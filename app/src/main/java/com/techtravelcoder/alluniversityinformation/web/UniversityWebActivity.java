@@ -84,7 +84,7 @@ public class UniversityWebActivity extends AppCompatActivity {
                         //&& campainModel.getCountryName().equals(contryName)
 
                         if (universityModel != null && universityModel.getContryName() != null
-                                && universityModel.getSuggested().equals("suggest")) {
+                                && universityModel.getSuggested().equals("true")) {
                             // Ensure this operation is performed on the main (UI) thread
                             runOnUiThread(() -> {
                                 list.add(0, universityModel);

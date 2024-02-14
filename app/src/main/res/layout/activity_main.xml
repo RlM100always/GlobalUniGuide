@@ -71,12 +71,13 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/back"
+        app:itemIconSize="28dp"
         app:itemTextColor="@color/white"
-        app:itemIconTint="#FFC107"
+        app:itemIconTint="@color/white"
         app:itemIconPadding="8dp"
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"
-        android:visibility="gone">
+        android:visibility="visible">
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

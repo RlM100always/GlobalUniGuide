@@ -200,7 +200,7 @@ public class UniversityActivity extends AppCompatActivity {
 
 
                         if(campainModelPrv != null  &&campainModelPrv.getContryName() != null&& campainModelPrv.getContryName().equals(contryName)
-                                && campainModelPrv.getPrivates().equals("private")){
+                                && campainModelPrv.getPrivates().equals("true")){
                             listPrv.add(0,campainModelPrv);
 
                         }
@@ -243,7 +243,7 @@ public class UniversityActivity extends AppCompatActivity {
 
 
                         if(campainModel1 != null  && campainModel1.getContryName() != null && campainModel1.getContryName().equals(contryName)
-                        && campainModel1.getBest().equals("top")){
+                        && campainModel1.getBest().equals("true")){
                             list1.add(0,campainModel1);
 
                         }
@@ -286,7 +286,7 @@ public class UniversityActivity extends AppCompatActivity {
 
 
                         if(campainModelPub != null  &&campainModelPub.getContryName() != null&& campainModelPub.getContryName().equals(contryName)
-                        && campainModelPub.getPublics().equals("public")){
+                        && campainModelPub.getPublics().equals("true")){
                             listPub.add(0,campainModelPub);
 
                         }

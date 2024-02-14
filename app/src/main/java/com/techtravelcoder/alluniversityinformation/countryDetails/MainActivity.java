@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         campainModel = dataSnapshot.getValue(CountryModel.class);
                         if (campainModel != null) {
-                            list.add(campainModel);
+                            list.add(0,campainModel);
                         }
                     }
 

@@ -1,37 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/back"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/header_ll"
-        app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="@color/back_upper"
+    <LinearLayout
+        android:background="@drawable/header_image"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
+        android:layout_height="170dp">
 
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="7dp"
-                android:id="@+id/header_user_name"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#F9F9F7"
-                android:text="Admin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 
 </LinearLayout>

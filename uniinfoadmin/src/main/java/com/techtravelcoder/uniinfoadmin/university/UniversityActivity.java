@@ -75,7 +75,7 @@ public class UniversityActivity extends AppCompatActivity {
                         //&& campainModel.getCountryName().equals(contryName)
 
 
-                        if(campainModel != null  &&campainModel.getContryName() != null&& campainModel.getContryName().equals(contryName)){
+                        if(campainModel != null  && campainModel.getContryName() != null&& campainModel.getContryName().equals(contryName)){
                             list.add(0,campainModel);
 
                         }
@@ -126,7 +126,8 @@ public class UniversityActivity extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!TextUtils.isEmpty(uniName.getText().toString()) && !TextUtils.isEmpty(uniImage.getText().toString()) && !TextUtils.isEmpty(uniLLink.getText().toString()) ){
+                if(!TextUtils.isEmpty(uniName.getText().toString()) && !TextUtils.isEmpty(uniImage.getText().toString()) && !TextUtils.isEmpty(uniLLink.getText().toString())
+                && !TextUtils.isEmpty(priv.getText().toString()) && !TextUtils.isEmpty(publ.getText().toString()) && !TextUtils.isEmpty(sugg.getText().toString()) && !TextUtils.isEmpty(top.getText().toString()) ){
                     uploadData();
                     alertDialog.dismiss();
 

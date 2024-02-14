@@ -4,16 +4,25 @@
 
     <group >
         <item
-            android:id="@+id/home_Id"
-            android:title="Home"
+            android:icon="@drawable/baseline_people_24"
+            android:id="@+id/menu_developer_id"
+            android:title="Developer"
             />
 
         <item
-            android:id="@+id/university_Id"
-            android:title="User DashBoard"
+            android:icon="@drawable/baseline_contact_phone_24"
+            android:id="@+id/menu_contact_id"
+            android:title="Contact"
             />
-        <item android:id="@+id/newsPostId"
-            android:title="Write a News"
+
+        <item
+            android:icon="@drawable/baseline_star_rate_24"
+            android:id="@+id/menu_ratting_id"
+            android:title="Ratting"
+            />
+        <item android:id="@+id/menu_privacy_id"
+            android:icon="@drawable/baseline_privacy_tip_24"
+            android:title="Privacy Policy"
          />
 
 
