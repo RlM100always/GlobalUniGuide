@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_margin="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="Enter University Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/university_name_id"
+                android:textColorHint="#676565"
+                android:textColor="@color/black"
+                android:paddingLeft="11dp"
+                android:hint="Enter university name ..."
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/back"
+                android:maxLines="1000"
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="Enter Image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/university_image_id"
+                android:textColorHint="#676565"
+                android:textColor="@color/black"
+                android:paddingLeft="11dp"
+                android:hint="Enter university image ..."
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/back"
+                android:maxLines="1000"
+                android:inputType="textWebEditText"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="Enter website"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/university_website_id"
+                android:textColorHint="#676565"
+                android:textColor="@color/black"
+                android:paddingLeft="11dp"
+                android:hint="Enter university website link ..."
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/back"
+                android:maxLines="1000"
+                android:inputType="textWebEditText"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"/>
+            <EditText
+                android:id="@+id/top_id"
+                android:textColorHint="#676565"
+                android:textColor="@color/black"
+                android:paddingLeft="11dp"
+                android:hint="top.."
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/back"
+                android:maxLines="1000"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"/>
+            <EditText
+                android:id="@+id/public_id"
+                android:textColorHint="#676565"
+                android:textColor="@color/black"
+                android:paddingLeft="11dp"
+                android:hint="public.."
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/back"
+                android:maxLines="1000"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"/>
+            <EditText
+                android:id="@+id/private_id"
+                android:textColorHint="#676565"
+                android:textColor="@color/black"
+                android:paddingLeft="11dp"
+                android:hint="private.."
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/back"
+                android:maxLines="1000"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"/>
+            <EditText
+                android:id="@+id/suggest_id"
+                android:textColorHint="#676565"
+                android:textColor="@color/black"
+                android:paddingLeft="11dp"
+                android:hint="suggest.."
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/back"
+                android:maxLines="1000"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"/>
+            <TextView
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2.5"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:id="@+id/add_university_post_id"
+                android:textColor="@color/white"
+                android:backgroundTint="#57C905"
+                android:background="@drawable/sub_back"
+                android:textSize="20dp"
+                android:foreground="@drawable/rip"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="Add University"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>

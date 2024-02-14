@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "357170375968",
+    "firebase_url": "https://all-university-information-default-rtdb.firebaseio.com",
+    "project_id": "all-university-information",
+    "storage_bucket": "all-university-information.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357170375968:android:d606ea418b94fa3bafbb45",
+        "android_client_info": {
+          "package_name": "com.techtravelcoder.alluniversityinformation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFFD5UbgY9y5_l1nF3qIDl2Z_rCz6uu14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357170375968:android:36666f60d52cd2bcafbb45",
+        "android_client_info": {
+          "package_name": "com.techtravelcoder.uniinfoadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFFD5UbgY9y5_l1nF3qIDl2Z_rCz6uu14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

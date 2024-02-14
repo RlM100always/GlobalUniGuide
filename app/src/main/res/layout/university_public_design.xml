@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="105dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/back"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:foreground="@drawable/uni_background"
+    android:gravity="center"
+    android:elevation="20dp"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_gravity="center"
+        android:id="@+id/public_unidesign_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/image_buet"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FFD600"
+        />
+
+    <TextView
+        android:layout_marginBottom="5dp"
+        android:fontFamily="serif"
+        android:layout_marginLeft="6dp"
+        android:maxLines="2"
+        android:id="@+id/public_unidesign_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bangladesh "
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

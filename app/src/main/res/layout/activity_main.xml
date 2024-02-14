@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/drawer_id"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/back"
+    tools:openDrawer="start"
+    tools:context=".countryDetails.MainActivity">
+
+
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <androidx.appcompat.widget.Toolbar
+
+                android:layout_gravity="left"
+                app:titleMarginStart="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tolbar"
+                app:title="University Guidelines"
+                app:subtitleTextColor="@color/white"
+                app:subtitle="Welcome to University Guidelines"
+                app:titleTextColor="@color/white"
+                />
+
+
+            <androidx.appcompat.widget.SearchView
+                android:elevation="10dp"
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/searchbar_background"
+                app:queryHint="Search here..."
+                app:iconifiedByDefault="false"
+            />
+
+
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/main_recycler_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/back"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="#FFC107"
+        app:itemIconPadding="8dp"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu"
+        android:visibility="gone">
+    </com.google.android.material.navigation.NavigationView>
+
+</androidx.drawerlayout.widget.DrawerLayout>

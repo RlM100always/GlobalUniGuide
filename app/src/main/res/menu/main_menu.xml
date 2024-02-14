@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group >
+        <item
+            android:id="@+id/home_Id"
+            android:title="Home"
+            />
+
+        <item
+            android:id="@+id/university_Id"
+            android:title="User DashBoard"
+            />
+        <item android:id="@+id/newsPostId"
+            android:title="Write a News"
+         />
+
+
+    </group>
+
+
+</menu>
