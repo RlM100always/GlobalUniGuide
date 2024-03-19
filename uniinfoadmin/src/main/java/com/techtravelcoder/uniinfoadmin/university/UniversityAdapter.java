@@ -1,6 +1,7 @@
 package com.techtravelcoder.uniinfoadmin.university;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -50,9 +51,10 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
         holder.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                LayoutInflater inflater = LayoutInflater.from(context);
-                final View view = inflater.inflate(R.layout.university_input, null);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                LayoutInflater inflater = LayoutInflater.from(v.getContext());
+                View view = inflater.inflate(R.layout.university_input, null);
                 builder.setView(view);
 
                 EditText uniName = view.findViewById(R.id.university_name_id);
@@ -65,20 +67,19 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
 
                 TextView update = view.findViewById(R.id.add_university_post_id);
 
-                uniName.setText(universityModel.getUniName() != null ? universityModel.getUniName() : "");
-                uniImage.setText(universityModel.getUniImageLink() != null ? universityModel.getUniImageLink() : "");
-                uniWebLink.setText(universityModel.getUniWebLink() != null ? universityModel.getUniWebLink() : "");
-                top.setText(universityModel.getBest() != null ? universityModel.getBest() : "");
-                publics.setText(universityModel.getPublics() != null ? universityModel.getPublics() : "");
-                privates.setText(universityModel.getPrivates() != null ? universityModel.getPrivates() : "");
-                suggest.setText(universityModel.getSuggested() != null ? universityModel.getSuggested() : "");
+                uniName.setText(universityModel.getUniName());
+                uniImage.setText(universityModel.getUniImageLink());
+                uniWebLink.setText(universityModel.getUniWebLink());
+                top.setText(universityModel.getBest());
+                publics.setText(universityModel.getPublics());
+                privates.setText(universityModel.getPrivates());
+                suggest.setText(universityModel.getSuggested());
 
 
 
 
                 AlertDialog alertDialog = builder.create();
-                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.back);
-                alertDialog.getWindow().setBackgroundDrawable(drawable);
+
                 alertDialog.show();
 
                 update.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +116,39 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
                 });
             }
         });
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                builder.setTitle("Delete post!!!");
+                builder.setMessage("Do you want to delete this post..");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey())
+                                .removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(context, "Delete Successful", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                        dialog.cancel();
+
+
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alertDialog=builder.create();
+                alertDialog.show();
+
+            }
+        });
+
 
     }
 
@@ -124,13 +158,14 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
     }
 
     public class UniViewHolder extends RecyclerView.ViewHolder {
-        TextView uniName,update;
+        TextView uniName,update,delete;
         ImageView uniImage;
         public UniViewHolder(@NonNull View itemView) {
             super(itemView);
             uniImage=itemView.findViewById(R.id.uni_design_image_id);
             uniName=itemView.findViewById(R.id.uni_design_uniname);
             update=itemView.findViewById(R.id.uni_update_id);
+            delete=itemView.findViewById(R.id.uni_delete_id);
 
         }
     }

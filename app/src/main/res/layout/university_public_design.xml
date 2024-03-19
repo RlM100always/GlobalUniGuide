@@ -16,21 +16,21 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/image_buet"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FFD600"
+        app:civ_border_width="1.4dp"
+        app:civ_border_color="#F8D304"
         />
 
     <TextView
         android:layout_marginBottom="5dp"
         android:fontFamily="serif"
         android:layout_marginLeft="6dp"
-        android:maxLines="2"
+        android:maxLines="3"
         android:id="@+id/public_unidesign_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bangladesh "
         android:textColor="@color/white"
-        android:textSize="15dp"
+        android:textSize="14dp"
         android:textStyle="bold" />
 
 

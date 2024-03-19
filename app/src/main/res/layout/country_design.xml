@@ -31,24 +31,29 @@
 
     <TextView
 
+        android:drawablePadding="1dp"
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/baseline_location_on_24"
         android:fontFamily="serif"
-        android:layout_marginLeft="6dp"
-        android:maxLines="2"
+        android:maxLines="3"
         android:id="@+id/country_name_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bangladesh "
-        android:textColor="@color/white"
+        android:textColor="#FCDF04"
         android:textSize="18dp"
         android:textStyle="bold" />
     <TextView
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="6dp"
-        android:maxLines="1"
+        android:layout_marginLeft="4dp"
+        android:drawablePadding="3dp"
+        android:drawableLeft="@drawable/baseline_info_24"
+        android:fontFamily="serif"
+        android:layout_marginBottom="5dp"
+        android:maxLines="2"
         android:id="@+id/tnDateId"
         android:textColor="@color/white"
         android:textSize="15dp"
-        android:text="Details information.."
+        android:text="Details Information.."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

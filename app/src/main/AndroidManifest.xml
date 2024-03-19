@@ -6,20 +6,32 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/university"
+        android:icon="@drawable/app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/university"
         android:supportsRtl="true"
         android:theme="@style/Theme.AllUniversityInformation"
+        android:name="com.techtravelcoder.alluniversityinformations.ads.App"
         tools:targetApi="31">
         <activity
-            android:name=".web.UniversityWebActivity"
+            android:name="com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity"
             android:exported="false" />
+        <meta-data
+            android:name="com.startapp.sdk.APPLICATION_ID"
+            android:value="201407686" />
         <activity
-            android:name=".universityDetails.UniversityActivity"
+            android:name="com.techtravelcoder.alluniversityinformations.universityDetails.UniversityActivity"
             android:exported="true"></activity>
+        <service
+            android:name="com.techtravelcoder.alluniversityinformations.service.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
-            android:name=".countryDetails.MainActivity"
+            android:name="com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">All University Information</string>
+    <string name="app_name">GlobalUniGuide</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+
+
+    <string name="FacebooK_Banner_Ads">"IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID"</string>
+    <string name="FacebooK_Interestitial_Ads">"IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID"</string>
 </resources>

@@ -5,34 +5,53 @@
     android:layout_width="match_parent"
     android:background="@color/back"
     android:orientation="vertical"
+    android:gravity="center"
     android:layout_height="match_parent"
-    tools:context=".web.UniversityWebActivity">
+    tools:context="com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:foreground="@drawable/uni_background"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        android:layout_gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/tolbar_web"
+        app:title="University Guide"
+        app:subtitleTextColor="@color/white"
+        app:titleTextColor="@color/white"
+        />
 
     <ProgressBar
+        android:progressTint="#FC012FFE"
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" />
     <WebView
+        android:layout_margin="6dp"
         android:id="@+id/webview_id"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
     <TextView
-        android:layout_marginLeft="10dp"
-        android:fontFamily="serif"
-        android:layout_marginTop="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Suggested University"
-        android:textStyle="bold"
         android:textColor="#FFD600"
-        android:textSize="14dp"/>
+        android:textSize="11dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:orientation="horizontal"
         android:id="@+id/suggested_recycler_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <com.startapp.sdk.ads.banner.Banner
+        android:id="@+id/banner_container_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="bottom" />
+
 
 </LinearLayout>
