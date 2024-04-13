@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        ;
+
 
         list=new ArrayList<>();
         campainAdapter=new CountryAdapter(this,list);

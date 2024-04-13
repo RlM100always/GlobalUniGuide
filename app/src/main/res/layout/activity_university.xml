@@ -4,155 +4,220 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/university_suffle_id"
     android:background="@color/back"
     tools:context="com.techtravelcoder.alluniversityinformations.universityDetails.UniversityActivity">
-
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_id"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:fontFamily="serif"
-            android:id="@+id/uni_coununtry_name_id"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="University Guidelines"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="21dp"/>
-
-        <androidx.appcompat.widget.SearchView
-            android:elevation="10dp"
-            android:id="@+id/searchView_uni"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/searchbar_background"
-            app:queryHint="Search here..."
-            app:iconifiedByDefault="false"
-            />
-        <androidx.core.widget.NestedScrollView
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_height="match_parent">
+
+            <!-- Progress bar in the middle -->
+            <!-- Content of the layout -->
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:visibility="gone"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/best_uni_id"
-                    android:fontFamily="serif"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Best University"
-                    android:textStyle="bold"
-                    android:textColor="#04FCCA"
-                    android:textSize="18dp"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/top_recyclerview_id"
-                    android:orientation="horizontal"
+
+                <!-- Your other views here -->
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:visibility="gone"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/public_uni_id"
-                    android:fontFamily="serif"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Public University"
-                    android:textStyle="bold"
-                    android:textColor="#04FCCA"
-                    android:textSize="18dp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/public_recyclerview_id"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:visibility="gone"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/private_uni_id"
-                    android:fontFamily="serif"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Private University"
-                    android:textStyle="bold"
-                    android:textColor="#04FCCA"
-                    android:textSize="18dp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/private_recyclerview_id"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:visibility="gone"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/all_uni_id"
-                    android:fontFamily="serif"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Best University"
-                    android:textStyle="bold"
-                    android:textColor="#04FCCA"
-                    android:textSize="18dp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:id="@+id/recycler_view_university_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:id="@+id/more_id"
-                    android:visibility="gone"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="serif"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Explore More University....."
-                    android:textStyle="bold"
-                    android:textColor="#04FCCA"
-                    android:textSize="18dp"/>
+                    android:gravity="center_horizontal"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_marginTop="7dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/back_pressed_id"
+                            android:foreground="@drawable/uni_background"
+                            android:drawablePadding="35dp"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="10dp"
+                            android:drawableLeft="@drawable/baseline_arrow_back_24"
+                            android:fontFamily="serif"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="21dp"
+                            android:textColor="@color/white"
+                            />
+                        <TextView
+                            android:visibility="gone"
+                            android:layout_marginRight="8dp"
+                            android:gravity="left"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="serif"
+                            android:id="@+id/uni_coununtry_name_id"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="University Guidelines"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="21dp"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/more_suggested_university"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+                    <androidx.appcompat.widget.SearchView
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/searchView_uni"
+                        android:layout_width="280dp"
+                        android:layout_height="42dp"
+                        android:background="@drawable/searchbar_background"
+                        app:queryHint="Search university..."
+                        app:iconifiedByDefault="false"
+                        />
+                    <androidx.core.widget.NestedScrollView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:visibility="gone"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/best_uni_id"
+                                android:fontFamily="serif"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Best University"
+                                android:textStyle="bold"
+                                android:textColor="#04FCCA"
+                                android:textSize="18dp"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_marginTop="15dp"
+                                android:id="@+id/top_recyclerview_id"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:visibility="gone"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/public_uni_id"
+                                android:fontFamily="serif"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Public University"
+                                android:textStyle="bold"
+                                android:textColor="#04FCCA"
+                                android:textSize="18dp"/>
+                            <ProgressBar
+                                android:layout_marginTop="190dp"
+                                android:visibility="visible"
+                                android:id="@+id/progressBar_uni"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="serif"
+                                android:id="@+id/loading_id"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Loading University !!!!"
+                                android:textStyle="bold"
+                                android:textColor="#42E7FB"
+                                android:textSize="22dp"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_marginTop="5dp"
+                                android:id="@+id/public_recyclerview_id"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:visibility="gone"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/private_uni_id"
+                                android:fontFamily="serif"
+                                android:layout_marginTop="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Private University"
+                                android:textStyle="bold"
+                                android:textColor="#04FCCA"
+                                android:textSize="18dp"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_marginTop="5dp"
+                                android:id="@+id/private_recyclerview_id"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:visibility="gone"
+                                android:layout_marginLeft="10dp"
+                                android:id="@+id/all_uni_id"
+                                android:fontFamily="serif"
+                                android:layout_marginTop="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Best University"
+                                android:textStyle="bold"
+                                android:textColor="#04FCCA"
+                                android:textSize="18dp"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:id="@+id/recycler_view_university_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:visibility="gone"
+                                android:id="@+id/more_id"
+                                android:layout_marginLeft="10dp"
+                                android:fontFamily="serif"
+                                android:layout_marginTop="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Explore More Countries University....."
+                                android:textStyle="bold"
+                                android:textColor="#04FCCA"
+                                android:textSize="18dp"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/more_suggested_university"
+                                android:layout_marginTop="10dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+                    </androidx.core.widget.NestedScrollView>
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-        <com.startapp.sdk.ads.banner.Banner
-            android:id="@+id/banner_container_uni"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="bottom" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
-    </LinearLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

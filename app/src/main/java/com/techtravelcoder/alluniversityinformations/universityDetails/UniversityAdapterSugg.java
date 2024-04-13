@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,6 +56,7 @@ public class UniversityAdapterSugg extends RecyclerView.Adapter<UniversityAdapte
     public void onBindViewHolder(@NonNull UniViewHolder holder, int position) {
         UniversityModel universityModel=list.get(position);
         holder.uniName.setText(universityModel.getUniName());
+        holder.countryName.setText(universityModel.getContryName());
         Glide.with(context).load(universityModel.getUniImageLink()).into(holder.uniImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +64,11 @@ public class UniversityAdapterSugg extends RecyclerView.Adapter<UniversityAdapte
                 Intent intent=new Intent(context, UniversityWebActivity.class);
                 intent.putExtra("link",universityModel.getUniWebLink());
                 intent.putExtra("name",universityModel.getUniName());
+                intent.putExtra("country",universityModel.getContryName());
+
                 context.startActivity(intent);
                 Random random=new Random();
-                int num = random.nextInt(8)+1;
+                int num = random.nextInt(6)+1;
                 if(num==2){
                     //FacebookInterestitialAds.loadAds(context);
                     App.interstitialLoader.doOnNextAvailable(result -> {
@@ -84,7 +88,7 @@ public class UniversityAdapterSugg extends RecyclerView.Adapter<UniversityAdapte
                     });
 
                 }
-                if(num==6){
+                if(num==1){
                     final StartAppAd rewardedVideo = new StartAppAd(context);
 
                     rewardedVideo.setVideoListener(new VideoListener() {
@@ -121,10 +125,12 @@ public class UniversityAdapterSugg extends RecyclerView.Adapter<UniversityAdapte
     public class UniViewHolder extends RecyclerView.ViewHolder {
         TextView uniName;
         ImageView uniImage;
+        TextView countryName;
         public UniViewHolder(@NonNull View itemView) {
             super(itemView);
             uniImage=itemView.findViewById(R.id.sugg_img_id);
             uniName=itemView.findViewById(R.id.sugg_uni_name_id);
+            countryName=itemView.findViewById(R.id.country_id_sugg);
         }
     }
 }

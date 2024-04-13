@@ -1,0 +1,59 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/back"
+    tools:context="com.techtravelcoder.alluniversityinformations.Fragment.RecentFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recent_recyclerview_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible" />
+
+            <!-- ProgressBar -->
+            <ImageView
+
+                android:layout_marginTop="150dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/nothing"
+                android:id="@+id/nothing_image"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+            <TextView
+                android:layout_marginTop="25dp"
+                android:id="@+id/nothing_text_id"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:text="No Recent Data Available"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </FrameLayout>
+    </LinearLayout>
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/recent_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+
+</FrameLayout>

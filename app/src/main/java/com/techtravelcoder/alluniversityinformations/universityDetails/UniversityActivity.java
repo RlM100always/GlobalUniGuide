@@ -1,29 +1,42 @@
 package com.techtravelcoder.alluniversityinformations.universityDetails;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Outline;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.ViewOutlineProvider;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.facebook.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.startapp.sdk.ads.banner.Banner;
 import com.startapp.sdk.adsbase.StartAppAd;
@@ -39,9 +52,9 @@ import java.util.Random;
 public class UniversityActivity extends AppCompatActivity {
 
 
-    RecyclerView recyclerView,recyclerView1,recyclerViewPub,recyclerViewPrv,recyclerViewSugg;
-    TextView cName,bestUni,allUni,pubUni,prvUni,moreUni;
-    SwipeRefreshLayout swipeRefreshLayout;
+    private  RecyclerView recyclerView,recyclerView1,recyclerViewPub,recyclerViewPrv,recyclerViewSugg;
+    private TextView cName,bestUni,allUni,pubUni,prvUni,moreUni,loadindUni,backPressed;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private UniversityAdapter campainAdapter;
     private UniversityAdapter1 campainAdapter1;
@@ -54,12 +67,21 @@ public class UniversityActivity extends AppCompatActivity {
     UniversityModel campainModel,campainModel1,campainModelPub,campainModelPrv,campainModelSugg;
     DatabaseReference mbase,mbase1,mbasePub,mbasePrv,mbaseSugg;
     SearchView searchView;
+    private ProgressBar progressBar;
 
     String contryName;
-    private Banner banner ;
-    private StartAppAd startAppAd = new StartAppAd(this);
-    private AdView adView;
-     ProgressDialog progressDialog,progressDialog1;
+    private String lastItemId;
+
+
+    NestedScrollView nestedScrollView;
+
+
+
+    //pagination
+    private static final int PAGE_SIZE = 19;
+    private static final int MAX_ITEMS_TO_LOAD = 500;
+    private int totalLoadedItems = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +94,9 @@ public class UniversityActivity extends AppCompatActivity {
         }
         getWindow().setStatusBarColor(color);
 
-        banner=findViewById(R.id.banner_container_uni);
-        banner.loadAd();
 
-//        adView = new AdView(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
-//        banner.addView(adView);
-//        adView.loadAd();
 
-        progressDialog1=new ProgressDialog(UniversityActivity.this);
-
+        nestedScrollView=findViewById(R.id.nested_id);
         cName=findViewById(R.id.uni_coununtry_name_id);
         searchView=findViewById(R.id.searchView_uni);
         bestUni=findViewById(R.id.best_uni_id);
@@ -88,7 +104,18 @@ public class UniversityActivity extends AppCompatActivity {
         pubUni=findViewById(R.id.public_uni_id);
         prvUni=findViewById(R.id.private_uni_id);
         moreUni=findViewById(R.id.more_id);
+        loadindUni=findViewById(R.id.loading_id);
+        backPressed=findViewById(R.id.back_pressed_id);
+
+
         swipeRefreshLayout=findViewById(R.id.university_suffle_id);
+
+
+        //loadindUni.setShadowLayer(3f, 0f, 0f, Color.WHITE); // Adjust shadow radius as needed
+
+        EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        editText.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        editText.setHintTextColor(ContextCompat.getColor(this, R.color.allert_back_upper));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -101,17 +128,10 @@ public class UniversityActivity extends AppCompatActivity {
                 return true;
             }
         });
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
-                progressDialog1.setTitle("ℹ️ℹ️ Refreshing ");
-                progressDialog1.setCancelable(false);
-                progressDialog1.setMessage("✔✔ Please Wait University Information is refreshing ‼️");
-                progressDialog1.show();
-                Drawable drawable1= ContextCompat.getDrawable(getApplicationContext(),R.drawable.alert_back);
-                progressDialog1.getWindow().setBackgroundDrawable(drawable1);
 
                 bestUni.setVisibility(View.GONE);
                 allUni.setVisibility(View.GONE);
@@ -119,6 +139,14 @@ public class UniversityActivity extends AppCompatActivity {
                 prvUni.setVisibility(View.GONE);
                 bestUni.setVisibility(View.GONE);
                 moreUni.setVisibility(View.GONE);
+                backPressed.setVisibility(View.GONE);
+                cName.setVisibility(View.GONE);
+
+                recyclerViewPub.setVisibility(View.GONE);
+                recyclerViewPrv.setVisibility(View.GONE);
+                recyclerView1.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+                recyclerViewSugg.setVisibility(View.GONE);
 
                 refreshData();
                 // After refreshing, call setRefreshing(false) to stop the loading animation
@@ -126,12 +154,21 @@ public class UniversityActivity extends AppCompatActivity {
             }
         });
 
+        progressBar=findViewById(R.id.progressBar_uni);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+
+
         contryName=getIntent().getStringExtra("name");
-        cName.setText(""+contryName+" University");
-        bestUni.setText("Top Ranking "+contryName+" University");
-        allUni.setText("All "+contryName+" University");
-        pubUni.setText(contryName+" Public University");
-        prvUni.setText(contryName+" Private University");
+
+        backPressed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         mbase = FirebaseDatabase.getInstance().getReference("University");
         mbase1 = FirebaseDatabase.getInstance().getReference("University");
@@ -139,159 +176,254 @@ public class UniversityActivity extends AppCompatActivity {
         mbasePrv=FirebaseDatabase.getInstance().getReference("University");
         mbaseSugg=FirebaseDatabase.getInstance().getReference("University");
 
-        progressDialog=new ProgressDialog(UniversityActivity.this);
-        progressDialog.setTitle("✔✔ Loading ℹ️ℹ️");
-        progressDialog.setMessage("✔✔ Please Wait University Information is loading‼️");
-        progressDialog.setProgressPercentFormat(NumberFormat.getPercentInstance());
-        progressDialog.setCancelable(false);
-
-        progressDialog.show();
-        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.alert_back);
-        progressDialog.getWindow().setBackgroundDrawable(drawable);
 
 
-
-
-        Runnable topRunnable = () -> topUniversity();
-        Runnable publicRunnable = () -> publicUniversity();
-        Runnable privateRunnable = () -> privateUniversity();
-        Runnable suggestedRunnable = () -> suggestedUniversity();
-        Runnable allRunnable = () -> allUniversity();
-
-
-        Thread topThread = new Thread(topRunnable);
-        Thread publicThread = new Thread(publicRunnable);
-        Thread privateThread = new Thread(privateRunnable);
-        Thread suggestedThread = new Thread(suggestedRunnable);
-        Thread allThread = new Thread(allRunnable);
-
-//
-        topThread.start();
-        publicThread.start();
-        privateThread.start();
-        suggestedThread.start();
-        allThread.start();
-
-//        publicUniversity();
-//        privateUniversity();
-//        allUniversity();
-//        suggestedUniversity();
-
-
-    }
-
-    private void suggestedUniversity() {
+        topUniversity(1);
+        publicUniversity(1);
+        privateUniversity(1);
+        allUniversity(1);
 
 
         recyclerViewSugg=findViewById(R.id.more_suggested_university);
-        recyclerViewSugg.setLayoutManager(new GridLayoutManager(this, 1));
+        recyclerViewSugg.clearOnScrollListeners();
+        recyclerViewSugg.setLayoutManager(new LinearLayoutManager(this));
         listSugg=new ArrayList<>();
         universityAdapterSugg=new UniversityAdapterSugg(this,listSugg);
         recyclerViewSugg.setAdapter(universityAdapterSugg );
-        mbaseSugg.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                listSugg.clear();
-
-                if(snapshot.exists()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                        campainModelSugg = dataSnapshot.getValue(UniversityModel.class);
-
-                        if(campainModelSugg != null  &&campainModelSugg.getContryName() != null
-                        && (campainModelSugg.getSuggested().equals("true") || campainModelSugg.getPublics().equals("true "))){
-                            listSugg.add(0,campainModelSugg);
-                        }
-
-                    }
-
-                }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        universityAdapterSugg.notifyDataSetChanged();
-                        Collections.shuffle(listSugg);
-                        universityAdapterSugg.notifyDataSetChanged();
-                    }
-                });
+        Random random=new Random();
+        int num=random.nextInt(19);
+        suggestedUniversity(num);
 
 
 
-
-
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        nestedScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                // User has scrolled to the bottom
+               loadNextPage();
 
             }
         });
 
+
+
+
+
     }
 
-    private void allUniversity(){
+
+    private void loadNextPage() {
+        if (totalLoadedItems >= MAX_ITEMS_TO_LOAD) {
+            Toast.makeText(this, "No University found", Toast.LENGTH_SHORT).show();
+            // Already loaded the maximum number of items
+            return;
+        }
+        Query nextPageQuery = mbaseSugg.orderByKey().startAfter(lastItemId).limitToFirst(PAGE_SIZE);
+        nextPageQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        UniversityModel universityModel = dataSnapshot.getValue(UniversityModel.class);
+                        if (universityModel != null && universityModel.getContryName() != null && (universityModel.getSuggested().equals("true") || universityModel.getSuggested().equals("true "))) {
+                            listSugg.add(universityModel);
+                            lastItemId = universityModel.getKey();
+                            totalLoadedItems++;
+                            if(totalLoadedItems>=MAX_ITEMS_TO_LOAD){
+                                break;
+                            }
+                        }
+                    }
+
+                    // Add new items to the existing list
+                    universityAdapterSugg.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle database error
+                Log.e(TAG, "loadNextPage: onCancelled", error.toException());
+            }
+        });
+    }
+    private void suggestedUniversity(int num) {
+        Query query = null;
+        if(num==0){
+            query = mbaseSugg.limitToFirst(60);
+
+        }
+        else if(num==1){
+             query = mbaseSugg.orderByChild("uniName")
+                    .startAt("A").endAt("A\uf8ff");
+        }
+        else if(num==2){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("B").endAt("C\uf8ff");
+        }
+        else if(num==3){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("C").endAt("C\uf8ff");
+        }
+        else if(num==4){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("D").endAt("D\uf8ff");
+        }
+        else if(num==5){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("E").endAt("E\uf8ff");
+        }
+        else if(num==6){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("F").endAt("F\uf8ff");
+        }
+        else if(num==7){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("G").endAt("G\uf8ff");
+        }
+        else if(num==8){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("H").endAt("H\uf8ff");
+        }
+        else if(num==9){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("I").endAt("I\uf8ff");
+        }
+        else if(num==10){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("J").endAt("J\uf8ff");
+        }
+        else if(num==11){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("K").endAt("K\uf8ff");
+        }
+        else if(num==12){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("L").endAt("L\uf8ff");
+        }
+        else if(num==13){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("M").endAt("M\uf8ff");
+        }
+        else if(num==14){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("N").endAt("N\uf8ff");
+        }else if(num==15){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("O").endAt("O\uf8ff");
+        }else if(num==16){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("P").endAt("P\uf8ff");
+        }
+        else if(num==17){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("Q").endAt("Q\uf8ff");
+        }
+        else if(num==18){
+            query = mbaseSugg.orderByChild("uniName")
+                    .startAt("R").endAt("R\uf8ff");
+        }
+
+
+
+        if(query!=null){
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        List<UniversityModel> suggestedItems = new ArrayList<>();
+
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            UniversityModel universityModel = dataSnapshot.getValue(UniversityModel.class);
+                            if (universityModel != null && universityModel.getContryName() != null
+                                    && (universityModel.getSuggested().equals("true") || universityModel.getSuggested().equals("true "))) {
+                                suggestedItems.add(universityModel);
+                                lastItemId = universityModel.getKey();
+                            }
+                        }
+
+                        // Replace the list with new suggested items
+                        listSugg.clear();
+                        listSugg.addAll(suggestedItems);
+                        Collections.shuffle(listSugg);
+                        recyclerViewSugg.setVisibility(View.VISIBLE);
+
+                        universityAdapterSugg.notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle database error
+                    Log.e(TAG, "suggestedUniversity: onCancelled", error.toException());
+                }
+            });
+        }
+
+
+
+    }
+
+
+
+    private void allUniversity(int num) {
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView=findViewById(R.id.recycler_view_university_id);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         list=new ArrayList<>();
         campainAdapter=new UniversityAdapter(this,list);
-        recyclerView.setAdapter(campainAdapter );
+        recyclerView.setAdapter(campainAdapter);
+        progressBar.setVisibility(View.VISIBLE);
         mbase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                list.clear();
-
-                if(snapshot.exists()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                        campainModel = dataSnapshot.getValue(UniversityModel.class);
-
-                        if(campainModel != null  &&campainModel.getContryName() != null&& campainModel.getContryName().equals(contryName)){
-                            list.add(0,campainModel);
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    list.clear();
+                    if(snapshot.exists()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            campainModel = dataSnapshot.getValue(UniversityModel.class);
+                            if(campainModel != null && campainModel.getContryName() != null && campainModel.getContryName().equals(contryName)){
+                                list.add(0,campainModel);
+                            }
                         }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
+                                // Update UI only after fetching and processing data
+                                campainAdapter.notifyDataSetChanged();
+                                Collections.shuffle(list);
+                                progressBar.setVisibility(View.GONE);
+                                backPressed.setVisibility(View.VISIBLE);// Dismiss ProgressDialog after updating UI
+
+                                cName.setVisibility(View.VISIBLE);
+                                allUni.setVisibility(View.VISIBLE);
+                                moreUni.setVisibility(View.VISIBLE);
+                                loadindUni.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
+
+
+
+                                cName.setText(""+contryName+" University"+" List ");
+                                allUni.setText("All "+contryName+" University");
+
+                            }
+                        });
                     }
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialog.dismiss();
-                            progressDialog1.dismiss();
-
-                            // Show other views if needed
-                            bestUni.setVisibility(View.VISIBLE);
-                            allUni.setVisibility(View.VISIBLE);
-                            pubUni.setVisibility(View.VISIBLE);
-                            prvUni.setVisibility(View.VISIBLE);
-                            bestUni.setVisibility(View.VISIBLE);
-                            moreUni.setVisibility(View.VISIBLE);
-                        }
-                    });
-
-
+                    else {
+                        backPressed.setVisibility(View.VISIBLE);// Dismiss ProgressDialog after updating UI
+                        // Handle case when no data exists
+                        progressBar.setVisibility(View.GONE); // Dismiss ProgressDialog after updating UI
+                    }
                 }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        campainAdapter.notifyDataSetChanged();
-                        Collections.shuffle(list);
-                        campainAdapter.notifyDataSetChanged();
-                    }
-                });
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle onCancelled event
+                    progressBar.setVisibility(View.GONE); // Dismiss ProgressDialog after updating UI
+                }
+            });
 
-
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     private void searchList(String newText) {
@@ -384,172 +516,199 @@ public class UniversityActivity extends AppCompatActivity {
         },SEARCH_DELAY_MS);
 
     }
-
-    private void privateUniversity() {
+    private void privateUniversity(int num) {
         recyclerViewPrv=findViewById(R.id.private_recyclerview_id);
         recyclerViewPrv.setLayoutManager(new GridLayoutManager(this,1,GridLayoutManager.HORIZONTAL,false));
         listPrv=new ArrayList<>();
         universityAdapterPrv=new UniversityAdapterPrv(this,listPrv);
         recyclerViewPrv.setAdapter(universityAdapterPrv);
 
-        mbasePrv.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if(num==1){
+            mbasePrv.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                listPrv.clear();
+                    listPrv.clear();
 
-                if(snapshot.exists()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    if(snapshot.exists()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                        campainModelPrv = dataSnapshot.getValue(UniversityModel.class);
-                        //&& campainModel.getCountryName().equals(contryName)
+                            campainModelPrv = dataSnapshot.getValue(UniversityModel.class);
+                            //&& campainModel.getCountryName().equals(contryName)
 
 
-                        if(campainModelPrv != null  &&campainModelPrv.getContryName() != null&& campainModelPrv.getContryName().equals(contryName)
-                                && (campainModelPrv.getPrivates().equals("true")|| campainModelPrv.getPublics().equals("true "))){
-                            listPrv.add(0,campainModelPrv);
+                            if(campainModelPrv != null  &&campainModelPrv.getContryName() != null&& campainModelPrv.getContryName().equals(contryName)
+                                    && (campainModelPrv.getPrivates().equals("true")|| campainModelPrv.getPublics().equals("true "))){
+                                listPrv.add(0,campainModelPrv);
+
+                            }
 
                         }
 
                     }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Collections.shuffle(listPrv);
+                            recyclerViewPrv.setVisibility(View.VISIBLE);
+                            prvUni.setVisibility(View.VISIBLE);
+                            prvUni.setText(contryName+" Private University");
+                            universityAdapterPrv.notifyDataSetChanged();
+
+
+
+                        }
+                    });
+
 
                 }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        universityAdapterPrv.notifyDataSetChanged();
-                        Collections.shuffle(listPrv);
-                        campainAdapter.notifyDataSetChanged();
-                    }
-                });
 
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        }
     }
 
-    private void topUniversity() {
+    private void topUniversity(int num) {
         recyclerView1=findViewById(R.id.top_recyclerview_id);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         list1=new ArrayList<>();
         campainAdapter1=new UniversityAdapter1(this,list1);
         recyclerView1.setAdapter(campainAdapter1);
 
-        mbase1.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if(num==1){
+            mbase1.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                list1.clear();
+                    list1.clear();
 
-                if(snapshot.exists()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    if(snapshot.exists()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                        campainModel1 = dataSnapshot.getValue(UniversityModel.class);
-                        //&& campainModel.getCountryName().equals(contryName)
+                            campainModel1 = dataSnapshot.getValue(UniversityModel.class);
+                            //&& campainModel.getCountryName().equals(contryName)
 
 
-                        if(campainModel1 != null  && campainModel1.getContryName() != null && campainModel1.getContryName().equals(contryName)
-                        && (campainModel1.getBest().equals("true") || campainModel1.getPublics().equals("true "))){
-                            list1.add(0,campainModel1);
+                            if(campainModel1 != null  && campainModel1.getContryName() != null && campainModel1.getContryName().equals(contryName)
+                                    && (campainModel1.getBest().equals("true") || campainModel1.getPublics().equals("true "))){
+                                list1.add(0,campainModel1);
+
+                            }
 
                         }
 
                     }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView1.setVisibility(View.VISIBLE);
+                            Collections.shuffle(list1);
+                            bestUni.setVisibility(View.VISIBLE);
+                            bestUni.setText("Top Ranking "+contryName+" University");
+                            campainAdapter1.notifyDataSetChanged();
+
+
+
+                        }
+                    });
+
 
                 }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        campainAdapter1.notifyDataSetChanged();
-                        Collections.shuffle(list1);
-                        campainAdapter1.notifyDataSetChanged();
-                    }
-                });
 
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        }
 
-            }
-        });
     }
 
-    private void publicUniversity(){
+    private void publicUniversity(int num){
         recyclerViewPub=findViewById(R.id.public_recyclerview_id);
         recyclerViewPub.setLayoutManager(new GridLayoutManager(this,2,GridLayoutManager.HORIZONTAL,false));
         listPub=new ArrayList<>();
         universityAdapterPub=new UniversityAdapterPub(this,listPub);
         recyclerViewPub.setAdapter(universityAdapterPub);
 
-        mbasePub.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if(num==1){
+            mbasePub.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                listPub.clear();
+                    listPub.clear();
 
-                if(snapshot.exists()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    if(snapshot.exists()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                        campainModelPub = dataSnapshot.getValue(UniversityModel.class);
-                        //&& campainModel.getCountryName().equals(contryName)
+                            campainModelPub = dataSnapshot.getValue(UniversityModel.class);
+                            //&& campainModel.getCountryName().equals(contryName)
 
 
-                        if(campainModelPub != null  &&campainModelPub.getContryName() != null&& campainModelPub.getContryName().equals(contryName)
-                        && (campainModelPub.getPublics().equals("true") || campainModelPub.getPublics().equals("true "))){
-                            listPub.add(0,campainModelPub);
+                            if(campainModelPub != null  &&campainModelPub.getContryName() != null&& campainModelPub.getContryName().equals(contryName)
+                                    && (campainModelPub.getPublics().equals("true") || campainModelPub.getPublics().equals("true "))){
+                                listPub.add(0,campainModelPub);
+
+                            }
 
                         }
 
                     }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Collections.shuffle(listPub);
+                            recyclerViewPub.setVisibility(View.VISIBLE);
+                            pubUni.setVisibility(View.VISIBLE);
+                            pubUni.setText(contryName+" Public University");
+                            universityAdapterPub.notifyDataSetChanged();
+
+
+
+                        }
+                    });
+
+
 
                 }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        universityAdapterPub.notifyDataSetChanged();
-                        Collections.shuffle(listPub);
-                        universityAdapterPub.notifyDataSetChanged();
-                    }
-                });
 
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
+                }
+            });
 
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     private void refreshData() {
 
-        allUniversity();
-        privateUniversity();
-        publicUniversity();
-        topUniversity();
-        suggestedUniversity();
+        topUniversity(1);
+        publicUniversity(1);
+        privateUniversity(1);
+        allUniversity(1);
+        Random random=new Random();
+        int num=random.nextInt(19);
+        suggestedUniversity(num);
+
         swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void onBackPressed() {
-        Random random=new Random();
-        int num=random.nextInt(3)+1;
-        if(num==2){
-            startAppAd.onBackPressed();
-        }
-        super.onBackPressed();
+
+            super.onBackPressed();
+
     }
+
+
 }

@@ -56,9 +56,11 @@ public class UniversityAdapterWeb extends RecyclerView.Adapter<UniversityAdapter
                 Intent intent=new Intent(context, UniversityWebActivity.class);
                 intent.putExtra("name",universityModel.getUniName());
                 intent.putExtra("link",universityModel.getUniWebLink());
+                intent.putExtra("country",universityModel.getContryName());
+
                 context.startActivity(intent);
                 Random random=new Random();
-                int num = random.nextInt(9)+1;
+                int num = random.nextInt(12)+1;
                 if(num==5){
                    // FacebookInterestitialAds.loadAds(context);
                     App.interstitialLoader.doOnNextAvailable(result -> {

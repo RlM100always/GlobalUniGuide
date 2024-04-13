@@ -10,17 +10,19 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/suggest_public_unidesign_img"
-        android:layout_width="55dp"
-        android:layout_height="40dp"
-        android:src="@drawable/image_buet"
-        app:civ_border_width="1dp"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:src="@drawable/loading"
+        app:civ_border_width="1.5dp"
         app:civ_border_color="#64DD17"
         />
 
     <TextView
-        android:maxWidth="90dp"
-        android:gravity="center"
-        android:maxLines="3"
+        android:textStyle="bold"
+        android:maxWidth="120dp"
+        android:gravity="center_horizontal"
+        android:minLines="4"
+        android:maxLines="6"
         android:id="@+id/suggest_public_unidesign_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

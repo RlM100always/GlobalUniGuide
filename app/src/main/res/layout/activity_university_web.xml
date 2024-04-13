@@ -10,48 +10,51 @@
     tools:context="com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity">
 
     <androidx.appcompat.widget.Toolbar
+
+        app:menu="@menu/home_menu"
         android:foreground="@drawable/uni_background"
         app:navigationIcon="@drawable/baseline_arrow_back_24"
         android:layout_gravity="left"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="50dp"
         android:id="@+id/tolbar_web"
+        app:titleTextAppearance="@style/MyToolbarTitleText"
         app:title="University Guide"
         app:subtitleTextColor="@color/white"
         app:titleTextColor="@color/white"
         />
 
     <ProgressBar
-        android:progressTint="#FC012FFE"
+        android:progressTint="#65FC05"
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="2.5dp"
         android:visibility="gone" />
     <WebView
-        android:layout_margin="6dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
         android:id="@+id/webview_id"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
     <TextView
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Suggested University"
         android:textColor="#FFD600"
-        android:textSize="11dp"/>
+        android:textSize="14dp"/>
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         android:id="@+id/suggested_recycler_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <com.startapp.sdk.ads.banner.Banner
-        android:id="@+id/banner_container_web"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="bottom" />
 
 
 </LinearLayout>

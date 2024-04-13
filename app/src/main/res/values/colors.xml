@@ -2,7 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="back">#FC050721</color><!-- FC050721-->
-    <color name="back_upper">#AB202677</color> <!-- AB202677-->
+    <color name="back">#FC060A44</color><!-- FC050721-->
+    <color name="back_upper">#AB202677</color> <!-- AB202677  98FC02-->
     <color name="allert_back_upper">#CC0A0D39</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#98FC02</color>
+
+
 </resources>

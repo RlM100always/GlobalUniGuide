@@ -62,9 +62,11 @@ public class UniversityAdapterPrv extends RecyclerView.Adapter<UniversityAdapter
                 Intent intent=new Intent(context, UniversityWebActivity.class);
                 intent.putExtra("link",universityModel.getUniWebLink());
                 intent.putExtra("name",universityModel.getUniName());
+                intent.putExtra("country",universityModel.getContryName());
+
                 context.startActivity(intent);
                 Random random=new Random();
-                int num = random.nextInt(8)+1;
+                int num = random.nextInt(6)+1;
                 if(num==3){
                     //FacebookInterestitialAds.loadAds(context);
                     App.interstitialLoader.doOnNextAvailable(result -> {
@@ -85,7 +87,7 @@ public class UniversityAdapterPrv extends RecyclerView.Adapter<UniversityAdapter
                     });
 
                 }
-                if(num==6){
+                if(num==5){
                     final StartAppAd rewardedVideo = new StartAppAd(context);
 
                     rewardedVideo.setVideoListener(new VideoListener() {

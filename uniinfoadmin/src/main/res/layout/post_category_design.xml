@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_margin="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginTop="30dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Enter Category / title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/category_title_id"
+            android:textColorHint="#676565"
+            android:textColor="@color/black"
+            android:paddingLeft="11dp"
+            android:hint="category.."
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/back"
+            android:maxLines="10"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"/>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Enter Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/categoty_label_id"
+            android:textColorHint="#676565"
+            android:textColor="@color/black"
+            android:paddingLeft="11dp"
+            android:hint="Enter label..."
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/back"
+            android:maxLines="10"
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"/>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Enter image link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/category_image_link_id"
+            android:textColorHint="#676565"
+            android:textColor="@color/black"
+            android:paddingLeft="11dp"
+            android:hint="Enter image link ..."
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/back"
+            android:maxLines="400"
+            android:inputType="textWebEditText"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"/>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="Enter unique id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/unique_id"
+            android:textColorHint="#676565"
+            android:textColor="@color/black"
+            android:paddingLeft="11dp"
+            android:hint="Enter unique id"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/back"
+            android:maxLines="400"
+            android:inputType="textWebEditText"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"/>
+        <TextView
+
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2.5"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:id="@+id/add_news_category_id"
+            android:textColor="@color/white"
+            android:backgroundTint="#57C905"
+            android:background="@drawable/sub_back"
+            android:textSize="20dp"
+            android:foreground="@drawable/rip"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="Add Category"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</LinearLayout>

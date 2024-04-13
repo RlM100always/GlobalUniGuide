@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,8 @@ import java.util.Map;
 public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.UniViewHolder> {
     Context context;
     ArrayList<UniversityModel>list;
+    private String checkedTextTop,checkedTextPublic,checkedTextPrivates,checkedTextSuggest;
+
 
     public UniversityAdapter(Context context, ArrayList<UniversityModel> list) {
         this.context = context;
@@ -60,20 +64,122 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
                 EditText uniName = view.findViewById(R.id.university_name_id);
                 EditText uniImage = view.findViewById(R.id.university_image_id);
                 EditText uniWebLink = view.findViewById(R.id.university_website_id);
-                EditText top = view.findViewById(R.id.top_id);
-                EditText publics = view.findViewById(R.id.public_id);
-                EditText privates = view.findViewById(R.id.private_id);
-                EditText suggest = view.findViewById(R.id.suggest_id);
+
+                RadioGroup top,publics,privates,suggest;
+                RadioButton topTrue,topFalse,publicsTrue,publicsFalse,privatesTrue,privatesFalse,suggestTrue,suggestFalse;
+                top=view.findViewById(R.id.group_radio_top);
+                publics=view.findViewById(R.id.radio_group_public);
+                privates=view.findViewById(R.id.radio_group_private);
+                suggest=view.findViewById(R.id.radio_group_suggest);
+
+                topTrue=view.findViewById(R.id.top_true_id);
+                topFalse=view.findViewById(R.id.top_false_id);
+                publicsTrue=view.findViewById(R.id.public_true_id);
+                publicsFalse=view.findViewById(R.id.public_false_id);
+                privatesTrue=view.findViewById(R.id.private_true_id);
+                privatesFalse=view.findViewById(R.id.private_false_id);
+                suggestTrue=view.findViewById(R.id.suggest_true_id);
+                suggestFalse=view.findViewById(R.id.suggest_false_id);
+
+
+
+
+
+//                EditText top = view.findViewById(R.id.top_id);
+//                EditText publics = view.findViewById(R.id.public_id);
+//                EditText privates = view.findViewById(R.id.private_id);
+//                EditText suggest = view.findViewById(R.id.suggest_id);
 
                 TextView update = view.findViewById(R.id.add_university_post_id);
 
                 uniName.setText(universityModel.getUniName());
                 uniImage.setText(universityModel.getUniImageLink());
                 uniWebLink.setText(universityModel.getUniWebLink());
-                top.setText(universityModel.getBest());
-                publics.setText(universityModel.getPublics());
-                privates.setText(universityModel.getPrivates());
-                suggest.setText(universityModel.getSuggested());
+
+//                top.setText(universityModel.getBest());
+//                publics.setText(universityModel.getPublics());
+//                privates.setText(universityModel.getPrivates());
+//                suggest.setText(universityModel.getSuggested());
+
+                if(universityModel.getBest().equals("true") || universityModel.getBest().equals("true ")){
+                    topTrue.setChecked(true);
+                    checkedTextTop="true";
+                }else if(universityModel.getBest().equals("false") || universityModel.getBest().equals("false ")){
+                    topFalse.setChecked(true);
+                    checkedTextTop="false";
+                }
+
+                if(universityModel.getPrivates().equals("true") || universityModel.getPrivates().equals("true ")){
+                    privatesTrue.setChecked(true);
+                    checkedTextPrivates="true";
+                }else if(universityModel.getPrivates().equals("false") || universityModel.getPrivates().equals("false ")){
+                    privatesFalse.setChecked(true);
+                    checkedTextPrivates="false";
+
+                }
+
+                if(universityModel.getPublics().equals("true") || universityModel.getPublics().equals("true ")){
+                    publicsTrue.setChecked(true);
+                    checkedTextPublic="true";
+                }else if(universityModel.getPublics().equals("false") || universityModel.getPublics().equals("false ")){
+                    publicsFalse.setChecked(true);
+                    checkedTextPublic="false";
+
+                }
+
+                if(universityModel.getSuggested().equals("true") || universityModel.getSuggested().equals("true ")){
+                    suggestTrue.setChecked(true);
+                    checkedTextSuggest="true";
+                }else if(universityModel.getSuggested().equals("false") || universityModel.getSuggested().equals("false ")){
+                    suggestFalse.setChecked(true);
+                    checkedTextSuggest="false";
+
+                }
+
+
+                top.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton checkedRadioButton = view.findViewById(checkedId);
+                        checkedTextTop = checkedRadioButton.getText().toString();
+
+                    }
+                });
+                top.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton checkedRadioButton = view.findViewById(checkedId);
+                        checkedTextTop = checkedRadioButton.getText().toString();
+
+                    }
+                });
+                publics.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton checkedRadioButton = view.findViewById(checkedId);
+                        checkedTextPublic = checkedRadioButton.getText().toString();
+
+                    }
+                });
+                privates.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton checkedRadioButton = view.findViewById(checkedId);
+                        checkedTextPrivates = checkedRadioButton.getText().toString();
+
+                    }
+                });
+                suggest.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        RadioButton checkedRadioButton = view.findViewById(checkedId);
+                        checkedTextSuggest = checkedRadioButton.getText().toString();
+
+                    }
+                });
+
+
+
 
 
 
@@ -89,12 +195,16 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
                         map.put("uniName",String.valueOf(uniName.getText()));
                         map.put("uniImageLink",String.valueOf(uniImage.getText()));
                         map.put("uniWebLink",String.valueOf(uniWebLink.getText()));
-                        map.put("suggested",String.valueOf(suggest.getText()));
-                        map.put("publics",String.valueOf(publics.getText()));
-                        map.put("privates",String.valueOf(privates.getText()));
+
+                        map.put("suggested",checkedTextSuggest);
+                        map.put("publics",checkedTextPublic);
+                        map.put("privates",checkedTextPrivates);
+                        map.put("best",checkedTextTop);
+
+
                         map.put("contryName",universityModel.getContryName());
-                        map.put("best",String.valueOf(top.getText()));
                         map.put("key",universityModel.getKey());
+                       // Toast.makeText(context, ""+checkedTextTop+" "+checkedTextPublic+" "+checkedTextPrivates+" "+checkedTextSuggest, Toast.LENGTH_SHORT).show();
 
                             FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey())
                                     .setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {

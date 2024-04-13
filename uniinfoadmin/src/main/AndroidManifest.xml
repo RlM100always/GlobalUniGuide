@@ -9,10 +9,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AllUniversityInformation">
         <activity
-            android:name=".university.UniversityActivity"
+            android:name=".post.MainPostActivity"
             android:exported="false" />
         <activity
             android:name=".country.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".post.PostDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".university.UniversityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".country.FirstActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity"
+    android:background="@color/white">
+    <androidx.appcompat.widget.Toolbar
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        android:background="@color/back"
+        app:menu="@menu/post_menu"
+        android:layout_gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/post_web_tolbar"
+        app:subtitleTextColor="@color/white"
+        app:titleTextColor="@color/white"
+        >
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Title TextView -->
+
+            <TextView
+                android:visibility="gone"
+                android:fontFamily="serif"
+                android:padding="5dp"
+                android:backgroundTint="#D81B60"
+                android:background="@drawable/edit_text_background"
+                android:id="@+id/post_title_id"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
+
+            <!-- WebView -->
+            <WebView
+                android:id="@+id/post_webView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Progress Bar (Centered in the ScrollView) -->
+            <ProgressBar
+                android:layout_marginTop="250dp"
+                android:id="@+id/post_progressbar_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:fontFamily="serif"
+                android:id="@+id/post_loading_id"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loading Content !!!!"
+                android:textStyle="bold"
+                android:textColor="#AC0906"
+                android:textSize="22dp"/>
+
+
+            <!-- "You May Like..." TextView -->
+            <TextView
+                android:id="@+id/may_like_id"
+                android:visibility="gone"
+                android:fontFamily="serif"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You May Like..."
+                android:textStyle="bold"
+                android:textColor="#051CAE"
+                android:textSize="22dp"/>
+
+            <!-- RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
+                android:background="@color/white"
+                android:id="@+id/post_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

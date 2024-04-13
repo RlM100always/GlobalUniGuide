@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,8 @@ public class UniversityActivity extends AppCompatActivity {
     EditText uniName,uniImage,uniLLink,top,priv,publ,sugg;
     TextView post;
     String contryName;
+    private String checkedTextTop,checkedTextPublic,checkedTextPrivates,checkedTextSuggest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,11 +115,57 @@ public class UniversityActivity extends AppCompatActivity {
         uniName=view.findViewById(R.id.university_name_id);
         uniImage=view.findViewById(R.id.university_image_id);
         uniLLink=view.findViewById(R.id.university_website_id);
-        top=view.findViewById(R.id.top_id);
-        sugg=view.findViewById(R.id.suggest_id);
-        priv=view.findViewById(R.id.private_id);
-        publ=view.findViewById(R.id.public_id);
+
+        RadioGroup top,publics,privates,suggest;
+        RadioButton topTrue,topFalse,publicsTrue,publicsFalse,privatesTrue,privatesFalse,suggestTrue,suggestFalse;
+        top=view.findViewById(R.id.group_radio_top);
+        publics=view.findViewById(R.id.radio_group_public);
+        privates=view.findViewById(R.id.radio_group_private);
+        suggest=view.findViewById(R.id.radio_group_suggest);
+
+        topTrue=view.findViewById(R.id.top_true_id);
+        topFalse=view.findViewById(R.id.top_false_id);
+        publicsTrue=view.findViewById(R.id.public_true_id);
+        publicsFalse=view.findViewById(R.id.public_false_id);
+        privatesTrue=view.findViewById(R.id.private_true_id);
+        privatesFalse=view.findViewById(R.id.private_false_id);
+        suggestTrue=view.findViewById(R.id.suggest_true_id);
+        suggestFalse=view.findViewById(R.id.suggest_false_id);
+
         post=view.findViewById(R.id.add_university_post_id);
+
+        top.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedRadioButton = view.findViewById(checkedId);
+                checkedTextTop = checkedRadioButton.getText().toString();
+
+            }
+        });
+        publics.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedRadioButton = view.findViewById(checkedId);
+                checkedTextPublic = checkedRadioButton.getText().toString();
+
+            }
+        });
+        privates.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedRadioButton = view.findViewById(checkedId);
+                checkedTextPrivates = checkedRadioButton.getText().toString();
+
+            }
+        });
+        suggest.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedRadioButton = view.findViewById(checkedId);
+                checkedTextSuggest = checkedRadioButton.getText().toString();
+
+            }
+        });
 
 
         builder.setView(view);
@@ -127,7 +177,7 @@ public class UniversityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!TextUtils.isEmpty(uniName.getText().toString()) && !TextUtils.isEmpty(uniImage.getText().toString()) && !TextUtils.isEmpty(uniLLink.getText().toString())
-                && !TextUtils.isEmpty(priv.getText().toString()) && !TextUtils.isEmpty(publ.getText().toString()) && !TextUtils.isEmpty(sugg.getText().toString()) && !TextUtils.isEmpty(top.getText().toString()) ){
+                && !TextUtils.isEmpty(checkedTextPrivates) && !TextUtils.isEmpty(checkedTextPublic) && !TextUtils.isEmpty(checkedTextSuggest) && !TextUtils.isEmpty(checkedTextTop) ){
                     uploadData();
                     alertDialog.dismiss();
 
@@ -143,20 +193,19 @@ public class UniversityActivity extends AppCompatActivity {
         String s_name=uniName.getText().toString();
         String s_link=uniLLink.getText().toString();
         String s_image=uniImage.getText().toString();
-        String prv=priv.getText().toString();
-        String pub=publ.getText().toString();
-        String sug=sugg.getText().toString();
-        String tp=top.getText().toString();
+
         Map<String,Object> map=new HashMap<>();
         map.put("contryName",contryName);
         map.put("uniWebLink",s_link);
         map.put("uniName",s_name);
         map.put("uniImageLink",s_image);
-        map.put("privates",prv);
-        map.put("publics",pub);
-        map.put("best",tp);
-        map.put("suggested",sug);
+        map.put("privates",checkedTextPrivates);
+        map.put("publics",checkedTextPublic);
+        map.put("best",checkedTextTop);
+        map.put("suggested",checkedTextSuggest);
         map.put("key",entryKey);
+
+        // Toast.makeText(UniversityActivity.this, ""+checkedTextTop+" "+checkedTextPublic+" "+checkedTextPrivates+" "+checkedTextSuggest, Toast.LENGTH_SHORT).show();
 
 
 

@@ -4,6 +4,24 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+    <style name="AppTheme.SearchView" parent="Widget.AppCompat.SearchView">
+        <!-- Customize the query text color -->
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textColor">@android:color/black</item>
+        <!-- Customize the hint text color -->
+        <item name="android:textColorHint">@android:color/black</item>
+    </style>
+    <style name="MyToolbarTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">17sp</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="CustomProgressDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/black</item>
+    </style>
 
     <style name="Theme.AllUniversityInformation" parent="Base.Theme.AllUniversityInformation" />
 </resources>

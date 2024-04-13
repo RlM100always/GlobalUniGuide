@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name="com.techtravelcoder.alluniversityinformations.ads.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,17 +14,28 @@
         android:roundIcon="@drawable/university"
         android:supportsRtl="true"
         android:theme="@style/Theme.AllUniversityInformation"
-        android:name="com.techtravelcoder.alluniversityinformations.ads.App"
         tools:targetApi="31">
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity"
+            android:exported="false" />
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity"
             android:exported="false" />
+
         <meta-data
             android:name="com.startapp.sdk.APPLICATION_ID"
             android:value="201407686" />
+
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.universityDetails.UniversityActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
+
         <service
             android:name="com.techtravelcoder.alluniversityinformations.service.MyFirebaseMessagingService"
             android:exported="false">

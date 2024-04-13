@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/back"
+    android:layout_height="match_parent"
+    tools:context="com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity">
+    <LinearLayout
+        android:background="@color/back"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.SearchView
+            android:layout_margin="6dp"
+            android:layout_gravity="center"
+            android:elevation="5dp"
+            android:id="@+id/category_post_searchView"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:background="@drawable/searchbar_background"
+            app:queryHint="Search post..."
+            app:iconifiedByDefault="false"
+            />
+
+        <TextView
+            android:id="@+id/category_set_id"
+            android:textColor="#52EBFE"
+            android:gravity="center"
+            android:text="Programming"
+            android:fontFamily="serif"
+            android:textStyle="bold"
+            android:textSize="23dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TextView>
+        <View
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="1.2dp"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:background="@color/back"
+            android:id="@+id/category_post_recyclerview_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </LinearLayout>
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/category_post_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+</LinearLayout>

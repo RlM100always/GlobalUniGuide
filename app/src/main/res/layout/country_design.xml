@@ -3,13 +3,10 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/edit_text_background"
-    android:backgroundTint="#FC0A0D3C"
+    android:backgroundTint="#FC0C115B"
     android:orientation="vertical"
-    android:foreground="@drawable/uni_background"
-    android:layout_marginTop="7dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginBottom="7dp"
+    android:layout_margin="10dp"
+
 
     android:elevation="10dp"
     android:layout_height="wrap_content">
@@ -20,17 +17,17 @@
         android:layout_width="match_parent"
         android:layout_height="100dp">
         <ImageView
+            android:foreground="@drawable/uni_background"
             android:id="@+id/country_image_id"
-            android:background="@drawable/edit_text_background"
-            android:scaleType="fitXY"
-            android:src="@drawable/image_buet"
+            android:background="@drawable/loading"
+            android:scaleType="centerCrop"
+            android:src="@drawable/loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
     </androidx.cardview.widget.CardView>
 
     <TextView
-
         android:drawablePadding="1dp"
         android:layout_marginTop="5dp"
         android:drawableLeft="@drawable/baseline_location_on_24"
@@ -40,20 +37,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bangladesh "
-        android:textColor="#FCDF04"
-        android:textSize="18dp"
+        android:textColor="@color/yellow"
+        android:textSize="16dp"
         android:textStyle="bold" />
     <TextView
+        android:textStyle="bold"
+        android:gravity="center"
         android:layout_marginLeft="4dp"
         android:drawablePadding="3dp"
         android:drawableLeft="@drawable/baseline_info_24"
         android:fontFamily="serif"
         android:layout_marginBottom="5dp"
         android:maxLines="2"
-        android:id="@+id/tnDateId"
         android:textColor="@color/white"
-        android:textSize="15dp"
-        android:text="Details Information.."
+        android:textSize="12dp"
+        android:text="Explore University"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

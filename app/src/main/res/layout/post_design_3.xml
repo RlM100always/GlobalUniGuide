@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:foreground="@drawable/uni_background"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:foreground="@drawable/uni_background"
+                app:cardCornerRadius="8dp"
+                android:padding="4dp"
+                android:layout_width="130dp"
+                android:layout_height="100dp">
+                <ImageView
+                    android:background="@drawable/loading"
+                    android:elevation="6dp"
+                    android:id="@+id/post_design_image_id3"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:fontFamily="serif"
+                    android:textStyle="bold"
+                    android:maxLines="4"
+                    android:id="@+id/post_design_title3"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Java Development Roadmap"
+                    android:textColor="@color/back"
+                    android:textSize="16dp"/>
+                <TextView
+                    android:id="@+id/post_design_views3"
+                    android:maxLines="2"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="serif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10444444 Views"
+                    android:textColor="@color/allert_back_upper"
+                    android:textSize="14dp"/>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

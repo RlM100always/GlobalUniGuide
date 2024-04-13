@@ -7,44 +7,51 @@
     android:foreground="@drawable/uni_background"
     android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
-        android:layout_margin="10dp"
+        android:layout_marginTop="7.5dp"
+        android:layout_marginBottom="7.5dp"
+        android:layout_marginLeft="5dp"
         app:cardCornerRadius="10dp"
         android:layout_width="160dp"
         android:layout_height="100dp">
         <ImageView
             android:id="@+id/sugg_img_id"
-            android:background="@drawable/edit_text_background"
+            android:background="@drawable/loading"
             android:scaleType="fitXY"
-            android:src="@drawable/image_buet"
+            android:src="@drawable/loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
     </androidx.cardview.widget.CardView>
     <LinearLayout
-        android:gravity="center_vertical"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/baseline_location_city_24"
             android:maxLines="3"
             android:fontFamily="serif"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="4dp"
             android:id="@+id/sugg_uni_name_id"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Banglb "
             android:textColor="@color/white"
-            android:textSize="16dp"
+            android:textSize="15dp"
             android:textStyle="bold" />
         <TextView
+            android:drawablePadding="4dp"
+            android:drawableLeft="@drawable/baseline_location_on_24"
+            android:textStyle="bold"
+            android:id="@+id/country_id_sugg"
             android:maxLines="3"
             android:fontFamily="serif"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="2.6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="To Know More..... "
-            android:textColor="#F5DB56"
+            android:text="Bangladesh"
+            android:textColor="@color/yellow"
             android:textSize="14dp"
             />
 

@@ -58,27 +58,54 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
                 context.startActivity(intent);
                 Random random=new Random();
 
-                int num = random.nextInt(14)+1;
+                int num = random.nextInt(40)+1;
                 if(num==2){
-                    //FacebookInterestitialAds.loadAds(context);
-                    App.interstitialLoader.doOnNextAvailable(result -> {
-                        if (result != null) {
-                            NotixInterstitial.Companion.show(result);
+                    final StartAppAd rewardedVideo = new StartAppAd(context);
+
+                    rewardedVideo.setVideoListener(new VideoListener() {
+                        @Override
+                        public void onVideoCompleted() {
+                            // Grant the reward to user
                         }
-                        return Unit.INSTANCE;
+                    });
+
+                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+                        @Override
+                        public void onReceiveAd(Ad ad) {
+                            rewardedVideo.showAd();
+                        }
+
+                        @Override
+                        public void onFailedToReceiveAd(Ad ad) {
+                            // Can't show rewarded video
+                        }
                     });
 
                 }
-                if(num==5){
-                    App.interstitialLoader.doOnNextAvailable(result -> {
-                        if (result != null) {
-                            NotixInterstitial.Companion.show(result);
+                if(num==10){
+                    final StartAppAd rewardedVideo = new StartAppAd(context);
+
+                    rewardedVideo.setVideoListener(new VideoListener() {
+                        @Override
+                        public void onVideoCompleted() {
+                            // Grant the reward to user
                         }
-                        return Unit.INSTANCE;
+                    });
+
+                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+                        @Override
+                        public void onReceiveAd(Ad ad) {
+                            rewardedVideo.showAd();
+                        }
+
+                        @Override
+                        public void onFailedToReceiveAd(Ad ad) {
+                            // Can't show rewarded video
+                        }
                     });
 
                 }
-                if(num==6){
+                if(num==15){
                     final StartAppAd rewardedVideo = new StartAppAd(context);
 
                     rewardedVideo.setVideoListener(new VideoListener() {
@@ -108,7 +135,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
 
     public void searchLists(ArrayList<CountryModel> filterlist){
         list=filterlist;
-        notifyDataSetChanged();
 
     }
     @Override
