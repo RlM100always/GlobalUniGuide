@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:text="Java Development Roadmap"
                     android:textColor="@color/back"
-                    android:textSize="14.5dp"/>
+                    android:textSize="16dp"/>
                 <TextView
                     android:id="@+id/post_design_views4"
                     android:maxLines="2"

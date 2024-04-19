@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ public class RecentFragment extends Fragment {
     private ProgressBar progressBar;
     private ImageView imageView;
     private TextView textView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public RecentFragment() {
     }
@@ -69,8 +71,10 @@ public class RecentFragment extends Fragment {
 
         imageView=view.findViewById(R.id.nothing_image);
         textView=view.findViewById(R.id.nothing_text_id);
+        swipeRefreshLayout=view.findViewById(R.id.swipe_refresh_layout_recent);
 
         progressBar=view.findViewById(R.id.recent_progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -79,6 +83,12 @@ public class RecentFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerView.setAdapter(mainPostAdapter);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchPostData();
+            }
+        });
 
         // Fetch data from Firebase Database
         fetchPostData();
@@ -91,7 +101,7 @@ public class RecentFragment extends Fragment {
     private void fetchPostData() {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -8);
+        calendar.add(Calendar.DAY_OF_YEAR, -5);
         Date startDate = calendar.getTime();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -113,6 +123,7 @@ public class RecentFragment extends Fragment {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.GONE);
+                        swipeRefreshLayout.setRefreshing(false);
 
                     }
                 },500);

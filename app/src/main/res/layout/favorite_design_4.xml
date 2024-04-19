@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/back"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:background="@color/white"
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,16 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.cardview.widget.CardView
+                android:layout_gravity="center"
                 android:foreground="@drawable/uni_background"
-                app:cardCornerRadius="8dp"
                 android:padding="4dp"
                 android:layout_width="125dp"
-                android:layout_height="110dp">
+                android:layout_height="100dp">
                 <ImageView
                     android:background="@drawable/loading"
-                    android:elevation="6dp"
-                    android:id="@+id/post_design_image_id3"
-                    android:scaleType="centerCrop"
+                    android:id="@+id/post_design_image_id"
+                    android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
@@ -37,22 +36,55 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:maxLines="2"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/post_design_category"
+                        android:layout_marginRight="5dp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="serif"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="P tomi"
+                        android:textStyle="bold"
+                        android:textColor="@color/yellow"
+                        android:textSize="17dp"/>
+                    <TextView
+                        android:foreground="@drawable/uni_background"
+                        android:id="@+id/favorite_post_delete_id"
+                        android:layout_marginRight="20dp"
+                        android:drawableLeft="@drawable/baseline_delete_24"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"
+                        android:fontFamily="serif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/yellow"
+                        android:textSize="18dp"/>
+
+
+                </LinearLayout>
 
 
                 <TextView
                     android:fontFamily="serif"
                     android:textStyle="bold"
-                    android:maxLines="4"
-                    android:id="@+id/post_design_title3"
+                    android:maxLines="5"
+                    android:id="@+id/post_design_title"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Java Development Roadmap"
-                    android:textColor="@color/back"
-                    android:textSize="17dp"/>
+                    android:text="Java Development Roadmap Journey "
+                    android:textColor="@color/white"
+                    android:textSize="15.5dp"/>
                 <TextView
-                    android:id="@+id/post_design_views3"
+                    android:id="@+id/post_design_views"
                     android:maxLines="2"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"
@@ -60,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10444444 Views"
-                    android:textColor="@color/back"
+                    android:textColor="@color/lighGreen"
                     android:textSize="14dp"/>
 
 

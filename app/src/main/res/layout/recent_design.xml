@@ -35,7 +35,7 @@
                     android:text="Programming"
                     android:textStyle="bold"
                     android:textColor="@color/yellow"
-                    android:textSize="19dp"/>
+                    android:textSize="17dp"/>
 
                 <TextView
                     android:fontFamily="serif"
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:text="Java Development Roadmap"
                     android:textColor="@color/white"
-                    android:textSize="16dp"/>
+                    android:textSize="15.5dp"/>
                 <TextView
                     android:id="@+id/recent_design_views"
                     android:maxLines="2"
@@ -56,8 +56,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10444444 Views"
-                    android:textColor="#C6FFFFFF"
-                    android:textSize="14dp"/>
+                    android:textColor="@color/lighGreen"
+                    android:textSize="13.5dp"/>
                 <TextView
                     android:id="@+id/recent_design_date"
                     android:maxLines="2"
@@ -66,14 +66,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Published On : 12 January , 2024"
-                    android:textColor="#C6FFFFFF"
-                    android:textSize="14dp"/>
+                    android:textColor="@color/lighGreen"
+                    android:textSize="13.5dp"/>
 
 
 
 
             </LinearLayout>
             <androidx.cardview.widget.CardView
+                android:layout_gravity="center"
                 android:layout_margin="4dp"
                 android:foreground="@drawable/uni_background"
                 app:cardCornerRadius="8dp"
@@ -81,8 +82,10 @@
                 android:layout_width="110dp"
                 android:layout_height="100dp">
                 <ImageView
+
+                    android:background="@drawable/loading"
                     android:id="@+id/recent_design_image_id"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:src="@drawable/image_buet"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>

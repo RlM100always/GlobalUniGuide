@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/back"
+    android:layout_height="match_parent">
+    <TextView
+        android:drawablePadding="5dp"
+        android:drawableLeft="@drawable/baseline_home_24"
+        android:textStyle="bold"
+        android:text="Home"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:drawablePadding="5dp"
+        android:drawableLeft="@drawable/baseline_home_24"
+        android:textStyle="bold"
+        android:text="Add to favorite"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:drawablePadding="5dp"
+        android:drawableLeft="@drawable/baseline_share_24"
+        android:textStyle="bold"
+        android:text="Share"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:drawablePadding="5dp"
+        android:drawableLeft="@drawable/baseline_home_24"
+        android:textStyle="bold"
+        android:text="View on Site"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

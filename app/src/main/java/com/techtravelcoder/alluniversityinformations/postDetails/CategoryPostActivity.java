@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -38,7 +42,12 @@ public class CategoryPostActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private SearchView searchView;
     private TextView cat;
-    String postId;
+    private String postId;
+    private int sizeCheck=0;
+    private String keyString;
+    private ProgressBar progressBar;
+    private TextView playListViews,playListRattings,playListItem;
+    private Long countTotalViews=0L;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,15 @@ public class CategoryPostActivity extends AppCompatActivity {
 
 
 
+        playListItem=findViewById(R.id.playlist_total_content_id);
+        playListViews=findViewById(R.id.playlist_views_id);
+        playListRattings=findViewById(R.id.playlist_rating_id);
+
+
+        progressBar=findViewById(R.id.category_post_progressbar_id);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        progressBar.setVisibility(View.VISIBLE);
+
         postId=getIntent().getStringExtra("id");
 
         int color=0;
@@ -54,9 +72,9 @@ public class CategoryPostActivity extends AppCompatActivity {
             color = getColor(R.color.back);
         }
         getWindow().setStatusBarColor(color);
-
+        keyString=getIntent().getStringExtra("title");
         cat=findViewById(R.id.category_set_id);
-        cat.setText(getIntent().getStringExtra("title"));
+        cat.setText(keyString);
 
         searchView=findViewById(R.id.category_post_searchView);
         EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
@@ -114,19 +132,61 @@ public class CategoryPostActivity extends AppCompatActivity {
 
 
     private void fetchPostData() {
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
-                    if (mainPostModels != null && mainPostModels.getUniqueNum().equals(postId)) {
-                        list.add(mainPostModels);
+                   // Toast.makeText(CategoryPostActivity.this, ""+keyString, Toast.LENGTH_SHORT).show();
+                    if(keyString.equals("Most Popular Content"))
+                    {
+                        MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
+                        if (mainPostModels != null) {
+                            list.add(mainPostModels);
+                            countTotalViews+=mainPostModels.getViews();
+                            sizeCheck++;
+                            if(sizeCheck>=150){
+                                break;
+                            }
+                        }
                     }
+                    else
+                    {
+                        MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
+                        if (mainPostModels != null && mainPostModels.getUniqueNum().equals(postId)) {
+                            list.add(mainPostModels);
+                            countTotalViews+=mainPostModels.getViews();
+                        }
+                    }
+
                 }
-                mainPostAdapter.notifyDataSetChanged();
-                Collections.shuffle(list);
-                mainPostAdapter.notifyDataSetChanged();
+                if(keyString.equals("Most Popular Content"))
+                {
+                    Collections.sort(list, new Comparator<MainPostModel>() {
+                        @Override
+                        public int compare(MainPostModel o1, MainPostModel o2) {
+                            return Long.compare(o2.getViews(), o1.getViews()); // Descending
+                        }
+                    });
+
+                    playListViews.setText(String.valueOf(countTotalViews));
+                    playListItem.setText(String.valueOf(list.size()));
+                    mainPostAdapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
+
+                }
+                else
+                {
+
+                    mainPostAdapter.notifyDataSetChanged();
+                    playListViews.setText(String.valueOf(countTotalViews));
+                    playListItem.setText(String.valueOf(list.size()));
+                    Collections.shuffle(list);
+                    progressBar.setVisibility(View.GONE);
+                    mainPostAdapter.notifyDataSetChanged();
+                }
+
             }
 
             @Override

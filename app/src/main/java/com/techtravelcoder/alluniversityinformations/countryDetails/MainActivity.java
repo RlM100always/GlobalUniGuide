@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -30,6 +31,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +47,9 @@ import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.startapp.sdk.adsbase.adlisteners.VideoListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.ads.App;
+import com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
+import com.techtravelcoder.alluniversityinformations.universityDetails.UniversityActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,18 +91,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-////        mAuth = FirebaseAuth.getInstance();
-////        Toast.makeText(this, ""+mAuth.getCurrentUser(), Toast.LENGTH_SHORT).show();
-//
-//
-//
-//          if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-//              Toast.makeText(this, ""+FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
-//
-//          } else {
-//            signInAnonymously();
-//
-//            }
+//        mAuth = FirebaseAuth.getInstance();
+//        Toast.makeText(this, ""+mAuth.getCurrentUser(), Toast.LENGTH_SHORT).show();
+
+
+
+          if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+          } else {
+            signInAnonymously();
+
+            }
 
 
 
@@ -120,6 +124,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize FirebaseAuth instance
 
+        mbase = FirebaseDatabase.getInstance().getReference("Country");
+        mbase.keepSynced(true);
+
+
+
+        recyclerView.setLayoutManager(gridLayoutManager);
+        list=new ArrayList<>();
+        campainAdapter=new CountryAdapter(this,list);
+        recyclerView.setAdapter(campainAdapter );
+
+        progressBar.setVisibility(View.VISIBLE);
+        loadData();
+        refeshData();
 
 
         visit.setOnClickListener(new View.OnClickListener() {
@@ -127,55 +144,54 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(),PostHandleActivity.class);
 
-                Random random=new Random();
-                int num = random.nextInt(3);
-                if(num==0){
-                    // FacebookInterestitialAds.loadAds(context);
-                    App.interstitialLoader.doOnNextAvailable(result -> {
-                        if (result != null) {
-                            NotixInterstitial.Companion.show(result);
-                        }
-                        return Unit.INSTANCE;
-                    });
-
-                }
-                if(num==1){
-                    App.interstitialLoader.doOnNextAvailable(result -> {
-                        if (result != null) {
-                            NotixInterstitial.Companion.show(result);
-                        }
-                        return Unit.INSTANCE;
-                    });
-
-                }
-                if(num==2){
-                    final StartAppAd rewardedVideo = new StartAppAd(getApplicationContext());
-
-                    rewardedVideo.setVideoListener(new VideoListener() {
-                        @Override
-                        public void onVideoCompleted() {
-                            // Grant the reward to user
-                        }
-                    });
-
-                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                        @Override
-                        public void onReceiveAd(Ad ad) {
-                            rewardedVideo.showAd();
-                        }
-
-                        @Override
-                        public void onFailedToReceiveAd(Ad ad) {
-                            // Can't show rewarded video
-                        }
-                    });
-                }
+//                Random random=new Random();
+//                int num = random.nextInt(3);
+//                if(num==0){
+//                    // FacebookInterestitialAds.loadAds(context);
+//                    App.interstitialLoader.doOnNextAvailable(result -> {
+//                        if (result != null) {
+//                            NotixInterstitial.Companion.show(result);
+//                        }
+//                        return Unit.INSTANCE;
+//                    });
+//
+//                }
+//                if(num==1){
+//                    App.interstitialLoader.doOnNextAvailable(result -> {
+//                        if (result != null) {
+//                            NotixInterstitial.Companion.show(result);
+//                        }
+//                        return Unit.INSTANCE;
+//                    });
+//
+//                }
+//                if(num==2){
+//                    final StartAppAd rewardedVideo = new StartAppAd(getApplicationContext());
+//
+//                    rewardedVideo.setVideoListener(new VideoListener() {
+//                        @Override
+//                        public void onVideoCompleted() {
+//                            // Grant the reward to user
+//                        }
+//                    });
+//
+//                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+//                        @Override
+//                        public void onReceiveAd(Ad ad) {
+//                            rewardedVideo.showAd();
+//                        }
+//
+//                        @Override
+//                        public void onFailedToReceiveAd(Ad ad) {
+//                            // Can't show rewarded video
+//                        }
+//                    });
+//                }
                 startActivity(intent);
             }
         });
 
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
-
 
         FirebaseMessaging.getInstance().subscribeToTopic("News").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -220,16 +236,7 @@ public class MainActivity extends AppCompatActivity {
             navIcon.setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_IN);
         }
 
-        mbase = FirebaseDatabase.getInstance().getReference("Country");
 
-        recyclerView.setLayoutManager(gridLayoutManager);
-        list=new ArrayList<>();
-        campainAdapter=new CountryAdapter(this,list);
-        recyclerView.setAdapter(campainAdapter );
-
-        progressBar.setVisibility(View.VISIBLE);
-        loadData();
-        refeshData();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -244,29 +251,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private void signInAnonymously() {
-//        FirebaseAuth.getInstance().signInAnonymously()
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        try {
-//                            if (task.isSuccessful()) {
-//                                // Sign-in success, retrieve the user
-//                                Toast.makeText(MainActivity.this, "Authentication success.",
-//                                        Toast.LENGTH_SHORT).show();
-//
-//                            } else {
-//                                // Sign-in failed, display a message to the user
-//                                Toast.makeText(MainActivity.this, "Authentication failed.",
-//                                        Toast.LENGTH_SHORT).show();
-//                            }
-//                        } catch (NullPointerException e) {
-//                            Toast.makeText(MainActivity.this, "An error occurred: " + e.getMessage(),
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
+    private void signInAnonymously() {
+        FirebaseAuth.getInstance().signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        try {
+                            if (task.isSuccessful()) {
+                                // Sign-in success, retrieve the user
+                                Toast.makeText(MainActivity.this, "Successfully Load.", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (NullPointerException e) {
+                            Toast.makeText(MainActivity.this, "An error occurred: " + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 
     private void refeshData() {
         mbase.addValueEventListener(new ValueEventListener() {
@@ -301,6 +303,11 @@ public class MainActivity extends AppCompatActivity {
     private HashSet<String> uniqueKeys = new HashSet<>();
 
     private void loadData() {
+        if (mbase == null) {
+            Log.e("MainActivity", "DatabaseReference is null. Firebase setup issue.");
+            return;
+        }
+
         Query query = mbase.limitToFirst(PAGE_SIZE);
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -453,13 +460,18 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         Intent intent= new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plain");
-                        intent.putExtra(Intent.EXTRA_SUBJECT,"✅✅ Best Application for Students Carrier and University Guidelines");
-                        intent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName());
+                        intent.putExtra(Intent.EXTRA_SUBJECT,"✔✔ Best Application for Students Carrier and University Guidelines");
+                        intent.putExtra(Intent.EXTRA_TEXT,"\uD83D\uDC49 "+"https://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName());
 
                         startActivity(Intent.createChooser(intent,"Share With"));
                     }catch (Exception e){
                         Toast.makeText(MainActivity.this, "Unable to Share!!!"+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                }
+                if(item.getItemId()==R.id.menu_popular_content_id){
+                    Intent intent=new Intent(MainActivity.this, CategoryPostActivity.class);
+                    intent.putExtra("title","Most Popular Content");
+                    startActivity(intent);
                 }
 
 
@@ -490,13 +502,14 @@ public class MainActivity extends AppCompatActivity {
         alertObj.setTitle(Html.fromHtml("<font color='#000000'>Confirm Exit...ℹ️</font>"));
         alertObj.setMessage(Html.fromHtml("<font color='#000000'>ℹ️ Do you want to Exit this Application ❓❓</font>"));
 
-        alertObj.setPositiveButton("✅Yes", new DialogInterface.OnClickListener() {
+        alertObj.setPositiveButton(Html.fromHtml("<font color='#000000'>✅Yes</font>"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 finishAffinity();
             }
         });
-        alertObj.setNegativeButton("❌No", new DialogInterface.OnClickListener() {
+        alertObj.setNegativeButton(Html.fromHtml("<font color='#000000'>❌No</font>"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

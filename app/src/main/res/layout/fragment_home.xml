@@ -1,49 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.techtravelcoder.alluniversityinformations.Fragment.HomeFragment">
 
-    <LinearLayout
-        android:background="@color/back"
-        android:gravity="center"
-        android:orientation="vertical"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/home_swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.appcompat.widget.SearchView
-            android:layout_margin="6dp"
-            android:layout_gravity="center"
-            android:elevation="5dp"
-            android:id="@+id/home_searchView"
-            android:layout_width="280dp"
-            android:layout_height="40dp"
-            android:background="@drawable/searchbar_background"
-            app:queryHint="Search here..."
-            app:iconifiedByDefault="false"
-            />
 
-
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/home_frag_scroll_id"
+        <LinearLayout
+            android:background="@color/back"
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:background="@color/back"
-                android:id="@+id/home_recyclerview_id"
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/home_searchView"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:layout_margin="6dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:background="@drawable/searchbar_background"
+                app:queryHint="Search here..."
+                app:iconifiedByDefault="false" />
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/home_frag_scroll_id"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="match_parent">
 
-        </androidx.core.widget.NestedScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_recyclerview_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/back" />
 
-    </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <ProgressBar
-        android:visibility="visible"
         android:id="@+id/home_progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </FrameLayout>

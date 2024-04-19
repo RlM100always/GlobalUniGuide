@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_post_home_id"
-        android:icon="@drawable/baseline_home_24"
-        android:visible="true"
+
+    <item
+        android:icon="@drawable/baseline_more_vert_24"
         app:showAsAction="always"
-        android:title="home" />
+        android:title="">
+        <menu>
+            <item
+
+                android:id="@+id/menu_post_home_id"
+                android:icon="@drawable/baseline_home_24"
+                android:title="Home"
+
+                />
+            <item
+                android:id="@+id/menu_post_rating_id"
+                android:icon="@drawable/baseline_star_rate_24"
+                android:title="Rating Content"
+                />
+
+            <item
+                android:id="@+id/menu_post_share_id"
+                android:icon="@drawable/baseline_share_24"
+                android:title="Share"
+                />
+            <item
+                android:id="@+id/menu_post_favorite_border_id"
+                android:icon="@drawable/baseline_favorite_border_24"
+                android:title="Add to Favorite"
+                />
+            <item
+                android:id="@+id/menu_post_view_site_id"
+                android:icon="@drawable/baseline_ios_share_24"
+                android:title="View on Site"
+                />
+
+        </menu>
+    </item>
+
+
 
 </menu>

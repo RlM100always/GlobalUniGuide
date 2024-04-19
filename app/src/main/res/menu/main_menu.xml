@@ -7,6 +7,17 @@
             android:icon="@drawable/baseline_newspaper_24"
             android:title="Carrier Guide"
             />
+        <item android:id="@+id/menu_popular_content_id"
+            android:icon="@drawable/baseline_article_24"
+            android:title="Popular Content"
+            />
+
+
+        <item android:id="@+id/menu_favorite_uni_id"
+            android:icon="@drawable/baseline_bookmark_added_24"
+            android:title="Bookmark University"
+            />
+
 
         <item
             android:icon="@drawable/baseline_people_24"

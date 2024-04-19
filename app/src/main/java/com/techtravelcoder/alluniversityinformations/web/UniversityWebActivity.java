@@ -137,6 +137,8 @@ public class UniversityWebActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.menu_home_id) {
             Intent intent = new Intent(UniversityWebActivity.this, MainActivity.class);
+            intent.putExtra("val",2);
+
             startActivity(intent);
             return true; // Make sure to return true to indicate that the item click is handled
         }

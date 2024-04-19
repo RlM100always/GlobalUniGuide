@@ -1,19 +1,33 @@
 package com.techtravelcoder.alluniversityinformations.FragmentAdapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity;
+import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity;
 
 import java.util.ArrayList;
@@ -65,8 +79,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case VIEW_TYPE_3:
                 itemView = inflater.inflate(R.layout.recent_design, parent, false);
                 return new ViewHolderType3(itemView);
-            case VIEW_TYPE_4://ekbaro call hoini eta
-                itemView = inflater.inflate(R.layout.post_design_4, parent, false);
+            case VIEW_TYPE_4:
+                itemView = inflater.inflate(R.layout.favorite_design_4, parent, false);
                 return new ViewHolderType4(itemView);
             default:
                 throw new IllegalArgumentException("Invalid view type");
@@ -108,7 +122,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void bindViewHolderType1(MainPostAdapter.ViewHolderType1 holder, MainPostModel mainPostModel) {
         holder.title1.setText(mainPostModel.getTitle());
         holder.label1.setText(mainPostModel.getCategory());
-        holder.view1.setText("read "+mainPostModel.getViews()+" times");
+        holder.view1.setText(mainPostModel.getViews()+" Views");
         Glide.with(context).load(mainPostModel.getImage()).into(holder.img1);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +184,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void bindViewHolderType4(MainPostAdapter.ViewHolderType4 holder, MainPostModel mainPostModel) {
         holder.title4.setText(mainPostModel.getTitle());
-        holder.view4.setText(String.valueOf(mainPostModel.getViews()));
+        holder.label4.setText(mainPostModel.getCategory());
+        holder.view4.setText("read "+mainPostModel.getViews()+" times");
         Glide.with(context).load(mainPostModel.getImage()).into(holder.img4);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +193,65 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
                 intent.putExtra("postId",mainPostModel.getPostId());
+                intent.putExtra("num",mainPostModel.getViews());
+                intent.putExtra("key",mainPostModel.getKey());
+                intent.putExtra("label",mainPostModel.getLabel());
                 context.startActivity(intent);
+            }
+        });
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertObj = new AlertDialog.Builder(context);
+                alertObj.setTitle(Html.fromHtml("<font color='#000000'>Confirm Removal...ℹ️</font>"));
+                alertObj.setMessage(Html.fromHtml("<font color='#000000'>ℹ️ Do you want to remove this post from favorite list ❓❓</font>"));
+
+                alertObj.setPositiveButton(Html.fromHtml("<font color='#000000'>✅Yes</font>"), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("favorite")
+                                .child(FirebaseAuth.getInstance().getUid()).setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(context, "Successfully remove from the Favorite List", Toast.LENGTH_SHORT).show();
+                                        FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("postLoves").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                Long num=snapshot.getValue(Long.class);
+                                               // Toast.makeText(context, ""+num, Toast.LENGTH_SHORT).show();
+                                                if(snapshot.exists()){
+                                                    FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("postLoves").setValue(num-1L);
+
+                                                }else {
+                                                    FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("postLoves").setValue(1L);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
+                                        Intent intent=new Intent(context, PostHandleActivity.class);
+                                        context.startActivity(intent);
+                                    }
+                                });
+
+                    }
+                });
+                alertObj.setNegativeButton(Html.fromHtml("<font color='#000000'>❌No</font>"), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog dialog = alertObj.create();
+                dialog.show();
+
+                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.alert_back);
+                dialog.getWindow().setBackgroundDrawable(drawable);
             }
         });
     }
@@ -234,13 +307,15 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private static class ViewHolderType4 extends RecyclerView.ViewHolder {
         ImageView img4;
-        TextView  title4,view4;
+        TextView label4, title4,view4,delete;
 
         ViewHolderType4(@NonNull View itemView) {
             super(itemView);
+            label4 = itemView.findViewById(R.id.post_design_category);
             img4 = itemView.findViewById(R.id.post_design_image_id);
             title4 = itemView.findViewById(R.id.post_design_title);
             view4=itemView.findViewById(R.id.post_design_views);
+            delete=itemView.findViewById(R.id.favorite_post_delete_id);
         }
     }
 

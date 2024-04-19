@@ -1,14 +1,23 @@
 package com.techtravelcoder.alluniversityinformations.postDetails;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.Fragment.CategoryFragment;
+import com.techtravelcoder.alluniversityinformations.Fragment.FavoriteFragment;
+import com.techtravelcoder.alluniversityinformations.Fragment.HomeFragment;
+import com.techtravelcoder.alluniversityinformations.Fragment.RecentFragment;
 
 public class PostHandleActivity extends AppCompatActivity {
 
@@ -21,44 +30,38 @@ public class PostHandleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_handle);
-
-        int color=0;
+        int color = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             color = getColor(R.color.back);
         }
         getWindow().setStatusBarColor(color);
 
-        tabLayout=(TabLayout)findViewById(R.id.tablayout1);
-        tabItem1=(TabItem)findViewById(R.id.tab1);
-        tabItem2=(TabItem)findViewById(R.id.tab2);
-        tabItem3=(TabItem)findViewById(R.id.tab3);
-        //tabItem4=(TabItem)findViewById(R.id.tab4);
-
-        viewPager=(ViewPager)findViewById(R.id.vpager);
-
-        pageAdapter=new PageAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        ViewPager2 viewPager = findViewById(R.id.vpager);
+        PageAdapter pageAdapter = new PageAdapter(this);
         viewPager.setAdapter(pageAdapter);
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+         tabLayout = findViewById(R.id.tablayout1);
 
-                if(tab.getPosition()==0 || tab.getPosition()==1 || tab.getPosition()==2)
-                    pageAdapter.notifyDataSetChanged();
+
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            // Set tab titles as needed based on position
+            switch (position) {
+                case 0:
+                    tab.setText("Home");
+                    break;
+                case 1:
+                    tab.setText("Category");
+                    break;
+                case 2:
+                    tab.setText("Recent");
+                    break;
+                case 3:
+                    tab.setText("Favorite");
+                    break;
             }
+        }).attach();
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
 
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
+
 }

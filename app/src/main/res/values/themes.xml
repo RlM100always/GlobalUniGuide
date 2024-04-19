@@ -13,9 +13,22 @@
         <item name="android:textColorHint">@android:color/black</item>
     </style>
     <style name="MyToolbarTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+
         <item name="android:textSize">17sp</item>
         <item name="fontFamily">serif</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+        <!-- Define a custom style for the toolbar -->
+    <style name="MyPopupTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">#D81B60</item> <!-- Set popup menu text color -->
+        <item name="android:textStyle">bold</item> <!-- Set popup menu text color -->
+
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#373837</item>
+        <item name="colorControlActivated">#EF045A</item>
     </style>
 
 

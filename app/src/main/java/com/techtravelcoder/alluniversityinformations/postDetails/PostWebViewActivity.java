@@ -1,20 +1,29 @@
 package com.techtravelcoder.alluniversityinformations.postDetails;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.media.Rating;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +31,10 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +44,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -49,8 +63,11 @@ import com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class PostWebViewActivity extends AppCompatActivity {
@@ -66,6 +83,7 @@ public class PostWebViewActivity extends AppCompatActivity {
     private Long views;
     private Handler handler;
     private Toolbar toolbars;
+    private String title,selfLink,urlLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +113,7 @@ public class PostWebViewActivity extends AppCompatActivity {
          toolbars=findViewById(R.id.post_web_tolbar);
          setSupportActionBar(toolbars);
 
+
         // toolbars.setTitle(uni_name);
          toolbars.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,10 +124,12 @@ public class PostWebViewActivity extends AppCompatActivity {
         });
 
 
+
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true); // Enable JavaScript
         webSettings.setDomStorageEnabled(true); // Enable DOM Storage
-        webView.clearCache(true);
+
+
 
         retriveData();
 
@@ -121,6 +142,9 @@ public class PostWebViewActivity extends AppCompatActivity {
         key=getIntent().getStringExtra("key");
 
 
+        //favorite menu handle dynamically
+
+
 
         String url="https://www.googleapis.com/blogger/v3/blogs/4823373246423002249/posts/"+postid+"?key=AIzaSyDRWqHviRcT8mTswe19KPBDIVlxfdIcejM";
 
@@ -131,12 +155,12 @@ public class PostWebViewActivity extends AppCompatActivity {
                     // Parse the response JSON to get the single post data
                     JSONObject jsonObject = new JSONObject(response);
 
-                    String title = jsonObject.getString("title");
+                    title = jsonObject.getString("title");
                     String content = jsonObject.getString("content");
                     String published = jsonObject.getString("published");
                     String updated = jsonObject.getString("updated");
-                    String url = jsonObject.getString("url");
-                    String selfLink = jsonObject.getString("selfLink");
+                    urlLink = jsonObject.getString("url");
+                    selfLink = jsonObject.getString("selfLink");
                     String author = jsonObject.getJSONObject("author").getString("displayName");
 
                     titles.setVisibility(View.VISIBLE);
@@ -200,12 +224,16 @@ public class PostWebViewActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // Handle error response
+
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().hide();
+                }
                 progressBar.setVisibility(View.GONE);
                 loading.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
                 mayLike.setVisibility(View.VISIBLE);
                 retriveData();
-                Toast.makeText(PostWebViewActivity.this, "Something Problem " , Toast.LENGTH_SHORT).show();
+                Toast.makeText(PostWebViewActivity.this, "Something Problem or Internet Issue " , Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -231,16 +259,322 @@ public class PostWebViewActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.post_menu, menu);
 
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
+
+        FirebaseDatabase.getInstance().getReference("Post").child(key).child("favorite")
+                .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            Boolean bool= (Boolean) snapshot.getValue();
+                            //Toast.makeText(PostWebViewActivity.this, "Menu", Toast.LENGTH_SHORT).show();
+                            Menu menu = toolbars.getMenu();; // Replace with your menu ID
+                            MenuItem menuItem = menu.findItem(R.id.menu_post_favorite_border_id); // ID of the menu item to update
+
+                            if (bool==true) {
+                                // Update the menu item properties
+                                menuItem.setTitle("Remove from Favorite");
+                                menuItem.setIcon(R.drawable.baseline_favorite_24);
+                            } else if (bool==false) {
+                                menuItem.setTitle("Add to Favorite");
+                                menuItem.setIcon(R.drawable.baseline_favorite_border_24);
+                            }else {
+                                menuItem.setTitle("Add to Favorite");
+                                menuItem.setIcon(R.drawable.baseline_favorite_border_24);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
         if(item.getItemId() == R.id.menu_post_home_id) {
             Intent intent = new Intent(PostWebViewActivity.this, MainActivity.class);
+            intent.putExtra("val",2);
             startActivity(intent);
             return true; // Make sure to return true to indicate that the item click is handled
         }
+        if(item.getItemId()==R.id.menu_post_share_id){
+
+            try {
+                if(urlLink != null){
+                    Intent intent= new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    String subject = "✔✔ " + title + ".\n\uD83D\uDC49\uD83D\uDC49 " + urlLink + "\n\n" +
+                            "✔✔ I would like to share this app with you. Download this App from Google PlayStore.";
+                    String appLink = "\uD83D\uDC49 \uD83D\uDC49"+"https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName();
+                    String message = subject + "\n" + appLink;
+                    intent.putExtra(Intent.EXTRA_TEXT, message);
+
+                    startActivity(Intent.createChooser(intent,"Share With"));
+                }else {
+                    Toast.makeText(PostWebViewActivity.this, "Internet Connection Loss", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }catch (Exception e){
+                Toast.makeText(PostWebViewActivity.this, "Unable to Share!!!"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        if(item.getItemId()==R.id.menu_post_view_site_id){
+
+            if(urlLink != null){
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(urlLink));
+                 startActivity(intent);
+            }else {
+                Toast.makeText(PostWebViewActivity.this, "Internet Connection Loss", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+        if(item.getItemId()==R.id.menu_post_favorite_border_id){
+            FirebaseDatabase.getInstance().getReference("Post").child(key).child("favorite")
+                    .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                Boolean bool= (Boolean) snapshot.getValue();
+
+                                if(bool){
+                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("favorite")
+                                            .child(FirebaseAuth.getInstance().getUid()).setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Toast.makeText(PostWebViewActivity.this, "Successfully remove from the Favorite List", Toast.LENGTH_SHORT).show();
+                                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("postLoves").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                            Long num=snapshot.getValue(Long.class);
+                                                            if(snapshot.exists()){
+                                                                FirebaseDatabase.getInstance().getReference("Post").child(key).child("postLoves").setValue(num-1L);
+
+                                                            }else {
+                                                                FirebaseDatabase.getInstance().getReference("Post").child(key).child("postLoves").setValue(1L);
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
+
+                                                }
+                                            });
+
+                                }else {
+                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("favorite")
+                                            .child(FirebaseAuth.getInstance().getUid()).setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Toast.makeText(PostWebViewActivity.this, "Successfully added to the Favorite List", Toast.LENGTH_SHORT).show();
+                                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("postLoves").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                            Long num=snapshot.getValue(Long.class);
+                                                            if(snapshot.exists()){
+                                                                FirebaseDatabase.getInstance().getReference("Post").child(key).child("postLoves").setValue(num+1L);
+
+                                                            }else {
+                                                                FirebaseDatabase.getInstance().getReference("Post").child(key).child("postLoves").setValue(1L);
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
+
+                                                }
+                                            });
+
+                                }
+
+                            }else {
+                                //Toast.makeText(PostWebViewActivity.this, "Not Exist", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(PostWebViewActivity.this, ""+key, Toast.LENGTH_SHORT).show();
+                                FirebaseDatabase.getInstance().getReference("Post").child(key).child("favorite")
+                                        .child(FirebaseAuth.getInstance().getUid()).setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(PostWebViewActivity.this, "Successfully added to the Favorite List", Toast.LENGTH_SHORT).show();
+                                                FirebaseDatabase.getInstance().getReference("Post").child(key).child("postLoves").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        Long num=snapshot.getValue(Long.class);
+                                                        if(snapshot.exists()){
+                                                            FirebaseDatabase.getInstance().getReference("Post").child(key).child("postLoves").setValue(num+1L);
+
+                                                        }else {
+                                                            FirebaseDatabase.getInstance().getReference("Post").child(key).child("postLoves").setValue(1L);
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
+                                            }
+                                        });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
+        }
+        if(item.getItemId()==R.id.menu_post_rating_id){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.rating_design, null);
+            builder.setView(dialogView);
+
+            RatingBar ratingBar=dialogView.findViewById(R.id.ratingBar);
+            EditText ratingText=dialogView.findViewById(R.id.rating_reason_id);
+            EditText ratingName=dialogView.findViewById(R.id.rating_name_id);
+            TextView submit=dialogView.findViewById(R.id.rating_submit_id);
+
+           //retrive
+            FirebaseDatabase.getInstance().getReference("Post").child(key).child("rating")
+                    .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                ratingName.setText(snapshot.child("name").getValue(String.class));
+                                ratingText.setText(snapshot.child("text").getValue(String.class));
+                                Double db=snapshot.child("rate").getValue(Double.class);
+                                DecimalFormat df = new DecimalFormat("#.##"); // Two decimal places
+                                float myFloat = Float.parseFloat(df.format(db));
+                                ratingBar.setRating(myFloat);
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
+
+            // Create and show the dialog
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
+            alertDialog.getWindow().setBackgroundDrawable(drawable);
+
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String rating=String.valueOf(ratingBar.getRating());
+
+                    if(!rating.isEmpty() && !ratingName.getText().toString().isEmpty() && !ratingText.getText().toString().isEmpty()){
+                        // String entryKey = FirebaseDatabase.getInstance().getReference("Post").child(key).child("rating").push().getKey();
+                        // Toast.makeText(getApplicationContext(), ""+entryKey+" "+rating+" "+ratingText.getText().toString()+" "+ratingName.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                        Map<String,Object> map=new HashMap();
+                        map.put("userid",FirebaseAuth.getInstance().getUid());
+                        map.put("name",ratingName.getText().toString());
+                        map.put("rate",Double.parseDouble(rating));
+                        map.put("text",ratingText.getText().toString());
+
+                        //retrive
+                        FirebaseDatabase.getInstance().getReference("Post").child(key).child("ratingNum").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists())
+                                {
+                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("rating")
+                                            .child(FirebaseAuth.getInstance().getUid()).setValue(map);
+                                    Toast.makeText(PostWebViewActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+
+                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("rating").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            Double rate=0d;
+                                            Long count=0L;
+                                            if(snapshot.exists()){
+                                                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                                    RatingModel ratingModel=dataSnapshot.getValue(RatingModel.class);
+
+                                                    rate=rate+ratingModel.getRate();
+                                                    count++;
+
+                                                }
+                                            }
+
+                                            FirebaseDatabase.getInstance().getReference("Post").child(key).child("ratingNum").setValue(count);
+                                            FirebaseDatabase.getInstance().getReference("Post").child(key).child("avgRating").setValue(rate/count);
+                                            alertDialog.dismiss();
+
+
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+                                }
+                                else {
+                                    //add
+                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("rating")
+                                            .child(FirebaseAuth.getInstance().getUid()).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Toast.makeText(PostWebViewActivity.this, "Rating Successful", Toast.LENGTH_SHORT).show();
+
+                                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("ratingNum").setValue(1L);
+                                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("avgRating").setValue(Double.parseDouble(rating));
+                                                    alertDialog.dismiss();
+
+
+                                                }
+                                            });
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+
+                        //add
+
+
+                    }
+
+                }
+            });
+
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -284,6 +618,7 @@ public class PostWebViewActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -291,6 +626,13 @@ public class PostWebViewActivity extends AppCompatActivity {
         if(handler != null){
             handler.removeCallbacksAndMessages(null);
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
     }
 
     private int getRandomViewType() {

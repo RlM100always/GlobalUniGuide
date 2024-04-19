@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +43,7 @@ public class CategoryFragment extends Fragment {
     private DatabaseReference databaseReference;
     private SearchView searchView;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -60,18 +62,18 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_category, container, false);
+        swipeRefreshLayout=view.findViewById(R.id.category_swipe_refresh_layout);
+
 
         searchView=view.findViewById(R.id.category_searchView);
         EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         editText.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
         editText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.allert_back_upper));
 
-
         //progressbar
         progressBar=view.findViewById(R.id.category_progressBar);
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.VISIBLE);
-
 
         int randomViewType = getRandomViewType(); // Implement your logic to get a random view type (1 or 2)
         categoryAdapter.setViewTypeToShow(randomViewType);
@@ -83,6 +85,13 @@ public class CategoryFragment extends Fragment {
 
         }
         recyclerView.setAdapter(categoryAdapter);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchCategoryData();
+            }
+        });
 
         // Fetch data from Firebase Database
         fetchCategoryData();
@@ -145,6 +154,7 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.GONE);
+                        swipeRefreshLayout.setRefreshing(false);
 
                     }
                 },500);

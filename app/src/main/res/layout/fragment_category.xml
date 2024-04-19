@@ -1,51 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/back"
+    android:id="@+id/fragment_category"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/back"
     tools:context="com.techtravelcoder.alluniversityinformations.Fragment.CategoryFragment">
 
-
-
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/category_swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.appcompat.widget.SearchView
-            android:layout_margin="6dp"
-            android:layout_gravity="center"
-            android:elevation="5dp"
-            style="@style/AppTheme.SearchView"
-            android:id="@+id/category_searchView"
-            android:layout_width="280dp"
-            android:layout_height="40dp"
-            android:background="@drawable/searchbar_background"
-            app:queryHint="Search Category..."
-            app:iconifiedByDefault="false"
-            />
 
-
-        <FrameLayout
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/category_recyclerview_id"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible" />
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/category_searchView"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:layout_margin="6dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                style="@style/AppTheme.SearchView"
+                android:background="@drawable/searchbar_background"
+                app:queryHint="Search Category..."
+                app:iconifiedByDefault="false" />
 
-            <!-- ProgressBar -->
-            <ProgressBar
-                android:visibility="gone"
-                android:id="@+id/category_progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-        </FrameLayout>
-    </LinearLayout>
+            <!-- Nested FrameLayout for RecyclerView and ProgressBar -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_recyclerview_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible" />
+
+                <!-- ProgressBar -->
+                <ProgressBar
+                    android:id="@+id/category_progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

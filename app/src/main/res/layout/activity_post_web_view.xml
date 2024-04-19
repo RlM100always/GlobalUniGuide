@@ -13,16 +13,12 @@
         app:menu="@menu/post_menu"
         android:layout_gravity="left"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
+        app:popupTheme="@style/MyPopupTheme"
         android:id="@+id/post_web_tolbar"
         app:subtitleTextColor="@color/white"
-        app:titleTextColor="@color/white"
-        >
-
+        app:titleTextColor="@color/white">
     </androidx.appcompat.widget.Toolbar>
-
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -34,6 +30,7 @@
             <!-- Title TextView -->
 
             <TextView
+                android:layout_gravity="center"
                 android:visibility="gone"
                 android:fontFamily="serif"
                 android:padding="5dp"
@@ -49,8 +46,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="20dp"/>
-
-            <!-- WebView -->
             <WebView
                 android:id="@+id/post_webView"
                 android:layout_width="match_parent"
@@ -76,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="Loading Content !!!!"
                 android:textStyle="bold"
-                android:textColor="#AC0906"
+                android:textColor="@color/back"
                 android:textSize="22dp"/>
 
 

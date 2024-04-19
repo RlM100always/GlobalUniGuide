@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,10 +58,10 @@ public class HomeFragment extends Fragment {
     private String lastItemId;
     private NestedScrollView scrollView;
     private Query query;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     public HomeFragment() {
-        // Required empty public constructor
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,11 +75,11 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        swipeRefreshLayout=view.findViewById(R.id.home_swipe_refresh_layout);
+
         scrollView=view.findViewById(R.id.home_frag_scroll_id);
-        //progressbar
         progressBar=view.findViewById(R.id.home_progressBar);
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.VISIBLE);
@@ -109,8 +111,18 @@ public class HomeFragment extends Fragment {
 //        });
 
 
-        // Fetch data from Firebase Database
-        fetchPostData(0);
+        Random random=new Random();
+        int num=random.nextInt(2);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Random random=new Random();
+                int num=random.nextInt(2);
+                fetchPostData(num);
+
+            }
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -125,13 +137,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        fetchPostData(num);
+
 
 
         return view;
     }
 
     private void fetchPaginateData() {
-        Toast.makeText(getContext(), ""+lastItemId+"  "+totalLoadedItems, Toast.LENGTH_SHORT).show();
         if (totalLoadedItems >= MAX_ITEMS_TO_LOAD) {
             Toast.makeText(getContext(), "No item found", Toast.LENGTH_SHORT).show();
             // Already loaded the maximum number of items
@@ -186,7 +199,6 @@ public class HomeFragment extends Fragment {
         if(num==1){
             query=databaseReference.limitToLast(150);
         }
-
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -204,6 +216,12 @@ public class HomeFragment extends Fragment {
                 mainPostAdapter.notifyDataSetChanged();
                 Collections.shuffle(list);
                 progressBar.setVisibility(View.GONE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                },1000);
                 mainPostAdapter.notifyDataSetChanged();
             }
 

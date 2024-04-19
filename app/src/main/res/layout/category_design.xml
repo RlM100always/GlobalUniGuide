@@ -23,9 +23,9 @@
                 android:layout_width="95dp"
                 android:layout_height="90dp">
                 <ImageView
+                    android:background="@drawable/loading"
                     android:id="@+id/category_design_image_id"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image_buet"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
@@ -49,7 +49,7 @@
                     android:text="Programming"
                     android:textStyle="bold"
                     android:textColor="@color/green"
-                    android:textSize="19dp"/>
+                    android:textSize="17dp"/>
 
                 <TextView
                     android:fontFamily="serif"
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:text="Java Development Roadmap"
                     android:textColor="@color/white"
-                    android:textSize="15dp"/>
+                    android:textSize="15.5dp"/>
 
 
             </LinearLayout>

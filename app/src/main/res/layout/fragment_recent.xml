@@ -1,59 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_recent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/back"
     tools:context="com.techtravelcoder.alluniversityinformations.Fragment.RecentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout_recent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recent_recyclerview_id"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible" />
+                android:layout_height="match_parent">
 
-            <!-- ProgressBar -->
-            <ImageView
+                <!-- RecyclerView -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recent_recyclerview_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible" />
 
-                android:layout_marginTop="150dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/nothing"
-                android:id="@+id/nothing_image"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-            <TextView
-                android:layout_marginTop="25dp"
-                android:id="@+id/nothing_text_id"
-                android:visibility="gone"
-                android:textColor="@color/white"
-                android:text="No Recent Data Available"
-                android:textSize="22dp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <!-- Placeholder for no data -->
+                <ImageView
+                    android:id="@+id/nothing_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="150dp"
+                    android:src="@drawable/nothing"
+                    android:visibility="gone" />
 
-        </FrameLayout>
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/nothing_text_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:fontFamily="serif"
+                    android:text="No Recent Data Available"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+            </FrameLayout>
+        </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     <ProgressBar
-        android:visibility="gone"
         android:id="@+id/recent_progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 
 </FrameLayout>
