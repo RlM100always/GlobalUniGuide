@@ -120,8 +120,14 @@ public class UniversityActivity extends AppCompatActivity {
         mbase.keepSynced(true);
 
 
-        LoadUniversityDataTask loadTask = new LoadUniversityDataTask();
-        loadTask.execute();
+        allUniversity();
+        topUniversity();
+        publicUniversity();
+        privateUniversity();
+        Random random = new Random();
+        int num = random.nextInt(19);
+        suggestedUniversity(num);
+
 
 
 
@@ -143,6 +149,9 @@ public class UniversityActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        progressBar=findViewById(R.id.progressBar_uni);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -156,12 +165,13 @@ public class UniversityActivity extends AppCompatActivity {
                 moreUni.setVisibility(View.GONE);
                 backPressed.setVisibility(View.GONE);
                 cName.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
 
-                recyclerViewPub.setVisibility(View.GONE);
-                recyclerViewPrv.setVisibility(View.GONE);
-                recyclerView1.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.GONE);
-                recyclerViewSugg.setVisibility(View.GONE);
+//                recyclerViewPub.setVisibility(View.GONE);
+//                recyclerViewPrv.setVisibility(View.GONE);
+//                recyclerView1.setVisibility(View.GONE);
+//                recyclerView.setVisibility(View.GONE);
+//                recyclerViewSugg.setVisibility(View.GONE);
 
                 refreshData();
                 // After refreshing, call setRefreshing(false) to stop the loading animation
@@ -169,8 +179,6 @@ public class UniversityActivity extends AppCompatActivity {
             }
         });
 
-        progressBar=findViewById(R.id.progressBar_uni);
-        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
 
 
         contryName=getIntent().getStringExtra("name");
@@ -183,9 +191,6 @@ public class UniversityActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
 
         nestedScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
@@ -201,26 +206,26 @@ public class UniversityActivity extends AppCompatActivity {
 
     }
 
-    public  class LoadUniversityDataTask extends AsyncTask<Void, Void, Integer> {
-        @Override
-        protected Integer doInBackground(Void... voids) {
-            topUniversity();
-            publicUniversity();
-            privateUniversity();
-            allUniversity();
-            Random random = new Random();
-            int num = random.nextInt(19);
-            suggestedUniversity(num);
-            return num;
-        }
-
-        @Override
-        protected void onPostExecute(Integer num) {
-            super.onPostExecute(num);
-            // Update UI components after data loading
-            //updateUI();
-        }
-    }
+//    public  class LoadUniversityDataTask extends AsyncTask<Void, Void, Integer> {
+//        @Override
+//        protected Integer doInBackground(Void... voids) {
+//            allUniversity();
+//            topUniversity();
+//            publicUniversity();
+//            privateUniversity();
+//            Random random = new Random();
+//            int num = random.nextInt(19);
+//            suggestedUniversity(num);
+//            return num;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Integer num) {
+//            super.onPostExecute(num);
+//            // Update UI components after data loading
+//            //updateUI();
+//        }
+//    }
 
 
 
@@ -387,13 +392,14 @@ public class UniversityActivity extends AppCompatActivity {
 
 
     private void allUniversity() {
-        progressBar.setVisibility(View.VISIBLE);
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE); // or any other operation
+        }
         recyclerView=findViewById(R.id.recycler_view_university_id);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         list=new ArrayList<>();
         campainAdapter=new UniversityAdapter(this,list);
         recyclerView.setAdapter(campainAdapter);
-        progressBar.setVisibility(View.VISIBLE);
 
         mbase.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -414,10 +420,17 @@ public class UniversityActivity extends AppCompatActivity {
 
                         backPressed.setVisibility(View.VISIBLE);// Dismiss ProgressDialog after updating UI
 
+                        bestUni.setVisibility(View.VISIBLE);
                         cName.setVisibility(View.VISIBLE);
                         allUni.setVisibility(View.VISIBLE);
                         moreUni.setVisibility(View.VISIBLE);
-                        recyclerView.setVisibility(View.VISIBLE);
+
+//                        recyclerView.setVisibility(View.VISIBLE);
+//                        recyclerView1.setVisibility(View.VISIBLE);
+//                        recyclerViewPrv.setVisibility(View.VISIBLE);
+//                        recyclerViewPub.setVisibility(View.GONE);
+
+
 
 
                         cName.setText(""+contryName+" University"+" List ");
@@ -561,9 +574,6 @@ public class UniversityActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Collections.shuffle(listPrv);
-                        progressBar.setVisibility(View.GONE);
-                        loadindUni.setVisibility(View.GONE);
-                        recyclerViewPrv.setVisibility(View.VISIBLE);
                         prvUni.setVisibility(View.VISIBLE);
                         prvUni.setText(contryName+" Private University");
                         universityAdapterPrv.notifyDataSetChanged();
@@ -585,7 +595,6 @@ public class UniversityActivity extends AppCompatActivity {
 
 
     }
-
     private void topUniversity() {
         recyclerView1=findViewById(R.id.top_recyclerview_id);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -618,15 +627,9 @@ public class UniversityActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        recyclerView1.setVisibility(View.VISIBLE);
                         Collections.shuffle(list1);
-                        progressBar.setVisibility(View.GONE);
-                        loadindUni.setVisibility(View.GONE);
-                        bestUni.setVisibility(View.VISIBLE);
                         bestUni.setText("Top Ranking "+contryName+" University");
                         campainAdapter1.notifyDataSetChanged();
-
-
 
                     }
                 });
@@ -660,8 +663,6 @@ public class UniversityActivity extends AppCompatActivity {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
                             campainModelPub = dataSnapshot.getValue(UniversityModel.class);
-                            //&& campainModel.getCountryName().equals(contryName)
-
 
                             if(campainModelPub != null  &&campainModelPub.getContryName() != null&& campainModelPub.getContryName().equals(contryName)
                                     && (campainModelPub.getPublics().equals("true") || campainModelPub.getPublics().equals("true "))){
@@ -676,9 +677,6 @@ public class UniversityActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Collections.shuffle(listPub);
-                            progressBar.setVisibility(View.GONE);
-                            loadindUni.setVisibility(View.GONE);
-                            recyclerViewPub.setVisibility(View.VISIBLE);
                             pubUni.setVisibility(View.VISIBLE);
                             pubUni.setText(contryName+" Public University");
                             universityAdapterPub.notifyDataSetChanged();
@@ -704,10 +702,10 @@ public class UniversityActivity extends AppCompatActivity {
 
     private void refreshData() {
 
+        allUniversity();
         topUniversity();
         publicUniversity();
         privateUniversity();
-        allUniversity();
         Random random=new Random();
         int num=random.nextInt(19);
         suggestedUniversity(num);

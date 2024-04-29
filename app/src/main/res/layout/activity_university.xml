@@ -123,7 +123,6 @@
                                 android:textColor="#04FCCA"
                                 android:textSize="18dp"/>
                             <ProgressBar
-                                android:layout_marginTop="190dp"
                                 android:visibility="visible"
                                 android:id="@+id/progressBar_uni"
                                 android:layout_width="wrap_content"

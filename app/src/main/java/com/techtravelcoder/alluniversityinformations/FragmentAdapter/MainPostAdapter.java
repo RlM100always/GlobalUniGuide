@@ -122,17 +122,40 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void bindViewHolderType1(MainPostAdapter.ViewHolderType1 holder, MainPostModel mainPostModel) {
         holder.title1.setText(mainPostModel.getTitle());
         holder.label1.setText(mainPostModel.getCategory());
-        holder.view1.setText(mainPostModel.getViews()+" Views");
+        holder.view1.setText(mainPostModel.getViews()+" views");
+        if(mainPostModel.getPostLoves()!=null){
+            holder.loves1.setText(mainPostModel.getPostLoves()+" loves");
+        }else {
+            holder.loves1.setText(0+" loves");
+
+        }
+
+        if(mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
+
+            holder.reviews1.setText(mainPostModel.getRatingNum()+" reviews");
+            String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
+            holder.star1.setText(formattedNumber+" stars");
+        }else {
+            holder.reviews1.setText(0+" reviews");
+            holder.star1.setText(0+" stars");
+        }
+
+
+
         Glide.with(context).load(mainPostModel.getImage()).into(holder.img1);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent=new Intent(context, PostWebViewActivity.class);
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());
                 intent.putExtra("key",mainPostModel.getKey());
+                intent.putExtra("loves",mainPostModel.getPostLoves());
+                intent.putExtra("reviewers",mainPostModel.getRatingNum());
+                intent.putExtra("avgrate",mainPostModel.getAvgRating());
 
 
                 context.startActivity(intent);
@@ -141,10 +164,30 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void bindViewHolderType2(MainPostAdapter.ViewHolderType2 holder, MainPostModel mainPostModel) {
+
         holder.title2.setText(mainPostModel.getTitle());
         holder.label2.setText(mainPostModel.getCategory());
-        holder.view2.setText("read "+mainPostModel.getViews()+" times");
+        holder.view2.setText(mainPostModel.getViews()+" views");
         Glide.with(context).load(mainPostModel.getImage()).into(holder.img2);
+        if(mainPostModel.getPostLoves()!=null){
+            holder.loves2.setText(mainPostModel.getPostLoves()+" loves");
+        }else {
+            holder.loves2.setText(0+" loves");
+
+        }
+
+        if( mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
+
+            holder.reviews2.setText(mainPostModel.getRatingNum()+" reviews");
+            String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
+            holder.star2.setText(formattedNumber+" stars");
+        }
+        else {
+            holder.reviews2.setText(0+" reviews");
+            holder.star2.setText(0+" stars");
+        }
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,6 +196,9 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());
                 intent.putExtra("key",mainPostModel.getKey());
+                intent.putExtra("loves",mainPostModel.getPostLoves());
+                intent.putExtra("reviewers",mainPostModel.getRatingNum());
+                intent.putExtra("avgrate",mainPostModel.getAvgRating());
                 context.startActivity(intent);
             }
         });
@@ -161,10 +207,29 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void bindViewHolderType3(MainPostAdapter.ViewHolderType3 holder, MainPostModel mainPostModel) {
         holder.title3.setText(mainPostModel.getTitle());
-        holder.view3.setText("read "+mainPostModel.getViews()+" times");
-        holder.date3.setText(mainPostModel.getDate());
+        if(mainPostModel.getDate()!=null){
+            holder.date3.setText(mainPostModel.getDate());
+        }
+        holder.view3.setText(mainPostModel.getViews()+" views");
         holder.category3.setText(mainPostModel.getCategory());
         Glide.with(context).load(mainPostModel.getImage()).into(holder.img3);
+
+        if(mainPostModel.getPostLoves()!=null){
+            holder.loves3.setText(mainPostModel.getPostLoves()+" loves");
+        }else {
+            holder.loves3.setText(0+" loves");
+
+        }
+
+        if(mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
+
+            holder.reviews3.setText(mainPostModel.getRatingNum()+" reviews");
+            String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
+            holder.star3.setText(formattedNumber+" stars");
+        }else {
+            holder.reviews3.setText(0+" reviews");
+            holder.star3.setText(0+" stars");
+        }
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -175,7 +240,9 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 intent.putExtra("num",mainPostModel.getViews());
                 intent.putExtra("key",mainPostModel.getKey());
                 intent.putExtra("label",mainPostModel.getLabel());
-
+                intent.putExtra("loves",mainPostModel.getPostLoves());
+                intent.putExtra("reviewers",mainPostModel.getRatingNum());
+                intent.putExtra("avgrate",mainPostModel.getAvgRating());
 
                 context.startActivity(intent);
             }
@@ -185,9 +252,25 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void bindViewHolderType4(MainPostAdapter.ViewHolderType4 holder, MainPostModel mainPostModel) {
         holder.title4.setText(mainPostModel.getTitle());
         holder.label4.setText(mainPostModel.getCategory());
-        holder.view4.setText("read "+mainPostModel.getViews()+" times");
+        holder.view4.setText(mainPostModel.getViews()+" views");
         Glide.with(context).load(mainPostModel.getImage()).into(holder.img4);
 
+        if(mainPostModel.getPostLoves()!=null){
+            holder.loves4.setText(mainPostModel.getPostLoves()+" loves");
+        }else {
+            holder.loves4.setText(0+" loves");
+
+        }
+
+        if(mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
+
+            holder.reviews4.setText(mainPostModel.getRatingNum()+" reviews");
+            String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
+            holder.star4.setText(formattedNumber+" stars");
+        }else {
+            holder.reviews4.setText(0+" reviews");
+            holder.star4.setText(0+" stars");
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,6 +279,9 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 intent.putExtra("num",mainPostModel.getViews());
                 intent.putExtra("key",mainPostModel.getKey());
                 intent.putExtra("label",mainPostModel.getLabel());
+                intent.putExtra("loves",mainPostModel.getPostLoves());
+                intent.putExtra("reviewers",mainPostModel.getRatingNum());
+                intent.putExtra("avgrate",mainPostModel.getAvgRating());
                 context.startActivity(intent);
             }
         });
@@ -266,7 +352,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private static class ViewHolderType1 extends RecyclerView.ViewHolder {
         ImageView img1;
-        TextView label1, title1,view1;
+        TextView label1, title1,view1,loves1,reviews1,star1;
 
         ViewHolderType1(@NonNull View itemView) {
             super(itemView);
@@ -274,12 +360,16 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             label1 = itemView.findViewById(R.id.post_design_category);
             title1 = itemView.findViewById(R.id.post_design_title);
             view1=itemView.findViewById(R.id.post_design_views);
+            loves1=itemView.findViewById(R.id.post_design_loves);
+            reviews1=itemView.findViewById(R.id.post_design_reviews_num);
+            star1=itemView.findViewById(R.id.post_design_star);
+
         }
     }
 
     private static class ViewHolderType2 extends RecyclerView.ViewHolder {
         ImageView img2;
-        TextView label2, title2,view2;
+        TextView label2, title2,view2,loves2,reviews2,star2;
 
         ViewHolderType2(@NonNull View itemView) {
             super(itemView);
@@ -287,27 +377,34 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             label2 = itemView.findViewById(R.id.post_design_category);
             title2 = itemView.findViewById(R.id.post_design_title);
             view2=itemView.findViewById(R.id.post_design_views);
+            loves2=itemView.findViewById(R.id.post_design_loves);
+            reviews2=itemView.findViewById(R.id.post_design_reviews_num);
+            star2=itemView.findViewById(R.id.post_design_star);
         }
     }
 
     private static class ViewHolderType3 extends RecyclerView.ViewHolder {
         ImageView img3;
-        TextView  date3,title3,view3,category3;
+        TextView  date3,title3,view3,category3,loves3,reviews3,star3;
 
         ViewHolderType3(@NonNull View itemView) {
             super(itemView);
             img3 = itemView.findViewById(R.id.recent_design_image_id);
             title3 = itemView.findViewById(R.id.recent_design_title);
             view3=itemView.findViewById(R.id.recent_design_views);
-            date3=itemView.findViewById(R.id.recent_design_date);
             category3=itemView.findViewById(R.id.recent_design_category);
+            date3=itemView.findViewById(R.id.recent_design_date);
+            loves3=itemView.findViewById(R.id.recent_design_loves);
+            reviews3=itemView.findViewById(R.id.recent_design_reviews_num);
+            star3=itemView.findViewById(R.id.recent_design_star);
+
         }
     }
 
 
     private static class ViewHolderType4 extends RecyclerView.ViewHolder {
         ImageView img4;
-        TextView label4, title4,view4,delete;
+        TextView label4, title4,view4,delete,loves4,reviews4,star4;
 
         ViewHolderType4(@NonNull View itemView) {
             super(itemView);
@@ -316,6 +413,10 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             title4 = itemView.findViewById(R.id.post_design_title);
             view4=itemView.findViewById(R.id.post_design_views);
             delete=itemView.findViewById(R.id.favorite_post_delete_id);
+            loves4=itemView.findViewById(R.id.post_design_loves);
+            reviews4=itemView.findViewById(R.id.post_design_reviews_num);
+            star4=itemView.findViewById(R.id.post_design_star);
+
         }
     }
 

@@ -58,75 +58,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
                 context.startActivity(intent);
                 Random random=new Random();
 
-                int num = random.nextInt(40)+1;
-                if(num==2){
-                    final StartAppAd rewardedVideo = new StartAppAd(context);
 
-                    rewardedVideo.setVideoListener(new VideoListener() {
-                        @Override
-                        public void onVideoCompleted() {
-                            // Grant the reward to user
-                        }
-                    });
-
-                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                        @Override
-                        public void onReceiveAd(Ad ad) {
-                            rewardedVideo.showAd();
-                        }
-
-                        @Override
-                        public void onFailedToReceiveAd(Ad ad) {
-                            // Can't show rewarded video
-                        }
-                    });
-
-                }
-                if(num==10){
-                    final StartAppAd rewardedVideo = new StartAppAd(context);
-
-                    rewardedVideo.setVideoListener(new VideoListener() {
-                        @Override
-                        public void onVideoCompleted() {
-                            // Grant the reward to user
-                        }
-                    });
-
-                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                        @Override
-                        public void onReceiveAd(Ad ad) {
-                            rewardedVideo.showAd();
-                        }
-
-                        @Override
-                        public void onFailedToReceiveAd(Ad ad) {
-                            // Can't show rewarded video
-                        }
-                    });
-
-                }
-                if(num==15){
-                    final StartAppAd rewardedVideo = new StartAppAd(context);
-
-                    rewardedVideo.setVideoListener(new VideoListener() {
-                        @Override
-                        public void onVideoCompleted() {
-                            // Grant the reward to user
-                        }
-                    });
-
-                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                        @Override
-                        public void onReceiveAd(Ad ad) {
-                            rewardedVideo.showAd();
-                        }
-
-                        @Override
-                        public void onFailedToReceiveAd(Ad ad) {
-                            // Can't show rewarded video
-                        }
-                    });
-                }
             }
         });
 

@@ -24,6 +24,22 @@
             android:layout_height="match_parent"/>
 
     </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:drawablePadding="3dp"
+        android:layout_marginLeft="5dp"
+        android:drawableTint="@color/green"
+        android:gravity="center"
+
+        android:drawableRight="@drawable/baseline_star_rate_34"
+        android:fontFamily="serif"
+        android:id="@+id/private_uni_design_rating_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 4.5"
+        android:textColor="@color/green"
+        android:textSize="12dp"
+        android:textStyle="bold" />
 
     <TextView
         android:fontFamily="serif"
@@ -36,6 +52,7 @@
         android:textColor="@color/white"
         android:textSize="15dp"
         android:textStyle="bold" />
+
     <TextView
         android:fontFamily="serif"
         android:layout_marginBottom="6dp"
@@ -47,6 +64,7 @@
         android:text="Read More.."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
 
 
 </LinearLayout>

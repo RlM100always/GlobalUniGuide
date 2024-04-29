@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_post_speaker_id"
+        android:icon="@drawable/speaker_off"
+        android:title="View on Site"
+        app:showAsAction="always"
+
+        />
+
 
     <item
         android:icon="@drawable/baseline_more_vert_24"
         app:showAsAction="always"
         android:title="">
+
         <menu>
             <item
 
@@ -17,7 +26,7 @@
             <item
                 android:id="@+id/menu_post_rating_id"
                 android:icon="@drawable/baseline_star_rate_24"
-                android:title="Rating Content"
+                android:title="Rate This Content"
                 />
 
             <item

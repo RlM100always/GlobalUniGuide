@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name="com.techtravelcoder.alluniversityinformations.ads.App"
@@ -16,6 +18,15 @@
         android:theme="@style/Theme.AllUniversityInformation"
         tools:targetApi="31">
         <activity
+            android:name="com.techtravelcoder.alluniversityinformations.vocabulary.VocabularyActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.universityDetails.SeeUniPostActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.universityDetails.ReBookMarkActivity"
+            android:exported="false" />
+        <activity
             android:name="com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity"
             android:exported="false" />
         <activity
@@ -23,7 +34,13 @@
             android:exported="false" />
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity"
-            android:exported="false" />
+            android:exported="false">
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY_FROM_NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity"
             android:exported="false" />

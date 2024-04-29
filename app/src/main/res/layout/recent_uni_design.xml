@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/back"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:foreground="@drawable/uni_background"
+        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="7.5dp"
+            android:layout_marginBottom="7.5dp"
+            android:layout_marginLeft="5dp"
+            app:cardCornerRadius="10dp"
+            android:layout_width="160dp"
+            android:layout_height="100dp">
+            <ImageView
+                android:id="@+id/re_uni_img_id"
+                android:background="@drawable/loading"
+                android:scaleType="fitXY"
+                android:src="@drawable/loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="3dp"
+                android:paddingLeft="5dp"
+                android:backgroundTint="@color/back"
+                android:background="@drawable/rating_back"
+                android:layout_gravity="center_horizontal"
+                android:drawableTint="@color/green"
+                android:gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/baseline_star_rate_34"
+                android:fontFamily="serif"
+                android:id="@+id/rebook_uni_rate_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 4.6"
+                android:textColor="@color/green"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:maxLines="4"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/baseline_location_city_24"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="7dp"
+                    android:id="@+id/re_uni_uni_id"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="serif"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Dhaka University"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"/>
+                <TextView
+                    android:foreground="@drawable/uni_background"
+                    android:id="@+id/re_uni_delete_id"
+                    android:layout_marginRight="20dp"
+                    android:drawableLeft="@drawable/baseline_delete_24"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="serif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/yellow"
+                    android:textSize="18dp"/>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/baseline_location_on_24"
+                android:drawablePadding="3dp"
+                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:maxLines="5"
+                android:id="@+id/re_uni_country_id"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bangladesh"
+                android:textColor="@color/yellow"
+                android:textSize="15dp"/>
+            <TextView
+                android:layout_marginBottom="4dp"
+
+                android:gravity="center_vertical"
+                android:id="@+id/re_uni_date_id"
+                android:drawableLeft="@drawable/baseline_access_time_24"
+                android:drawablePadding="5dp"
+                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:maxLines="5"
+                android:layout_marginLeft="9dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12 /11/2001"
+                android:textColor="#E3E4E0"
+                android:textSize="12dp"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

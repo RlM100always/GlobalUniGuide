@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group >
+        <item
+
+            android:id="@+id/menu_vocabulayr_id"
+            android:icon="@drawable/baseline_menu_book_24"
+            android:title="Dictionary"
+
+            />
+
         <item android:id="@+id/menu_guide_id"
             android:icon="@drawable/baseline_newspaper_24"
             android:title="Carrier Guide"
@@ -17,13 +25,13 @@
             android:icon="@drawable/baseline_bookmark_added_24"
             android:title="Bookmark University"
             />
-
-
-        <item
-            android:icon="@drawable/baseline_people_24"
-            android:id="@+id/menu_developer_id"
-            android:title="Developed By"
+        <item android:id="@+id/menu_recent_id"
+            android:icon="@drawable/repeat"
+            android:title="New University"
             />
+
+
+
         <item
             android:icon="@drawable/baseline_star_rate_24"
             android:id="@+id/menu_rate_id"
@@ -42,6 +50,17 @@
             android:id="@+id/menu_contact_id"
             android:title="Contact"
             />
+        <item
+            android:icon="@drawable/telegram"
+            android:id="@+id/menu_telegram_id"
+            android:title="Join Telegram"
+            />
+        <item
+            android:icon="@drawable/outline_thumb_up_24"
+            android:id="@+id/menu_facebook_id"
+            android:title="Like Facebook"
+            />
+
 
         <item android:id="@+id/menu_privacy_id"
             android:icon="@drawable/baseline_privacy_tip_24"

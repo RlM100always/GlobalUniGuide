@@ -52,9 +52,8 @@ public class CategoryFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        categoryList = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Category");
-        categoryAdapter = new CategoryAdapter(getContext(), categoryList);
+
     }
 
     @Override
@@ -63,6 +62,8 @@ public class CategoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_category, container, false);
         swipeRefreshLayout=view.findViewById(R.id.category_swipe_refresh_layout);
+        recyclerView = view.findViewById(R.id.category_recyclerview_id);
+
 
 
         searchView=view.findViewById(R.id.category_searchView);
@@ -75,16 +76,7 @@ public class CategoryFragment extends Fragment {
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.VISIBLE);
 
-        int randomViewType = getRandomViewType(); // Implement your logic to get a random view type (1 or 2)
-        categoryAdapter.setViewTypeToShow(randomViewType);
-        recyclerView = view.findViewById(R.id.category_recyclerview_id);
-        if(randomViewType==1){
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        } else if (randomViewType==2) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
 
-        }
-        recyclerView.setAdapter(categoryAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -139,6 +131,17 @@ public class CategoryFragment extends Fragment {
     }
 
     private void fetchCategoryData() {
+        categoryList = new ArrayList<>();
+        categoryAdapter = new CategoryAdapter(getContext(), categoryList);
+        int randomViewType = getRandomViewType(); // Implement your logic to get a random view type (1 or 2)
+        categoryAdapter.setViewTypeToShow(randomViewType);
+        if(randomViewType==1){
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        } else if (randomViewType==2) {
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+
+        }
+        recyclerView.setAdapter(categoryAdapter);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

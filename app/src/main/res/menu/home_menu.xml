@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/menu_fovorite_id"
-        android:icon="@drawable/baseline_favorite_border_24"
-        android:visible="false"
+    <item
+        android:icon="@drawable/baseline_more_vert_24"
         app:showAsAction="always"
-        android:title="Add Favorite" />
+        android:title="">
+        <menu>
+            <item
 
-    <item android:id="@+id/menu_home_id"
-        android:icon="@drawable/baseline_home_24"
-        android:visible="true"
-        app:showAsAction="always"
-        android:title="home" />
+                android:id="@+id/menu_home_id"
+                android:icon="@drawable/baseline_home_24"
+                android:title="Home"
+
+                />
+
+            <item
+                android:id="@+id/menu_rating_id"
+                android:icon="@drawable/baseline_star_rate_24"
+                android:title="Rate This University"
+                />
+            <item
+                android:id="@+id/menu_favorite_border_id"
+                android:icon="@drawable/baseline_bookmark_border_24"
+                android:title="Add to BookMark"
+                />
+            <item
+                android:id="@+id/menu_university_details_id"
+                android:icon="@drawable/baseline_summarize_24"
+                android:title="Summary"
+                />
+
+
+        </menu>
+    </item>
+
 
 
 </menu>

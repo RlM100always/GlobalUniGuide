@@ -30,27 +30,32 @@
                     android:visibility="visible" />
 
                 <!-- Placeholder for no data -->
-                <ImageView
-                    android:id="@+id/nothing_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="150dp"
-                    android:src="@drawable/nothing"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/nothing_text_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
                     android:layout_gravity="center"
-                    android:layout_marginTop="25dp"
-                    android:fontFamily="serif"
-                    android:text="No Recent Data Available"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/nothing_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/nothing"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/nothing_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="serif"
+                        android:text="No Recent Data Available"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
+
 
             </FrameLayout>
         </LinearLayout>

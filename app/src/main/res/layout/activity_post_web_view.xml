@@ -34,8 +34,6 @@
                 android:visibility="gone"
                 android:fontFamily="serif"
                 android:padding="5dp"
-                android:backgroundTint="#D81B60"
-                android:background="@drawable/edit_text_background"
                 android:id="@+id/post_title_id"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
@@ -44,8 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textSize="20dp"/>
+                android:textColor="@color/black"
+                android:textSize="24dp"/>
             <WebView
                 android:id="@+id/post_webView"
                 android:layout_width="match_parent"
@@ -73,6 +71,76 @@
                 android:textStyle="bold"
                 android:textColor="@color/back"
                 android:textSize="22dp"/>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_info_id"
+                android:layout_marginBottom="7dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/post_webview_loves_id"
+                    android:drawableTint="#F80505"
+                    android:fontFamily="serif"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:drawableTop="@drawable/baseline_favorite_241"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="3454466 loves"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/post_webview_review_num"
+                    android:drawableTint="#FFAB00"
+                    android:fontFamily="serif"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:drawableTop="@drawable/baseline_reviews_24"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="123664 reviews"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/post_webview_avgstar"
+                    android:drawableTint="#2962FF"
+                    android:fontFamily="serif"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:drawableTop="@drawable/baseline_stars_24"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="4.6 stars"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:foreground="@drawable/uni_background"
+                    android:id="@+id/post_webview_reviewers_id"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="center"
+                    android:drawableTint="#6200EA"
+                    android:fontFamily="serif"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:textColor="#6200EA"
+                    android:drawableRight="@drawable/notix_ic_chevron_right_24"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="See Reviews"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </LinearLayout>
 
 
             <!-- "You May Like..." TextView -->

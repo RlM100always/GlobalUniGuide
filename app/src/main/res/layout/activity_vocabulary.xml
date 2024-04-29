@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="4dp"
+    android:background="@color/back"
+    android:layout_height="match_parent"
+    tools:context="com.techtravelcoder.alluniversityinformations.vocabulary.VocabularyActivity">
+    <TextView
+
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/set_category_id"
+        android:text="Dictionary"
+        android:textColor="@color/yellow"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:textColorHint="#8D8686"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Search word here"
+            android:layout_toLeftOf="@id/search_btn"
+            android:paddingLeft="12dp"
+            android:id="@+id/search_input"
+            android:background="@drawable/searchbar_background"
+            />
+
+        <Button
+            android:textColor="@color/white"
+            android:backgroundTint="#CA04FC"
+            android:id="@+id/search_btn"
+            android:layout_width="100dp"
+            android:layout_height="47dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:text="Search" />
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/my_primary"
+            android:id="@+id/progress_bar12"
+            android:visibility="gone"/>
+
+
+
+    </RelativeLayout>
+    <TextView
+       android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="word"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:textColor="#00B8D4"
+        android:id="@+id/word_textview"
+        />
+
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="/t e s t/"
+        android:textColor="@color/white"
+        android:id="@+id/phonetic_textview"/>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/voca_image_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:src="@drawable/nothing"
+            android:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/meaning_recycler_view"/>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>

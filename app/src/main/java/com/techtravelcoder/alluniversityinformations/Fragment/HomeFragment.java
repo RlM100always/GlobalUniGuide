@@ -4,6 +4,7 @@ import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
@@ -35,13 +36,14 @@ import com.techtravelcoder.alluniversityinformations.FragmentAdapter.CategoryAda
 import com.techtravelcoder.alluniversityinformations.FragmentAdapter.MainPostAdapter;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.CategoryModel;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment   {
 
 
     private RecyclerView recyclerView;
@@ -52,13 +54,16 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
 
     //pagination
-    private static final int PAGE_SIZE = 19;
-    private static final int MAX_ITEMS_TO_LOAD = 280;
+    private static final int PAGE_SIZE =10;
     private int totalLoadedItems = 0;
     private String lastItemId;
     private NestedScrollView scrollView;
     private Query query;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private LinearLayoutManager linearLayoutManager;
+    private int randomViewType;
+
+
 
 
     public HomeFragment() {
@@ -66,9 +71,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        list = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Post");
-        mainPostAdapter = new MainPostAdapter(getContext(),list);
+
     }
 
 
@@ -76,6 +80,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
 
         swipeRefreshLayout=view.findViewById(R.id.home_swipe_refresh_layout);
 
@@ -83,6 +88,10 @@ public class HomeFragment extends Fragment {
         progressBar=view.findViewById(R.id.home_progressBar);
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.VISIBLE);
+        recyclerView = view.findViewById(R.id.home_recyclerview_id);
+
+
+
 
         //searchview
         searchView=view.findViewById(R.id.home_searchView);
@@ -91,33 +100,25 @@ public class HomeFragment extends Fragment {
         editText.setHintTextColor(ContextCompat.getColor(getContext(), R.color.allert_back_upper));
 
 
-        int randomViewType = getRandomViewType(); // Implement your logic to get a random view type (1 or 2)
-        mainPostAdapter.setViewTypeToShow(randomViewType);
-        recyclerView = view.findViewById(R.id.home_recyclerview_id);
-        if(randomViewType==1){
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        } else if (randomViewType==2) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),1));
-
-        }
-        recyclerView.setAdapter(mainPostAdapter);
-
-//        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-//            if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
-//                // User has scrolled to the bottom
-//                fetchPaginateData();
-//
-//            }
-//        });
 
 
-        Random random=new Random();
-        int num=random.nextInt(2);
+
+
+        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                // User has scrolled to the bottom
+               fetchPaginateData();
+
+            }
+        });
+
+
+        ;
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 Random random=new Random();
-                int num=random.nextInt(2);
+                int num=random.nextInt(7);
                 fetchPostData(num);
 
             }
@@ -137,6 +138,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        Random random=new Random();
+        int num=random.nextInt(7);
         fetchPostData(num);
 
 
@@ -144,18 +147,15 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+
     private void fetchPaginateData() {
-        if (totalLoadedItems >= MAX_ITEMS_TO_LOAD) {
-            Toast.makeText(getContext(), "No item found", Toast.LENGTH_SHORT).show();
-            // Already loaded the maximum number of items
-            return;
-        }
+
         Query nextPageQuery = databaseReference.orderByKey().startAfter(lastItemId).limitToFirst(PAGE_SIZE);
 
         nextPageQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
+                //list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
                     if (mainPostModels != null) {
@@ -165,6 +165,8 @@ public class HomeFragment extends Fragment {
 
                     }
                 }
+                //Toast.makeText(getContext(), ""+list.size(), Toast.LENGTH_SHORT).show();
+
                 mainPostAdapter.notifyDataSetChanged();
             }
 
@@ -192,44 +194,81 @@ public class HomeFragment extends Fragment {
     }
 
     private void fetchPostData(int num) {
+        list = new ArrayList<>();
+        mainPostAdapter = new MainPostAdapter(getContext(),list);
+        randomViewType = getRandomViewType();
+        mainPostAdapter.setViewTypeToShow(randomViewType);
+        if(randomViewType==1){
+            recyclerView.setLayoutManager(linearLayoutManager);
+        } else if (randomViewType==2) {
+            recyclerView.setLayoutManager(linearLayoutManager);
+
+        }
+        recyclerView.setAdapter(mainPostAdapter);
 
         if(num==0){
-            query=databaseReference.limitToFirst(150);
+            query=databaseReference.limitToFirst(15);
+        }else if(num==1){
+            query = databaseReference.orderByChild("title")
+                    .startAt("A").endAt("A\uf8ff");
         }
-        if(num==1){
-            query=databaseReference.limitToLast(150);
+        else if(num==2){
+            query = databaseReference.orderByChild("title")
+                    .startAt("B").endAt("C\uf8ff");
         }
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
-                    if (mainPostModels != null) {
-                        list.add(mainPostModels);
-                        lastItemId = mainPostModels.getKey();
-                       // Toast.makeText(getContext(), ""+lastItemId, Toast.LENGTH_SHORT).show();
+        else if(num==3){
+            query = databaseReference.orderByChild("title")
+                    .startAt("C").endAt("C\uf8ff");
+        }
+
+        else if(num==4){
+            query = databaseReference.orderByChild("title")
+                    .startAt("H").endAt("H\uf8ff");
+        }
+        else if(num==5){
+            query = databaseReference.orderByChild("title")
+                    .startAt("M").endAt("M\uf8ff");
+        }
+        else if(num==6){
+            query = databaseReference.orderByChild("title")
+                    .startAt("P").endAt("P\uf8ff");
+        }
 
 
+        if(query!=null){
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
+                        if (mainPostModels != null) {
+                            list.add(mainPostModels);
+                            lastItemId = mainPostModels.getKey();
+
+                        }
                     }
+                  //  Toast.makeText(getContext(), ""+lastItemId, Toast.LENGTH_SHORT).show();
+
+                    mainPostAdapter.notifyDataSetChanged();
+                    Collections.shuffle(list);
+                    progressBar.setVisibility(View.GONE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
+                    },1000);
+                    mainPostAdapter.notifyDataSetChanged();
                 }
-                mainPostAdapter.notifyDataSetChanged();
-                Collections.shuffle(list);
-                progressBar.setVisibility(View.GONE);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                },1000);
-                mainPostAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(), "Failed to fetch categories: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getContext(), "Failed to fetch categories: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
     }
 
     private int getRandomViewType() {
@@ -237,7 +276,6 @@ public class HomeFragment extends Fragment {
         int num=random.nextInt(2)+1;
         return num;
     }
-
 
 
 }

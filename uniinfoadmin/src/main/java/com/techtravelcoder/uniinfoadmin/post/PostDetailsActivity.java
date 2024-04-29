@@ -14,6 +14,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,9 @@ public class PostDetailsActivity extends AppCompatActivity {
     private CategoryAdapter categoryAdapter;
     private ArrayList<CategoryModel>list;
     private DatabaseReference mbase1;
+    private RadioGroup radioGroup;
+    private RadioButton lesson,random;
+    private Boolean check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +118,21 @@ public class PostDetailsActivity extends AppCompatActivity {
         label=view.findViewById(R.id.categoty_label_id);
         link=view.findViewById(R.id.category_image_link_id);
         id=view.findViewById(R.id.unique_id);
+        radioGroup=view.findViewById(R.id.group_radio_category);
+        lesson=view.findViewById(R.id.lesson_id);
+        random=view.findViewById(R.id.random_id);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                if (checkedId == R.id.lesson_id) {
+                   check=true;
+
+                } else if (checkedId == R.id.random_id) {
+                    check=false;
+                }
+            }
+        });
 
         TextView posttv=view.findViewById(R.id.add_news_category_id);
 
@@ -125,8 +145,9 @@ public class PostDetailsActivity extends AppCompatActivity {
         posttv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(PostDetailsActivity.this, ""+check, Toast.LENGTH_SHORT).show();
                 if(!TextUtils.isEmpty(title.getText().toString()) && !TextUtils.isEmpty(link.getText().toString()) && !TextUtils.isEmpty(label.getText().toString())
-                && !TextUtils.isEmpty(id.getText().toString())){
+                && !TextUtils.isEmpty(id.getText().toString()) && check!=null){
                     uploadData();
                     alertDialog.dismiss();
 
@@ -151,6 +172,8 @@ public class PostDetailsActivity extends AppCompatActivity {
         map.put("label",s_label);
         map.put("key",entryKey);
         map.put("id",id.getText().toString());
+        map.put("categoryType",check);
+
 
         //Toast.makeText(this, ""+s_title+" "+s_label+" "+entryKey+" "+s_link, Toast.LENGTH_SHORT).show();
 

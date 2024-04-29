@@ -1,10 +1,45 @@
 package com.techtravelcoder.alluniversityinformations.universityDetails;
 
 public class UniversityModel {
-    String uniName,best,contryName,key,privates,publics,suggested,uniImageLink,uniWebLink;
+    String uniName,best,contryName,key,privates,publics,suggested,uniImageLink,uniWebLink,date;
+    Long ratingNum,postLoves;
+    Double avgRating;
+
 
     public UniversityModel(){
 
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public Long getRatingNum() {
+        return ratingNum;
+    }
+
+    public void setRatingNum(Long ratingNum) {
+        this.ratingNum = ratingNum;
+    }
+
+    public Long getPostLoves() {
+        return postLoves;
+    }
+
+    public void setPostLoves(Long postLoves) {
+        this.postLoves = postLoves;
+    }
+
+    public Double getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(Double avgRating) {
+        this.avgRating = avgRating;
     }
 
     public String getUniName() {
@@ -78,4 +113,13 @@ public class UniversityModel {
     public void setUniWebLink(String uniWebLink) {
         this.uniWebLink = uniWebLink;
     }
+
+    @Override
+    public String toString() {
+        return "UniversityModel{" +
+                "uniName='" + uniName.trim() + '\'' +
+                ", contryName='" + contryName.trim() + '\'' +
+                '}';
+    }
+
 }

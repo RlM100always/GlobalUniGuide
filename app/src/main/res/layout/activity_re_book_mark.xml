@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/back"
+    tools:context="com.techtravelcoder.alluniversityinformations.universityDetails.ReBookMarkActivity">
+
+    <TextView
+
+        android:padding="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/set_category_id"
+        android:text="University List"
+        android:textColor="@color/yellow"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.SearchView
+        android:layout_margin="6dp"
+        android:layout_gravity="center"
+        android:elevation="5dp"
+        android:id="@+id/rebook_searchView"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/searchbar_background"
+        app:queryHint="Search ..."
+        app:iconifiedByDefault="false"
+        />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/rebookmark_recycler_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+
+        <!-- Placeholder for no data -->
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/re_book_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/nothing"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/re_book_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="serif"
+                android:text="No Recent Data Available"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/rebook_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+
+    </FrameLayout>
+
+</LinearLayout>

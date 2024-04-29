@@ -25,6 +25,23 @@
             android:layout_height="match_parent"/>
 
     </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:drawablePadding="3dp"
+        android:layout_marginLeft="5dp"
+        android:drawableTint="@color/green"
+        android:gravity="center"
+        android:drawableRight="@drawable/baseline_star_rate_34"
+        android:fontFamily="serif"
+
+        android:id="@+id/top_design_rating_id"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text=" 4.5"
+        android:textColor="@color/green"
+        android:textSize="12dp"
+        android:textStyle="bold" />
+
 
     <TextView
         android:fontFamily="serif"

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/rounded_corner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/speaker_off_id"
+                android:src="@drawable/speaker_off"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+            <TextView
+                android:layout_gravity="center"
+                android:fontFamily="serif"
+                android:id="@+id/audio_off_id"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
+                android:text="Audio Off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:foreground="@drawable/uni_background"
+            android:drawablePadding="4dp"
+            android:layout_weight="1"
+            android:drawableTint="#0091EA"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:drawableLeft="@drawable/baseline_g_translate_24"
+            android:id="@+id/translate_id"
+            android:fontFamily="serif"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/white"
+            android:text="Translate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:foreground="@drawable/uni_background"
+            android:drawablePadding="4dp"
+            android:layout_weight="1"
+            android:drawableTint="#0091EA"
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/baseline_info_24"
+            android:id="@+id/voca_notice_id"
+            android:fontFamily="serif"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/white"
+            android:text="Notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:fontFamily="serif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="noun"
+        android:textStyle="bold"
+        android:textSize="21sp"
+        android:textColor="@color/yellow"
+        android:id="@+id/part_of_speech_textview"/>
+
+    <TextView
+        android:fontFamily="serif"
+        android:textColor="#EE53FC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:text="Definitions : "
+        android:textSize="18sp"/>
+
+    <TextView
+        android:textSize="14.5dp"
+        android:fontFamily="serif"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="1 defination \n\n 2 another \n\n 3 third"
+        android:id="@+id/definitions_textview"/>
+
+    <TextView
+        android:fontFamily="serif"
+        android:textColor="#EE53FC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:text="Synonyms : "
+        android:id="@+id/synonyms_title_textview"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:textSize="14.5dp"
+        android:fontFamily="serif"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="asad, asaad, asdia ,asdajod"
+        android:id="@+id/synonyms_textview"/>
+
+    <TextView
+        android:fontFamily="serif"
+        android:textColor="#EE53FC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:text="Antonyms : "
+        android:id="@+id/antonyms_title_textview"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:textSize="14.5dp"
+        android:fontFamily="serif"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="asad, asaad, asdia ,asdajod"
+        android:id="@+id/antonyms_textview"/>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:foreground="@drawable/uni_background"
+
+            android:layout_marginLeft="10dp"
+            android:id="@+id/copy_text_id"
+            android:src="@drawable/copy"
+            android:layout_width="23dp"
+            android:layout_height="23dp"/>
+
+        <ImageView
+            android:foreground="@drawable/uni_background"
+
+            android:layout_marginLeft="20dp"
+            android:id="@+id/copy_share_id"
+            android:src="@drawable/baseline_share_24"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:tint="#0091EA" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

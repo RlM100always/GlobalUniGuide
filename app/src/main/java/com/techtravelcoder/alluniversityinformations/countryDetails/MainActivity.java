@@ -40,16 +40,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.onesignal.OneSignal;
+import com.onesignal.debug.LogLevel;
+import com.onesignal.notifications.INotificationClickEvent;
+import com.onesignal.notifications.INotificationClickListener;
 import com.startapp.sdk.ads.banner.Banner;
 import com.startapp.sdk.adsbase.Ad;
 import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.StartAppSDK;
 import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.startapp.sdk.adsbase.adlisteners.VideoListener;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.ads.App;
 import com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
-import com.techtravelcoder.alluniversityinformations.universityDetails.UniversityActivity;
+import com.techtravelcoder.alluniversityinformations.universityDetails.ReBookMarkActivity;
+import com.techtravelcoder.alluniversityinformations.vocabulary.VocabularyActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,7 +67,7 @@ import java.util.Random;
 import co.notix.interstitial.NotixInterstitial;
 import kotlin.Unit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     RecyclerView recyclerView;
     private CountryAdapter campainAdapter;
@@ -70,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference mbase;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private StartAppAd startAppAd = new StartAppAd(this);
     Banner banner;
     private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -81,7 +87,10 @@ public class MainActivity extends AppCompatActivity {
 
     private GridLayoutManager gridLayoutManager;
     private ProgressBar progressBar;
-    private LinearLayout visit;
+    private LinearLayout visit,recentUni,carrierGuide,popularContent,bookUni;
+    private static final String ONESIGNAL_APP_ID = "4966cbfa-9bdd-4424-9b60-b11fd884cee5";
+
+
 
 
 
@@ -91,8 +100,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-//        mAuth = FirebaseAuth.getInstance();
-//        Toast.makeText(this, ""+mAuth.getCurrentUser(), Toast.LENGTH_SHORT).show();
+        //for ads disable
+        StartAppSDK.init(this, "201407686");
+        StartAppAd.disableAutoInterstitial();
+
+
+        //Toast.makeText(this, ""+OneSignal.getSession(), Toast.LENGTH_SHORT).show();
+        OneSignal.getDebug().setLogLevel(LogLevel.VERBOSE);
+        // OneSignal Initialization
+        OneSignal.initWithContext(this, ONESIGNAL_APP_ID);
+        OneSignal.getNotifications().addClickListener(new INotificationClickListener() {
+            @Override
+            public void onClick(@NonNull INotificationClickEvent iNotificationClickEvent) {
+                iNotificationClickEvent.getNotification().getTemplateName();
+                Toast.makeText(MainActivity.this, ""+iNotificationClickEvent.getNotification().getTemplateName(), Toast.LENGTH_SHORT).show();
+                //Log.d("Value",iNotificationClickEvent.getNotification().getTemplateName());
+                if(iNotificationClickEvent.getNotification().getTemplateName().equals("University")){
+                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                    intent.putExtra("check",1);
+                    startActivity(intent);
+                }
+                if(iNotificationClickEvent.getNotification().getTemplateName().equals("Popular Content")){
+                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                    intent.putExtra("check",2);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+
+
 
 
 
@@ -100,10 +138,15 @@ public class MainActivity extends AppCompatActivity {
 
           } else {
             signInAnonymously();
+          }
 
-            }
 
-
+//        App.appOpenLoader.doOnNextAvailable(result -> {
+//            if (result != null) {
+//                NotixAppOpen.Companion.show(result);
+//            }
+//            return Unit.INSTANCE;
+//        });
 
 
 
@@ -120,7 +163,10 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout=findViewById(R.id.drawer_id);
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.tolbar);
-        visit=findViewById(R.id.students_guide_id);
+        recentUni=findViewById(R.id.recent_uni_id);
+        carrierGuide=findViewById(R.id.carrier_guide_id);
+        popularContent=findViewById(R.id.popular_content_id);
+        bookUni=findViewById(R.id.bookmark_uni_id);
 
         // Initialize FirebaseAuth instance
 
@@ -129,64 +175,44 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        recyclerView.setLayoutManager(gridLayoutManager);
-        list=new ArrayList<>();
-        campainAdapter=new CountryAdapter(this,list);
-        recyclerView.setAdapter(campainAdapter );
 
         progressBar.setVisibility(View.VISIBLE);
         loadData();
         refeshData();
 
 
-        visit.setOnClickListener(new View.OnClickListener() {
+        recentUni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),PostHandleActivity.class);
-
-//                Random random=new Random();
-//                int num = random.nextInt(3);
-//                if(num==0){
-//                    // FacebookInterestitialAds.loadAds(context);
-//                    App.interstitialLoader.doOnNextAvailable(result -> {
-//                        if (result != null) {
-//                            NotixInterstitial.Companion.show(result);
-//                        }
-//                        return Unit.INSTANCE;
-//                    });
-//
-//                }
-//                if(num==1){
-//                    App.interstitialLoader.doOnNextAvailable(result -> {
-//                        if (result != null) {
-//                            NotixInterstitial.Companion.show(result);
-//                        }
-//                        return Unit.INSTANCE;
-//                    });
-//
-//                }
-//                if(num==2){
-//                    final StartAppAd rewardedVideo = new StartAppAd(getApplicationContext());
-//
-//                    rewardedVideo.setVideoListener(new VideoListener() {
-//                        @Override
-//                        public void onVideoCompleted() {
-//                            // Grant the reward to user
-//                        }
-//                    });
-//
-//                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-//                        @Override
-//                        public void onReceiveAd(Ad ad) {
-//                            rewardedVideo.showAd();
-//                        }
-//
-//                        @Override
-//                        public void onFailedToReceiveAd(Ad ad) {
-//                            // Can't show rewarded video
-//                        }
-//                    });
-//                }
+                Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                ADSSetUp.adsType1(MainActivity.this);
+                intent.putExtra("check",1);
+                startActivity(intent);
+            }
+        });
+        carrierGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, PostHandleActivity.class);
+                ADSSetUp.adsType1(MainActivity.this);
+                startActivity(intent);
+            }
+        });
+        popularContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, CategoryPostActivity.class);
+                ADSSetUp.adsType1(MainActivity.this);
+                intent.putExtra("title","Most Popular Content");
+                startActivity(intent);
+            }
+        });
+        bookUni.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                ADSSetUp.adsType1(MainActivity.this);
+                intent.putExtra("check",2);
                 startActivity(intent);
             }
         });
@@ -258,7 +284,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         try {
                             if (task.isSuccessful()) {
-                                // Sign-in success, retrieve the user
                                 Toast.makeText(MainActivity.this, "Successfully Load.", Toast.LENGTH_SHORT).show();
 
                             }
@@ -271,6 +296,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refeshData() {
+        recyclerView.setLayoutManager(gridLayoutManager);
+        list=new ArrayList<>();
+        campainAdapter=new CountryAdapter(this,list);
+        recyclerView.setAdapter(campainAdapter );
         mbase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -307,7 +336,10 @@ public class MainActivity extends AppCompatActivity {
             Log.e("MainActivity", "DatabaseReference is null. Firebase setup issue.");
             return;
         }
-
+        recyclerView.setLayoutManager(gridLayoutManager);
+        list=new ArrayList<>();
+        campainAdapter=new CountryAdapter(this,list);
+        recyclerView.setAdapter(campainAdapter );
         Query query = mbase.limitToFirst(PAGE_SIZE);
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -367,54 +399,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 
-                //https://www.youtube.com/@SelfMeTeam/videos
-                //https://github.com/RlM100always/uni_info_privacy_policy/blob/main/README.md
+
                 if(item.getItemId()==R.id.menu_guide_id){
 
                     Intent openWebsiteIntent = new Intent(MainActivity.this, PostHandleActivity.class);
-                    Random random=new Random();
-                    int num = random.nextInt(3);
-                    if(num==0){
-                        // FacebookInterestitialAds.loadAds(context);
-                        App.interstitialLoader.doOnNextAvailable(result -> {
-                            if (result != null) {
-                                NotixInterstitial.Companion.show(result);
-                            }
-                            return Unit.INSTANCE;
-                        });
 
-                    }
-                    if(num==1){
-                        App.interstitialLoader.doOnNextAvailable(result -> {
-                            if (result != null) {
-                                NotixInterstitial.Companion.show(result);
-                            }
-                            return Unit.INSTANCE;
-                        });
-
-                    }
-                    if(num==2){
-                        final StartAppAd rewardedVideo = new StartAppAd(getApplicationContext());
-
-                        rewardedVideo.setVideoListener(new VideoListener() {
-                            @Override
-                            public void onVideoCompleted() {
-                                // Grant the reward to user
-                            }
-                        });
-
-                        rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                            @Override
-                            public void onReceiveAd(Ad ad) {
-                                rewardedVideo.showAd();
-                            }
-
-                            @Override
-                            public void onFailedToReceiveAd(Ad ad) {
-                                // Can't show rewarded video
-                            }
-                        });
-                    }
                     startActivity(openWebsiteIntent);
 
                 }
@@ -434,16 +423,6 @@ public class MainActivity extends AppCompatActivity {
                     emailIntent.putExtra(Intent.EXTRA_EMAIL, recipientEmails);
                     startActivity(emailIntent);
 
-//                    if (emailIntent.resolveActivity(getPackageManager()) != null) {
-//                        startActivity(emailIntent);
-//                    }
-                }
-                if(item.getItemId()==R.id.menu_developer_id){
-                    //https://www.facebook.com/profile.php?id=61550636764055
-
-                    String websiteUrl = "https://www.facebook.com/profile.php?id=61550636764055";
-                    Intent openWebsiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteUrl));
-                    startActivity(openWebsiteIntent);
                 }
                 if(item.getItemId()==R.id.menu_rate_id){
                     Uri uri=Uri.parse("https://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName());
@@ -473,6 +452,36 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("title","Most Popular Content");
                     startActivity(intent);
                 }
+                if(item.getItemId()==R.id.menu_facebook_id){
+                    String websiteUrl = "https://www.facebook.com/profile.php?id=61558689002953&mibextid=ZbWKwL";
+                    Intent openWebsiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteUrl));
+                    startActivity(openWebsiteIntent);
+
+                }
+                if(item.getItemId()==R.id.menu_telegram_id){
+                    String websiteUrl = "https://t.me/globaluniguide";
+                    Intent openWebsiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteUrl));
+                    startActivity(openWebsiteIntent);
+
+                }
+                if(item.getItemId()==R.id.menu_favorite_uni_id){
+                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                    intent.putExtra("check",2);
+                    startActivity(intent);
+
+                }
+                if(item.getItemId()==R.id.menu_recent_id){
+                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                    intent.putExtra("check",1);
+                    startActivity(intent);
+
+                }
+                if(item.getItemId()==R.id.menu_vocabulayr_id){
+                    Intent intent=new Intent(MainActivity.this, VocabularyActivity.class);
+                    startActivity(intent);
+
+                }
+
 
 
                 return false;
@@ -509,6 +518,7 @@ public class MainActivity extends AppCompatActivity {
                 finishAffinity();
             }
         });
+
         alertObj.setNegativeButton(Html.fromHtml("<font color='#000000'>❌No</font>"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

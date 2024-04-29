@@ -20,11 +20,25 @@
         app:civ_border_width="1.4dp"
         app:civ_border_color="#68F501"
         />
+    <TextView
+        android:drawablePadding="3dp"
+        android:layout_marginLeft="5dp"
+        android:drawableTint="@color/green"
+        android:gravity="center"
+        android:drawableRight="@drawable/baseline_star_rate_34"
+        android:fontFamily="serif"
+        android:id="@+id/public_uni_design_rating_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 4.5"
+        android:textColor="@color/green"
+        android:textSize="12dp"
+        android:textStyle="bold" />
+
 
     <TextView
         android:layout_marginBottom="5dp"
         android:fontFamily="serif"
-        android:layout_marginLeft="6dp"
         android:maxLines="3"
         android:id="@+id/public_unidesign_name"
         android:layout_width="wrap_content"

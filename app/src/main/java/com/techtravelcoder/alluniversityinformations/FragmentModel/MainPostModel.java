@@ -3,10 +3,35 @@ package com.techtravelcoder.alluniversityinformations.FragmentModel;
 
 public class MainPostModel {
     String title,postId,image,key,label,uniqueNum,category,date;
-    Long views;
+    Long views,ratingNum,postLoves;
+    Double avgRating;
 
     public MainPostModel(){
 
+    }
+
+    public Long getRatingNum() {
+        return ratingNum;
+    }
+
+    public void setRatingNum(Long ratingNum) {
+        this.ratingNum = ratingNum;
+    }
+
+    public Long getPostLoves() {
+        return postLoves;
+    }
+
+    public void setPostLoves(Long postLoves) {
+        this.postLoves = postLoves;
+    }
+
+    public Double getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(Double avgRating) {
+        this.avgRating = avgRating;
     }
 
     public String getTitle() {

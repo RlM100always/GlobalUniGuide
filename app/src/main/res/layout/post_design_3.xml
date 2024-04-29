@@ -12,9 +12,8 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:foreground="@drawable/uni_background"
-            android:layout_marginBottom="7dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.cardview.widget.CardView
@@ -51,25 +50,79 @@
                     android:text="Java Development Roadmap"
                     android:textColor="@color/back"
                     android:textSize="17dp"/>
-                <TextView
-                    android:id="@+id/post_design_views3"
-                    android:maxLines="2"
-                    android:layout_marginLeft="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="serif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10444444 Views"
-                    android:textColor="@color/back"
-                    android:textSize="14dp"/>
 
 
 
             </LinearLayout>
 
 
+
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:drawableTint="@color/deepGreen"
+                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:drawableTop="@drawable/baseline_pageview_24"
+                android:layout_weight="1"
+                android:id="@+id/post_design_views3"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="10444444 Views"
+                android:textColor="@color/black"
+                android:textSize="12dp"/>
+
+            <TextView
+                android:id="@+id/post_design_loves3"
+                android:drawableTint="@color/red"
+                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:drawableTop="@drawable/baseline_favorite_241"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="3454466 loves"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/post_design_reviews3"
+                android:drawableTint="@color/deepYellow"
+                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:drawableTop="@drawable/baseline_reviews_24"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="123664 reviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/post_design_stars3"
+                android:drawableTint="@color/blue"
+                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:drawableTop="@drawable/baseline_stars_24"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="4.6 stars"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

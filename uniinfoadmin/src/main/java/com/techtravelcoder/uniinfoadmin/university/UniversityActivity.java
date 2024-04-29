@@ -1,14 +1,9 @@
 package com.techtravelcoder.uniinfoadmin.university;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.app.Notification;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +12,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -24,13 +29,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.techtravelcoder.uniinfoadmin.R;
-import com.techtravelcoder.uniinfoadmin.country.CountryAdapter;
-import com.techtravelcoder.uniinfoadmin.country.CountryModel;
-import com.techtravelcoder.uniinfoadmin.country.MainActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class UniversityActivity extends AppCompatActivity {
@@ -58,12 +65,14 @@ public class UniversityActivity extends AppCompatActivity {
         contryName=getIntent().getStringExtra("name");
 
         mbase = FirebaseDatabase.getInstance().getReference("University");
+        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+
 
 
         recyclerView=findViewById(R.id.recycler_view_university_id);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         list=new ArrayList<>();
-        campainAdapter=new UniversityAdapter(this,list);
+        campainAdapter=new UniversityAdapter(this,list,contryName);
         recyclerView.setAdapter(campainAdapter );
 
         mbase.addValueEventListener(new ValueEventListener() {
@@ -189,6 +198,11 @@ public class UniversityActivity extends AppCompatActivity {
 
     private void uploadData() {
 
+        Calendar calendar = Calendar.getInstance();
+        Date times=calendar.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy,EEEE", Locale.getDefault());
+        String date = sdf.format(times);
+
         String entryKey = FirebaseDatabase.getInstance().getReference("University").push().getKey();
         String s_name=uniName.getText().toString();
         String s_link=uniLLink.getText().toString();
@@ -204,9 +218,9 @@ public class UniversityActivity extends AppCompatActivity {
         map.put("best",checkedTextTop);
         map.put("suggested",checkedTextSuggest);
         map.put("key",entryKey);
+        map.put("date",date);
 
         // Toast.makeText(UniversityActivity.this, ""+checkedTextTop+" "+checkedTextPublic+" "+checkedTextPrivates+" "+checkedTextSuggest, Toast.LENGTH_SHORT).show();
-
 
 
         FirebaseDatabase.getInstance().getReference("University").child(entryKey).setValue(map).

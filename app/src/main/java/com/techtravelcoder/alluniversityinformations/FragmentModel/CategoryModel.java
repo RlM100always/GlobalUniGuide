@@ -2,9 +2,18 @@ package com.techtravelcoder.alluniversityinformations.FragmentModel;
 
 public class CategoryModel {
     String name,label,key,imageLink,id;
+    Boolean categoryType;
 
     public CategoryModel(){
 
+    }
+
+    public Boolean getCategoryType() {
+        return categoryType;
+    }
+
+    public void setCategoryType(Boolean categoryType) {
+        this.categoryType = categoryType;
     }
 
     public String getId() {

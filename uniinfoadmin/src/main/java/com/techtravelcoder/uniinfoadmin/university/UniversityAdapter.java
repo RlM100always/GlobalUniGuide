@@ -25,19 +25,25 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.techtravelcoder.uniinfoadmin.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.UniViewHolder> {
     Context context;
     ArrayList<UniversityModel>list;
+    String contryName;
     private String checkedTextTop,checkedTextPublic,checkedTextPrivates,checkedTextSuggest;
 
 
-    public UniversityAdapter(Context context, ArrayList<UniversityModel> list) {
+    public UniversityAdapter(Context context, ArrayList<UniversityModel> list,String contryName) {
         this.context = context;
         this.list = list;
+        this.contryName=contryName;
     }
 
     @NonNull
@@ -191,6 +197,11 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
                 update.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Calendar calendar = Calendar.getInstance();
+                        Date times=calendar.getTime();
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy,EEEE", Locale.getDefault());
+                        String date = sdf.format(times);
+
                         Map<String,Object> map=new HashMap<>();
                         map.put("uniName",String.valueOf(uniName.getText()));
                         map.put("uniImageLink",String.valueOf(uniImage.getText()));
@@ -204,23 +215,22 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
 
                         map.put("contryName",universityModel.getContryName());
                         map.put("key",universityModel.getKey());
+                        map.put("date",date);
                        // Toast.makeText(context, ""+checkedTextTop+" "+checkedTextPublic+" "+checkedTextPrivates+" "+checkedTextSuggest, Toast.LENGTH_SHORT).show();
 
-                            FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey())
-                                    .setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void unused) {
-                                            Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
-                                            alertDialog.dismiss();
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey()).child("uniName").setValue(String.valueOf(uniName.getText()));
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey()).child("uniImageLink").setValue(String.valueOf(uniImage.getText()));
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey()).child("uniWebLink").setValue(String.valueOf(uniWebLink.getText()));
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey()).child("suggested").setValue(checkedTextSuggest);
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey()).child("publics").setValue(checkedTextPublic);
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey()).child("privates").setValue(checkedTextPrivates);
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey()).child("best").setValue(checkedTextTop);
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey()).child("contryName").setValue(contryName);
+                        FirebaseDatabase.getInstance().getReference("University").child(universityModel.getKey()).child("date").setValue(date);
+                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
 
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(context, "Something wrong...", Toast.LENGTH_SHORT).show();
-                                alertDialog.dismiss();
-                            }
-                        });
+
 
                     }
                 });

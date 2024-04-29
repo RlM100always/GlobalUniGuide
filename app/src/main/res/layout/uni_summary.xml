@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_marginTop="8dp"
+        android:src="@drawable/summary"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"/>
+    <TextView
+        android:layout_margin="10dp"
+        android:id="@+id/uni_samary_universityName"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:fontFamily="serif"
+        android:textStyle="bold"
+        android:textSize="19dp"
+        android:textColor="#6200EA"
+        android:text="Dhaka University \n Summary based on user activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_margin="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:drawableTint="@color/deepYellow"
+            android:id="@+id/uni_samary_reviews_no"
+            android:fontFamily="serif"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/baseline_reviews_24"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="123664 reviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:drawableTint="@color/red"
+            android:id="@+id/uni_samary_avg_star"
+            android:fontFamily="serif"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/baseline_stars_24"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="4.6 stars"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_margin="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/uni_samary_bookmark"
+            android:drawableTint="@color/blue"
+            android:fontFamily="serif"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/baseline_bookmark_added_24"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="123664 bookmarks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:foreground="@drawable/uni_background"
+            android:id="@+id/see_uni_samary_userwhorate"
+            android:drawableTint="@color/deepYellow"
+            android:fontFamily="serif"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            android:drawableTop="@drawable/baseline_reviews_24"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="See Reviewsers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+    <TextView
+        android:layout_gravity="center"
+        android:foreground="@drawable/uni_background"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/uni_samary_cancel_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/submit_back"
+        android:paddingLeft="10dp"
+        android:paddingTop="4dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="4dp"
+        android:text="Cancel"
+        android:textColor="@color/yellow"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+
+
+</LinearLayout>

@@ -13,7 +13,7 @@
         <LinearLayout
             android:foreground="@drawable/uni_background"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.cardview.widget.CardView
@@ -70,30 +70,34 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="13dp"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:drawableTint="@color/green"
                 android:fontFamily="serif"
                 android:textStyle="bold"
-                android:drawableTop="@drawable/baseline_favorite_24"
+                android:drawableTop="@drawable/baseline_pageview_24"
                 android:layout_weight="1"
                 android:id="@+id/post_design_views"
                 android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="10444444 Views"
-                android:textColor="@color/lighGreen"
+                android:textColor="@color/white"
                 android:textSize="12dp"/>
 
             <TextView
+                android:drawableTint="@color/red"
+                android:id="@+id/post_design_loves"
                 android:fontFamily="serif"
                 android:textStyle="bold"
                 android:textSize="12dp"
                 android:textColor="@color/white"
-                android:drawableTop="@drawable/baseline_favorite_24"
+                android:drawableTop="@drawable/baseline_favorite_241"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:text="3454466 loves"
@@ -101,11 +105,13 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:drawableTint="@color/deepYellow"
+                android:id="@+id/post_design_reviews_num"
                 android:fontFamily="serif"
                 android:textStyle="bold"
                 android:textSize="12dp"
                 android:textColor="@color/white"
-                android:drawableTop="@drawable/baseline_share_24"
+                android:drawableTop="@drawable/baseline_reviews_24"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:text="123664 reviews"
@@ -113,11 +119,13 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:drawableTint="#00BFA5"
+                android:id="@+id/post_design_star"
                 android:fontFamily="serif"
                 android:textStyle="bold"
                 android:textSize="12dp"
                 android:textColor="@color/white"
-                android:drawableTop="@drawable/baseline_star_rate_24"
+                android:drawableTop="@drawable/baseline_stars_24"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:text="4.6 stars"

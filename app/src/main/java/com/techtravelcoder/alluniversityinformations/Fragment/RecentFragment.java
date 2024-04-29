@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentAdapter.MainPostAdapter;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.universityDetails.UniversityModel;
 
 import org.w3c.dom.Text;
 
@@ -36,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
@@ -74,13 +76,12 @@ public class RecentFragment extends Fragment {
         swipeRefreshLayout=view.findViewById(R.id.swipe_refresh_layout_recent);
 
         progressBar=view.findViewById(R.id.recent_progressBar);
-        progressBar.setVisibility(View.VISIBLE);
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.VISIBLE);
 
         mainPostAdapter.setViewTypeToShow(3);
         recyclerView = view.findViewById(R.id.recent_recyclerview_id);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerView.setAdapter(mainPostAdapter);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -101,7 +102,7 @@ public class RecentFragment extends Fragment {
     private void fetchPostData() {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -5);
+        calendar.add(Calendar.DAY_OF_YEAR, -8);
         Date startDate = calendar.getTime();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -114,6 +115,15 @@ public class RecentFragment extends Fragment {
                         list.add(0,mainPostModels);
                     }
                 }
+
+                Collections.sort(list, new Comparator<MainPostModel>() {
+                    @Override
+                    public int compare(MainPostModel u1, MainPostModel u2) {
+                        // Sort by date in descending order
+                        return u2.getDate().compareTo(u1.getDate());
+                    }
+                });
+
                 if(list.size()==0){
                     imageView.setVisibility(View.VISIBLE);
                     textView.setVisibility(View.VISIBLE);

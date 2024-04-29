@@ -1,30 +1,19 @@
 package com.techtravelcoder.alluniversityinformations.postDetails;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.techtravelcoder.alluniversityinformation.R;
-import com.techtravelcoder.alluniversityinformations.Fragment.CategoryFragment;
-import com.techtravelcoder.alluniversityinformations.Fragment.FavoriteFragment;
-import com.techtravelcoder.alluniversityinformations.Fragment.HomeFragment;
-import com.techtravelcoder.alluniversityinformations.Fragment.RecentFragment;
 
 public class PostHandleActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
-    TabItem tabItem1,tabItem2,tabItem3,tabItem4;
-    ViewPager viewPager;
-    PageAdapter pageAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,5 +52,6 @@ public class PostHandleActivity extends AppCompatActivity {
 
 
     }
+
 
 }

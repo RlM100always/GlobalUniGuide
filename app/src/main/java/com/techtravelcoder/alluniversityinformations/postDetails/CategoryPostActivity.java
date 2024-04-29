@@ -46,8 +46,13 @@ public class CategoryPostActivity extends AppCompatActivity {
     private int sizeCheck=0;
     private String keyString;
     private ProgressBar progressBar;
-    private TextView playListViews,playListRattings,playListItem;
+    private TextView playListViews,playListRattings,playListItem,playListReviewNum;
     private Long countTotalViews=0L;
+    private Boolean categoryType;
+    private Double rating=0d;
+    private int rateCnt=0;
+    private Long reviewersNum=0l;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class CategoryPostActivity extends AppCompatActivity {
         playListItem=findViewById(R.id.playlist_total_content_id);
         playListViews=findViewById(R.id.playlist_views_id);
         playListRattings=findViewById(R.id.playlist_rating_id);
+        playListReviewNum=findViewById(R.id.playlist_review_id);
 
 
         progressBar=findViewById(R.id.category_post_progressbar_id);
@@ -73,6 +79,7 @@ public class CategoryPostActivity extends AppCompatActivity {
         }
         getWindow().setStatusBarColor(color);
         keyString=getIntent().getStringExtra("title");
+        categoryType=getIntent().getBooleanExtra("type",false);
         cat=findViewById(R.id.category_set_id);
         cat.setText(keyString);
 
@@ -146,7 +153,15 @@ public class CategoryPostActivity extends AppCompatActivity {
                             list.add(mainPostModels);
                             countTotalViews+=mainPostModels.getViews();
                             sizeCheck++;
-                            if(sizeCheck>=150){
+                            if(mainPostModels.getAvgRating() !=null){
+                                rating=rating+mainPostModels.getAvgRating();
+                                rateCnt++;
+
+                            }
+                            if(mainPostModels.getRatingNum()!=null){
+                                reviewersNum=mainPostModels.getRatingNum()+reviewersNum;
+                            }
+                            if(sizeCheck>=200){
                                 break;
                             }
                         }
@@ -157,6 +172,13 @@ public class CategoryPostActivity extends AppCompatActivity {
                         if (mainPostModels != null && mainPostModels.getUniqueNum().equals(postId)) {
                             list.add(mainPostModels);
                             countTotalViews+=mainPostModels.getViews();
+                            if(mainPostModels.getAvgRating() !=null){
+                                rating=rating+mainPostModels.getAvgRating();
+                                rateCnt++;
+                            }
+                            if(mainPostModels.getRatingNum()!=null){
+                                reviewersNum=mainPostModels.getRatingNum()+reviewersNum;
+                            }
                         }
                     }
 
@@ -170,8 +192,12 @@ public class CategoryPostActivity extends AppCompatActivity {
                         }
                     });
 
-                    playListViews.setText(String.valueOf(countTotalViews));
-                    playListItem.setText(String.valueOf(list.size()));
+                    Double avg=rating/rateCnt;
+                    String formatted = String.format("%.2f", avg);
+                    playListRattings.setText(formatted+" stars");
+                    playListViews.setText(String.valueOf(countTotalViews)+" times");
+                    playListItem.setText(String.valueOf(list.size())+" ");
+                    playListReviewNum.setText(reviewersNum+" people");
                     mainPostAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
 
@@ -179,12 +205,27 @@ public class CategoryPostActivity extends AppCompatActivity {
                 else
                 {
 
-                    mainPostAdapter.notifyDataSetChanged();
-                    playListViews.setText(String.valueOf(countTotalViews));
-                    playListItem.setText(String.valueOf(list.size()));
-                    Collections.shuffle(list);
-                    progressBar.setVisibility(View.GONE);
-                    mainPostAdapter.notifyDataSetChanged();
+                    Double avg=rating/rateCnt;
+                    String formatted = String.format("%.2f", avg);
+                    playListRattings.setText(formatted+" stars");
+                    playListReviewNum.setText(reviewersNum+" people");
+
+                    if(categoryType==true){
+                        mainPostAdapter.notifyDataSetChanged();
+                        playListViews.setText(String.valueOf(countTotalViews+" times"));
+                        playListItem.setText(String.valueOf(list.size())+" ");
+                        progressBar.setVisibility(View.GONE);
+                        mainPostAdapter.notifyDataSetChanged();
+                    }
+                    else {
+                        mainPostAdapter.notifyDataSetChanged();
+                        playListViews.setText(String.valueOf(countTotalViews)+" times");
+                        playListItem.setText(String.valueOf(list.size())+" ");
+                        Collections.shuffle(list);
+                        progressBar.setVisibility(View.GONE);
+                        mainPostAdapter.notifyDataSetChanged();
+                    }
+
                 }
 
             }

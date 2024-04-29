@@ -51,6 +51,13 @@ public class UniversityAdapter1 extends RecyclerView.Adapter<UniversityAdapter1.
     public void onBindViewHolder(@NonNull UniViewHolder holder, int position) {
         UniversityModel universityModel=list.get(position);
         holder.uniName.setText(universityModel.getUniName());
+        if(universityModel.getAvgRating() !=null){
+            holder.rating.setVisibility(View.VISIBLE);
+            holder.rating.setText(universityModel.getAvgRating()+"");
+        }else {
+            holder.rating.setVisibility(View.GONE);
+
+        }
         Glide.with(context).load(universityModel.getUniImageLink()).into(holder.uniImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,51 +66,55 @@ public class UniversityAdapter1 extends RecyclerView.Adapter<UniversityAdapter1.
                 intent.putExtra("link",universityModel.getUniWebLink());
                 intent.putExtra("name",universityModel.getUniName());
                 intent.putExtra("country",universityModel.getContryName());
+                intent.putExtra("key",universityModel.getKey());
+                intent.putExtra("bookmark",universityModel.getPostLoves());
+                intent.putExtra("reviewers",universityModel.getRatingNum());
+                intent.putExtra("avgrate",universityModel.getAvgRating());
 
                 context.startActivity(intent);
-                Random random=new Random();
-                int num = random.nextInt(6)+1;
-                if(num==3){
-                   // FacebookInterestitialAds.loadAds(context);
-                    App.interstitialLoader.doOnNextAvailable(result -> {
-                        if (result != null) {
-                            NotixInterstitial.Companion.show(result);
-                        }
-                        return Unit.INSTANCE;
-                    });
-
-                }
-                if(num==5){
-                    App.interstitialLoader.doOnNextAvailable(result -> {
-                        if (result != null) {
-                            NotixInterstitial.Companion.show(result);
-                        }
-                        return Unit.INSTANCE;
-                    });
-
-                }
-                if(num==4){
-                    final StartAppAd rewardedVideo = new StartAppAd(context);
-
-                    rewardedVideo.setVideoListener(new VideoListener() {
-                        @Override
-                        public void onVideoCompleted() {
-                            // Grant the reward to user
-                        }
-                    });
-
-                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                        @Override
-                        public void onReceiveAd(Ad ad) {
-                            rewardedVideo.showAd();
-                        }
-
-                        @Override
-                        public void onFailedToReceiveAd(Ad ad) {
-                            // Can't show rewarded video
-                        }
-                    });
-                }
+//                Random random=new Random();
+//                int num = random.nextInt(6)+1;
+//                if(num==3){
+//                   // FacebookInterestitialAds.loadAds(context);
+//                    App.interstitialLoader.doOnNextAvailable(result -> {
+//                        if (result != null) {
+//                            NotixInterstitial.Companion.show(result);
+//                        }
+//                        return Unit.INSTANCE;
+//                    });
+//
+//                }
+//                if(num==5){
+//                    App.interstitialLoader.doOnNextAvailable(result -> {
+//                        if (result != null) {
+//                            NotixInterstitial.Companion.show(result);
+//                        }
+//                        return Unit.INSTANCE;
+//                    });
+//
+//                }
+//                if(num==4){
+//                    final StartAppAd rewardedVideo = new StartAppAd(context);
+//
+//                    rewardedVideo.setVideoListener(new VideoListener() {
+//                        @Override
+//                        public void onVideoCompleted() {
+//                            // Grant the reward to user
+//                        }
+//                    });
+//
+//                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+//                        @Override
+//                        public void onReceiveAd(Ad ad) {
+//                            rewardedVideo.showAd();
+//                        }
+//
+//                        @Override
+//                        public void onFailedToReceiveAd(Ad ad) {
+//                            // Can't show rewarded video
+//                        }
+//                    });
+//                }
 
             }
         });
@@ -123,12 +134,14 @@ public class UniversityAdapter1 extends RecyclerView.Adapter<UniversityAdapter1.
     }
 
     public class UniViewHolder extends RecyclerView.ViewHolder {
-        TextView uniName;
+        TextView uniName,rating;
         ImageView uniImage;
         public UniViewHolder(@NonNull View itemView) {
             super(itemView);
             uniImage=itemView.findViewById(R.id.uni_design_image_id1);
             uniName=itemView.findViewById(R.id.uni_design_uniname1);
+            rating=itemView.findViewById(R.id.top_design_rating_id);
+
         }
     }
 }

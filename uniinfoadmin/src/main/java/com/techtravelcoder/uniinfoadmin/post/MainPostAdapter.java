@@ -21,17 +21,24 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.techtravelcoder.uniinfoadmin.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.MainPostViewHolder> {
     Context context;
     ArrayList<MainPostModel>list;
+    String label,category;
 
-    public MainPostAdapter(Context context, ArrayList<MainPostModel> list) {
+    public MainPostAdapter(Context context, ArrayList<MainPostModel> list,String label,String category ) {
         this.context = context;
         this.list = list;
+        this.label=label;
+        this.category=category;
     }
 
     @NonNull
@@ -55,6 +62,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.MainPo
                     final View view=LayoutInflater.from(context).inflate(R.layout.main_post_design,null);
                      EditText postId,imageLink,title;
 
+                    Toast.makeText(context, ""+label+"   "+category, Toast.LENGTH_SHORT).show();
                     title=view.findViewById(R.id.post_title_id);
                     imageLink=view.findViewById(R.id.post_image_link_id);
                     postId=view.findViewById(R.id.post_post_id);
@@ -76,6 +84,11 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.MainPo
                         public void onClick(View v) {
                             if(!TextUtils.isEmpty(title.getText().toString()) && !TextUtils.isEmpty(imageLink.getText().toString()) && !TextUtils.isEmpty(postId.getText().toString())){
 
+                                Calendar calendar = Calendar.getInstance();
+                                Date times=calendar.getTime();
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy,EEEE", Locale.getDefault());
+                                String date = sdf.format(times);
+
                                 String s_title=title.getText().toString();
                                 String s_postid=postId.getText().toString();
                                 String s_link=imageLink.getText().toString();
@@ -87,21 +100,21 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.MainPo
                                 map.put("postId",s_postid);
                                 map.put("image",s_link);
                                 map.put("key",mainPostModel.getKey());
-                                map.put("label",mainPostModel.getLabel());
+                                map.put("label",label);
                                 map.put("uniqueNum",mainPostModel.getUniqueNum());
-                                map.put("category",mainPostModel.getCategory());
-                                map.put("date",mainPostModel.getDate());
+                                map.put("category",category);
+                                map.put("date",date);
                                 map.put("views",mainPostModel.getViews());
 
 
                                 //Toast.makeText(this, ""+s_title+" "+s_label+" "+entryKey+" "+s_link, Toast.LENGTH_SHORT).show();
-                                FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).setValue(map).
-                                        addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
+                                FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("title").setValue(s_title);
+                                FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("postId").setValue(s_postid);
+                                FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("image").setValue(s_link);
+                                FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("category").setValue(category);
+                                FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("date").setValue(date);
+                                FirebaseDatabase.getInstance().getReference("Post").child(mainPostModel.getKey()).child("label").setValue(label);
+                                Toast.makeText(context, "Successful", Toast.LENGTH_SHORT).show();
 
                                 alertDialog.dismiss();
 

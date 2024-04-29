@@ -100,7 +100,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onClick(View v) {
                 Intent intent=new Intent(context, CategoryPostActivity.class);
                 intent.putExtra("id",categoryModel.getId());
-                intent.putExtra("title",categoryModel.getName());
+                intent.putExtra("title",categoryModel.getLabel());
+                if(categoryModel.getCategoryType()!=null){
+                    intent.putExtra("type",categoryModel.getCategoryType());
+                }
+
                 context.startActivity(intent);
             }
         });
@@ -115,7 +119,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onClick(View v) {
                 Intent intent=new Intent(context, CategoryPostActivity.class);
                 intent.putExtra("id",categoryModel.getId());
-                intent.putExtra("title",categoryModel.getName());
+                intent.putExtra("title",categoryModel.getLabel());
+                if(categoryModel.getCategoryType()!=null){
+                    intent.putExtra("type",categoryModel.getCategoryType());
+                }
 
                 context.startActivity(intent);
             }

@@ -64,7 +64,7 @@ public class MainPostActivity extends AppCompatActivity {
 
 
         list=new ArrayList<>();
-        mainPostAdapter=new MainPostAdapter(MainPostActivity.this,list);
+        mainPostAdapter=new MainPostAdapter(MainPostActivity.this,list,label,category);
         recyclerView.setAdapter(mainPostAdapter );
 
         mbase1.addValueEventListener(new ValueEventListener() {

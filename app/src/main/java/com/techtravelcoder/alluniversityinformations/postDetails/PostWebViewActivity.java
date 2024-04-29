@@ -3,26 +3,21 @@ package com.techtravelcoder.alluniversityinformations.postDetails;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.media.Rating;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.text.Html;
-import android.text.Spanned;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +27,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -52,21 +47,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
-import com.techtravelcoder.alluniversityinformations.Fragment.HomeFragment;
-import com.techtravelcoder.alluniversityinformations.FragmentAdapter.MainPostAdapter;
 import com.techtravelcoder.alluniversityinformations.FragmentAdapter.PostWebAdapter;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
 import com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity;
-import com.techtravelcoder.alluniversityinformations.universityDetails.UniversityActivity;
-import com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity;
+import com.techtravelcoder.alluniversityinformations.universityDetails.SeeUniPostActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -84,6 +82,14 @@ public class PostWebViewActivity extends AppCompatActivity {
     private Handler handler;
     private Toolbar toolbars;
     private String title,selfLink,urlLink;
+    private String htmlContentWithStyle;
+    private TextToSpeech textToSpeech;
+    private Boolean bool=false;
+    private Long loves,rateno;
+    private Double avgRate;
+    private LinearLayout postInfo;
+    private TextView lovesPost,reviewNoPost,avgReviewPost,reviewsersTv;
+    private String text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +109,12 @@ public class PostWebViewActivity extends AppCompatActivity {
         titles=findViewById(R.id.post_title_id);
         mayLike=findViewById(R.id.may_like_id);
         loading=findViewById(R.id.post_loading_id);
+        postInfo=findViewById(R.id.ll_info_id);
+        lovesPost=findViewById(R.id.post_webview_loves_id);
+        reviewNoPost=findViewById(R.id.post_webview_review_num);
+        avgReviewPost=findViewById(R.id.post_webview_avgstar);
+        reviewsersTv=findViewById(R.id.post_webview_reviewers_id);
+
 
         progressBar=findViewById(R.id.post_progressbar_id);
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.back), PorterDuff.Mode.SRC_IN);
@@ -113,18 +125,60 @@ public class PostWebViewActivity extends AppCompatActivity {
          toolbars=findViewById(R.id.post_web_tolbar);
          setSupportActionBar(toolbars);
 
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = textToSpeech.setLanguage(Locale.US);
+
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Toast.makeText(PostWebViewActivity.this, "Language not supported", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(PostWebViewActivity.this, "Initialization failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override
+            public void onStart(String utteranceId) {
+                // Speech started
+            }
+
+            @Override
+            public void onDone(String utteranceId) {
+                // Speech completed
+            }
+
+            @Override
+            public void onError(String utteranceId) {
+                // Speech error
+            }
+        });
+
+
+
 
         // toolbars.setTitle(uni_name);
          toolbars.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), PostHandleActivity.class);
+                if(textToSpeech!=null){
+                    textToSpeech.stop();
+                }
                 startActivity(intent);
             }
         });
 
-
-
+        webView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
+        webView.setLongClickable(false);
+        webView.setHapticFeedbackEnabled(false);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true); // Enable JavaScript
         webSettings.setDomStorageEnabled(true); // Enable DOM Storage
@@ -140,6 +194,22 @@ public class PostWebViewActivity extends AppCompatActivity {
         label=getIntent().getStringExtra("label");
         views=getIntent().getLongExtra("num",1);
         key=getIntent().getStringExtra("key");
+        loves=getIntent().getLongExtra("loves",0);
+        rateno=getIntent().getLongExtra("reviewers",0);
+        avgRate=getIntent().getDoubleExtra("avgrate",0d);
+
+
+        reviewsersTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), SeeUniPostActivity.class);
+                intent.putExtra("postid",key);
+                intent.putExtra("checker","1");
+
+                startActivity(intent);
+            }
+        });
+
 
 
         //favorite menu handle dynamically
@@ -166,12 +236,16 @@ public class PostWebViewActivity extends AppCompatActivity {
                     titles.setVisibility(View.VISIBLE);
                     titles.setText(title);
 
+                    Document doc = Jsoup.parse(content);
+                    text = doc.text();
 
 
-                    String htmlContentWithStyle = "<html><head><style>" +
-                            "body { font-size: 20px; background-color: #FCF9F9FB; color: #333333; margin: 0px; padding: 0; }" +
-                            "img { max-width: 90%; height: auto; }" +
-                            "video { max-width: 90%; height: auto; }" +
+
+                    htmlContentWithStyle = "<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+                            "<style>" +
+                            "body { font-size: 20px; background-color: #FCF9F9FB; color: #333333; margin: 0px; padding: 0; word-wrap: break-word; }" +
+                            "img { max-width: 90%; height: auto }" +
+                            "video { max-width: 90%; height: auto }" +
                             "</style></head><body>" + content + "</body></html>";
 
                     // Set a WebViewClient to handle page navigation inside the WebView
@@ -196,7 +270,7 @@ public class PostWebViewActivity extends AppCompatActivity {
                         }
                     });
                     //webView.loadData(desc,"text/html", ENCODING);
-                    webView.loadDataWithBaseURL("",htmlContentWithStyle,"text/html","UTF-8","");
+                    webView.loadDataWithBaseURL("", htmlContentWithStyle,"text/html","UTF-8","");
                     progressBar.setVisibility(View.GONE);
                     loading.setVisibility(View.GONE);
 
@@ -206,8 +280,28 @@ public class PostWebViewActivity extends AppCompatActivity {
                         public void run() {
                             recyclerView.setVisibility(View.VISIBLE);
                             mayLike.setVisibility(View.VISIBLE);
+                            postInfo.setVisibility(View.VISIBLE);
+                            if(loves==0){
+                                lovesPost.setText("0 loves");
+                            }else {
+                                lovesPost.setText(loves+" loves");
+                            }
+
+                            if(rateno==0){
+                                reviewNoPost.setText("0 reviews");
+                            }else {
+                                reviewNoPost.setText(rateno+" reviews");
+                            }
+
+                            if(avgRate==0.0){
+                                avgReviewPost.setText("No Rating History");
+                            }else {
+                                String formattedNumber = String.format("%.2f", avgRate);
+                                avgReviewPost.setText(formattedNumber+" Stars");
+                            }
                         }
-                    },500);
+                    },200);
+
 
 
                 } catch (JSONException e) {
@@ -300,6 +394,9 @@ public class PostWebViewActivity extends AppCompatActivity {
 
         if(item.getItemId() == R.id.menu_post_home_id) {
             Intent intent = new Intent(PostWebViewActivity.this, MainActivity.class);
+            if(textToSpeech!=null){
+                textToSpeech.stop();
+            }
             intent.putExtra("val",2);
             startActivity(intent);
             return true; // Make sure to return true to indicate that the item click is handled
@@ -488,14 +585,18 @@ public class PostWebViewActivity extends AppCompatActivity {
                     String rating=String.valueOf(ratingBar.getRating());
 
                     if(!rating.isEmpty() && !ratingName.getText().toString().isEmpty() && !ratingText.getText().toString().isEmpty()){
-                        // String entryKey = FirebaseDatabase.getInstance().getReference("Post").child(key).child("rating").push().getKey();
-                        // Toast.makeText(getApplicationContext(), ""+entryKey+" "+rating+" "+ratingText.getText().toString()+" "+ratingName.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                        Calendar calendar = Calendar.getInstance();
+                        Date times=calendar.getTime();
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy,EEEE", Locale.getDefault());
+                        String date = sdf.format(times);
 
                         Map<String,Object> map=new HashMap();
                         map.put("userid",FirebaseAuth.getInstance().getUid());
                         map.put("name",ratingName.getText().toString());
                         map.put("rate",Double.parseDouble(rating));
                         map.put("text",ratingText.getText().toString());
+                        map.put("date",date);
 
                         //retrive
                         FirebaseDatabase.getInstance().getReference("Post").child(key).child("ratingNum").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -523,7 +624,8 @@ public class PostWebViewActivity extends AppCompatActivity {
                                             }
 
                                             FirebaseDatabase.getInstance().getReference("Post").child(key).child("ratingNum").setValue(count);
-                                            FirebaseDatabase.getInstance().getReference("Post").child(key).child("avgRating").setValue(rate/count);
+                                            Double v1 = rate / count;
+                                            FirebaseDatabase.getInstance().getReference("Post").child(key).child("avgRating").setValue(v1);
                                             alertDialog.dismiss();
 
 
@@ -546,7 +648,8 @@ public class PostWebViewActivity extends AppCompatActivity {
                                                     Toast.makeText(PostWebViewActivity.this, "Rating Successful", Toast.LENGTH_SHORT).show();
 
                                                     FirebaseDatabase.getInstance().getReference("Post").child(key).child("ratingNum").setValue(1L);
-                                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("avgRating").setValue(Double.parseDouble(rating));
+                                                    Double d=Double.parseDouble(rating);
+                                                    FirebaseDatabase.getInstance().getReference("Post").child(key).child("avgRating").setValue(d);
                                                     alertDialog.dismiss();
 
 
@@ -574,10 +677,59 @@ public class PostWebViewActivity extends AppCompatActivity {
 
 
         }
+        if(item.getItemId()==R.id.menu_post_speaker_id){
+            Menu menu = toolbars.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.menu_post_speaker_id);
+            if(htmlContentWithStyle!=null){
+
+                if (textToSpeech != null && !text.isEmpty())
+                {
+                    if (bool==false) {
+                        Toast.makeText(this, "Audio On", Toast.LENGTH_SHORT).show();
+
+                        menuItem.setIcon(R.drawable.speaker_on);
+                        bool=true;
+                        textToSpeech.setSpeechRate(0.75f); // Adjust speech rate (0.5f is slower than normal)
+                        textToSpeech.setPitch(1.0f); // Adjust pitch (1.0f is normal)
+                        String[] sentences = text.split("[.!?]");
+                        for (String sentence : sentences) {
+                            // Trim whitespace and skip empty sentences
+                            sentence = sentence.trim();
+                            if (!sentence.isEmpty()) {
+                                speakSentence(sentence);
+                            }
+                        }
+                        // Start speaking
+                        speakSentence(text);
+                    }
+                    else{
+                        // Toggle to OFF state
+                        menuItem.setIcon(R.drawable.speaker_off);
+                        bool=false;
+                        Toast.makeText(this, "Audio Off", Toast.LENGTH_SHORT).show();
+                        textToSpeech.stop();
+                    }
+
+
+                }
+
+
+            }
+
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void speakSentence(String sentence) {
+        if (textToSpeech != null && !sentence.isEmpty()) {
+
+            // Speak the sentence
+            HashMap<String, String> params = new HashMap<>();
+            params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "text");
+            textToSpeech.speak(sentence, TextToSpeech.QUEUE_ADD, params);
+        }
+    }
     private void retriveData() {
 
         list = new ArrayList<>();
@@ -589,7 +741,7 @@ public class PostWebViewActivity extends AppCompatActivity {
         if(randomViewType==1){
             recyclerView.setLayoutManager(new LinearLayoutManager(PostWebViewActivity.this));
         } else if (randomViewType==2) {
-            recyclerView.setLayoutManager(new GridLayoutManager(PostWebViewActivity.this,2));
+            recyclerView.setLayoutManager(new GridLayoutManager(PostWebViewActivity.this,1));
 
         }
         recyclerView.setAdapter(postWebAdapter);
@@ -623,6 +775,11 @@ public class PostWebViewActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+            textToSpeech = null;
+        }
         if(handler != null){
             handler.removeCallbacksAndMessages(null);
         }
@@ -633,6 +790,7 @@ public class PostWebViewActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
+
     }
 
     private int getRandomViewType() {
@@ -640,6 +798,7 @@ public class PostWebViewActivity extends AppCompatActivity {
         int num=random.nextInt(2)+1;
         return num;
     }
+
 
 
 

@@ -57,51 +57,56 @@ public class UniversityAdapterWeb extends RecyclerView.Adapter<UniversityAdapter
                 intent.putExtra("name",universityModel.getUniName());
                 intent.putExtra("link",universityModel.getUniWebLink());
                 intent.putExtra("country",universityModel.getContryName());
+                intent.putExtra("key",universityModel.getKey());
+                intent.putExtra("bookmark",universityModel.getPostLoves());
+                intent.putExtra("reviewers",universityModel.getRatingNum());
+                intent.putExtra("avgrate",universityModel.getAvgRating());
+
 
                 context.startActivity(intent);
-                Random random=new Random();
-                int num = random.nextInt(12)+1;
-                if(num==5){
-                   // FacebookInterestitialAds.loadAds(context);
-                    App.interstitialLoader.doOnNextAvailable(result -> {
-                        if (result != null) {
-                            NotixInterstitial.Companion.show(result);
-                        }
-                        return Unit.INSTANCE;
-                    });
-
-                }
-                if(num==4){
-                    App.interstitialLoader.doOnNextAvailable(result -> {
-                        if (result != null) {
-                            NotixInterstitial.Companion.show(result);
-                        }
-                        return Unit.INSTANCE;
-                    });
-
-                }
-                if(num==6){
-                    final StartAppAd rewardedVideo = new StartAppAd(context);
-
-                    rewardedVideo.setVideoListener(new VideoListener() {
-                        @Override
-                        public void onVideoCompleted() {
-                            // Grant the reward to user
-                        }
-                    });
-
-                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                        @Override
-                        public void onReceiveAd(Ad ad) {
-                            rewardedVideo.showAd();
-                        }
-
-                        @Override
-                        public void onFailedToReceiveAd(Ad ad) {
-                            // Can't show rewarded video
-                        }
-                    });
-                }
+//                Random random=new Random();
+//                int num = random.nextInt(12)+1;
+//                if(num==5){
+//                   // FacebookInterestitialAds.loadAds(context);
+//                    App.interstitialLoader.doOnNextAvailable(result -> {
+//                        if (result != null) {
+//                            NotixInterstitial.Companion.show(result);
+//                        }
+//                        return Unit.INSTANCE;
+//                    });
+//
+//                }
+//                if(num==4){
+//                    App.interstitialLoader.doOnNextAvailable(result -> {
+//                        if (result != null) {
+//                            NotixInterstitial.Companion.show(result);
+//                        }
+//                        return Unit.INSTANCE;
+//                    });
+//
+//                }
+//                if(num==6){
+//                    final StartAppAd rewardedVideo = new StartAppAd(context);
+//
+//                    rewardedVideo.setVideoListener(new VideoListener() {
+//                        @Override
+//                        public void onVideoCompleted() {
+//                            // Grant the reward to user
+//                        }
+//                    });
+//
+//                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+//                        @Override
+//                        public void onReceiveAd(Ad ad) {
+//                            rewardedVideo.showAd();
+//                        }
+//
+//                        @Override
+//                        public void onFailedToReceiveAd(Ad ad) {
+//                            // Can't show rewarded video
+//                        }
+//                    });
+//                }
 
             }
         });
