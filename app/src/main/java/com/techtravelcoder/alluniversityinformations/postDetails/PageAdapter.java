@@ -12,33 +12,35 @@ import com.techtravelcoder.alluniversityinformations.Fragment.FavoriteFragment;
 import com.techtravelcoder.alluniversityinformations.Fragment.HomeFragment;
 import com.techtravelcoder.alluniversityinformations.Fragment.RecentFragment;
 
-public class PageAdapter extends FragmentStateAdapter
+public class PageAdapter extends FragmentPagerAdapter
 {
-    private static final int NUM_PAGES = 4;
+    int tabcount;
 
-    public PageAdapter(FragmentActivity fragmentActivity) {
-        super(fragmentActivity);
+    public PageAdapter(@NonNull FragmentManager fm, int behavior) {
+        super(fm, behavior);
+        tabcount=behavior;
     }
 
     @NonNull
     @Override
-    public Fragment createFragment(int position) {
-        switch (position) {
-            case 0:
-                return new HomeFragment();
-            case 1:
-                return new CategoryFragment();
-            case 2:
-                return new RecentFragment();
-            case 3:
-                return new FavoriteFragment();
-            default:
-                return new HomeFragment(); // Default fragment to handle invalid position
+    public Fragment getItem(int position)
+    {
+        switch (position)
+        {
+            case 0 : return new RecentFragment();
+            case 1 : return new HomeFragment();
+            case 2 : return new CategoryFragment();
+            case 3 : return new FavoriteFragment();
+
+            default: return null;
         }
     }
 
     @Override
-    public int getItemCount() {
-        return NUM_PAGES;
+    public int getCount() {
+        return tabcount;
     }
+
+
+
 }

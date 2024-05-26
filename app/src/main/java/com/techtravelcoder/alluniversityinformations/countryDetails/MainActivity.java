@@ -1,5 +1,7 @@
 package com.techtravelcoder.alluniversityinformations.countryDetails;
 
+import static com.techtravelcoder.alluniversityinformations.ads.App.appOpenLoader;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -64,6 +66,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
+import co.notix.appopen.NotixAppOpen;
 import co.notix.interstitial.NotixInterstitial;
 import kotlin.Unit;
 
@@ -88,7 +91,6 @@ public class MainActivity extends AppCompatActivity  {
     private GridLayoutManager gridLayoutManager;
     private ProgressBar progressBar;
     private LinearLayout visit,recentUni,carrierGuide,popularContent,bookUni;
-    private static final String ONESIGNAL_APP_ID = "4966cbfa-9bdd-4424-9b60-b11fd884cee5";
 
 
 
@@ -101,33 +103,10 @@ public class MainActivity extends AppCompatActivity  {
 
 
         //for ads disable
-        StartAppSDK.init(this, "201407686");
-        StartAppAd.disableAutoInterstitial();
+//        StartAppSDK.init(this, "201407686");
+//        StartAppAd.disableAutoInterstitial();
 
 
-        //Toast.makeText(this, ""+OneSignal.getSession(), Toast.LENGTH_SHORT).show();
-        OneSignal.getDebug().setLogLevel(LogLevel.VERBOSE);
-        // OneSignal Initialization
-        OneSignal.initWithContext(this, ONESIGNAL_APP_ID);
-        OneSignal.getNotifications().addClickListener(new INotificationClickListener() {
-            @Override
-            public void onClick(@NonNull INotificationClickEvent iNotificationClickEvent) {
-                iNotificationClickEvent.getNotification().getTemplateName();
-                Toast.makeText(MainActivity.this, ""+iNotificationClickEvent.getNotification().getTemplateName(), Toast.LENGTH_SHORT).show();
-                //Log.d("Value",iNotificationClickEvent.getNotification().getTemplateName());
-                if(iNotificationClickEvent.getNotification().getTemplateName().equals("University")){
-                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
-                    intent.putExtra("check",1);
-                    startActivity(intent);
-                }
-                if(iNotificationClickEvent.getNotification().getTemplateName().equals("Popular Content")){
-                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
-                    intent.putExtra("check",2);
-                    startActivity(intent);
-                }
-
-            }
-        });
 
 
 
@@ -141,12 +120,7 @@ public class MainActivity extends AppCompatActivity  {
           }
 
 
-//        App.appOpenLoader.doOnNextAvailable(result -> {
-//            if (result != null) {
-//                NotixAppOpen.Companion.show(result);
-//            }
-//            return Unit.INSTANCE;
-//        });
+
 
 
 
@@ -156,10 +130,10 @@ public class MainActivity extends AppCompatActivity  {
         }
         getWindow().setStatusBarColor(color);
 
-        gridLayoutManager=new GridLayoutManager(MainActivity.this,2);
+        gridLayoutManager=new GridLayoutManager(MainActivity.this,2,GridLayoutManager.HORIZONTAL,false);
         progressBar=findViewById(R.id.progressBar_id);
         recyclerView=findViewById(R.id.main_recycler_id);
-        swipeRefreshLayout=findViewById(R.id.swipeRefreshLayout);
+        //swipeRefreshLayout=findViewById(R.id.swipeRefreshLayout);
         drawerLayout=findViewById(R.id.drawer_id);
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.tolbar);
@@ -184,36 +158,56 @@ public class MainActivity extends AppCompatActivity  {
         recentUni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
-                ADSSetUp.adsType1(MainActivity.this);
-                intent.putExtra("check",1);
-                startActivity(intent);
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
+                    intent.putExtra("check",1);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(MainActivity.this, "Internet Issue", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         carrierGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, PostHandleActivity.class);
-                ADSSetUp.adsType1(MainActivity.this);
-                startActivity(intent);
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    Intent intent=new Intent(MainActivity.this, PostHandleActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(MainActivity.this, "Internet Issue", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         popularContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, CategoryPostActivity.class);
-                ADSSetUp.adsType1(MainActivity.this);
-                intent.putExtra("title","Most Popular Content");
-                startActivity(intent);
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    Intent intent=new Intent(MainActivity.this, CategoryPostActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
+                    intent.putExtra("title","Most Popular Content");
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(MainActivity.this, "Internet Issue", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         bookUni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
-                ADSSetUp.adsType1(MainActivity.this);
-                intent.putExtra("check",2);
-                startActivity(intent);
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
+                    intent.putExtra("check",2);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(MainActivity.this, "Internet Issue", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -263,13 +257,13 @@ public class MainActivity extends AppCompatActivity  {
         }
 
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refeshData();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                refeshData();
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        });
         navItemOnClickListener();
 
 
@@ -403,7 +397,7 @@ public class MainActivity extends AppCompatActivity  {
                 if(item.getItemId()==R.id.menu_guide_id){
 
                     Intent openWebsiteIntent = new Intent(MainActivity.this, PostHandleActivity.class);
-
+                    ADSSetUp.adsType1(MainActivity.this);
                     startActivity(openWebsiteIntent);
 
                 }
@@ -450,6 +444,7 @@ public class MainActivity extends AppCompatActivity  {
                 if(item.getItemId()==R.id.menu_popular_content_id){
                     Intent intent=new Intent(MainActivity.this, CategoryPostActivity.class);
                     intent.putExtra("title","Most Popular Content");
+                    ADSSetUp.adsType1(MainActivity.this);
                     startActivity(intent);
                 }
                 if(item.getItemId()==R.id.menu_facebook_id){
@@ -467,17 +462,20 @@ public class MainActivity extends AppCompatActivity  {
                 if(item.getItemId()==R.id.menu_favorite_uni_id){
                     Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
                     intent.putExtra("check",2);
+                    ADSSetUp.adsType1(MainActivity.this);
                     startActivity(intent);
 
                 }
                 if(item.getItemId()==R.id.menu_recent_id){
                     Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
                     intent.putExtra("check",1);
+                    ADSSetUp.adsType1(MainActivity.this);
                     startActivity(intent);
 
                 }
                 if(item.getItemId()==R.id.menu_vocabulayr_id){
                     Intent intent=new Intent(MainActivity.this, VocabularyActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
                     startActivity(intent);
 
                 }

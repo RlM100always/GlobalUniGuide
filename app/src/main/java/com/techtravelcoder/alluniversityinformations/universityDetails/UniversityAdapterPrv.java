@@ -17,6 +17,7 @@ import com.startapp.sdk.adsbase.StartAppAd;
 import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.startapp.sdk.adsbase.adlisteners.VideoListener;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.ads.App;
 import com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity;
 
@@ -58,7 +59,8 @@ public class UniversityAdapterPrv extends RecyclerView.Adapter<UniversityAdapter
         Glide.with(context).load(universityModel.getUniImageLink()).into(holder.uniImage);
         if(universityModel.getAvgRating()!=null){
             holder.rating.setVisibility(View.VISIBLE);
-            holder.rating.setText(universityModel.getAvgRating()+"");
+            String formattedNumber = String.format("%.2f", universityModel.getAvgRating());
+            holder.rating.setText(formattedNumber+" ");
         }else {
             holder.rating.setVisibility(View.GONE);
         }
@@ -66,6 +68,8 @@ public class UniversityAdapterPrv extends RecyclerView.Adapter<UniversityAdapter
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, UniversityWebActivity.class);
+                ADSSetUp.adsType2(context);
+
                 intent.putExtra("link",universityModel.getUniWebLink());
                 intent.putExtra("name",universityModel.getUniName());
                 intent.putExtra("country",universityModel.getContryName());
@@ -76,50 +80,6 @@ public class UniversityAdapterPrv extends RecyclerView.Adapter<UniversityAdapter
 
 
                 context.startActivity(intent);
-//                Random random=new Random();
-//                int num = random.nextInt(6)+1;
-//                if(num==3){
-//                    //FacebookInterestitialAds.loadAds(context);
-//                    App.interstitialLoader.doOnNextAvailable(result -> {
-//                        if (result != null) {
-//                            NotixInterstitial.Companion.show(result);
-//                        }
-//                        return Unit.INSTANCE;
-//                    });
-//
-//
-//                }
-//                if(num==4){
-//                    App.interstitialLoader.doOnNextAvailable(result -> {
-//                        if (result != null) {
-//                            NotixInterstitial.Companion.show(result);
-//                        }
-//                        return Unit.INSTANCE;
-//                    });
-//
-//                }
-//                if(num==5){
-//                    final StartAppAd rewardedVideo = new StartAppAd(context);
-//
-//                    rewardedVideo.setVideoListener(new VideoListener() {
-//                        @Override
-//                        public void onVideoCompleted() {
-//                            // Grant the reward to user
-//                        }
-//                    });
-//
-//                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-//                        @Override
-//                        public void onReceiveAd(Ad ad) {
-//                            rewardedVideo.showAd();
-//                        }
-//
-//                        @Override
-//                        public void onFailedToReceiveAd(Ad ad) {
-//                            // Can't show rewarded video
-//                        }
-//                    });
-//                }
 
             }
         });

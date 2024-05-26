@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.startapp.sdk.adsbase.Ad;
 import com.startapp.sdk.adsbase.StartAppAd;
 import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
@@ -53,10 +54,14 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, UniversityActivity.class);
-                intent.putExtra("name",countryModel.getName());
-                context.startActivity(intent);
-                Random random=new Random();
+
+                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    Intent intent=new Intent(context, UniversityActivity.class);
+                    intent.putExtra("name",countryModel.getName());
+                    context.startActivity(intent);
+                    Random random=new Random();
+                }
+
 
 
             }

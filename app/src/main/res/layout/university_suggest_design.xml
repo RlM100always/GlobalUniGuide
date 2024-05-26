@@ -9,6 +9,7 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
+
         android:id="@+id/suggest_public_unidesign_img"
         android:layout_width="60dp"
         android:layout_height="48dp"

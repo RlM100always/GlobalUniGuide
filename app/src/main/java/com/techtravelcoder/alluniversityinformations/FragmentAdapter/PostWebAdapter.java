@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity;
 
 import java.util.ArrayList;
@@ -114,6 +115,7 @@ public class PostWebAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
+                ADSSetUp.adsType2(context);
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());
@@ -154,6 +156,7 @@ public class PostWebAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
+                ADSSetUp.adsType2(context);
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());

@@ -18,7 +18,7 @@
             android:foreground="@drawable/uni_background"
             android:id="@+id/uni_design_image_id"
             android:background="@drawable/loading"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

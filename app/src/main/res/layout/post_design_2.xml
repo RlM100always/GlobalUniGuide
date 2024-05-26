@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:layout_margin="4dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,11 +21,11 @@
                 android:foreground="@drawable/uni_background"
                 app:cardCornerRadius="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="190dp">
+                android:layout_height="200dp">
                 <ImageView
                     android:background="@drawable/loading"
                     android:id="@+id/post_design_image_id"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 

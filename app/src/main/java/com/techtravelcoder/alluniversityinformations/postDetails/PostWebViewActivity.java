@@ -182,6 +182,9 @@ public class PostWebViewActivity extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true); // Enable JavaScript
         webSettings.setDomStorageEnabled(true); // Enable DOM Storage
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+
 
 
 
@@ -243,9 +246,8 @@ public class PostWebViewActivity extends AppCompatActivity {
 
                     htmlContentWithStyle = "<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
                             "<style>" +
-                            "body { font-size: 20px; background-color: #FCF9F9FB; color: #333333; margin: 0px; padding: 0; word-wrap: break-word; }" +
-                            "img { max-width: 90%; height: auto }" +
-                            "video { max-width: 90%; height: auto }" +
+                            "img { max-width: 100%; height: auto }" +
+                            "video { max-width: 92%; height: auto }" +
                             "</style></head><body>" + content + "</body></html>";
 
                     // Set a WebViewClient to handle page navigation inside the WebView
@@ -269,6 +271,8 @@ public class PostWebViewActivity extends AppCompatActivity {
                             }
                         }
                     });
+
+
                     //webView.loadData(desc,"text/html", ENCODING);
                     webView.loadDataWithBaseURL("", htmlContentWithStyle,"text/html","UTF-8","");
                     progressBar.setVisibility(View.GONE);

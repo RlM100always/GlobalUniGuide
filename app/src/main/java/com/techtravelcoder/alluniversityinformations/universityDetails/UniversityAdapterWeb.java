@@ -16,6 +16,7 @@ import com.startapp.sdk.adsbase.StartAppAd;
 import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 import com.startapp.sdk.adsbase.adlisteners.VideoListener;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.ads.App;
 import com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity;
 
@@ -54,6 +55,7 @@ public class UniversityAdapterWeb extends RecyclerView.Adapter<UniversityAdapter
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, UniversityWebActivity.class);
+                ADSSetUp.adsType2(context);
                 intent.putExtra("name",universityModel.getUniName());
                 intent.putExtra("link",universityModel.getUniWebLink());
                 intent.putExtra("country",universityModel.getContryName());
@@ -64,49 +66,6 @@ public class UniversityAdapterWeb extends RecyclerView.Adapter<UniversityAdapter
 
 
                 context.startActivity(intent);
-//                Random random=new Random();
-//                int num = random.nextInt(12)+1;
-//                if(num==5){
-//                   // FacebookInterestitialAds.loadAds(context);
-//                    App.interstitialLoader.doOnNextAvailable(result -> {
-//                        if (result != null) {
-//                            NotixInterstitial.Companion.show(result);
-//                        }
-//                        return Unit.INSTANCE;
-//                    });
-//
-//                }
-//                if(num==4){
-//                    App.interstitialLoader.doOnNextAvailable(result -> {
-//                        if (result != null) {
-//                            NotixInterstitial.Companion.show(result);
-//                        }
-//                        return Unit.INSTANCE;
-//                    });
-//
-//                }
-//                if(num==6){
-//                    final StartAppAd rewardedVideo = new StartAppAd(context);
-//
-//                    rewardedVideo.setVideoListener(new VideoListener() {
-//                        @Override
-//                        public void onVideoCompleted() {
-//                            // Grant the reward to user
-//                        }
-//                    });
-//
-//                    rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-//                        @Override
-//                        public void onReceiveAd(Ad ad) {
-//                            rewardedVideo.showAd();
-//                        }
-//
-//                        @Override
-//                        public void onFailedToReceiveAd(Ad ad) {
-//                            // Can't show rewarded video
-//                        }
-//                    });
-//                }
 
             }
         });

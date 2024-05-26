@@ -95,7 +95,8 @@ public class ReBookMarkAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.delete.setVisibility(View.GONE);
         if(universityModel.getAvgRating()!=null){
             holder.rating.setVisibility(View.VISIBLE);
-            holder.rating.setText(universityModel.getAvgRating()+" ");
+            String formattedNumber = String.format("%.2f", universityModel.getAvgRating());
+            holder.rating.setText(formattedNumber+" ");
         }else {
             holder.rating.setVisibility(View.GONE);
         }
@@ -129,7 +130,8 @@ public class ReBookMarkAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.date.setVisibility(View.GONE);
         if(universityModel.getAvgRating()!=null){
             holder.rating.setVisibility(View.VISIBLE);
-            holder.rating.setText(universityModel.getAvgRating()+" ");
+            String formattedNumber = String.format("%.2f", universityModel.getAvgRating());
+            holder.rating.setText(formattedNumber+" ");
         }else {
             holder.rating.setVisibility(View.GONE);
         }

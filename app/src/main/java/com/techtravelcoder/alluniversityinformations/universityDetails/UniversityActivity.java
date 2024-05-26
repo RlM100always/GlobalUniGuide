@@ -561,8 +561,8 @@ public class UniversityActivity extends AppCompatActivity {
                         //&& campainModel.getCountryName().equals(contryName)
 
 
-                        if(campainModelPrv != null  &&campainModelPrv.getContryName() != null&& campainModelPrv.getContryName().equals(contryName)
-                                && (campainModelPrv.getPrivates().equals("true")|| campainModelPrv.getPublics().equals("true "))){
+                        if(campainModelPrv != null  && campainModelPrv.getContryName() != null && campainModelPrv.getContryName().equals(contryName)
+                                && (campainModelPrv.getPrivates().equals("true") || campainModelPrv.getPublics().equals("true "))){
                             listPrv.add(0,campainModelPrv);
 
                         }

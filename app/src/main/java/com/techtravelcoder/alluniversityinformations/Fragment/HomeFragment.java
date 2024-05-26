@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment   {
     private ProgressBar progressBar;
 
     //pagination
-    private static final int PAGE_SIZE =10;
+    private static final int PAGE_SIZE =5;
     private int totalLoadedItems = 0;
     private String lastItemId;
     private NestedScrollView scrollView;
@@ -81,6 +81,7 @@ public class HomeFragment extends Fragment   {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         linearLayoutManager = new LinearLayoutManager(getActivity());
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
 
         swipeRefreshLayout=view.findViewById(R.id.home_swipe_refresh_layout);
 

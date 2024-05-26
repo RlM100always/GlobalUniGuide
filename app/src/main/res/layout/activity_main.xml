@@ -11,13 +11,10 @@
     tools:openDrawer="start"
     tools:context="com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity">
 
-
     <LinearLayout
         android:orientation="vertical"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="match_parent">
         <androidx.appcompat.widget.Toolbar
             android:layout_gravity="left"
             android:layout_width="match_parent"
@@ -44,266 +41,477 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:padding="5dp"
-                    android:elevation="10dp"
-                    android:weightSum="4"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:elevation="10dp"
-                        android:foreground="@drawable/uni_background"
-                        android:layout_margin="4dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:foreground="@drawable/uni_background"
-                            android:id="@+id/carrier_guide_id"
-                            android:gravity="center"
-                            android:background="@drawable/vw_back"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp">
-                            <ImageView
-                                android:scaleType="centerCrop"
-                                android:padding="5dp"
-                                android:src="@drawable/carrier_guidelines"
-                                android:layout_width="50dp"
-                                android:layout_height="40dp"/>
-
-                        </LinearLayout>
-                        <TextView
-                            android:gravity="center"
-                            android:fontFamily="serif"
-                            android:textStyle="bold"
-                            android:shadowDx=".5"
-                            android:shadowDy=".5"
-                            android:shadowRadius="1.5"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Carrier Guidelines"
-                            android:textColor="@color/white"
-                            android:textSize="10dp"
-                            />
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:elevation="10dp"
-                        android:foreground="@drawable/uni_background"
-                        android:layout_margin="4dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:foreground="@drawable/uni_background"
-                            android:id="@+id/bookmark_uni_id"
-                            android:gravity="center"
-                            android:background="@drawable/vw_back"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp">
-                            <ImageView
-                                android:scaleType="centerCrop"
-                                android:padding="5dp"
-                                android:src="@drawable/baseline_bookmark_added_24"
-                                android:layout_width="50dp"
-                                android:layout_height="35dp"/>
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:gravity="center"
-                            android:fontFamily="serif"
-                            android:textStyle="bold"
-                            android:shadowDx=".5"
-                            android:shadowDy=".5"
-                            android:shadowRadius="1.5"
-                            android:layout_gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="BookMark University"
-                            android:textColor="@color/white"
-                            android:textSize="10dp"
-                            />
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:elevation="10dp"
-                        android:foreground="@drawable/uni_background"
-                        android:layout_margin="4dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:foreground="@drawable/uni_background"
-                            android:id="@+id/recent_uni_id"
-                            android:gravity="center"
-                            android:background="@drawable/vw_back"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp">
-                            <ImageView
-                                android:scaleType="centerCrop"
-                                android:padding="5dp"
-                                android:src="@drawable/most_recent"
-                                android:layout_width="50dp"
-                                android:layout_height="40dp"/>
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:gravity="center"
-                            android:fontFamily="serif"
-                            android:textStyle="bold"
-                            android:shadowDx=".5"
-                            android:shadowDy=".5"
-                            android:shadowRadius="1.5"
-                            android:layout_gravity="center"
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="New University"
-                            android:textColor="@color/white"
-                            android:textSize="10dp"
-                            />
-
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:elevation="10dp"
-                        android:foreground="@drawable/uni_background"
-                        android:layout_margin="4dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:foreground="@drawable/uni_background"
-                            android:id="@+id/popular_content_id"
-                            android:gravity="center"
-                            android:background="@drawable/vw_back"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp">
-                            <ImageView
-                                android:scaleType="centerCrop"
-                                android:padding="5dp"
-                                android:src="@drawable/trendy"
-                                android:layout_width="50dp"
-                                android:layout_height="40dp"/>
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:gravity="center"
-                            android:fontFamily="serif"
-                            android:textStyle="bold"
-                            android:shadowDx=".5"
-                            android:shadowDy=".5"
-                            android:shadowRadius="1.5"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Popular Content"
-                            android:textColor="@color/white"
-                            android:textSize="10dp"
-                            />
-
-
-                    </LinearLayout>
-
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginTop="7dp"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="serif"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="✔✔"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:textSize="19dp"/>
-                    <TextView
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:fontFamily="serif"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Explore More Than 100 Countries University Information"
-                        android:textStyle="bold"
-                        android:textColor="@color/yellow"
-                        android:textSize="16dp"/>
-
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
-
-
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center_vertical">
-
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipeRefreshLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/main_recycler_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    android:paddingTop="10dp"
-                    android:clipToPadding="false"/>
-
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-            <ProgressBar
-                android:id="@+id/progressBar_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:indeterminate="true"
-                android:visibility="visible" />
-
-        </RelativeLayout>
-
-        <com.startapp.sdk.ads.banner.Banner
-            android:id="@+id/banner_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="bottom" />
-
     </LinearLayout>
+  <androidx.core.widget.NestedScrollView
+      android:layout_marginTop="40dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <LinearLayout
+          android:layout_marginTop="10dp"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <TextView
+              android:layout_marginBottom="5dp"
+              android:layout_marginLeft="5dp"
+              android:layout_marginRight="5dp"
+              android:fontFamily="serif"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="GLOBAL UNI GUIDE"
+              android:textStyle="bold"
+              android:textColor="#AEEA00"
+              android:textSize="22dp"/>
+          <LinearLayout
+              android:layout_marginTop="7dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+              <de.hdodenhof.circleimageview.CircleImageView
+                  android:padding="5dp"
+                  app:civ_border_color="@color/yellow"
+                  app:civ_border_width="1.3dp"
+                  android:scaleType="centerCrop"
+                  android:layout_gravity="center"
+                  android:src="@drawable/arrow"
+                  android:layout_marginLeft="10dp"
+                  android:layout_width="45dp"
+                  android:layout_height="45dp"
+                  />
+              <TextView
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="5dp"
+                  android:fontFamily="serif"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Explore Different Category"
+                  android:textStyle="bold"
+                  android:textColor="@color/yellow"
+                  android:textSize="16dp"/>
+
+          </LinearLayout>
+
+
+
+          <LinearLayout
+
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <LinearLayout
+                  android:padding="5dp"
+                  android:elevation="10dp"
+                  android:weightSum="4"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+                  <LinearLayout
+                      android:gravity="center"
+                      android:elevation="10dp"
+                      android:foreground="@drawable/uni_background"
+                      android:layout_margin="4dp"
+                      android:orientation="vertical"
+                      android:layout_weight="1"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+                      <LinearLayout
+                          android:foreground="@drawable/uni_background"
+                          android:id="@+id/carrier_guide_id"
+                          android:gravity="center"
+                          android:background="@drawable/background"
+                          android:layout_width="80dp"
+                          android:layout_height="60dp">
+                          <ImageView
+                              android:scaleType="centerCrop"
+                              android:padding="5dp"
+                              android:src="@drawable/carrier_guidelines"
+                              android:layout_width="50dp"
+                              android:layout_height="40dp"/>
+
+                      </LinearLayout>
+                      <TextView
+                          android:gravity="center"
+                          android:fontFamily="serif"
+                          android:textStyle="bold"
+                          android:shadowDx=".5"
+                          android:shadowDy=".5"
+                          android:shadowRadius="1.5"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Learn Your \n Nish "
+                          android:textColor="@color/white"
+                          android:textSize="10dp"
+                          />
+
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:gravity="center"
+                      android:elevation="10dp"
+                      android:foreground="@drawable/uni_background"
+                      android:layout_margin="4dp"
+                      android:orientation="vertical"
+                      android:layout_weight="1"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+                      <LinearLayout
+                          android:foreground="@drawable/uni_background"
+                          android:id="@+id/bookmark_uni_id"
+                          android:gravity="center"
+                          android:background="@drawable/background"
+                          android:layout_width="80dp"
+                          android:layout_height="60dp">
+                          <ImageView
+                              android:scaleType="centerCrop"
+                              android:padding="5dp"
+                              android:src="@drawable/baseline_bookmark_added_24"
+                              android:layout_width="50dp"
+                              android:layout_height="35dp"/>
+
+                      </LinearLayout>
+
+                      <TextView
+                          android:gravity="center"
+                          android:fontFamily="serif"
+                          android:textStyle="bold"
+                          android:shadowDx=".5"
+                          android:shadowDy=".5"
+                          android:shadowRadius="1.5"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="MyBookMark University"
+                          android:textColor="@color/white"
+                          android:textSize="10dp"
+                          />
+
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:gravity="center"
+                      android:elevation="10dp"
+                      android:foreground="@drawable/uni_background"
+                      android:layout_margin="4dp"
+                      android:orientation="vertical"
+                      android:layout_weight="1"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+                      <LinearLayout
+                          android:foreground="@drawable/uni_background"
+                          android:id="@+id/recent_uni_id"
+                          android:gravity="center"
+                          android:background="@drawable/background"
+                          android:layout_width="80dp"
+                          android:layout_height="60dp">
+                          <ImageView
+                              android:scaleType="centerCrop"
+                              android:padding="5dp"
+                              android:src="@drawable/new_uni"
+                              android:layout_width="50dp"
+                              android:layout_height="40dp"/>
+
+                      </LinearLayout>
+
+                      <TextView
+                          android:gravity="center"
+                          android:fontFamily="serif"
+                          android:textStyle="bold"
+                          android:shadowDx=".5"
+                          android:shadowDy=".5"
+                          android:shadowRadius="1.5"
+
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="New \n University"
+                          android:textColor="@color/white"
+                          android:textSize="10dp"
+                          />
+
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:gravity="center"
+                      android:elevation="10dp"
+                      android:foreground="@drawable/uni_background"
+                      android:layout_margin="4dp"
+                      android:orientation="vertical"
+                      android:layout_weight="1"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+                      <LinearLayout
+                          android:foreground="@drawable/uni_background"
+                          android:id="@+id/popular_content_id"
+                          android:gravity="center"
+                          android:background="@drawable/background"
+                          android:layout_width="80dp"
+                          android:layout_height="60dp">
+                          <ImageView
+                              android:scaleType="centerCrop"
+                              android:padding="5dp"
+                              android:src="@drawable/trendy"
+                              android:layout_width="50dp"
+                              android:layout_height="40dp"/>
+
+                      </LinearLayout>
+
+                      <TextView
+                          android:gravity="center"
+                          android:fontFamily="serif"
+                          android:textStyle="bold"
+                          android:shadowDx=".5"
+                          android:shadowDy=".5"
+                          android:shadowRadius="1.5"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Popular \n Content"
+                          android:textColor="@color/white"
+                          android:textSize="10dp"
+                          />
+
+
+                  </LinearLayout>
+
+
+
+
+              </LinearLayout>
+              <LinearLayout
+                  android:padding="5dp"
+                  android:elevation="10dp"
+                  android:weightSum="4"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+                  <LinearLayout
+                      android:gravity="center"
+                      android:elevation="10dp"
+                      android:foreground="@drawable/uni_background"
+                      android:layout_margin="4dp"
+                      android:orientation="vertical"
+                      android:layout_weight="1"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+                      <LinearLayout
+                          android:foreground="@drawable/uni_background"
+                          android:gravity="center"
+                          android:background="@drawable/background"
+                          android:layout_width="80dp"
+                          android:layout_height="60dp">
+                          <ImageView
+                              android:scaleType="centerCrop"
+                              android:padding="5dp"
+                              android:src="@drawable/dictionar"
+                              android:layout_width="50dp"
+                              android:layout_height="40dp"/>
+
+                      </LinearLayout>
+                      <TextView
+                          android:gravity="center"
+                          android:fontFamily="serif"
+                          android:textStyle="bold"
+                          android:shadowDx=".5"
+                          android:shadowDy=".5"
+                          android:shadowRadius="1.5"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Dictionary"
+                          android:textColor="@color/white"
+                          android:textSize="10dp"
+                          />
+
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:gravity="center"
+                      android:elevation="10dp"
+                      android:foreground="@drawable/uni_background"
+                      android:layout_margin="4dp"
+                      android:orientation="vertical"
+                      android:layout_weight="1"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+                      <LinearLayout
+                          android:foreground="@drawable/uni_background"
+                          android:gravity="center"
+                          android:background="@drawable/background"
+                          android:layout_width="80dp"
+                          android:layout_height="60dp">
+                          <ImageView
+                              android:scaleType="centerCrop"
+                              android:padding="5dp"
+                              android:src="@drawable/book"
+                              android:layout_width="50dp"
+                              android:layout_height="35dp"/>
+
+                      </LinearLayout>
+
+                      <TextView
+                          android:gravity="center"
+                          android:fontFamily="serif"
+                          android:textStyle="bold"
+                          android:shadowDx=".5"
+                          android:shadowDy=".5"
+                          android:shadowRadius="1.5"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="Book  \n Collection"
+                          android:textColor="@color/white"
+                          android:textSize="10dp"
+                          />
+
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:gravity="center"
+                      android:elevation="10dp"
+                      android:foreground="@drawable/uni_background"
+                      android:layout_margin="4dp"
+                      android:orientation="vertical"
+                      android:layout_weight="1"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+                      <LinearLayout
+                          android:foreground="@drawable/uni_background"
+                          android:gravity="center"
+                          android:background="@drawable/background"
+                          android:layout_width="80dp"
+                          android:layout_height="60dp">
+                          <ImageView
+                              android:scaleType="centerCrop"
+                              android:padding="5dp"
+                              android:src="@drawable/mark"
+                              android:layout_width="50dp"
+                              android:layout_height="40dp"/>
+
+                      </LinearLayout>
+
+                      <TextView
+                          android:gravity="center"
+                          android:fontFamily="serif"
+                          android:textStyle="bold"
+                          android:shadowDx=".5"
+                          android:shadowDy=".5"
+                          android:shadowRadius="1.5"
+
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="MyBookmark \n Book"
+                          android:textColor="@color/white"
+                          android:textSize="10dp"
+                          />
+
+
+                  </LinearLayout>
+                  <LinearLayout
+                      android:gravity="center"
+                      android:elevation="10dp"
+                      android:foreground="@drawable/uni_background"
+                      android:layout_margin="4dp"
+                      android:orientation="vertical"
+                      android:layout_weight="1"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+                      <LinearLayout
+                          android:foreground="@drawable/uni_background"
+                          android:gravity="center"
+                          android:background="@drawable/background"
+                          android:layout_width="80dp"
+                          android:layout_height="60dp">
+                          <ImageView
+                              android:scaleType="centerCrop"
+                              android:padding="5dp"
+                              android:src="@drawable/new_book"
+                              android:layout_width="50dp"
+                              android:layout_height="40dp"/>
+
+                      </LinearLayout>
+
+                      <TextView
+                          android:gravity="center"
+                          android:fontFamily="serif"
+                          android:textStyle="bold"
+                          android:shadowDx=".5"
+                          android:shadowDy=".5"
+                          android:shadowRadius="1.5"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="New Book \n Collection"
+                          android:textColor="@color/white"
+                          android:textSize="10dp"
+                          />
+
+
+                  </LinearLayout>
+
+
+
+
+              </LinearLayout>
+
+
+              <LinearLayout
+                  android:gravity="center"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+                  <de.hdodenhof.circleimageview.CircleImageView
+                      android:padding="5dp"
+                      app:civ_border_color="@color/yellow"
+                      app:civ_border_width="1.3dp"
+                      android:scaleType="centerCrop"
+                      android:layout_gravity="center"
+                      android:src="@drawable/arrow"
+                      android:layout_marginLeft="10dp"
+                      android:layout_width="45dp"
+                      android:layout_height="45dp"
+                      />
+                  <TextView
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginRight="5dp"
+                      android:fontFamily="serif"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Explore More Than 100 Countries University Information"
+                      android:textStyle="bold"
+                      android:textColor="@color/yellow"
+                      android:textSize="16dp"/>
+
+              </LinearLayout>
+          </LinearLayout>
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/main_recycler_id"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_centerInParent="true"
+              android:orientation="horizontal"
+              android:paddingTop="10dp" />
+
+
+          <RelativeLayout
+              android:layout_weight="1"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:gravity="center_vertical">
+
+
+              <ProgressBar
+                  android:id="@+id/progressBar_id"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerInParent="true"
+                  android:indeterminate="true"
+                  android:visibility="visible" />
+
+          </RelativeLayout>
+
+
+      </LinearLayout>
+
+  </androidx.core.widget.NestedScrollView>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -317,7 +525,8 @@
         app:itemIconPadding="8dp"
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"
-        android:visibility="visible">
+        android:visibility="gone">
     </com.google.android.material.navigation.NavigationView>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

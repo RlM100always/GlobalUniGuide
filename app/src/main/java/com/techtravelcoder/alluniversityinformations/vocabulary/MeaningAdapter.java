@@ -36,6 +36,7 @@ import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslateLanguag
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslator;
 import com.google.firebase.ml.naturallanguage.translate.FirebaseTranslatorOptions;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity;
 
 import java.security.acl.Group;
@@ -274,6 +275,8 @@ public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.MeaningV
                 convert.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        ADSSetUp.adsType3(context);
+
 
 
                         //String text=meaning.getPartOfSpeech()+"   "+"Definitions"+"  "+joinDefinitions(meaning.getDefinitions())+"\n\n"+"Synonyms"+"\n\n"+joinStrings(meaning.getSynonyms())+"\n\n"+"Antonyms"+"\n\n"+joinStrings(meaning.getAntonyms());

@@ -23,7 +23,6 @@
             android:layout_height="match_parent"/>
 
     </androidx.cardview.widget.CardView>
-
     <TextView
 
         android:layout_marginLeft="6dp"

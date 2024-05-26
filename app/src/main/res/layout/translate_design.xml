@@ -33,7 +33,7 @@
             android:layout_height="55dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:backgroundTint="#00C853"
+            android:backgroundTint="@color/deepYellow"
             android:background="@drawable/submit_back"
             android:padding="5dp">
 

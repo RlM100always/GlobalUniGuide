@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity;
@@ -149,6 +150,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onClick(View v) {
 
                 Intent intent=new Intent(context, PostWebViewActivity.class);
+                ADSSetUp.adsType2(context);
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());
@@ -192,6 +194,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
+                ADSSetUp.adsType2(context);
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());
@@ -236,6 +239,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
+                ADSSetUp.adsType2(context);
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("num",mainPostModel.getViews());
                 intent.putExtra("key",mainPostModel.getKey());
@@ -275,6 +279,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
+                ADSSetUp.adsType2(context);
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("num",mainPostModel.getViews());
                 intent.putExtra("key",mainPostModel.getKey());

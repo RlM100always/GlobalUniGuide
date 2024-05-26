@@ -12,14 +12,14 @@
 
     <androidx.cardview.widget.CardView
         android:foreground="@drawable/uni_background"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="13dp"
         android:layout_width="180dp"
         android:layout_height="130dp">
         <ImageView
             android:foreground="@drawable/uni_background"
             android:id="@+id/uni_design_image_id1"
             android:background="@drawable/loading"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

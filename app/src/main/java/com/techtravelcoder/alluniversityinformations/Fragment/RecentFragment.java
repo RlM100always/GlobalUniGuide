@@ -116,13 +116,25 @@ public class RecentFragment extends Fragment {
                     }
                 }
 
+
                 Collections.sort(list, new Comparator<MainPostModel>() {
                     @Override
                     public int compare(MainPostModel u1, MainPostModel u2) {
+
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy,EEEE", Locale.getDefault());
+
+                        try {
+                            Date date2 = formatter.parse(u2.getDate());
+                            Date date1 = formatter.parse(u1.getDate());
+                            return date2.compareTo(date1);
+
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         // Sort by date in descending order
-                        return u2.getDate().compareTo(u1.getDate());
                     }
                 });
+
 
                 if(list.size()==0){
                     imageView.setVisibility(View.VISIBLE);

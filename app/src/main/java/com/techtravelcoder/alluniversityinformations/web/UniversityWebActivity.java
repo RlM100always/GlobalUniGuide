@@ -642,13 +642,6 @@ public class UniversityWebActivity extends AppCompatActivity {
         if (webView.canGoBack()) {
             webView.goBack();
         } else {
-//            App.interstitialLoader.doOnNextAvailable(result -> {
-//                if (result != null) {
-//                    NotixInterstitial.Companion.show(result);
-//                }
-//                return Unit.INSTANCE;
-//            });
-
             super.onBackPressed();
         }
     }

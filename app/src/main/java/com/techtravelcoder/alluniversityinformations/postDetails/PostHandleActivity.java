@@ -1,11 +1,14 @@
 package com.techtravelcoder.alluniversityinformations.postDetails;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.techtravelcoder.alluniversityinformation.R;
@@ -13,6 +16,8 @@ import com.techtravelcoder.alluniversityinformation.R;
 public class PostHandleActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
+    PagerAdapter pageAdapter;
+    TabItem home,recent,favo,cate;
 
 
     @Override
@@ -25,30 +30,39 @@ public class PostHandleActivity extends AppCompatActivity {
         }
         getWindow().setStatusBarColor(color);
 
-        ViewPager2 viewPager = findViewById(R.id.vpager);
-        PageAdapter pageAdapter = new PageAdapter(this);
+        tabLayout = findViewById(R.id.tablayout1);
+        recent=findViewById(R.id.tab3);
+        home=findViewById(R.id.tab1);
+        cate=findViewById(R.id.tab2);
+        favo=findViewById(R.id.tab4);
+
+
+        ViewPager viewPager = findViewById(R.id.vpager);
+        pageAdapter=new PageAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
 
-         tabLayout = findViewById(R.id.tablayout1);
 
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
 
-        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
-            // Set tab titles as needed based on position
-            switch (position) {
-                case 0:
-                    tab.setText("Home");
-                    break;
-                case 1:
-                    tab.setText("Category");
-                    break;
-                case 2:
-                    tab.setText("Recent");
-                    break;
-                case 3:
-                    tab.setText("Favorite");
-                    break;
+                if(tab.getPosition()==0 || tab.getPosition()==1 || tab.getPosition()==2 || tab.getPosition()==3)
+                    pageAdapter.notifyDataSetChanged();
             }
-        }).attach();
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
 
     }

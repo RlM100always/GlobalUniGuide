@@ -40,7 +40,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class ReBookMarkActivity extends AppCompatActivity {
+public class ReBookMarkActivity extends AppCompatActivity  {
 
     private RecyclerView recyclerView;
     private ReBookMarkAdapter reBookMarkAdapter;
@@ -138,8 +138,18 @@ public class ReBookMarkActivity extends AppCompatActivity {
                 Collections.sort(list, new Comparator<UniversityModel>() {
                     @Override
                     public int compare(UniversityModel u1, UniversityModel u2) {
+
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy,EEEE", Locale.getDefault());
+
+                        try {
+                            Date date2 = formatter.parse(u2.getDate());
+                            Date date1 = formatter.parse(u1.getDate());
+                            return date2.compareTo(date1);
+
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         // Sort by date in descending order
-                        return u2.getDate().compareTo(u1.getDate());
                     }
                 });
                 if(list.size()==0){
