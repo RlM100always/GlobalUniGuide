@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/back"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.techtravelcoder.alluniversityinformations.mcq.DoExamActivity">
+
+
+    <LinearLayout
+        android:padding="3dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_margin="8.5dp"
+        android:elevation="2dp"
+        android:foreground="@drawable/uni_background"
+        android:backgroundTint="@color/cardMakerColor"
+        android:background="@drawable/edit_text_background"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/exam"
+            android:layout_width="90dp"
+            android:layout_height="80dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/exam_topic_id"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/whiteTextColor1"
+                android:fontFamily="serif"
+                android:text="Topic : HTML"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/exam_question_set_id"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/whiteTextColor1"
+                android:fontFamily="serif"
+                android:text="Set : Question Set 1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/exam_question_number_id"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/whiteTextColor1"
+                android:fontFamily="serif"
+                android:text="Total Question : 50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_weight="1"
+        android:id="@+id/exam_recycler_view_id"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2.5"
+        android:gravity="center"
+        android:id="@+id/uni_update_id"
+        android:textColor="@color/back"
+        android:backgroundTint="@color/blue"
+        android:background="@drawable/edit_text_background"
+        android:textSize="16dp"
+        android:foreground="@drawable/uni_background"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:text="Submit"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

@@ -18,6 +18,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,12 +32,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.techtravelcoder.uniinfoadmin.R;
+import com.techtravelcoder.uniinfoadmin.country.CountryModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -54,6 +57,7 @@ public class UniversityActivity extends AppCompatActivity {
     EditText uniName,uniImage,uniLLink,top,priv,publ,sugg;
     TextView post;
     String contryName;
+    private SearchView searchView;
     private String checkedTextTop,checkedTextPublic,checkedTextPrivates,checkedTextSuggest;
 
 
@@ -63,9 +67,24 @@ public class UniversityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_university);
 
         contryName=getIntent().getStringExtra("name");
+        searchView=findViewById(R.id.searchViewUniversity);
 
         mbase = FirebaseDatabase.getInstance().getReference("University");
         FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return false;
+            }
+        });
 
 
 
@@ -182,6 +201,8 @@ public class UniversityActivity extends AppCompatActivity {
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
+        alertDialog.setCancelable(false);
+
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -232,5 +253,32 @@ public class UniversityActivity extends AppCompatActivity {
                 });
 
     }
+
+
+    private void searchList(String newText) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<UniversityModel> fList = new ArrayList<>();
+                for (UniversityModel obj : list) {
+                    if (obj.getUniName().toLowerCase().replaceAll("\\s","").contains(newText.toLowerCase().replaceAll("\\s",""))) {
+                        fList.add(obj);
+                    }
+                }
+
+                // Update the UI on the main thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        campainAdapter.searchListsFunc((ArrayList<UniversityModel>) fList);
+                        campainAdapter.notifyDataSetChanged();
+
+                    }
+                });
+            }
+        }).start();
+    }
+
 
 }

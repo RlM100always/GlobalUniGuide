@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -47,7 +48,7 @@ public class SeeUniPostActivity extends AppCompatActivity {
 
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.back);
+            color = getColor(R.color.whiteTextSideColor1);
         }
         getWindow().setStatusBarColor(color);
 
@@ -73,17 +74,19 @@ public class SeeUniPostActivity extends AppCompatActivity {
                         list.clear();
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             RatingModel ratingModel= dataSnapshot.getValue(RatingModel.class);
-                            list.add(0,ratingModel);
+                            list.add(ratingModel);
 
                         }
+                        seeUniPostAdapter.notifyDataSetChanged();
+
                         if(list.size()==0){
                             // Create an AlertDialog.Builder instance
                             AlertDialog.Builder builder = new AlertDialog.Builder(SeeUniPostActivity.this);
 
-                            // Set the dialog title and message
-                            builder.setTitle("No Reviewers Found")
-                                    .setMessage("We can not found any reviewers for this Content.")
-                                    .setCancelable(false) // Set whether the dialog can be canceled by tapping outside of it
+                            builder.setTitle(Html.fromHtml("<font color='#000000'>No Reviewers Foundℹ️</font>"));
+                            builder.setMessage(Html.fromHtml("<font color='#000000'>ℹ️ We can not found any reviewers for this Content.❓❓</font>"));
+
+                            builder.setCancelable(false) // Set whether the dialog can be canceled by tapping outside of it
 
                                     // Add a button to the dialog with a listener for when the button is clicked
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -92,15 +95,15 @@ public class SeeUniPostActivity extends AppCompatActivity {
                                             dialog.dismiss(); // Dismiss the dialog
                                         }
                                     });
-                            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
-                            getWindow().setBackgroundDrawable(drawable);
+
 
                             // Create and show the AlertDialog
                             AlertDialog alert = builder.create();
                             alert.show();
+                            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
+                            alert.getWindow().setBackgroundDrawable(drawable);
 
                         }
-                        seeUniPostAdapter.notifyDataSetChanged();
 
                     }
 
@@ -133,6 +136,8 @@ public class SeeUniPostActivity extends AppCompatActivity {
                             list.add(0,ratingModel);
 
                         }
+                        seeUniPostAdapter.notifyDataSetChanged();
+
                         if(list.size()==0){
                             // Create an AlertDialog.Builder instance
                             AlertDialog.Builder builder = new AlertDialog.Builder(SeeUniPostActivity.this);
@@ -150,14 +155,12 @@ public class SeeUniPostActivity extends AppCompatActivity {
                                         }
                                     });
 
-                            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
-                            getWindow().setBackgroundDrawable(drawable);
-                            // Create and show the AlertDialog
                             AlertDialog alert = builder.create();
                             alert.show();
+                            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
+                            alert.getWindow().setBackgroundDrawable(drawable);
 
                         }
-                        seeUniPostAdapter.notifyDataSetChanged();
 
                     }
 

@@ -5,13 +5,16 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity;
 
 public class PostHandleActivity extends AppCompatActivity {
 
@@ -26,7 +29,7 @@ public class PostHandleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_handle);
         int color = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.back);
+            color = getColor(R.color.whiteTextSideColor1);
         }
         getWindow().setStatusBarColor(color);
 

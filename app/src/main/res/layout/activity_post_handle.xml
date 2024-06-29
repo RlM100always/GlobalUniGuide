@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/tablayout1"
         android:background="@color/back"
-        app:tabTextColor="@color/white"
-        app:tabSelectedTextColor="#7FF403"
-        app:tabIndicatorColor="@color/white">
+        app:tabTextColor="@color/whiteTextColor1"
+        app:tabSelectedTextColor="@color/whiteTextSideColor1"
+        app:tabIndicatorColor="@color/whiteTextColor1">
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,19 +26,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tab1"
-            android:text="Home"/>
+            android:text="All Content"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tab2"
-            android:text="Category"/>
+            android:text="Course List"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tab4"
-            android:text="Favorite "/>
+            android:text="My Favorite "/>
 
 
     </com.google.android.material.tabs.TabLayout>

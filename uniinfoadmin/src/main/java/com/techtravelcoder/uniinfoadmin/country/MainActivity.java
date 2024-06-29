@@ -3,6 +3,7 @@ package com.techtravelcoder.uniinfoadmin.country;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<CountryModel> list;
     DatabaseReference mbase;
     FloatingActionButton floatingActionButton;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,22 @@ public class MainActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.recycler_view_id);
 
         floatingActionButton=findViewById(R.id.withdraw_set_float_button);
+        searchView=findViewById(R.id.searchView);
 
         mbase = FirebaseDatabase.getInstance().getReference("Country");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return false;
+            }
+        });
 
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -146,6 +162,32 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
+
+    private void searchList(String newText) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<CountryModel> fList = new ArrayList<>();
+                for (CountryModel obj : list) {
+                    if (obj.getName().toLowerCase().replaceAll("\\s","").contains(newText.toLowerCase().replaceAll("\\s",""))) {
+                        fList.add(obj);
+                    }
+                }
+
+                // Update the UI on the main thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        campainAdapter.searchListsFunc((ArrayList<CountryModel>) fList);
+                        campainAdapter.notifyDataSetChanged();
+
+                    }
+                });
+            }
+        }).start();
+    }
+
 
 
 }

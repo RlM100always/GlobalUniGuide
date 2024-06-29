@@ -1,31 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:background="@color/back"
     android:layout_height="match_parent"
     tools:context=".post.MainPostActivity">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_post_recycler_view_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/main_post_float_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:src="@drawable/baseline_add_24"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewMainPost"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/searchbar_background"
+        android:elevation="5dp"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.914" />
+        app:queryHint="Search ..."
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:text="Exam Question"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:orientation="horizontal"
+        android:id="@+id/question_set_recycler_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+  />
+
+    <TextView
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:text="Post"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_weight="1"
+        android:id="@+id/main_post_recycler_view_id"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+         />
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_margin="10dp"
+            android:id="@+id/main_post_float_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/baseline_add_24"
+            app:fabSize="normal"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:backgroundTint="#C6FF00"
+            android:layout_margin="10dp"
+            android:id="@+id/mcq_float_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/baseline_add_24"
+            app:fabSize="normal"
+            />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

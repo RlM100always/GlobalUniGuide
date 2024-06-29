@@ -3,6 +3,7 @@ package com.techtravelcoder.uniinfoadmin.post;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +34,7 @@ import com.techtravelcoder.uniinfoadmin.country.MainActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PostDetailsActivity extends AppCompatActivity {
@@ -49,6 +51,7 @@ public class PostDetailsActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton lesson,random;
     private Boolean check;
+    private androidx.appcompat.widget.SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,20 @@ public class PostDetailsActivity extends AppCompatActivity {
         mbase1 = FirebaseDatabase.getInstance().getReference("Category");
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        searchView=findViewById(R.id.searchViewPostDetails);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return false;
+            }
+        });
 
         list=new ArrayList<>();
         categoryAdapter=new CategoryAdapter(list,PostDetailsActivity.this);
@@ -142,6 +158,8 @@ public class PostDetailsActivity extends AppCompatActivity {
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
+        alertDialog.setCancelable(false);
+
         posttv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,5 +205,31 @@ public class PostDetailsActivity extends AppCompatActivity {
                 });
 
     }
+
+    private void searchList(String newText) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<CategoryModel> fList = new ArrayList<>();
+                for (CategoryModel obj : list) {
+                    if (obj.getName().toLowerCase().trim().replaceAll("\\s","").contains(newText.toLowerCase().trim().replaceAll("\\s",""))) {
+                        fList.add(obj);
+                    }
+                }
+
+                // Update the UI on the main thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        categoryAdapter.searchListsFunc((ArrayList<CategoryModel>) fList);
+                        categoryAdapter.notifyDataSetChanged();
+
+                    }
+                });
+            }
+        }).start();
+    }
+
 
 }

@@ -12,8 +12,11 @@ import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentAdapter.MainPostAdapter;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.mcq.QuestionTitleAdapter;
+import com.techtravelcoder.alluniversityinformations.mcq.QuestionTitleModel;
 
 import org.w3c.dom.Text;
 
@@ -36,8 +41,9 @@ import java.util.Random;
 
 public class CategoryPostActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView,mcqRecyclerView;
     private MainPostAdapter mainPostAdapter;
+
     private ArrayList<MainPostModel> list;
     private DatabaseReference databaseReference;
     private SearchView searchView;
@@ -52,6 +58,8 @@ public class CategoryPostActivity extends AppCompatActivity {
     private Double rating=0d;
     private int rateCnt=0;
     private Long reviewersNum=0l;
+    private LinearLayout linearLayout,l1,l2;
+    private Switch visible;
 
 
     @Override
@@ -65,17 +73,44 @@ public class CategoryPostActivity extends AppCompatActivity {
         playListViews=findViewById(R.id.playlist_views_id);
         playListRattings=findViewById(R.id.playlist_rating_id);
         playListReviewNum=findViewById(R.id.playlist_review_id);
+        l1=findViewById(R.id.ll_playlist_status_id);
+        l2=findViewById(R.id.ll_question_set_id);
+
 
 
         progressBar=findViewById(R.id.category_post_progressbar_id);
-        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.VISIBLE);
+
+        visible=findViewById(R.id.switchButton);
+        linearLayout=findViewById(R.id.ll_vcrr_id);
+
+        visible.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    linearLayout.setVisibility(View.GONE);
+                    l1.setVisibility(View.GONE);
+                    l2.setVisibility(View.GONE);
+                    mcqRecyclerView.setVisibility(View.GONE);
+
+                    // Switch is turned on
+                } else {
+                    // Switch is turned off
+                    linearLayout.setVisibility(View.VISIBLE);
+                    l1.setVisibility(View.VISIBLE);
+                    l2.setVisibility(View.VISIBLE);
+                    mcqRecyclerView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
         postId=getIntent().getStringExtra("id");
 
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.back);
+            color = getColor(R.color.whiteTextSideColor1);
         }
         getWindow().setStatusBarColor(color);
         keyString=getIntent().getStringExtra("title");
@@ -90,7 +125,7 @@ public class CategoryPostActivity extends AppCompatActivity {
 
         list = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Post");
-        mainPostAdapter = new MainPostAdapter(CategoryPostActivity.this,list);
+        mainPostAdapter = new MainPostAdapter(CategoryPostActivity.this,list,0);
 
         int randomViewType = getRandomViewType();
         mainPostAdapter.setViewTypeToShow(randomViewType);
@@ -104,6 +139,10 @@ public class CategoryPostActivity extends AppCompatActivity {
         recyclerView.setAdapter(mainPostAdapter);
 
         // Fetch data from Firebase Database
+        if(!keyString.equals("Most Popular Content")){
+            fetchQuestionSetData();
+        }
+
         fetchPostData();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -119,6 +158,42 @@ public class CategoryPostActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void fetchQuestionSetData() {
+        mcqRecyclerView=findViewById(R.id.category_mcq_set_recyclerview_id);
+        ArrayList<QuestionTitleModel>listMcq=new ArrayList<>();
+        QuestionTitleAdapter questionTitleAdapter=new QuestionTitleAdapter(CategoryPostActivity.this,listMcq);
+        mcqRecyclerView.setAdapter(questionTitleAdapter );
+        mcqRecyclerView.setLayoutManager(new GridLayoutManager(CategoryPostActivity.this,1,RecyclerView.HORIZONTAL,false));
+
+        FirebaseDatabase.getInstance().getReference("McqQuestion").child("QuestionSet").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                listMcq.clear();
+                if(snapshot.exists()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                        QuestionTitleModel questionTitleModel = dataSnapshot.getValue(QuestionTitleModel.class);
+
+                        if(questionTitleModel != null  && postId.equals(questionTitleModel.getUniqueNum())){
+                            listMcq.add(0,questionTitleModel);
+                        }
+
+                    }
+
+                }
+                questionTitleAdapter.notifyDataSetChanged();
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void  searchList(String query) {
@@ -194,10 +269,10 @@ public class CategoryPostActivity extends AppCompatActivity {
 
                     Double avg=rating/rateCnt;
                     String formatted = String.format("%.2f", avg);
-                    playListRattings.setText(formatted+" stars");
-                    playListViews.setText(String.valueOf(countTotalViews)+" times");
-                    playListItem.setText(String.valueOf(list.size())+" ");
-                    playListReviewNum.setText(reviewersNum+" people");
+                    playListRattings.setText(formatted+"");
+                    playListViews.setText(String.valueOf(countTotalViews)+"");
+                    playListItem.setText(String.valueOf(list.size())+"");
+                    playListReviewNum.setText(reviewersNum+"");
                     mainPostAdapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
 
@@ -207,20 +282,20 @@ public class CategoryPostActivity extends AppCompatActivity {
 
                     Double avg=rating/rateCnt;
                     String formatted = String.format("%.2f", avg);
-                    playListRattings.setText(formatted+" stars");
-                    playListReviewNum.setText(reviewersNum+" people");
+                    playListRattings.setText(formatted+"");
+                    playListReviewNum.setText(reviewersNum+"");
 
                     if(categoryType==true){
                         mainPostAdapter.notifyDataSetChanged();
-                        playListViews.setText(String.valueOf(countTotalViews+" times"));
+                        playListViews.setText(String.valueOf(countTotalViews+""));
                         playListItem.setText(String.valueOf(list.size())+" ");
                         progressBar.setVisibility(View.GONE);
                         mainPostAdapter.notifyDataSetChanged();
                     }
                     else {
                         mainPostAdapter.notifyDataSetChanged();
-                        playListViews.setText(String.valueOf(countTotalViews)+" times");
-                        playListItem.setText(String.valueOf(list.size())+" ");
+                        playListViews.setText(String.valueOf(countTotalViews)+"");
+                        playListItem.setText(String.valueOf(list.size())+"");
                         Collections.shuffle(list);
                         progressBar.setVisibility(View.GONE);
                         mainPostAdapter.notifyDataSetChanged();

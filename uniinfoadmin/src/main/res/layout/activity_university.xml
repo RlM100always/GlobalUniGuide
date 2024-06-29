@@ -7,13 +7,32 @@
     android:background="@color/back"
     tools:context=".university.UniversityActivity">
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewUniversity"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/searchbar_background"
+        android:elevation="5dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Search university..."
+        tools:ignore="MissingConstraints" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_university_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/searchViewUniversity" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/uni_float_button"

@@ -3,10 +3,15 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/back"
+    android:elevation="2dp"
+    android:background="@drawable/edit_text_background"
+    android:layout_margin="10dp"
+
     android:layout_height="wrap_content">
     <LinearLayout
-
+        android:background="@drawable/edit_text_background"
+        android:backgroundTint="@color/cardMakerColor"
+        android:padding="5dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,7 +25,6 @@
                 app:cardCornerRadius="12dp"
                 android:layout_gravity="center"
                 android:foreground="@drawable/uni_background"
-                android:padding="4dp"
                 android:layout_width="140dp"
                 android:layout_height="100dp">
                 <ImageView
@@ -36,7 +40,39 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <TextView
+                    android:visibility="gone"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingBottom="1dp"
+                    android:paddingTop="1dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:backgroundTint="#57AE0E"
+                    android:background="@drawable/edit_text_background"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="serif"
+                    android:maxLines="1"
+                    android:id="@+id/post_lesson_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50 Lesson"
+                    android:textColor="@color/back"
+                    android:textSize="11dp"
+                    android:textStyle="bold" />
 
+
+                <TextView
+                    android:fontFamily="serif"
+                    android:maxLines="5"
+                    android:id="@+id/post_design_title"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Java Development Roadmap"
+                    android:textColor="@color/whiteTextColor1"
+                    android:textSize="14.5dp"/>
                 <TextView
                     android:maxLines="2"
                     android:id="@+id/post_design_category"
@@ -47,21 +83,9 @@
                     android:layout_height="wrap_content"
                     android:text="Programming"
                     android:textStyle="bold"
-                    android:textColor="@color/yellow"
-                    android:textSize="17dp"/>
+                    android:textColor="@color/whiteTextSideColor1"
+                    android:textSize="18dp"/>
 
-                <TextView
-                    android:fontFamily="serif"
-                    android:textStyle="bold"
-                    android:maxLines="5"
-                    android:id="@+id/post_design_title"
-                    android:layout_marginLeft="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Java Development Roadmap"
-                    android:textColor="@color/white"
-                    android:textSize="15.5dp"/>
 
 
 
@@ -78,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:drawableTint="@color/green"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:fontFamily="serif"
                 android:textStyle="bold"
                 android:drawableTop="@drawable/baseline_pageview_24"
@@ -88,16 +112,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="10444444 Views"
-                android:textColor="@color/white"
-                android:textSize="12dp"/>
+                android:textColor="@color/whiteTextSideColor1"
+                android:textSize="11dp"/>
 
             <TextView
-                android:drawableTint="@color/red"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:id="@+id/post_design_loves"
                 android:fontFamily="serif"
                 android:textStyle="bold"
-                android:textSize="12dp"
-                android:textColor="@color/white"
+                android:textSize="11dp"
+                android:textColor="@color/whiteTextSideColor1"
                 android:drawableTop="@drawable/baseline_favorite_241"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -106,12 +130,12 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:drawableTint="@color/deepYellow"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:id="@+id/post_design_reviews_num"
                 android:fontFamily="serif"
                 android:textStyle="bold"
-                android:textSize="12dp"
-                android:textColor="@color/white"
+                android:textSize="11dp"
+                android:textColor="@color/whiteTextSideColor1"
                 android:drawableTop="@drawable/baseline_reviews_24"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -120,12 +144,12 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:drawableTint="#00BFA5"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:id="@+id/post_design_star"
                 android:fontFamily="serif"
                 android:textStyle="bold"
-                android:textSize="12dp"
-                android:textColor="@color/white"
+                android:textSize="11dp"
+                android:textColor="@color/whiteTextSideColor1"
                 android:drawableTop="@drawable/baseline_stars_24"
                 android:gravity="center"
                 android:layout_weight="1"

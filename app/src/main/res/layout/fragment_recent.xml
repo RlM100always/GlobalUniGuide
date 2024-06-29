@@ -50,7 +50,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="serif"
                         android:text="No Recent Data Available"
-                        android:textColor="@color/white"
+                        android:textColor="@color/whiteTextColor1"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:visibility="gone" />

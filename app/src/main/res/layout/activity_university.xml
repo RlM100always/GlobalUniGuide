@@ -39,6 +39,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:drawableTint="@color/whiteTextColor1"
                             android:visibility="gone"
                             android:id="@+id/back_pressed_id"
                             android:foreground="@drawable/uni_background"
@@ -52,7 +53,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:textSize="21dp"
-                            android:textColor="@color/white"
+                            android:textColor="@color/whiteTextColor1"
                             />
                         <TextView
                             android:visibility="gone"
@@ -66,7 +67,7 @@
                             android:layout_height="wrap_content"
                             android:text="University Guidelines"
                             android:textStyle="bold"
-                            android:textColor="@color/white"
+                            android:textColor="@color/whiteTextColor1"
                             android:textSize="21dp"/>
 
 
@@ -75,34 +76,65 @@
 
 
                     <androidx.appcompat.widget.SearchView
+
+                        app:iconifiedByDefault="false"
+
                         android:layout_marginBottom="10dp"
                         android:id="@+id/searchView_uni"
                         android:layout_width="280dp"
                         android:layout_height="42dp"
                         android:background="@drawable/searchbar_background"
-                        app:queryHint="Search university..."
-                        app:iconifiedByDefault="false"
+                        app:queryHint="Search university"
                         />
                     <androidx.core.widget.NestedScrollView
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="0dp">
                         <LinearLayout
+
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <TextView
+                            <LinearLayout
                                 android:visibility="gone"
-                                android:layout_marginLeft="10dp"
-                                android:id="@+id/best_uni_id"
-                                android:fontFamily="serif"
-                                android:layout_marginTop="10dp"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/l1"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Best University"
-                                android:textStyle="bold"
-                                android:textColor="#04FCCA"
-                                android:textSize="18dp"/>
+                                android:padding="5dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="45dp"
+                                    android:padding="3dp"
+                                    android:layout_weight="0.1"
+                                    android:layout_marginStart="2dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/arrow"
+                                    app:civ_border_color="@color/cardMakerColor"
+                                    app:civ_border_width=".8dp" />
+
+                                <TextView
+                                    android:id="@+id/best_uni_id"
+                                    android:fontFamily="serif"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.8"
+                                    android:layout_marginStart="5dp"
+                                    android:text=""
+                                    android:textColor="@color/heading"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="30dp"
+                                    android:layout_weight="0.1"
+                                    android:background="@drawable/arrow_right"
+                                    android:scaleType="fitXY" />
+
+                            </LinearLayout>
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:layout_marginTop="15dp"
@@ -110,18 +142,47 @@
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
-                            <TextView
+                            <LinearLayout
                                 android:visibility="gone"
-                                android:layout_marginLeft="10dp"
-                                android:id="@+id/public_uni_id"
-                                android:fontFamily="serif"
-                                android:layout_marginTop="10dp"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/l2"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Public University"
-                                android:textStyle="bold"
-                                android:textColor="#04FCCA"
-                                android:textSize="18dp"/>
+                                android:padding="5dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="45dp"
+                                    android:padding="3dp"
+                                    android:layout_weight="0.1"
+                                    android:layout_marginStart="2dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/arrow"
+                                    app:civ_border_color="@color/cardMakerColor"
+                                    app:civ_border_width=".8dp" />
+
+                                <TextView
+                                    android:id="@+id/public_uni_id"
+                                    android:fontFamily="serif"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.8"
+                                    android:layout_marginStart="5dp"
+                                    android:text=""
+                                    android:textColor="@color/heading"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="30dp"
+                                    android:layout_weight="0.1"
+                                    android:background="@drawable/arrow_right"
+                                    android:scaleType="fitXY" />
+
+                            </LinearLayout>
+
                             <ProgressBar
                                 android:visibility="visible"
                                 android:id="@+id/progressBar_uni"
@@ -137,7 +198,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Loading University !!!!"
                                 android:textStyle="bold"
-                                android:textColor="#42E7FB"
+                                android:textColor="@color/whiteTextColor1"
                                 android:textSize="22dp"/>
 
                             <androidx.recyclerview.widget.RecyclerView
@@ -146,18 +207,48 @@
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
-                            <TextView
+                            <LinearLayout
+                                android:id="@+id/ll_private_id"
                                 android:visibility="gone"
-                                android:layout_marginLeft="10dp"
-                                android:id="@+id/private_uni_id"
-                                android:fontFamily="serif"
-                                android:layout_marginTop="20dp"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Private University"
-                                android:textStyle="bold"
-                                android:textColor="#04FCCA"
-                                android:textSize="18dp"/>
+                                android:padding="5dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="45dp"
+                                    android:padding="3dp"
+                                    android:layout_weight="0.1"
+                                    android:layout_marginStart="2dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/arrow"
+                                    app:civ_border_color="@color/cardMakerColor"
+                                    app:civ_border_width=".8dp" />
+
+                                <TextView
+                                    android:id="@+id/private_uni_id"
+                                    android:fontFamily="serif"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.8"
+                                    android:layout_marginStart="5dp"
+                                    android:text=""
+                                    android:textColor="@color/heading"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="30dp"
+                                    android:layout_weight="0.1"
+                                    android:background="@drawable/arrow_right"
+                                    android:scaleType="fitXY" />
+
+                            </LinearLayout>
+
+
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:layout_marginTop="5dp"
@@ -165,19 +256,47 @@
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
-
-                            <TextView
+                            <LinearLayout
                                 android:visibility="gone"
-                                android:layout_marginLeft="10dp"
-                                android:id="@+id/all_uni_id"
-                                android:fontFamily="serif"
-                                android:layout_marginTop="20dp"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/l3"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Best University"
-                                android:textStyle="bold"
-                                android:textColor="#04FCCA"
-                                android:textSize="18dp"/>
+                                android:padding="5dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="45dp"
+                                    android:padding="3dp"
+                                    android:layout_weight="0.1"
+                                    android:layout_marginStart="2dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/arrow"
+                                    app:civ_border_color="@color/cardMakerColor"
+                                    app:civ_border_width=".8dp" />
+
+                                <TextView
+                                    android:id="@+id/all_uni_id"
+                                    android:fontFamily="serif"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.8"
+                                    android:layout_marginStart="5dp"
+                                    android:text=""
+                                    android:textColor="@color/heading"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="30dp"
+                                    android:layout_weight="0.1"
+                                    android:scaleType="fitXY" />
+
+                            </LinearLayout>
+
+
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:layout_marginTop="10dp"
@@ -185,18 +304,46 @@
                                 android:id="@+id/recycler_view_university_id"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
-                            <TextView
+                            <LinearLayout
                                 android:visibility="gone"
-                                android:id="@+id/more_id"
-                                android:layout_marginLeft="10dp"
-                                android:fontFamily="serif"
-                                android:layout_marginTop="20dp"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/l4"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Explore More Countries University....."
-                                android:textStyle="bold"
-                                android:textColor="#04FCCA"
-                                android:textSize="18dp"/>
+                                android:padding="5dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="45dp"
+                                    android:padding="3dp"
+                                    android:layout_weight="0.1"
+                                    android:layout_marginStart="2dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/arrow"
+                                    app:civ_border_color="@color/cardMakerColor"
+                                    app:civ_border_width=".8dp" />
+
+                                <TextView
+                                    android:id="@+id/more_id"
+                                    android:fontFamily="serif"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.8"
+                                    android:layout_marginStart="5dp"
+                                    android:text="More University , You May Like"
+                                    android:textColor="@color/heading"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="30dp"
+                                    android:layout_weight="0.1"
+                                    android:scaleType="fitXY" />
+
+                            </LinearLayout>
+
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/more_suggested_university"

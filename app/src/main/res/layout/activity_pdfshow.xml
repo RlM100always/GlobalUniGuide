@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/FullWhite"
+    tools:context="com.techtravelcoder.alluniversityinformations.pdf.PDFShowActivity">
+
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:gravity="center"
+            android:maxLines="3"
+            android:layout_width="match_parent"
+            android:id="@+id/pdf_show_title_id"
+            android:fontFamily="serif"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Explore More Than 100 Countries University "
+            android:textColor="@color/heading"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="5dp"
+        android:weightSum="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:foreground="@drawable/uni_background"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:backgroundTint="@color/whiteTextColor1"
+                android:id="@+id/settings_button_id"
+                android:layout_marginLeft="5dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/baseline_settings_24"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:foreground="@drawable/uni_background"
+
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+
+                android:backgroundTint="@color/whiteTextColor1"
+                android:id="@+id/without_bookmark_button_id"
+                android:layout_marginLeft="5dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/baseline_bookmark_border_24"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+            <ImageView
+                android:foreground="@drawable/uni_background"
+                android:backgroundTint="@color/whiteTextColor1"
+                android:id="@+id/share_button_id"
+                android:layout_marginLeft="5dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/baseline_share_24"
+                />
+
+    </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:foreground="@drawable/uni_background"
+                android:backgroundTint="@color/whiteTextColor1"
+                android:id="@+id/home_button_id"
+                android:layout_marginLeft="5dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/baseline_home_24"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <com.github.barteksc.pdfviewer.PDFView
+        android:background="@color/whiteTextColor1"
+        android:id="@+id/pdfView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

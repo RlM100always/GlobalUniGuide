@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/FullWhite"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_gravity="center"
+        android:src="@drawable/login"
+        android:layout_width="380dp"
+        android:layout_height="220dp"/>
+    <TextView
+        android:fontFamily="serif"
+        android:textStyle="bold"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:text="Please Login First"
+        android:textColor="@color/whiteTextColor1"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <LinearLayout
+        android:layout_marginBottom="50dp"
+        android:id="@+id/google_login"
+        android:foreground="@drawable/uni_background"
+        android:backgroundTint="@color/card"
+        android:background="@drawable/log_back"
+        android:padding="6dp"
+        android:orientation="horizontal"
+        android:layout_width="260dp"
+        android:layout_height="45dp">
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/google"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
+        <TextView
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:layout_marginLeft="15dp"
+            android:text="Login With Google"
+            android:textColor="@color/back"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

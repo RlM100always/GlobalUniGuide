@@ -277,6 +277,10 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
         return list.size();
     }
 
+    public void searchListsFunc(ArrayList<UniversityModel> fList) {
+        list=fList;
+    }
+
     public class UniViewHolder extends RecyclerView.ViewHolder {
         TextView uniName,update,delete;
         ImageView uniImage;

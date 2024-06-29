@@ -6,18 +6,19 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity"
-    android:background="@color/white">
+    android:background="#FFFFFF">
     <androidx.appcompat.widget.Toolbar
+        app:title="Rakibul"
         app:navigationIcon="@drawable/baseline_arrow_back_24"
-        android:background="@color/back"
+        android:background="@color/whiteTextSideColor1"
         app:menu="@menu/post_menu"
         android:layout_gravity="left"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         app:popupTheme="@style/MyPopupTheme"
         android:id="@+id/post_web_tolbar"
-        app:subtitleTextColor="@color/white"
-        app:titleTextColor="@color/white">
+        app:subtitleTextColor="@color/back"
+        app:titleTextColor="@color/back">
     </androidx.appcompat.widget.Toolbar>
     <ScrollView
         android:layout_width="match_parent"
@@ -42,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/whiteTextSideColor1"
                 android:textSize="24dp"/>
             <WebView
                 android:layout_marginRight="5dp"
@@ -70,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="Loading Content !!!!"
                 android:textStyle="bold"
-                android:textColor="@color/back"
+                android:textColor="@color/whiteTextColor1"
                 android:textSize="22dp"/>
             <LinearLayout
                 android:visibility="gone"
@@ -83,11 +84,11 @@
 
                 <TextView
                     android:id="@+id/post_webview_loves_id"
-                    android:drawableTint="#F80505"
+                    android:drawableTint="@color/whiteTextSideColor1"
                     android:fontFamily="serif"
                     android:textStyle="bold"
                     android:textSize="12dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/whiteTextSideColor1"
                     android:drawableTop="@drawable/baseline_favorite_241"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -97,11 +98,11 @@
 
                 <TextView
                     android:id="@+id/post_webview_review_num"
-                    android:drawableTint="#FFAB00"
+                    android:drawableTint="@color/whiteTextSideColor1"
                     android:fontFamily="serif"
                     android:textStyle="bold"
                     android:textSize="12dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/whiteTextSideColor1"
                     android:drawableTop="@drawable/baseline_reviews_24"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -111,11 +112,11 @@
 
                 <TextView
                     android:id="@+id/post_webview_avgstar"
-                    android:drawableTint="#2962FF"
+                    android:drawableTint="@color/whiteTextSideColor1"
                     android:fontFamily="serif"
                     android:textStyle="bold"
                     android:textSize="12dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/whiteTextSideColor1"
                     android:drawableTop="@drawable/baseline_stars_24"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -157,13 +158,13 @@
                 android:layout_height="wrap_content"
                 android:text="You May Like..."
                 android:textStyle="bold"
-                android:textColor="#051CAE"
-                android:textSize="22dp"/>
+                android:textColor="@color/whiteTextSideColor1"
+                android:textSize="20dp"/>
 
             <!-- RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:visibility="gone"
-                android:background="@color/white"
+                android:background="#FFFFFF"
                 android:id="@+id/post_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_weight="1"

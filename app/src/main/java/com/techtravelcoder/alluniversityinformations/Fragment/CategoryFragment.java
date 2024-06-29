@@ -73,7 +73,7 @@ public class CategoryFragment extends Fragment {
 
         //progressbar
         progressBar=view.findViewById(R.id.category_progressBar);
-        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.VISIBLE);
 
 
@@ -138,7 +138,7 @@ public class CategoryFragment extends Fragment {
         if(randomViewType==1){
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         } else if (randomViewType==2) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
 
         }
         recyclerView.setAdapter(categoryAdapter);

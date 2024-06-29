@@ -60,7 +60,7 @@ public class FavoriteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         list = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Post");
-        mainPostAdapter = new MainPostAdapter(getContext(),list);
+        mainPostAdapter = new MainPostAdapter(getContext(),list,1);
     }
 
     @Override
@@ -167,35 +167,40 @@ public class FavoriteFragment extends Fragment {
     }
     private void checkFavorite(MainPostModel mainPostModel) {
         String key = mainPostModel.getKey();
-                databaseReference.child(key)
-                .child("favorite")
-                .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                    databaseReference.child(key)
+                            .child("favorite")
+                            .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if(snapshot.exists()){
-                    if ((snapshot.getValue(Boolean.class) != null) && (snapshot.getValue(Boolean.class))) {
-                        list.add(mainPostModel);
-                        mainPostAdapter.notifyDataSetChanged();
+                                    if(snapshot.exists()){
+                                        if ((snapshot.getValue(Boolean.class) != null) && (snapshot.getValue(Boolean.class))) {
+                                            list.add(mainPostModel);
+                                            mainPostAdapter.notifyDataSetChanged();
 
-                    }
-                    if(list.size()==0){
-                        textView.setVisibility(View.VISIBLE);
-                        imageView.setVisibility(View.VISIBLE);
-                    }else {
-                        textView.setVisibility(View.GONE);
-                        imageView.setVisibility(View.GONE);
-                    }
+                                        }
+                                        if(list.size()==0){
+                                            textView.setVisibility(View.VISIBLE);
+                                            imageView.setVisibility(View.VISIBLE);
+                                        }else {
+                                            textView.setVisibility(View.GONE);
+                                            imageView.setVisibility(View.GONE);
+                                        }
 
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Log.e("FavoriteFragment", "Failed to check favorite status: " + error.getMessage());
+                                }
+                            });
+                }else {
+                   // Toast.makeText(getContext(), "Please Create Account", Toast.LENGTH_SHORT).show();
                 }
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FavoriteFragment", "Failed to check favorite status: " + error.getMessage());
-            }
-        });
     }
 
 

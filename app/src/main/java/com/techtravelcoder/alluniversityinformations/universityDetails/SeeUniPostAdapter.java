@@ -10,10 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.RatingModel;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SeeUniPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
@@ -75,10 +78,17 @@ public class SeeUniPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private void bindViewHolderType1(SeeUniPostAdapter.ViewHolderType1 holder, RatingModel ratingModel) {
       holder.name.setText(ratingModel.getName());
       holder.date.setText(ratingModel.getDate());
-      holder.text.setText(ratingModel.getText());
+      if(ratingModel.getImage() != null){
+          Glide.with(context).load(ratingModel.getImage()).into(holder.img);
+      }
+
+        holder.text.setText(ratingModel.getText());
         Double myDouble = ratingModel.getRate();
         float fl= myDouble.floatValue();
         holder.ratingBar.setRating(fl);
+        holder.ratingBar.setIsIndicator(true);
+
+
 
     }
     private void bindViewHolderType2(SeeUniPostAdapter.ViewHolderType2 holder, RatingModel universityModel) {
@@ -89,6 +99,7 @@ public class SeeUniPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         TextView name,date,text;
         RatingBar ratingBar;
+        CircleImageView img;
 
         ViewHolderType1(@NonNull View itemView) {
             super(itemView);
@@ -97,6 +108,7 @@ public class SeeUniPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             date=itemView.findViewById(R.id.reviewers_date_id);
             text=itemView.findViewById(R.id.reviewers_text_id);
             ratingBar=itemView.findViewById(R.id.reviewers_ratingbar_id);
+            img=itemView.findViewById(R.id.cv_image_id);
 
 
 
@@ -107,6 +119,7 @@ public class SeeUniPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         TextView name,date,text;
         RatingBar ratingBar;
+
         ViewHolderType2(@NonNull View itemView) {
             super(itemView);
 

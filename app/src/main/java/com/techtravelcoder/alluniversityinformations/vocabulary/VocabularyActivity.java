@@ -58,7 +58,7 @@ public class VocabularyActivity extends AppCompatActivity {
 
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.back);
+            color = getColor(R.color.whiteTextSideColor1);
         }
         getWindow().setStatusBarColor(color);
 

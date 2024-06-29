@@ -12,7 +12,7 @@
     android:layout_height="match_parent"
     tools:context="com.techtravelcoder.alluniversityinformations.vocabulary.VocabularyActivity">
     <TextView
-
+        android:fontFamily="serif"
         android:layout_gravity="center_horizontal"
         android:id="@+id/set_category_id"
         android:text="Dictionary"
@@ -28,6 +28,8 @@
         android:layout_height="wrap_content">
 
         <EditText
+            android:layout_marginTop="3dp"
+            android:fontFamily="serif"
             android:textColorHint="#8D8686"
             android:textColor="@color/black"
             android:layout_width="match_parent"
@@ -40,7 +42,8 @@
             />
 
         <Button
-            android:textColor="@color/white"
+            android:fontFamily="serif"
+            android:textColor="@color/back"
             android:backgroundTint="#CA04FC"
             android:id="@+id/search_btn"
             android:layout_width="100dp"
@@ -61,6 +64,7 @@
 
     </RelativeLayout>
     <TextView
+        android:fontFamily="serif"
        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,11 +77,12 @@
         />
 
     <TextView
+        android:fontFamily="serif"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="/t e s t/"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteTextColor1"
         android:id="@+id/phonetic_textview"/>
 
 

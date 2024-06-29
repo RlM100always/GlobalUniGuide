@@ -18,6 +18,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,6 +77,7 @@ public class UniversityActivity extends AppCompatActivity {
 
 
     NestedScrollView nestedScrollView;
+    private LinearLayout l1,l2,l3,l4,l5;
 
 
 
@@ -92,7 +94,7 @@ public class UniversityActivity extends AppCompatActivity {
 
         int color=0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            color = getColor(R.color.back);
+            color = getColor(R.color.whiteTextSideColor1);
         }
         getWindow().setStatusBarColor(color);
 
@@ -108,8 +110,14 @@ public class UniversityActivity extends AppCompatActivity {
         moreUni=findViewById(R.id.more_id);
         loadindUni=findViewById(R.id.loading_id);
         backPressed=findViewById(R.id.back_pressed_id);
-
         swipeRefreshLayout=findViewById(R.id.university_suffle_id);
+
+        l1=findViewById(R.id.l1);
+        l2=findViewById(R.id.l2);
+        l3=findViewById(R.id.l3);
+        l4=findViewById(R.id.l4);
+        l5=findViewById(R.id.ll_private_id);
+
 
         mbase = FirebaseDatabase.getInstance().getReference("University");
         mbase1 = FirebaseDatabase.getInstance().getReference("University");
@@ -127,8 +135,6 @@ public class UniversityActivity extends AppCompatActivity {
         Random random = new Random();
         int num = random.nextInt(19);
         suggestedUniversity(num);
-
-
 
 
 
@@ -151,11 +157,10 @@ public class UniversityActivity extends AppCompatActivity {
         });
 
         progressBar=findViewById(R.id.progressBar_uni);
-        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
 
                 bestUni.setVisibility(View.GONE);
                 allUni.setVisibility(View.GONE);
@@ -167,11 +172,12 @@ public class UniversityActivity extends AppCompatActivity {
                 cName.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
 
-//                recyclerViewPub.setVisibility(View.GONE);
-//                recyclerViewPrv.setVisibility(View.GONE);
-//                recyclerView1.setVisibility(View.GONE);
-//                recyclerView.setVisibility(View.GONE);
-//                recyclerViewSugg.setVisibility(View.GONE);
+                l1.setVisibility(View.GONE);
+                l2.setVisibility(View.GONE);
+                l3.setVisibility(View.GONE);
+                l4.setVisibility(View.GONE);
+                l5.setVisibility(View.GONE);
+
 
                 refreshData();
                 // After refreshing, call setRefreshing(false) to stop the loading animation
@@ -425,10 +431,12 @@ public class UniversityActivity extends AppCompatActivity {
                         allUni.setVisibility(View.VISIBLE);
                         moreUni.setVisibility(View.VISIBLE);
 
-//                        recyclerView.setVisibility(View.VISIBLE);
-//                        recyclerView1.setVisibility(View.VISIBLE);
-//                        recyclerViewPrv.setVisibility(View.VISIBLE);
-//                        recyclerViewPub.setVisibility(View.GONE);
+                        l1.setVisibility(View.VISIBLE);
+                        l2.setVisibility(View.VISIBLE);
+                        l3.setVisibility(View.VISIBLE);
+                        l4.setVisibility(View.VISIBLE);
+                        l5.setVisibility(View.VISIBLE);
+
 
 
 

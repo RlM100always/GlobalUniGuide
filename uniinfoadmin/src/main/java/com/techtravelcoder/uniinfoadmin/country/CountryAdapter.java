@@ -115,6 +115,10 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
         return list.size();
     }
 
+    public void searchListsFunc(ArrayList<CountryModel> fList) {
+        list=fList;
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
         TextView name,update;

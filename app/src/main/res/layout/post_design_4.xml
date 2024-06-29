@@ -3,19 +3,19 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/white"
+   android:layout_margin="10dp"
+    android:background="@drawable/edit_text_background"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:layout_margin="4dp"
-        android:background="@color/white"
+        android:padding="8dp"
+        android:backgroundTint="#FCEDEDF6"
+        android:background="@drawable/edit_text_background"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.cardview.widget.CardView
@@ -42,14 +42,13 @@
                 <TextView
                     android:maxLines="4"
                     android:fontFamily="serif"
-                    android:textStyle="bold"
                     android:id="@+id/post_design_title4"
                     android:layout_marginLeft="2dp"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Java Development Roadmap"
-                    android:textColor="@color/back"
+                    android:textColor="@color/whiteTextColor1"
                     android:textSize="16dp"/>
 
 
@@ -66,9 +65,8 @@
             android:layout_height="wrap_content">
             <TextView
 
-                android:drawableTint="@color/deepGreen"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:fontFamily="serif"
-                android:textStyle="bold"
                 android:drawableTop="@drawable/baseline_pageview_24"
                 android:layout_weight="1"
                 android:id="@+id/post_design_views4"
@@ -76,16 +74,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="10444444 Views"
-                android:textColor="@color/black"
-                android:textSize="12dp"/>
+                android:textColor="@color/whiteTextSideColor1"
+                android:textSize="11dp"/>
 
             <TextView
                 android:id="@+id/post_design_loves4"
-                android:drawableTint="@color/red"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:fontFamily="serif"
-                android:textStyle="bold"
-                android:textSize="12dp"
-                android:textColor="@color/black"
+                android:textSize="11dp"
+                android:textColor="@color/whiteTextSideColor1"
                 android:drawableTop="@drawable/baseline_favorite_241"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -95,11 +92,10 @@
 
             <TextView
                 android:id="@+id/post_design_reviews4"
-                android:drawableTint="@color/deepYellow"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:fontFamily="serif"
-                android:textStyle="bold"
-                android:textSize="12dp"
-                android:textColor="@color/black"
+                android:textSize="11dp"
+                android:textColor="@color/whiteTextSideColor1"
                 android:drawableTop="@drawable/baseline_reviews_24"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -109,11 +105,10 @@
 
             <TextView
                 android:id="@+id/post_design_stars4"
-                android:drawableTint="@color/blue"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:fontFamily="serif"
-                android:textStyle="bold"
-                android:textSize="12dp"
-                android:textColor="@color/black"
+                android:textSize="11dp"
+                android:textColor="@color/whiteTextSideColor1"
                 android:drawableTop="@drawable/baseline_stars_24"
                 android:gravity="center"
                 android:layout_weight="1"

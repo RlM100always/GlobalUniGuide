@@ -9,7 +9,7 @@
         android:drawableLeft="@drawable/baseline_home_24"
         android:textStyle="bold"
         android:text="Home"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteTextColor1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
@@ -17,7 +17,7 @@
         android:drawableLeft="@drawable/baseline_home_24"
         android:textStyle="bold"
         android:text="Add to favorite"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteTextColor1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -26,7 +26,7 @@
         android:drawableLeft="@drawable/baseline_share_24"
         android:textStyle="bold"
         android:text="Share"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteTextColor1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
@@ -34,7 +34,7 @@
         android:drawableLeft="@drawable/baseline_home_24"
         android:textStyle="bold"
         android:text="View on Site"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteTextColor1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

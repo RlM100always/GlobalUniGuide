@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/FullWhite"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"/>
         <TextView
+            android:fontFamily="serif"
             android:textColor="#EC0B70"
             android:text="Share Your Rating"
             android:textStyle="bold"
@@ -28,54 +29,35 @@
             android:layout_height="wrap_content"
             android:numStars="5"
             android:theme="@style/RatingBar" />
+
         <TextView
+            android:fontFamily="serif"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Give your Name"
+            android:text="Say about rating reason"
             android:textColor="@color/black"
             android:textSize="16dp"
             />
 
         <EditText
-            android:inputType="text"
-            android:id="@+id/rating_name_id"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="35dp"
-            android:background="@drawable/rate_design"
-            android:hint="name"
-            android:padding="15dp"
-            android:textColor="@color/black"
-            android:textSize="16dp" />
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Say something about rating"
-            android:textColor="@color/black"
-            android:textSize="16dp"
-            />
-
-        <EditText
+            android:maxLines="200"
             android:autoLink="all"
             android:inputType="textMultiLine"
             android:id="@+id/rating_reason_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="3dp"
             android:layout_marginRight="35dp"
             android:background="@drawable/rate_design"
             android:hint="rating reason"
-            android:maxHeight="80dp"
-            android:padding="15dp"
+            android:padding="5dp"
             android:textColor="@color/black"
             android:textSize="16dp" />
 
         <TextView
+            android:fontFamily="serif"
             android:foreground="@drawable/uni_background"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"
@@ -88,7 +70,7 @@
             android:paddingRight="10dp"
             android:paddingBottom="4dp"
             android:text="Submit"
-            android:textColor="@color/white"
+            android:textColor="@color/back"
             android:textSize="18dp"
             android:textStyle="bold" />
     </LinearLayout>

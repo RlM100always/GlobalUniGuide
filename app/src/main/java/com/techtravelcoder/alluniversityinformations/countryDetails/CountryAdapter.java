@@ -55,14 +55,9 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
             @Override
             public void onClick(View v) {
 
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     Intent intent=new Intent(context, UniversityActivity.class);
                     intent.putExtra("name",countryModel.getName());
                     context.startActivity(intent);
-                    Random random=new Random();
-                }
-
-
 
             }
         });

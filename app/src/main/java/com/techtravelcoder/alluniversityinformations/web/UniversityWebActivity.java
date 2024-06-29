@@ -1,10 +1,12 @@
 package com.techtravelcoder.alluniversityinformations.web;
 
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -12,17 +14,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.CookieManager;
+import android.webkit.SslErrorHandler;
 import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +47,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.startapp.sdk.adsbase.StartAppAd;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.ads.GoogleSignInHelper;
 import com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity;
+import com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.RatingModel;
 import com.techtravelcoder.alluniversityinformations.universityDetails.SeeUniPostActivity;
 import com.techtravelcoder.alluniversityinformations.universityDetails.UniversityActivity;
@@ -71,6 +80,11 @@ public class UniversityWebActivity extends AppCompatActivity {
     private Long bookmark,rateno;
     private Double avgRate;
     private String uni_name;
+    private String userName,userImage;
+    private GoogleSignInHelper mGoogleSignInHelper;
+    private AlertDialog alertDialog;
+    private ImageView noInternet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,12 +92,14 @@ public class UniversityWebActivity extends AppCompatActivity {
 
         int color = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            color = getColor(R.color.back);
+            color = getColor(R.color.whiteTextSideColor1);
         }
         getWindow().setStatusBarColor(color);
 
+        noInternet=findViewById(R.id.no_internet_id);
+
         String s_link = getIntent().getStringExtra("link");
-         uni_name=getIntent().getStringExtra("name");
+        uni_name=getIntent().getStringExtra("name");
         String country_name=getIntent().getStringExtra("country");
 
         keyUni=getIntent().getStringExtra("key");
@@ -112,6 +128,8 @@ public class UniversityWebActivity extends AppCompatActivity {
         webView = findViewById(R.id.webview_id);
         progressBar = findViewById(R.id.progressBar);
 
+        retriveUserData();
+
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
         webView.setWebChromeClient(new MyWebChromeClient());
@@ -119,8 +137,6 @@ public class UniversityWebActivity extends AppCompatActivity {
         webView.getSettings().setAllowContentAccess(true);
 
         webView.getSettings().setDomStorageEnabled(true);
-        webView.loadUrl(s_link);
-
         webView.setDownloadListener((url, userAgent, contentDisposition, mimetype, contentLength) -> {
             // Implement download handling here
             // For example, you can use DownloadManager to handle the download
@@ -142,10 +158,91 @@ public class UniversityWebActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Download Manager is not available", Toast.LENGTH_SHORT).show();
             }
         });
+        webView.setWebViewClient(new MyWebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                progressBar.setVisibility(View.VISIBLE);
+                view.loadUrl(url);
+                return true;
+            }
+
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed();
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                // Hide the WebView
+                webView.setVisibility(View.GONE);
+                // Show error message
+                noInternet.setVisibility(View.VISIBLE);
+            }
+        });
+        webView.loadUrl(s_link);
+
 
 
         suggestedUniLoad();
     }
+
+    private void retriveUserData() {
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserInfo");
+            databaseReference.child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        // User data found, retrieve the data
+                        userName = snapshot.child("userName").getValue(String.class);
+                        userImage = snapshot.child("userImage").getValue(String.class);
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mGoogleSignInHelper.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void doLogin(final Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);  // Use context to get LayoutInflater
+        View dialogView = inflater.inflate(R.layout.log_design, null);
+        builder.setView(dialogView);
+
+        LinearLayout layout = dialogView.findViewById(R.id.google_login);
+
+        alertDialog = builder.create();
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+        if (alertDialog.getWindow() != null) {
+            Drawable drawable = ContextCompat.getDrawable(context, R.drawable.alert_back);
+            alertDialog.getWindow().setBackgroundDrawable(drawable);
+        }
+
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGoogleSignInHelper = new GoogleSignInHelper(UniversityWebActivity.this,alertDialog);
+                mGoogleSignInHelper.signIn();
+            }
+        });
+    }
+
 
 
     @Override
@@ -157,35 +254,38 @@ public class UniversityWebActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("favorite")
-                .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            Boolean bool= (Boolean) snapshot.getValue();
-                            //Toast.makeText(PostWebViewActivity.this, "Menu", Toast.LENGTH_SHORT).show();
-                            Menu menu = toolbar.getMenu();; // Replace with your menu ID
-                            MenuItem menuItem = menu.findItem(R.id.menu_favorite_border_id); // ID of the menu item to update
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("favorite")
+                    .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                Boolean bool= (Boolean) snapshot.getValue();
+                                //Toast.makeText(PostWebViewActivity.this, "Menu", Toast.LENGTH_SHORT).show();
+                                Menu menu = toolbar.getMenu();; // Replace with your menu ID
+                                MenuItem menuItem = menu.findItem(R.id.menu_favorite_border_id); // ID of the menu item to update
 
-                            if (bool==true) {
-                                // Update the menu item properties
-                                menuItem.setTitle("Remove from BookMark");
-                                menuItem.setIcon(R.drawable.baseline_bookmark_added_24);
-                            } else if (bool==false) {
-                                menuItem.setTitle("Add to BookMark");
-                                menuItem.setIcon(R.drawable.baseline_bookmark_border_24);
-                            }else {
-                                menuItem.setTitle("Add to BookMark");
-                                menuItem.setIcon(R.drawable.baseline_bookmark_border_24);
+                                if (bool==true) {
+                                    // Update the menu item properties
+                                    menuItem.setTitle("Remove from BookMark");
+                                    menuItem.setIcon(R.drawable.baseline_bookmark_added_24);
+                                } else if (bool==false) {
+                                    menuItem.setTitle("Add to BookMark");
+                                    menuItem.setIcon(R.drawable.baseline_bookmark_border_24);
+                                }else {
+                                    menuItem.setTitle("Add to BookMark");
+                                    menuItem.setIcon(R.drawable.baseline_bookmark_border_24);
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+
+        }
 
         if(item.getItemId() == R.id.menu_home_id) {
             Intent intent = new Intent(UniversityWebActivity.this, MainActivity.class);
@@ -195,40 +295,69 @@ public class UniversityWebActivity extends AppCompatActivity {
             return true; // Make sure to return true to indicate that the item click is handled
         }
         if(item.getItemId() == R.id.menu_favorite_border_id) {
-            FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("favorite")
-                    .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.exists()){
-                                Boolean bool= (Boolean) snapshot.getValue();
+            if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("favorite")
+                        .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists()){
+                                    Boolean bool= (Boolean) snapshot.getValue();
 
-                                if(bool)
-                                {
-                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("favorite")
-                                            .child(FirebaseAuth.getInstance().getUid()).setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Toast.makeText(UniversityWebActivity.this, "Successfully remove from the Bookmark List", Toast.LENGTH_SHORT).show();
-                                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            Long num=snapshot.getValue(Long.class);
-                                                            if(snapshot.exists()){
-                                                                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").setValue(num-1L);
+                                    if(bool)
+                                    {
+                                        FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("favorite")
+                                                .child(FirebaseAuth.getInstance().getUid()).setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        Toast.makeText(UniversityWebActivity.this, "Successfully remove from the Bookmark List", Toast.LENGTH_SHORT).show();
+                                                        FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                Long num=snapshot.getValue(Long.class);
+                                                                if(snapshot.exists()){
+                                                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").setValue(num-1L);
 
-                                                            }else {
-                                                                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").setValue(1L);
+                                                                }else {
+                                                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").setValue(1L);
+                                                                }
                                                             }
-                                                        }
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                                        }
-                                                    });
+                                                            }
+                                                        });
 
-                                                }
-                                            });
+                                                    }
+                                                });
+
+                                    }else {
+                                        FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("favorite")
+                                                .child(FirebaseAuth.getInstance().getUid()).setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        Toast.makeText(UniversityWebActivity.this, "Successfully added to the BookMark List", Toast.LENGTH_SHORT).show();
+                                                        FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                Long num=snapshot.getValue(Long.class);
+                                                                if(snapshot.exists()){
+                                                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").setValue(num+1L);
+
+                                                                }else {
+                                                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").setValue(1L);
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                                            }
+                                                        });
+
+                                                    }
+                                                });
+                                    }
 
                                 }else {
                                     FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("favorite")
@@ -257,163 +386,6 @@ public class UniversityWebActivity extends AppCompatActivity {
                                                 }
                                             });
                                 }
-
-                            }else {
-                                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("favorite")
-                                        .child(FirebaseAuth.getInstance().getUid()).setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Toast.makeText(UniversityWebActivity.this, "Successfully added to the BookMark List", Toast.LENGTH_SHORT).show();
-                                                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                        Long num=snapshot.getValue(Long.class);
-                                                        if(snapshot.exists()){
-                                                            FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").setValue(num+1L);
-
-                                                        }else {
-                                                            FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("postLoves").setValue(1L);
-                                                        }
-                                                    }
-
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                                    }
-                                                });
-
-                                            }
-                                        });
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-
-        }
-        if(item.getItemId()==R.id.menu_rating_id){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            LayoutInflater inflater = getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.rating_design, null);
-            builder.setView(dialogView);
-
-            RatingBar ratingBar=dialogView.findViewById(R.id.ratingBar);
-            EditText ratingText=dialogView.findViewById(R.id.rating_reason_id);
-            EditText ratingName=dialogView.findViewById(R.id.rating_name_id);
-            TextView submit=dialogView.findViewById(R.id.rating_submit_id);
-
-            //retrive
-            FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("rating")
-                    .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.exists()){
-                                ratingName.setText(snapshot.child("name").getValue(String.class));
-                                ratingText.setText(snapshot.child("text").getValue(String.class));
-                                Double db=snapshot.child("rate").getValue(Double.class);
-                                DecimalFormat df = new DecimalFormat("#.##"); // Two decimal places
-                                float myFloat = Float.parseFloat(df.format(db));
-                                ratingBar.setRating(myFloat);
-
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-
-
-            // Create and show the dialog
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
-            alertDialog.getWindow().setBackgroundDrawable(drawable);
-
-            submit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String rating=String.valueOf(ratingBar.getRating());
-
-                    if(!rating.isEmpty() && !ratingName.getText().toString().isEmpty() && !ratingText.getText().toString().isEmpty()){
-
-                        Calendar calendar = Calendar.getInstance();
-                        Date times=calendar.getTime();
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy,EEEE", Locale.getDefault());
-                        String date = sdf.format(times);
-
-                        Map<String,Object> map=new HashMap();
-                        map.put("userid",FirebaseAuth.getInstance().getUid());
-                        map.put("name",ratingName.getText().toString());
-                        map.put("rate",Double.parseDouble(rating));
-                        map.put("text",ratingText.getText().toString());
-                        map.put("date",date);
-
-                        //retrive
-                        FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("ratingNum").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.exists())
-                                {
-                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("rating")
-                                            .child(FirebaseAuth.getInstance().getUid()).setValue(map);
-                                    Toast.makeText(UniversityWebActivity.this, "Successful", Toast.LENGTH_SHORT).show();
-
-                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("rating").addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            Double rate=0d;
-                                            Long count=0L;
-                                            if(snapshot.exists()){
-                                                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                                    RatingModel ratingModel=dataSnapshot.getValue(RatingModel.class);
-
-                                                    rate=rate+ratingModel.getRate();
-                                                    count++;
-
-                                                }
-                                            }
-
-                                            FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("ratingNum").setValue(count);
-                                            Double v1 = rate / count;
-                                            FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("avgRating").setValue(v1);
-                                            alertDialog.dismiss();
-
-
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-
-                                }
-                                else {
-                                    //add
-                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("rating")
-                                            .child(FirebaseAuth.getInstance().getUid()).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Toast.makeText(UniversityWebActivity.this, "Rating Successful", Toast.LENGTH_SHORT).show();
-
-                                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("ratingNum").setValue(1L);
-                                                    Double d=Double.parseDouble(rating);
-                                                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("avgRating").setValue(d);
-                                                    alertDialog.dismiss();
-
-
-                                                }
-                                            });
-
-                                }
                             }
 
                             @Override
@@ -421,16 +393,20 @@ public class UniversityWebActivity extends AppCompatActivity {
 
                             }
                         });
+            }else {
+               doLogin(this);
+            }
 
 
-
-                        //add
-
-
-                    }
-
-                }
-            });
+        }
+        if(item.getItemId()==R.id.menu_rating_id){
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null) {
+                // User is signed in, proceed with rating
+                doRating();
+            } else {
+                doLogin(this);
+            }
         }
         if(item.getItemId()==R.id.menu_university_details_id){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -489,6 +465,144 @@ public class UniversityWebActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void doRating() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.rating_design, null);
+        builder.setView(dialogView);
+
+        RatingBar ratingBar=dialogView.findViewById(R.id.ratingBar);
+        EditText ratingText=dialogView.findViewById(R.id.rating_reason_id);
+        TextView submit=dialogView.findViewById(R.id.rating_submit_id);
+
+        //retrive
+        FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("rating")
+                .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            ratingText.setText(snapshot.child("text").getValue(String.class));
+                            Double db=snapshot.child("rate").getValue(Double.class);
+                            DecimalFormat df = new DecimalFormat("#.##"); // Two decimal places
+                            float myFloat = Float.parseFloat(df.format(db));
+                            ratingBar.setRating(myFloat);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+        // Create and show the dialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
+        alertDialog.getWindow().setBackgroundDrawable(drawable);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String rating=String.valueOf(ratingBar.getRating());
+
+                if(!rating.isEmpty() && !ratingText.getText().toString().isEmpty()){
+
+                    Calendar calendar = Calendar.getInstance();
+                    Date times=calendar.getTime();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy,EEEE", Locale.getDefault());
+                    String date = sdf.format(times);
+
+                    Map<String,Object> map=new HashMap();
+                    map.put("userid",FirebaseAuth.getInstance().getUid());
+                    map.put("name",userName);
+                    map.put("rate",Double.parseDouble(rating));
+                    map.put("text",ratingText.getText().toString());
+                    map.put("date",date);
+                    map.put("image",userImage);
+
+
+                    //retrive
+                    FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("ratingNum").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists())
+                            {
+                                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("rating")
+                                        .child(FirebaseAuth.getInstance().getUid()).setValue(map);
+                                Toast.makeText(UniversityWebActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+
+                                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("rating").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Double rate=0d;
+                                        Long count=0L;
+                                        if(snapshot.exists()){
+                                            for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                                RatingModel ratingModel=dataSnapshot.getValue(RatingModel.class);
+
+                                                rate=rate+ratingModel.getRate();
+                                                count++;
+
+                                            }
+                                        }
+
+                                        FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("ratingNum").setValue(count);
+                                        Double v1 = rate / count;
+                                        FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("avgRating").setValue(v1);
+                                        alertDialog.dismiss();
+
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+                            }
+                            else {
+                                //add
+                                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("rating")
+                                        .child(FirebaseAuth.getInstance().getUid()).setValue(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Toast.makeText(UniversityWebActivity.this, "Rating Successful", Toast.LENGTH_SHORT).show();
+
+                                                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("ratingNum").setValue(1L);
+                                                Double d=Double.parseDouble(rating);
+                                                FirebaseDatabase.getInstance().getReference("University").child(keyUni).child("avgRating").setValue(d);
+                                                alertDialog.dismiss();
+
+
+                                            }
+                                        });
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
+
+                    //add
+
+
+                }
+
+            }
+        });
     }
 
     private void suggestedUniLoad() {

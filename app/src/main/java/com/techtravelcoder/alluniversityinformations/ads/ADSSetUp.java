@@ -15,143 +15,143 @@ import kotlin.Unit;
 public class ADSSetUp {
 
     public static void adsType1(Context context){
-        Random random=new Random();
-        int num = random.nextInt(10);
-        if(num==0){
-            // FacebookInterestitialAds.loadAds(context);
-            App.interstitialLoader.doOnNextAvailable(result -> {
-                if (result != null) {
-                    NotixInterstitial.Companion.show(result);
-                }
-                return Unit.INSTANCE;
-            });
-
-        }
-        if(num==1){
-            App.interstitialLoader.doOnNextAvailable(result -> {
-                if (result != null) {
-                    NotixInterstitial.Companion.show(result);
-                }
-                return Unit.INSTANCE;
-            });
-
-        }
-        if(num==2){
-            final StartAppAd rewardedVideo = new StartAppAd(context);
-
-            rewardedVideo.setVideoListener(new VideoListener() {
-                @Override
-                public void onVideoCompleted() {
-                    // Grant the reward to user
-                }
-            });
-
-            rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                @Override
-                public void onReceiveAd(Ad ad) {
-                    rewardedVideo.showAd();
-                }
-
-                @Override
-                public void onFailedToReceiveAd(Ad ad) {
-                    // Can't show rewarded video
-                }
-            });
-        }
+//        Random random=new Random();
+//        int num = random.nextInt(10);
+//        if(num==0){
+//            // FacebookInterestitialAds.loadAds(context);
+//            App.interstitialLoader.doOnNextAvailable(result -> {
+//                if (result != null) {
+//                    NotixInterstitial.Companion.show(result);
+//                }
+//                return Unit.INSTANCE;
+//            });
+//
+//        }
+//        if(num==1){
+//            App.interstitialLoader.doOnNextAvailable(result -> {
+//                if (result != null) {
+//                    NotixInterstitial.Companion.show(result);
+//                }
+//                return Unit.INSTANCE;
+//            });
+//
+//        }
+//        if(num==2){
+//            final StartAppAd rewardedVideo = new StartAppAd(context);
+//
+//            rewardedVideo.setVideoListener(new VideoListener() {
+//                @Override
+//                public void onVideoCompleted() {
+//                    // Grant the reward to user
+//                }
+//            });
+//
+//            rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+//                @Override
+//                public void onReceiveAd(Ad ad) {
+//                    rewardedVideo.showAd();
+//                }
+//
+//                @Override
+//                public void onFailedToReceiveAd(Ad ad) {
+//                    // Can't show rewarded video
+//                }
+//            });
+//        }
 
     }
 
     public static void adsType2(Context context){
-        Random random=new Random();
-        int num = random.nextInt(30);
-        if(num==0){
-            // FacebookInterestitialAds.loadAds(context);
-            App.interstitialLoader.doOnNextAvailable(result -> {
-                if (result != null) {
-                    NotixInterstitial.Companion.show(result);
-                }
-                return Unit.INSTANCE;
-            });
-
-        }
-        if(num==1){
-            App.interstitialLoader.doOnNextAvailable(result -> {
-                if (result != null) {
-                    NotixInterstitial.Companion.show(result);
-                }
-                return Unit.INSTANCE;
-            });
-
-        }
-        if(num==2){
-            final StartAppAd rewardedVideo = new StartAppAd(context);
-
-            rewardedVideo.setVideoListener(new VideoListener() {
-                @Override
-                public void onVideoCompleted() {
-                    // Grant the reward to user
-                }
-            });
-
-            rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                @Override
-                public void onReceiveAd(Ad ad) {
-                    rewardedVideo.showAd();
-                }
-
-                @Override
-                public void onFailedToReceiveAd(Ad ad) {
-                    // Can't show rewarded video
-                }
-            });
-        }
+//        Random random=new Random();
+//        int num = random.nextInt(30);
+//        if(num==0){
+//            // FacebookInterestitialAds.loadAds(context);
+//            App.interstitialLoader.doOnNextAvailable(result -> {
+//                if (result != null) {
+//                    NotixInterstitial.Companion.show(result);
+//                }
+//                return Unit.INSTANCE;
+//            });
+//
+//        }
+//        if(num==1){
+//            App.interstitialLoader.doOnNextAvailable(result -> {
+//                if (result != null) {
+//                    NotixInterstitial.Companion.show(result);
+//                }
+//                return Unit.INSTANCE;
+//            });
+//
+//        }
+//        if(num==2){
+//            final StartAppAd rewardedVideo = new StartAppAd(context);
+//
+//            rewardedVideo.setVideoListener(new VideoListener() {
+//                @Override
+//                public void onVideoCompleted() {
+//                    // Grant the reward to user
+//                }
+//            });
+//
+//            rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+//                @Override
+//                public void onReceiveAd(Ad ad) {
+//                    rewardedVideo.showAd();
+//                }
+//
+//                @Override
+//                public void onFailedToReceiveAd(Ad ad) {
+//                    // Can't show rewarded video
+//                }
+//            });
+//        }
     }
 
 
     public static void adsType3(Context context){
-        Random random=new Random();
-        int num = random.nextInt(3);
-        if(num==0){
-            // FacebookInterestitialAds.loadAds(context);
-            App.interstitialLoader.doOnNextAvailable(result -> {
-                if (result != null) {
-                    NotixInterstitial.Companion.show(result);
-                }
-                return Unit.INSTANCE;
-            });
-
-        }
-        if(num==1){
-            App.interstitialLoader.doOnNextAvailable(result -> {
-                if (result != null) {
-                    NotixInterstitial.Companion.show(result);
-                }
-                return Unit.INSTANCE;
-            });
-
-        }
-        if(num==2){
-            final StartAppAd rewardedVideo = new StartAppAd(context);
-
-            rewardedVideo.setVideoListener(new VideoListener() {
-                @Override
-                public void onVideoCompleted() {
-                    // Grant the reward to user
-                }
-            });
-
-            rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
-                @Override
-                public void onReceiveAd(Ad ad) {
-                    rewardedVideo.showAd();
-                }
-
-                @Override
-                public void onFailedToReceiveAd(Ad ad) {
-                    // Can't show rewarded video
-                }
-            });
-        }
+//        Random random=new Random();
+//        int num = random.nextInt(3);
+//        if(num==0){
+//            // FacebookInterestitialAds.loadAds(context);
+//            App.interstitialLoader.doOnNextAvailable(result -> {
+//                if (result != null) {
+//                    NotixInterstitial.Companion.show(result);
+//                }
+//                return Unit.INSTANCE;
+//            });
+//
+//        }
+//        if(num==1){
+//            App.interstitialLoader.doOnNextAvailable(result -> {
+//                if (result != null) {
+//                    NotixInterstitial.Companion.show(result);
+//                }
+//                return Unit.INSTANCE;
+//            });
+//
+//        }
+//        if(num==2){
+//            final StartAppAd rewardedVideo = new StartAppAd(context);
+//
+//            rewardedVideo.setVideoListener(new VideoListener() {
+//                @Override
+//                public void onVideoCompleted() {
+//                    // Grant the reward to user
+//                }
+//            });
+//
+//            rewardedVideo.loadAd(StartAppAd.AdMode.REWARDED_VIDEO, new AdEventListener() {
+//                @Override
+//                public void onReceiveAd(Ad ad) {
+//                    rewardedVideo.showAd();
+//                }
+//
+//                @Override
+//                public void onFailedToReceiveAd(Ad ad) {
+//                    // Can't show rewarded video
+//                }
+//            });
+//        }
 
     }
 }

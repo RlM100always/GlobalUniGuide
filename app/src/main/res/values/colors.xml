@@ -1,21 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="back">#FC060A44</color><!-- FC050721-->
     <color name="back_upper">#AB202677</color> <!-- AB202677  98FC02-->
-    <color name="allert_back_upper">#CC0A0D39</color>
-    <color name="yellow">#FFFF00</color>
+    <color name="allert_back_upper">#00172B</color><!-- CC0A0D39-->
+    <color name="yellow">#00172B</color>
     <color name="green">#98FC02</color>
     <color name="lighGreen">#B8F988</color>
     <color name="blue">#2962FF</color>
-    <color name="deepYellow">#FFAB00</color>
-    <color name="red">#F90303</color>
-    <color name="deepGreen">#038C3B</color>
     <color name="my_primary">#EF6C00</color>
     <color name="grey">#898989</color>
 
+    <color name="heading">#00172B</color>
     <color name="card">#FC0C115B</color>
+
+
+    <color name="back">#FFFFFF</color><!-- F0F0F4F4-->
+    <color name="cardMakerColor">#F5FEFC</color><!--F3F4F5 FC0C115B  AD00050A-->
+    <color name="WhitebuttonSide">#F8BDBDBD</color><!-- FC05093A-->
+    <color name="whiteTextColor1">#FF000000</color>
+    <color name="whiteTextSideColor1">#CF0369</color>
+    <color name="deepGreen">#57AE0E</color>
+    <color name="red">#F90303</color>
+    <color name="deepYellow">#FFAB00</color>
+    <color name="FullWhite">#FFFFFF</color>
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+       background/back color : #F0F0F4F4
+       cardMakerColor : #F3F4F5
+       edittext background of a card
+    -->
+
+    <!--
+       background/back color : #00172B
+       cardMakerColor : #F3F4F5
+       edittext background of a card
+    -->
 
 
 

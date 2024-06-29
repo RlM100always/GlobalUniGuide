@@ -6,6 +6,8 @@
         android:icon="@drawable/speaker_off"
         android:title="View on Site"
         app:showAsAction="always"
+        android:iconTint="@color/back"
+
 
         />
 
@@ -20,7 +22,7 @@
 
                 android:id="@+id/menu_post_home_id"
                 android:icon="@drawable/baseline_home_24"
-                android:title="Home"
+                android:title="Home Page"
 
                 />
             <item
@@ -32,17 +34,23 @@
             <item
                 android:id="@+id/menu_post_share_id"
                 android:icon="@drawable/baseline_share_24"
-                android:title="Share"
+                android:title="Share Content"
                 />
             <item
                 android:id="@+id/menu_post_favorite_border_id"
                 android:icon="@drawable/baseline_favorite_border_24"
-                android:title="Add to Favorite"
+                android:title="Add To Favorite"
                 />
+            <item
+                android:id="@+id/menu_post_different_language_id"
+                android:icon="@drawable/baseline_favorite_border_24"
+                android:title="Convert Language"
+                />
+
             <item
                 android:id="@+id/menu_post_view_site_id"
                 android:icon="@drawable/baseline_ios_share_24"
-                android:title="View on Site"
+                android:title="View On Site"
                 />
 
         </menu>

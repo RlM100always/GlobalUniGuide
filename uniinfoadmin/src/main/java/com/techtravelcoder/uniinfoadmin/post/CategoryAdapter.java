@@ -167,6 +167,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return list.size();
     }
 
+    public void searchListsFunc(ArrayList<CategoryModel> fList) {
+        list=fList;
+    }
+
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
         TextView title,label,update,id;

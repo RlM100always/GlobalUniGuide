@@ -1,11 +1,20 @@
 package com.techtravelcoder.alluniversityinformations.FragmentModel;
 
 public class RatingModel {
-    String name,date,text,userid;
+    String name,date,text,userid,image;
     Double rate;
+
 
     RatingModel(){
 
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {

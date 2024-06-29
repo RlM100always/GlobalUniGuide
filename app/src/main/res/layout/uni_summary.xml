@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/back"
     android:orientation="vertical"
     android:layout_height="match_parent">
     <ImageView
@@ -17,7 +17,7 @@
         android:fontFamily="serif"
         android:textStyle="bold"
         android:textSize="19dp"
-        android:textColor="#6200EA"
+        android:textColor="@color/whiteTextColor1"
         android:text="Dhaka University \n Summary based on user activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -30,12 +30,12 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:drawableTint="@color/deepYellow"
+            android:drawableTint="@color/whiteTextSideColor1"
             android:id="@+id/uni_samary_reviews_no"
             android:fontFamily="serif"
             android:textStyle="bold"
             android:textSize="12dp"
-            android:textColor="@color/black"
+            android:textColor="@color/whiteTextSideColor1"
             android:drawableTop="@drawable/baseline_reviews_24"
             android:gravity="center"
             android:layout_weight="1"
@@ -44,12 +44,12 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:drawableTint="@color/red"
+            android:drawableTint="@color/whiteTextSideColor1"
             android:id="@+id/uni_samary_avg_star"
             android:fontFamily="serif"
             android:textStyle="bold"
             android:textSize="12dp"
-            android:textColor="@color/black"
+            android:textColor="@color/whiteTextSideColor1"
             android:drawableTop="@drawable/baseline_stars_24"
             android:gravity="center"
             android:layout_weight="1"
@@ -68,11 +68,11 @@
 
         <TextView
             android:id="@+id/uni_samary_bookmark"
-            android:drawableTint="@color/blue"
+            android:drawableTint="@color/whiteTextSideColor1"
             android:fontFamily="serif"
             android:textStyle="bold"
             android:textSize="12dp"
-            android:textColor="@color/black"
+            android:textColor="@color/whiteTextSideColor1"
             android:drawableTop="@drawable/baseline_bookmark_added_24"
             android:gravity="center"
             android:layout_weight="1"
@@ -83,11 +83,11 @@
         <TextView
             android:foreground="@drawable/uni_background"
             android:id="@+id/see_uni_samary_userwhorate"
-            android:drawableTint="@color/deepYellow"
+            android:drawableTint="@color/whiteTextSideColor1"
             android:fontFamily="serif"
             android:textStyle="bold"
             android:textSize="12dp"
-            android:textColor="@color/black"
+            android:textColor="@color/whiteTextSideColor1"
             android:drawableTop="@drawable/baseline_reviews_24"
             android:gravity="center"
             android:layout_weight="1"
@@ -111,7 +111,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="4dp"
         android:text="Cancel"
-        android:textColor="@color/yellow"
+        android:textColor="@color/back"
         android:textSize="18dp"
         android:textStyle="bold" />
 

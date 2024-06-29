@@ -1,9 +1,10 @@
 package com.techtravelcoder.alluniversityinformations.countryDetails;
 
-import static com.techtravelcoder.alluniversityinformations.ads.App.appOpenLoader;
-
+import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -11,29 +12,40 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.interfaces.ItemClickListener;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,19 +54,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.onesignal.OneSignal;
-import com.onesignal.debug.LogLevel;
-import com.onesignal.notifications.INotificationClickEvent;
-import com.onesignal.notifications.INotificationClickListener;
 import com.startapp.sdk.ads.banner.Banner;
-import com.startapp.sdk.adsbase.Ad;
-import com.startapp.sdk.adsbase.StartAppAd;
-import com.startapp.sdk.adsbase.StartAppSDK;
-import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
-import com.startapp.sdk.adsbase.adlisteners.VideoListener;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.FragmentAdapter.MainPostAdapter;
+import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
 import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
-import com.techtravelcoder.alluniversityinformations.ads.App;
+import com.techtravelcoder.alluniversityinformations.ads.GoogleSignInHelper;
+import com.techtravelcoder.alluniversityinformations.books.BookCategoryActivity;
+import com.techtravelcoder.alluniversityinformations.books.BookCategoryAdapter;
+import com.techtravelcoder.alluniversityinformations.books.BookCategoryModel;
+import com.techtravelcoder.alluniversityinformations.books.BookPostActivity;
+import com.techtravelcoder.alluniversityinformations.books.BookPostAdapter;
+import com.techtravelcoder.alluniversityinformations.books.BookPostModel;
 import com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 import com.techtravelcoder.alluniversityinformations.universityDetails.ReBookMarkActivity;
@@ -62,20 +73,18 @@ import com.techtravelcoder.alluniversityinformations.vocabulary.VocabularyActivi
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
-
-import co.notix.appopen.NotixAppOpen;
-import co.notix.interstitial.NotixInterstitial;
-import kotlin.Unit;
 
 public class MainActivity extends AppCompatActivity  {
 
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView ,difBookCategoryRecyclerView,suggestedBooksRecyclerview;
+    private BookCategoryAdapter bookCategoryAdapter;
+    private BookPostAdapter bookPostAdapter;
+
     private CountryAdapter campainAdapter;
     private ArrayList<CountryModel> list;
-    ArrayList<CountryModel> newlist;
+    private ArrayList<BookPostModel> bookList;
+    private ArrayList<BookCategoryModel> bookCategoryList;
     SwipeRefreshLayout swipeRefreshLayout;
     DatabaseReference mbase;
     private DrawerLayout drawerLayout;
@@ -89,8 +98,29 @@ public class MainActivity extends AppCompatActivity  {
     private static final int PAGE_SIZE = 20;
 
     private GridLayoutManager gridLayoutManager;
-    private ProgressBar progressBar;
-    private LinearLayout visit,recentUni,carrierGuide,popularContent,bookUni;
+    private AlertDialog alertDialog;
+    private GoogleSignInHelper mGoogleSignInHelper;
+    private ProgressBar progressBar,progressBar1,progressBar2,progressBar3;
+    private LinearLayout visit,recentUni,carrierGuide,popularContent,bookUni,dictionary,bookCollection,newBook,bookMarkBook;
+
+
+
+
+    //new data
+
+    private RecyclerView recyclerViewNew;
+    private MainPostAdapter mainPostAdapter;
+    private ArrayList<MainPostModel> listNew;
+    private DatabaseReference databaseReferenceNew;
+
+    private LinearLayout userProf;
+    private ImageView userImg;
+    private TextView userNme,markText;
+    private static final int REQUEST_USE_FULL_SCREEN_INTENT = 1;
+    private ImageSlider imageSlider;
+    private CardView cardView;
+
+
 
 
 
@@ -106,18 +136,39 @@ public class MainActivity extends AppCompatActivity  {
 //        StartAppSDK.init(this, "201407686");
 //        StartAppAd.disableAutoInterstitial();
 
+        userProf=findViewById(R.id.ll_user_profile);
+        userImg=findViewById(R.id.user_image_id);
+        userNme=findViewById(R.id.user_name_id);
+        cardView=findViewById(R.id.pimage_card_id);
 
 
+        //profile handelling
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            userProf.setVisibility(View.VISIBLE);
+            FirebaseDatabase.getInstance().getReference("UserInfo").child(FirebaseAuth.getInstance().getUid())
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                String name = (String) snapshot.child("userName").getValue();
+                                String image = (String) snapshot.child("userImage").getValue();
+                                userNme.setText(name);
+                                Glide.with(getApplicationContext()).load(image).into(userImg);
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+        }
+        else {
+            userProf.setVisibility(View.VISIBLE);
+        }
 
 
-
-
-
-          if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-
-          } else {
-            signInAnonymously();
-          }
 
 
 
@@ -126,14 +177,21 @@ public class MainActivity extends AppCompatActivity  {
 
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.back);
+            color = getColor(R.color.whiteTextSideColor1);
         }
         getWindow().setStatusBarColor(color);
+
+
+
 
         gridLayoutManager=new GridLayoutManager(MainActivity.this,2,GridLayoutManager.HORIZONTAL,false);
         progressBar=findViewById(R.id.progressBar_id);
         recyclerView=findViewById(R.id.main_recycler_id);
-        //swipeRefreshLayout=findViewById(R.id.swipeRefreshLayout);
+        recyclerViewNew=findViewById(R.id.newdata_recyclerview_id);
+        difBookCategoryRecyclerView=findViewById(R.id.different_book_category_recycler_id);
+
+        imageSlider=findViewById(R.id.image_slider);
+        swipeRefreshLayout=findViewById(R.id.swipe_refresh_layout_id);
         drawerLayout=findViewById(R.id.drawer_id);
         navigationView=findViewById(R.id.nav_view);
         toolbar=findViewById(R.id.tolbar);
@@ -141,6 +199,88 @@ public class MainActivity extends AppCompatActivity  {
         carrierGuide=findViewById(R.id.carrier_guide_id);
         popularContent=findViewById(R.id.popular_content_id);
         bookUni=findViewById(R.id.bookmark_uni_id);
+        dictionary=findViewById(R.id.dictionary_id);
+        bookCollection=findViewById(R.id.book_collection_id);
+        newBook=findViewById(R.id.new_book_id);
+        bookMarkBook=findViewById(R.id.my_bookmark_book_id);
+        progressBar1=findViewById(R.id.progressBar_id1);
+        progressBar2=findViewById(R.id.progressBar_id2);
+        progressBar3=findViewById(R.id.progressBar_id3);
+        markText=findViewById(R.id.marque_text_id);
+        imageSlider = findViewById(R.id.image_slider);
+
+        //handle marque text
+        FirebaseDatabase.getInstance().getReference("Ads Control").child("hStatus")
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists()){
+                                    String ans=snapshot.getValue(String.class);
+                                    if(ans.equals("on")){
+                                        FirebaseDatabase.getInstance().getReference("Ads Control").
+                                                child("marque").addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if(snapshot.exists()){
+                                                            String val=snapshot.child("text").getValue(String.class);
+                                                            markText.setVisibility(View.VISIBLE);
+                                                            markText.setText(val);
+                                                            markText.setSelected(true);
+
+
+                                                        }
+
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+
+
+        //slider call
+        try {
+            FirebaseDatabase.getInstance().getReference("Ads Control")
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                String ans11=snapshot.child("pStatus").getValue(String.class);
+                                Toast.makeText(MainActivity.this, ""+ans11, Toast.LENGTH_SHORT).show();
+                                if(ans11.equals("on")){
+                                    cardView.setVisibility(View.VISIBLE);
+                                    sliderSupport();
+                                }else {
+                                }
+                            }else {
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+        }catch (Exception e){
+        }
+
+
+
 
         // Initialize FirebaseAuth instance
 
@@ -151,67 +291,117 @@ public class MainActivity extends AppCompatActivity  {
 
 
         progressBar.setVisibility(View.VISIBLE);
-        loadData();
-        refeshData();
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
 
+        progressBar1.setVisibility(View.VISIBLE);
+        progressBar1.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
+
+        progressBar2.setVisibility(View.VISIBLE);
+        progressBar2.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
+
+        progressBar3.setVisibility(View.VISIBLE);
+        progressBar3.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
+
+
+
+
+
+        bookMarkBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                    Intent intent=new Intent(getApplicationContext(), BookPostActivity.class);
+                    intent.putExtra("key","@");
+                    startActivity(intent);
+                }
+                else {
+                    doLogin(MainActivity.this);
+                }
+            }
+        });
+        newBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                    Intent intent=new Intent(getApplicationContext(), BookPostActivity.class);
+                    intent.putExtra("key","@b");
+
+                    startActivity(intent);
+                }
+                else {
+                    doLogin(MainActivity.this);
+                }
+
+            }
+        });
 
         recentUni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
-                    ADSSetUp.adsType1(MainActivity.this);
-                    intent.putExtra("check",1);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(MainActivity.this, "Internet Issue", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                ADSSetUp.adsType1(MainActivity.this);
+                intent.putExtra("check",1);
+                startActivity(intent);
 
             }
         });
         carrierGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    Intent intent=new Intent(MainActivity.this, PostHandleActivity.class);
-                    ADSSetUp.adsType1(MainActivity.this);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(MainActivity.this, "Internet Issue", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent=new Intent(MainActivity.this, PostHandleActivity.class);
+                intent.putExtra("ggg",44);
+                ADSSetUp.adsType1(MainActivity.this);
+                startActivity(intent);
 
             }
         });
         popularContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    Intent intent=new Intent(MainActivity.this, CategoryPostActivity.class);
-                    ADSSetUp.adsType1(MainActivity.this);
-                    intent.putExtra("title","Most Popular Content");
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(MainActivity.this, "Internet Issue", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent=new Intent(MainActivity.this, CategoryPostActivity.class);
+                ADSSetUp.adsType1(MainActivity.this);
+                intent.putExtra("title","Most Popular Content");
+                startActivity(intent);
 
             }
         });
         bookUni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+                if(FirebaseAuth.getInstance().getCurrentUser() != null){
                     Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
                     ADSSetUp.adsType1(MainActivity.this);
                     intent.putExtra("check",2);
                     startActivity(intent);
+
                 }else {
-                    Toast.makeText(MainActivity.this, "Internet Issue", Toast.LENGTH_SHORT).show();
+                    doLogin(MainActivity.this);
+                }
+
+            }
+        });
+        dictionary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),VocabularyActivity.class);
+                startActivity(intent);
+            }
+        });
+        bookCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                    Intent intent=new Intent(getApplicationContext(), BookCategoryActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    doLogin(MainActivity.this);
                 }
 
             }
         });
 
-        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
 
         FirebaseMessaging.getInstance().subscribeToTopic("News").addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -244,6 +434,51 @@ public class MainActivity extends AppCompatActivity  {
                 return true;
             }
         });
+        Runnable loadDataTask = () -> {
+            loadData();
+        };
+
+        Runnable refreshDataTask = () -> {
+            refeshData();
+        };
+
+        Runnable fetchNewPostDataTask = () -> {
+            fetchNewPostData();
+        };
+
+        Runnable fetchBookCategoryTask = () -> {
+            fetchBookCategory();
+        };
+
+        Runnable retrieveDifferent50BooksTask = () -> {
+            retriveDiffernt50Books();
+        };
+
+        // Create threads with the tasks
+        Thread loadDataThread = new Thread(loadDataTask);
+        Thread refreshDataThread = new Thread(refreshDataTask);
+        Thread fetchNewPostDataThread = new Thread(fetchNewPostDataTask);
+        Thread fetchBookCategoryThread = new Thread(fetchBookCategoryTask);
+        Thread retrieveDifferent50BooksThread = new Thread(retrieveDifferent50BooksTask);
+
+        // Start all threads
+        loadDataThread.start();
+        refreshDataThread.start();
+        fetchNewPostDataThread.start();
+        fetchBookCategoryThread.start();
+        retrieveDifferent50BooksThread.start();
+
+        // Wait for all threads to finish
+        try {
+            loadDataThread.join();
+            refreshDataThread.join();
+            fetchNewPostDataThread.join();
+            fetchBookCategoryThread.join();
+            retrieveDifferent50BooksThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
 
 
@@ -253,17 +488,20 @@ public class MainActivity extends AppCompatActivity  {
         actionBarDrawerToggle.syncState();
         Drawable navIcon = toolbar.getNavigationIcon();
         if (navIcon != null) {
-            navIcon.setColorFilter(getResources().getColor(android.R.color.white), PorterDuff.Mode.SRC_IN);
+            navIcon.setColorFilter(getResources().getColor(android.R.color.holo_green_dark), PorterDuff.Mode.SRC_IN);
         }
 
 
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                refeshData();
-//                swipeRefreshLayout.setRefreshing(false);
-//            }
-//        });
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refeshData();
+                fetchNewPostData();
+                fetchBookCategory();
+                retriveDiffernt50Books();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         navItemOnClickListener();
 
 
@@ -271,23 +509,174 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
-    private void signInAnonymously() {
-        FirebaseAuth.getInstance().signInAnonymously()
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        try {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(MainActivity.this, "Successfully Load.", Toast.LENGTH_SHORT).show();
+    public void sliderSupport() {
+        final List<SlideModel> remoteimages = new ArrayList<>(); // SlideModel is an inbuilt model class made by the GitHub library provider
+        List<String> remoteimages1 = new ArrayList<>();
 
+        FirebaseDatabase.getInstance().getReference().child("Ads Control").child("Premium ads")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            for (DataSnapshot data : snapshot.getChildren()) {
+                                remoteimages.add(new SlideModel(
+                                        data.child("image").getValue().toString(),
+                                        data.child("title").getValue().toString(),
+                                        ScaleTypes.FIT));
+                              //  Toast.makeText(MainActivity.this, ""+data.child("siteUrl").getValue(String.class),Toast.LENGTH_SHORT).show();
+                                remoteimages1.add((String) data.child("siteUrl").getValue());
                             }
-                        } catch (NullPointerException e) {
-                            Toast.makeText(MainActivity.this, "An error occurred: " + e.getMessage(),
-                                    Toast.LENGTH_SHORT).show();
+                            // Set the image list and click listener outside the loop
+                            imageSlider.setImageList(remoteimages, ScaleTypes.FIT);
+                            imageSlider.setItemClickListener(new ItemClickListener() {
+                                @Override
+                                public void onItemSelected(int i) {
+                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                    intent.setData(Uri.parse(String.valueOf(remoteimages1.get(i))));
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void doubleClick(int i) {
+                                    // Handle double click if needed
+                                }
+                            });
                         }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Handle the error if needed
                     }
                 });
     }
+
+
+
+
+
+
+
+
+
+
+    private void retriveDiffernt50Books() {
+        suggestedBooksRecyclerview=findViewById(R.id.different_book_recycler_id);
+        suggestedBooksRecyclerview.setLayoutManager(new GridLayoutManager(getApplicationContext(),1,GridLayoutManager.HORIZONTAL,false));
+        bookList = new ArrayList<>();
+        bookPostAdapter = new BookPostAdapter(this, bookList, 4);
+
+        suggestedBooksRecyclerview.setAdapter(bookPostAdapter);
+        FirebaseDatabase.getInstance().getReference("Book Details").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                bookList.clear();
+                List<BookPostModel> allBooks = new ArrayList<>();
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        BookPostModel bookPostModel = dataSnapshot.getValue(BookPostModel.class);
+                        if (bookPostModel != null) {
+                            allBooks.add(bookPostModel);
+                        }
+                    }
+
+                    // Shuffle the list of all books
+                    Collections.shuffle(allBooks);
+                    progressBar2.setVisibility(View.GONE);
+
+
+                    // Take the first 50 items or fewer if the list size is less than 50
+                    int itemsToFetch = Math.min(40, allBooks.size());
+                    for (int i = 0; i < itemsToFetch; i++) {
+                        bookList.add(allBooks.get(i));
+                    }
+
+                    bookPostAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Failed to fetch categories: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void fetchBookCategory() {
+        bookCategoryList = new ArrayList<>();
+        bookCategoryAdapter = new BookCategoryAdapter(MainActivity.this, bookCategoryList);
+        difBookCategoryRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1,GridLayoutManager.HORIZONTAL,false));
+        difBookCategoryRecyclerView.setAdapter(bookCategoryAdapter);
+
+        FirebaseDatabase.getInstance().getReference("Book Category").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<BookCategoryModel> allBooks = new ArrayList<>();
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        BookCategoryModel bookCategoryModel = dataSnapshot.getValue(BookCategoryModel.class);
+                        if (bookCategoryModel != null) {
+                            allBooks.add(bookCategoryModel);
+                        }
+                    }
+                }
+
+                // Shuffle the list
+                Collections.shuffle(allBooks);
+
+                // Clear the current list
+                bookCategoryList.clear();
+                progressBar1.setVisibility(View.GONE);
+
+
+                // Add up to 20 items to the bookCategoryList
+                for (int i = 0; i < Math.min(15, allBooks.size()); i++) {
+                    bookCategoryList.add(allBooks.get(i));
+                }
+
+                // Notify the adapter
+                bookCategoryAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle possible errors
+                Log.e("MainActivity", "Database error: " + error.getMessage());
+            }
+        });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mGoogleSignInHelper.onActivityResult(requestCode, resultCode, data);
+    }
+    public void doLogin(final Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);  // Use context to get LayoutInflater
+        View dialogView = inflater.inflate(R.layout.log_design, null);
+        builder.setView(dialogView);
+
+        LinearLayout layout = dialogView.findViewById(R.id.google_login);
+
+        alertDialog = builder.create();
+        alertDialog.setCancelable(false);
+
+        alertDialog.show();
+        if (alertDialog.getWindow() != null) {
+            Drawable drawable = ContextCompat.getDrawable(context, R.drawable.alert_back);
+            alertDialog.getWindow().setBackgroundDrawable(drawable);
+        }
+
+
+        layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGoogleSignInHelper = new GoogleSignInHelper(MainActivity.this,alertDialog);
+                mGoogleSignInHelper.signIn();
+            }
+        });
+    }
+
+
 
     private void refeshData() {
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -321,9 +710,6 @@ public class MainActivity extends AppCompatActivity  {
         });
 
     }
-
-
-    private HashSet<String> uniqueKeys = new HashSet<>();
 
     private void loadData() {
         if (mbase == null) {
@@ -460,10 +846,16 @@ public class MainActivity extends AppCompatActivity  {
 
                 }
                 if(item.getItemId()==R.id.menu_favorite_uni_id){
-                    Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
-                    intent.putExtra("check",2);
-                    ADSSetUp.adsType1(MainActivity.this);
-                    startActivity(intent);
+                    if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                        Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
+                        intent.putExtra("check",2);
+                        ADSSetUp.adsType1(MainActivity.this);
+                        startActivity(intent);
+                    }
+                    else {
+                        doLogin(MainActivity.this);
+                    }
+
 
                 }
                 if(item.getItemId()==R.id.menu_recent_id){
@@ -503,7 +895,6 @@ public class MainActivity extends AppCompatActivity  {
             showExitConfirmationDialog();
         }
     }
-
     private void showExitConfirmationDialog() {
         AlertDialog.Builder alertObj = new AlertDialog.Builder(MainActivity.this);
         alertObj.setTitle(Html.fromHtml("<font color='#000000'>Confirm Exit...ℹ️</font>"));
@@ -529,7 +920,51 @@ public class MainActivity extends AppCompatActivity  {
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
         dialog.getWindow().setBackgroundDrawable(drawable);
     }
+    private void fetchNewPostData() {
+        listNew = new ArrayList<>();
+        mainPostAdapter = new MainPostAdapter(getApplicationContext(), listNew,1);
+
+        databaseReferenceNew = FirebaseDatabase.getInstance().getReference("Post");
+        mainPostAdapter.setViewTypeToShow(2);
+        recyclerViewNew.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewNew.setAdapter(mainPostAdapter);
 
 
+        databaseReferenceNew.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listNew.clear();
+                List<MainPostModel> allPosts = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    MainPostModel mainPostModel = dataSnapshot.getValue(MainPostModel.class);
+                    if (mainPostModel != null) {
+                        allPosts.add(mainPostModel);
+                    }
+                }
 
+                // Shuffle the list of all posts
+                Collections.shuffle(allPosts);
+                progressBar3.setVisibility(View.GONE);
+
+
+                // Take the first 120 items or fewer if the list size is less than 120
+                int itemsToFetch = Math.min(150, allPosts.size());
+                for (int i = 0; i < itemsToFetch; i++) {
+                    listNew.add(allPosts.get(i));
+                }
+
+                mainPostAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Failed to fetch categories: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 }

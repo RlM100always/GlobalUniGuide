@@ -31,8 +31,12 @@ import com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity
 import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -44,12 +48,14 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int VIEW_TYPE_2 = 2;
     private static final int VIEW_TYPE_3 = 3;
     private static final int VIEW_TYPE_4 = 4;
+    private int checker;
 
 
-    public MainPostAdapter(Context context, ArrayList<MainPostModel> list) {
+    public MainPostAdapter(Context context, ArrayList<MainPostModel> list,int checker) {
         this.context = context;
         this.list = list;
         this.viewTypeToShow = VIEW_TYPE_1;
+        this.checker=checker;
     }
 
     public void setViewTypeToShow(int viewType) {
@@ -59,7 +65,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     public void searchLists(ArrayList<MainPostModel> filterlist) {
-        list = filterlist;
+        list.clear();
+        list.addAll(filterlist);
         notifyDataSetChanged();
     }
 
@@ -121,26 +128,55 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void bindViewHolderType1(MainPostAdapter.ViewHolderType1 holder, MainPostModel mainPostModel) {
-        holder.title1.setText(mainPostModel.getTitle());
-        holder.label1.setText(mainPostModel.getCategory());
-        holder.view1.setText(mainPostModel.getViews()+" views");
-        if(mainPostModel.getPostLoves()!=null){
-            holder.loves1.setText(mainPostModel.getPostLoves()+" loves");
-        }else {
-            holder.loves1.setText(0+" loves");
+        if(checker==1){
+            holder.title1.setText(mainPostModel.getTitle());
+            holder.label1.setVisibility(View.VISIBLE);
+            holder.label1.setText(mainPostModel.getCategory());
+            holder.lesson1.setVisibility(View.GONE);
+            holder.view1.setText(mainPostModel.getViews()+" views");
+            if(mainPostModel.getPostLoves()!=null){
+                holder.loves1.setText(mainPostModel.getPostLoves()+" loves");
+            }
+            else {
+                holder.loves1.setText(0+" loves");
+
+            }
+            if(mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
+
+                holder.reviews1.setText(mainPostModel.getRatingNum()+" reviews");
+                String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
+                holder.star1.setText(formattedNumber+" stars");
+            }
+            else {
+                holder.reviews1.setText(0+" reviews");
+                holder.star1.setText(0+" stars");
+            }
 
         }
+        else {
+            holder.title1.setText(mainPostModel.getTitle());
+            holder.label1.setVisibility(View.GONE);
+            holder.lesson1.setVisibility(View.VISIBLE);
+            holder.lesson1.setText("Lesson : "+(holder.getPosition()+1));
+            holder.view1.setText(mainPostModel.getViews()+" views");
+            if(mainPostModel.getPostLoves()!=null){
+                holder.loves1.setText(mainPostModel.getPostLoves()+" loves");
+            }
+            else {
+                holder.loves1.setText(0+" loves");
 
-        if(mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
+            }
+            if(mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
 
-            holder.reviews1.setText(mainPostModel.getRatingNum()+" reviews");
-            String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
-            holder.star1.setText(formattedNumber+" stars");
-        }else {
-            holder.reviews1.setText(0+" reviews");
-            holder.star1.setText(0+" stars");
+                holder.reviews1.setText(mainPostModel.getRatingNum()+" reviews");
+                String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
+                holder.star1.setText(formattedNumber+" stars");
+            }
+            else {
+                holder.reviews1.setText(0+" reviews");
+                holder.star1.setText(0+" stars");
+            }
         }
-
 
 
         Glide.with(context).load(mainPostModel.getImage()).into(holder.img1);
@@ -167,27 +203,58 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void bindViewHolderType2(MainPostAdapter.ViewHolderType2 holder, MainPostModel mainPostModel) {
 
-        holder.title2.setText(mainPostModel.getTitle());
-        holder.label2.setText(mainPostModel.getCategory());
-        holder.view2.setText(mainPostModel.getViews()+" views");
-        Glide.with(context).load(mainPostModel.getImage()).into(holder.img2);
-        if(mainPostModel.getPostLoves()!=null){
-            holder.loves2.setText(mainPostModel.getPostLoves()+" loves");
+        if(checker==1){
+            holder.title2.setText(mainPostModel.getTitle());
+            holder.label2.setVisibility(View.VISIBLE);
+            holder.label2.setText(mainPostModel.getCategory());
+            holder.view2.setText(mainPostModel.getViews()+" views");
+            Glide.with(context).load(mainPostModel.getImage()).into(holder.img2);
+            if(mainPostModel.getPostLoves()!=null){
+                holder.loves2.setText(mainPostModel.getPostLoves()+" loves");
+            }else {
+                holder.loves2.setText(0+" loves");
+
+            }
+
+            if( mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
+
+                holder.reviews2.setText(mainPostModel.getRatingNum()+" reviews");
+                String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
+                holder.star2.setText(formattedNumber+" stars");
+            }
+            else {
+                holder.reviews2.setText(0+" reviews");
+                holder.star2.setText(0+" stars");
+            }
         }else {
-            holder.loves2.setText(0+" loves");
+            holder.title2.setText(mainPostModel.getTitle());
+            holder.label2.setVisibility(View.GONE);
+            holder.lesson2.setVisibility(View.VISIBLE);
+            holder.lesson2.setText("Lesson : "+(holder.getPosition()+1));
+            holder.label2.setText(mainPostModel.getCategory());
+            holder.view2.setText(mainPostModel.getViews()+" views");
+            Glide.with(context).load(mainPostModel.getImage()).into(holder.img2);
+            if(mainPostModel.getPostLoves()!=null){
+                holder.loves2.setText(mainPostModel.getPostLoves()+" loves");
+            }else {
+                holder.loves2.setText(0+" loves");
 
+            }
+
+            if( mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
+
+                holder.reviews2.setText(mainPostModel.getRatingNum()+" reviews");
+                String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
+                holder.star2.setText(formattedNumber+" stars");
+            }
+            else {
+                holder.reviews2.setText(0+" reviews");
+                holder.star2.setText(0+" stars");
+            }
         }
 
-        if( mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
 
-            holder.reviews2.setText(mainPostModel.getRatingNum()+" reviews");
-            String formattedNumber = String.format("%.2f", mainPostModel.getAvgRating());
-            holder.star2.setText(formattedNumber+" stars");
-        }
-        else {
-            holder.reviews2.setText(0+" reviews");
-            holder.star2.setText(0+" stars");
-        }
+
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -202,6 +269,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 intent.putExtra("loves",mainPostModel.getPostLoves());
                 intent.putExtra("reviewers",mainPostModel.getRatingNum());
                 intent.putExtra("avgrate",mainPostModel.getAvgRating());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  // Add this line
+
                 context.startActivity(intent);
             }
         });
@@ -211,7 +280,37 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void bindViewHolderType3(MainPostAdapter.ViewHolderType3 holder, MainPostModel mainPostModel) {
         holder.title3.setText(mainPostModel.getTitle());
         if(mainPostModel.getDate()!=null){
-            holder.date3.setText(mainPostModel.getDate());
+            Calendar calendar = Calendar.getInstance();
+            Date times=calendar.getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy,EEEE", Locale.getDefault());
+            String date = sdf.format(times);
+
+            // Get the previous date
+            calendar.add(Calendar.DAY_OF_YEAR, -1);
+            Date previousDay = calendar.getTime();
+            String previousDate = sdf.format(previousDay);
+
+            //onweak
+
+            // Get the date one week ago
+            calendar.add(Calendar.DAY_OF_YEAR, -7);
+            Date oneWeekAgo = calendar.getTime();
+            String oneWeekAgoDate = sdf.format(oneWeekAgo);
+
+            holder.date3.setVisibility(View.VISIBLE);
+            if (mainPostModel.getDate().equals(date)) {
+                holder.date3.setText("Publish : "+"Today");
+                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.yellow));
+            }else if(mainPostModel.getDate().equals(previousDate)){
+                holder.date3.setText("Publish : "+"Yesterday");
+                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.heading));
+            } else if (mainPostModel.getDate().equals(oneWeekAgoDate)) {
+                holder.date3.setText("Publish : "+"1 Weak Ago");
+                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.my_primary));
+            } else {
+                holder.date3.setText("Publish : "+mainPostModel.getDate());
+            }
+            //holder.date3.setText(mainPostModel.getDate());
         }
         holder.view3.setText(mainPostModel.getViews()+" views");
         holder.category3.setText(mainPostModel.getCategory());
@@ -357,7 +456,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private static class ViewHolderType1 extends RecyclerView.ViewHolder {
         ImageView img1;
-        TextView label1, title1,view1,loves1,reviews1,star1;
+        TextView label1, title1,view1,loves1,reviews1,star1,lesson1;
 
         ViewHolderType1(@NonNull View itemView) {
             super(itemView);
@@ -368,13 +467,14 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             loves1=itemView.findViewById(R.id.post_design_loves);
             reviews1=itemView.findViewById(R.id.post_design_reviews_num);
             star1=itemView.findViewById(R.id.post_design_star);
+            lesson1=itemView.findViewById(R.id.post_lesson_category);
 
         }
     }
 
     private static class ViewHolderType2 extends RecyclerView.ViewHolder {
         ImageView img2;
-        TextView label2, title2,view2,loves2,reviews2,star2;
+        TextView label2, title2,view2,loves2,reviews2,star2,lesson2;
 
         ViewHolderType2(@NonNull View itemView) {
             super(itemView);
@@ -385,6 +485,7 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             loves2=itemView.findViewById(R.id.post_design_loves);
             reviews2=itemView.findViewById(R.id.post_design_reviews_num);
             star2=itemView.findViewById(R.id.post_design_star);
+            lesson2=itemView.findViewById(R.id.post_lesson_category);
         }
     }
 

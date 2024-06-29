@@ -61,7 +61,7 @@ public class RecentFragment extends Fragment {
         super.onCreate(savedInstanceState);
         list = new ArrayList<>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Post");
-        mainPostAdapter = new MainPostAdapter(getContext(),list);
+        mainPostAdapter = new MainPostAdapter(getContext(),list,1);
     }
 
 
@@ -76,7 +76,7 @@ public class RecentFragment extends Fragment {
         swipeRefreshLayout=view.findViewById(R.id.swipe_refresh_layout_recent);
 
         progressBar=view.findViewById(R.id.recent_progressBar);
-        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
         progressBar.setVisibility(View.VISIBLE);
 
         mainPostAdapter.setViewTypeToShow(3);

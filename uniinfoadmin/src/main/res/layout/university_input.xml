@@ -54,8 +54,8 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
                 android:background="@drawable/back"
-                android:maxLines="1000"
-                android:inputType="textWebEditText"
+                android:maxLines="100000"
+                android:inputType="textImeMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"/>
             <TextView
@@ -77,8 +77,8 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
                 android:background="@drawable/back"
-                android:maxLines="1000"
-                android:inputType="textWebEditText"
+                android:maxLines="100000"
+                android:inputType="textMultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"/>
             <LinearLayout

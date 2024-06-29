@@ -4,158 +4,273 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="@color/back"
     android:layout_height="match_parent"
     tools:context="com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity">
+    <Switch
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingRight="6dp"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="8dp"
+        android:backgroundTint="@color/whiteTextSideColor1"
+        android:background="@drawable/edit_text_background"
+        android:textColor="@color/FullWhite"
+        android:fontFamily="serif"
+        android:id="@+id/switchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable View Flexibility" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:background="@color/back"
             android:gravity="center"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:padding="5dp"
-                android:id="@+id/category_set_id"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:id="@+id/ll_playlist_status_id"
+                android:layout_marginLeft="3dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="serif"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:padding="3dp"
+                    android:layout_weight="0.1"
+                    android:layout_marginStart="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/arrow"
+                    app:civ_border_color="@color/cardMakerColor"
+                    app:civ_border_width=".8dp" />
+
+                <TextView
+                    android:fontFamily="serif"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:layout_marginStart="5dp"
+                    android:text="Playlist Status"
+                    android:textColor="@color/heading"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.1"
+                    android:scaleType="fitXY" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:id="@+id/ll_vcrr_id"
                 android:gravity="center"
-                android:text="Programming"
-                android:textColor="@color/yellow"
-                android:textSize="17dp"
-                android:textStyle="bold">
-
-            </TextView>
-
-
-            <LinearLayout
+                android:weightSum="4"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:textColor="@color/white"
-                    android:gravity="left"
-                    android:text="Total Playlist Views :"
-                    android:fontFamily="serif"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:padding="4dp"
+                    android:layout_margin="4dp"
+                    android:elevation="2dp"
 
-                </TextView>
-                <TextView
-                    android:id="@+id/playlist_views_id"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="#64DD17"
-                    android:gravity="left"
-                    android:text="500"
-                    android:fontFamily="serif"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
+                    android:backgroundTint="@color/cardMakerColor"
+                    android:background="@drawable/edit_text_background"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/playlist_views_id"
+                        android:textColor="@color/whiteTextColor1"
+                        android:text="500"
+                        android:fontFamily="serif"
+                        android:textSize="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                </TextView>
 
+                    </TextView>
+                    <TextView
+                        android:textColor="@color/whiteTextSideColor1"
+                        android:text="Views"
+                        android:fontFamily="serif"
+                        android:textSize="11.5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="4dp"
+
+                    android:layout_margin="4dp"
+                    android:elevation="2dp"
+
+                    android:backgroundTint="@color/cardMakerColor"
+                    android:background="@drawable/edit_text_background"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/playlist_total_content_id"
+                        android:textColor="@color/whiteTextColor1"
+                        android:text="500"
+                        android:fontFamily="serif"
+                        android:textSize="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                    <TextView
+                        android:textColor="@color/whiteTextSideColor1"
+                        android:text="Content"
+                        android:fontFamily="serif"
+                        android:textSize="11.5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="4dp"
+
+                    android:layout_margin="4dp"
+                    android:elevation="2dp"
+
+                    android:backgroundTint="@color/cardMakerColor"
+                    android:background="@drawable/edit_text_background"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/playlist_review_id"
+                        android:textColor="@color/whiteTextColor1"
+                        android:text="45"
+                        android:fontFamily="serif"
+                        android:textSize="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                    <TextView
+                        android:textColor="@color/whiteTextSideColor1"
+                        android:text="Reviewers"
+                        android:fontFamily="serif"
+                        android:textSize="11.5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="4dp"
+
+                    android:layout_margin="4dp"
+                    android:elevation="2dp"
+
+                    android:backgroundTint="@color/cardMakerColor"
+                    android:background="@drawable/edit_text_background"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/playlist_rating_id"
+                        android:textColor="@color/whiteTextColor1"
+                        android:text="4.5"
+                        android:fontFamily="serif"
+                        android:textSize="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                    <TextView
+                        android:textColor="@color/whiteTextSideColor1"
+                        android:text="Ratting"
+                        android:fontFamily="serif"
+                        android:textSize="11.5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/ll_question_set_id"
+                android:layout_marginLeft="3dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:textColor="@color/white"
-                    android:gravity="left"
-                    android:text="Total Playlist Content :"
-                    android:fontFamily="serif"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                </TextView>
-                <TextView
-                    android:id="@+id/playlist_total_content_id"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="#11DBF9"
-                    android:gravity="left"
-                    android:text="500"
-                    android:fontFamily="serif"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:padding="3dp"
+                    android:layout_weight="0.1"
+                    android:layout_marginStart="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/arrow"
+                     />
 
-                </TextView>
+                <TextView
+                    android:fontFamily="serif"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:layout_marginStart="5dp"
+                    android:text="Exam Question Set "
+                    android:textColor="@color/heading"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.1"
+                    android:scaleType="fitXY" />
 
             </LinearLayout>
-            <LinearLayout
+
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:orientation="horizontal"
+                android:id="@+id/category_mcq_set_recyclerview_id"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:textColor="@color/white"
-                    android:gravity="left"
-                    android:text="Playlist Reviewers Number  :"
-                    android:fontFamily="serif"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                />
 
-                </TextView>
-                <TextView
-                    android:id="@+id/playlist_review_id"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="#FF01F2"
-                    android:gravity="left"
-                    android:text="45"
-                    android:fontFamily="serif"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                </TextView>
-
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:textColor="@color/white"
-                    android:gravity="left"
-                    android:text="Playlist Ratting :"
-                    android:fontFamily="serif"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                </TextView>
-                <TextView
-                    android:id="@+id/playlist_rating_id"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="#FFD600"
-                    android:gravity="left"
-                    android:text="4.5"
-                    android:fontFamily="serif"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </TextView>
-
-            </LinearLayout>
 
             <androidx.appcompat.widget.SearchView
                 android:layout_margin="6dp"
@@ -168,12 +283,50 @@
                 app:queryHint="Search post..."
                 app:iconifiedByDefault="false"
                 />
+            <LinearLayout
+                android:layout_marginLeft="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:padding="3dp"
+                    android:layout_weight="0.1"
+                    android:layout_marginStart="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/arrow"
+                    app:civ_border_color="@color/cardMakerColor"
+                    app:civ_border_width=".8dp" />
+
+                <TextView
+                    android:id="@+id/category_set_id"
+                    android:fontFamily="serif"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:layout_marginStart="5dp"
+                    android:text="Exam Question Set "
+                    android:textColor="@color/heading"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="0.1"
+                    android:scaleType="fitXY" />
+
+            </LinearLayout>
+
+
 
 
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:background="@color/back"
                 android:id="@+id/category_post_recyclerview_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

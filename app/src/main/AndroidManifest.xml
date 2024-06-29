@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <application
         android:name="com.techtravelcoder.alluniversityinformations.ads.App"
@@ -18,23 +20,32 @@
         android:theme="@style/Theme.AllUniversityInformation"
         tools:targetApi="31">
         <activity
-            android:name="com.techtravelcoder.alluniversityinformations.vocabulary.VocabularyActivity"
+            android:name="com.techtravelcoder.alluniversityinformations.mcq.DoExamActivity"
             android:exported="false" />
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.vocabulary.VocabularyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.universityDetails.SeeUniPostActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.universityDetails.ReBookMarkActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="OPEN_ACTIVITY_FROM_NOTIFICATION" />
 
@@ -43,7 +54,8 @@
         </activity>
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.startapp.sdk.APPLICATION_ID"
@@ -51,11 +63,13 @@
 
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.universityDetails.UniversityActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.techtravelcoder.alluniversityinformations.service.MyFirebaseMessagingService"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -63,13 +77,34 @@
 
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.books.BookCategoryActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.books.BookPostActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.pdf.PDFShowActivity"
+            android:exported="false"></activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.your.package.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

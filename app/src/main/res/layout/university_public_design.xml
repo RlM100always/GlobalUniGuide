@@ -2,11 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="105dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/back"
+    android:background="@drawable/edit_text_background"
     android:orientation="vertical"
-    android:layout_margin="5dp"
+    android:padding="5dp"
+    android:layout_margin="4dp"
+    android:backgroundTint="@color/cardMakerColor"
     android:gravity="center"
-    android:elevation="20dp"
+    android:elevation="2dp"
+    android:foreground="@drawable/uni_background"
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -22,7 +25,7 @@
     <TextView
         android:drawablePadding="3dp"
         android:layout_marginLeft="5dp"
-        android:drawableTint="@color/green"
+        android:drawableTint="@color/deepGreen"
         android:gravity="center"
         android:drawableRight="@drawable/baseline_star_rate_34"
         android:fontFamily="serif"
@@ -30,12 +33,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" 4.5"
-        android:textColor="@color/green"
+        android:textColor="@color/deepGreen"
         android:textSize="12dp"
         android:textStyle="bold" />
 
 
     <TextView
+        android:gravity="center"
         android:layout_marginBottom="5dp"
         android:fontFamily="serif"
         android:maxLines="3"
@@ -43,8 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bangladesh "
-        android:textColor="@color/white"
-        android:textSize="14dp"
+        android:textColor="@color/whiteTextColor1"
+        android:textSize="13dp"
         android:textStyle="bold" />
 
 

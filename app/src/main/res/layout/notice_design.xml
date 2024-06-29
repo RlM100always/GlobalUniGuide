@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/back"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:layout_height="match_parent">
   <TextView
+      android:fontFamily="serif"
       android:layout_marginTop="10dp"
       android:drawablePadding="5dp"
       android:drawableLeft="@drawable/baseline_info_24"
@@ -16,6 +17,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"/>
     <TextView
+        android:fontFamily="serif"
         android:layout_margin="15dp"
         android:text="When you Translate any Language First Times .It may takes some times"
         android:textColor="@color/black"
@@ -23,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
   <TextView
+      android:fontFamily="serif"
       android:gravity="center"
       android:foreground="@drawable/uni_background"
       android:layout_marginBottom="20dp"
@@ -31,7 +34,7 @@
       android:layout_height="35dp"
       android:background="@drawable/submit_back"
       android:text="Ok"
-      android:textColor="@color/white"
+      android:textColor="@color/back"
       android:textSize="18dp"
       android:textStyle="bold" />
 

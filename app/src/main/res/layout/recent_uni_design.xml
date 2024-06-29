@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/back"
+    android:background="@drawable/edit_text_background"
     android:gravity="center"
+    android:elevation="2dp"
+    android:layout_margin="10dp"
+
     android:layout_height="wrap_content">
     <LinearLayout
-        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/cardMakerColor"
+        android:background="@drawable/edit_text_background"
         android:foreground="@drawable/uni_background"
-        android:layout_marginLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.cardview.widget.CardView
@@ -34,7 +37,7 @@
                 android:backgroundTint="@color/back"
                 android:background="@drawable/rating_back"
                 android:layout_gravity="center_horizontal"
-                android:drawableTint="@color/green"
+                android:drawableTint="@color/deepGreen"
                 android:gravity="center_vertical"
                 android:drawablePadding="5dp"
                 android:drawableRight="@drawable/baseline_star_rate_34"
@@ -43,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 4.6"
-                android:textColor="@color/green"
+                android:textColor="@color/deepGreen"
                 android:textSize="12dp"
                 android:textStyle="bold" />
 
@@ -58,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:drawableTint="@color/whiteTextColor1"
                     android:maxLines="4"
                     android:gravity="center_vertical"
                     android:drawablePadding="5dp"
@@ -72,8 +76,8 @@
                     android:layout_height="wrap_content"
                     android:text="Dhaka University"
                     android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="15dp"/>
+                    android:textColor="@color/whiteTextColor1"
+                    android:textSize="12dp"/>
                 <TextView
                     android:foreground="@drawable/uni_background"
                     android:id="@+id/re_uni_delete_id"
@@ -93,6 +97,7 @@
 
 
             <TextView
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:gravity="center_vertical"
                 android:drawableLeft="@drawable/baseline_location_on_24"
                 android:drawablePadding="3dp"
@@ -105,24 +110,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bangladesh"
-                android:textColor="@color/yellow"
-                android:textSize="15dp"/>
+                android:textColor="@color/whiteTextSideColor1"
+                android:textSize="12dp"/>
             <TextView
                 android:layout_marginBottom="4dp"
-
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:gravity="center_vertical"
                 android:id="@+id/re_uni_date_id"
                 android:drawableLeft="@drawable/baseline_access_time_24"
                 android:drawablePadding="5dp"
                 android:fontFamily="serif"
-                android:textStyle="bold"
                 android:maxLines="5"
                 android:layout_marginLeft="9dp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="12 /11/2001"
-                android:textColor="#E3E4E0"
+                android:textColor="@color/whiteTextSideColor1"
                 android:textSize="12dp"/>
 
 

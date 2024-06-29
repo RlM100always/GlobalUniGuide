@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:elevation="2dp"
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/back"
+    android:layout_width="match_parent"
+    android:background="@drawable/edit_text_background"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/mcq_serial_no_id"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:textColor="@color/FullWhite"
+            android:background="@drawable/mcq_back"
+            android:textSize="17dp"
+            android:text="17"
+            android:textStyle="bold"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+        <TextView
+            android:id="@+id/mcq_title_id"
+            android:layout_marginLeft="7dp"
+            android:fontFamily="serif"
+            android:textColor="@color/whiteTextColor1"
+            android:textSize="16dp"
+            android:text="What is HTML ? ddddddddd ddddddd ddddddddddddddddddddddddddddd d"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <RadioGroup
+        android:id="@+id/mcq_radio_group_id"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+
+            style="@style/Widget.App.RadioButton"
+            android:textColor="@color/whiteTextColor1"
+            android:foreground="@drawable/uni_background"
+            android:id="@+id/mcq_option_a_id"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:elevation="2dp"
+            android:background="@drawable/searchbar_background"
+            android:fontFamily="serif"
+            android:text="It is a mark up Laguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            style="@style/Widget.App.RadioButton"
+
+            android:textColor="@color/whiteTextColor1"
+            android:foreground="@drawable/uni_background"
+
+            android:id="@+id/mcq_option_b_id"
+            android:layout_marginTop="10dp"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:elevation="2dp"
+            android:background="@drawable/searchbar_background"
+            android:fontFamily="serif"
+            android:text="It is a mark up Laguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+
+            style="@style/Widget.App.RadioButton"
+
+            android:textColor="@color/whiteTextColor1"
+
+            android:foreground="@drawable/uni_background"
+            android:id="@+id/mcq_option_c_id"
+            android:layout_marginTop="10dp"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:elevation="2dp"
+            android:background="@drawable/searchbar_background"
+            android:fontFamily="serif"
+            android:text="It is a mark up Laguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            style="@style/Widget.App.RadioButton"
+
+            android:drawableTint="@color/whiteTextSideColor1"
+            android:textColor="@color/whiteTextColor1"
+            android:foreground="@drawable/uni_background"
+            android:id="@+id/mcq_option_d_id"
+            android:layout_marginTop="10dp"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:elevation="2dp"
+            android:background="@drawable/searchbar_background"
+            android:fontFamily="serif"
+            android:text="It is a mark up Laguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </RadioGroup>
+
+</LinearLayout>

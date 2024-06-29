@@ -8,6 +8,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AllUniversityInformation">
+        <activity
+            android:name=".mcq.QuestionAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".adsNotifi.AdsNotifiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".book.BookPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".book.BookCategoryActivity"
+            android:exported="false" />
 
         <service
             android:name=".university.UniversityActivity"

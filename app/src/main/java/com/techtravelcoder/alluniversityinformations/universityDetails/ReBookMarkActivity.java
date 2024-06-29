@@ -1,19 +1,24 @@
 package com.techtravelcoder.alluniversityinformations.universityDetails;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -28,7 +33,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentAdapter.MainPostAdapter;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.ads.GoogleSignInHelper;
 import com.techtravelcoder.alluniversityinformations.countryDetails.CountryAdapter;
+import com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,6 +58,8 @@ public class ReBookMarkActivity extends AppCompatActivity  {
     private TextView textView,category;
     private androidx.appcompat.widget.SearchView searchView;
     private int check;
+    private AlertDialog alertDialog;
+    private  GoogleSignInHelper mGoogleSignInHelper;
 
 
     @Override
@@ -62,7 +71,7 @@ public class ReBookMarkActivity extends AppCompatActivity  {
 
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.back);
+            color = getColor(R.color.whiteTextSideColor1);
         }
         getWindow().setStatusBarColor(color);
 
@@ -76,7 +85,7 @@ public class ReBookMarkActivity extends AppCompatActivity  {
         EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         editText.setTextColor(ContextCompat.getColor(this, android.R.color.black));
         editText.setHintTextColor(ContextCompat.getColor(this, R.color.allert_back_upper));
-        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
 
         // Initialize FirebaseAuth instance
 
@@ -103,8 +112,11 @@ public class ReBookMarkActivity extends AppCompatActivity  {
 
         }
         if(check==2){
-            category.setText("Your BookMark University List");
-            bookMarkFetchPostData();
+            category.setText("My BookMark University List");
+            if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                bookMarkFetchPostData();
+
+            }
 
         }
     }
@@ -205,14 +217,13 @@ public class ReBookMarkActivity extends AppCompatActivity  {
                     }
 
                     reBookMarkAdapter.notifyDataSetChanged();
-                    progressBar.setVisibility(View.GONE);
-                    if(list.size()==0){
-                        textView.setVisibility(View.VISIBLE);
-                        imageView.setVisibility(View.VISIBLE);
-                    }else {
-                        textView.setVisibility(View.GONE);
-                        imageView.setVisibility(View.GONE);
-                    }
+//                    if(list.size()==0){
+//                        textView.setVisibility(View.VISIBLE);
+//                        imageView.setVisibility(View.VISIBLE);
+//                    }else {
+//                        textView.setVisibility(View.GONE);
+//                        imageView.setVisibility(View.GONE);
+//                    }
 
                 }
 
@@ -228,38 +239,53 @@ public class ReBookMarkActivity extends AppCompatActivity  {
         });
     }
     private void checkFavorite(UniversityModel universityModel) {
-        String key = universityModel.getKey();
-        databaseReference.child(key)
-                .child("favorite")
-                .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            String key = universityModel.getKey();
+            databaseReference.child(key)
+                    .child("favorite")
+                    .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        if(snapshot.exists()){
-                            if ((snapshot.getValue(Boolean.class) != null) && (snapshot.getValue(Boolean.class))) {
-                                list.add(universityModel);
+                            if(snapshot.exists()){
+                                if ((snapshot.getValue(Boolean.class) != null) && (snapshot.getValue(Boolean.class))) {
+                                    list.add(universityModel);
+
+                                }
+                                reBookMarkAdapter.notifyDataSetChanged();
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if(list.size()==0){
+                                            textView.setVisibility(View.VISIBLE);
+                                            imageView.setVisibility(View.VISIBLE);
+                                            progressBar.setVisibility(View.GONE);
+
+                                        }else {
+                                            textView.setVisibility(View.GONE);
+                                            imageView.setVisibility(View.GONE);
+                                            progressBar.setVisibility(View.GONE);
+
+                                        }
+                                    }
+                                },1500);
+
+
 
                             }
-                            if(list.size()==0){
-                                textView.setVisibility(View.VISIBLE);
-                                imageView.setVisibility(View.VISIBLE);
-                            }else {
-                                textView.setVisibility(View.GONE);
-                                imageView.setVisibility(View.GONE);
-                            }
-                            reBookMarkAdapter.notifyDataSetChanged();
-
 
                         }
 
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.e("FavoriteFragment", "Failed to check favorite status: " + error.getMessage());
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.e("FavoriteFragment", "Failed to check favorite status: " + error.getMessage());
+                        }
+                    });
+        }
     }
+
+
 
     public void  searchList(String query) {
         List<UniversityModel> filteredList = new ArrayList<>();

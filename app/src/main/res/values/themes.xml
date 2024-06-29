@@ -11,6 +11,8 @@
         <item name="android:textColor">@android:color/black</item>
         <!-- Customize the hint text color -->
         <item name="android:textColorHint">@android:color/black</item>
+        <item name="android:fontFamily">serif</item>
+
     </style>
     <style name="MyToolbarTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">16sp</item>
@@ -19,10 +21,18 @@
 
     </style>
 
+
+    <style name="Widget.App.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="buttonTint">#2A292A</item>
+
+    </style>
         <!-- Define a custom style for the toolbar -->
     <style name="MyPopupTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColor">#D81B60</item> <!-- Set popup menu text color -->
         <item name="android:textStyle">bold</item> <!-- Set popup menu text color -->
+        <item name="android:fontFamily">serif</item> <!-- Set popup menu text color -->
+
+
 
     </style>
 

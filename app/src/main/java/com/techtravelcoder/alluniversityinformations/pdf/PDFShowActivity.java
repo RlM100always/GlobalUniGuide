@@ -1,0 +1,656 @@
+package com.techtravelcoder.alluniversityinformations.pdf;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
+import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity;
+import com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+
+public class PDFShowActivity extends AppCompatActivity {
+
+    private PDFView pdfView;
+    private DatabaseHelper databaseHelper;
+    private TextView title;
+    private ImageView settings,withoutBookMark,home,share;
+    private String theme,mode,fileUrl,fName,bName,iUrl;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pdfshow);
+
+        int color=0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            color = getColor(R.color.whiteTextSideColor1);
+        }
+        getWindow().setStatusBarColor(color);
+
+        pdfView=findViewById(R.id.pdfView1);
+        title=findViewById(R.id.pdf_show_title_id);
+        settings=findViewById(R.id.settings_button_id);
+        withoutBookMark=findViewById(R.id.without_bookmark_button_id);
+        home=findViewById(R.id.home_button_id);
+        share=findViewById(R.id.share_button_id);
+
+
+        databaseHelper = new DatabaseHelper(PDFShowActivity.this);
+//      SQLiteDatabase sqLiteDatabase=databaseHelper.getWritableDatabase();
+
+        String fUrl=getIntent().getStringExtra("fUrl");
+        fName=getIntent().getStringExtra("fName");
+        iUrl=getIntent().getStringExtra("iUrl");
+        bName=getIntent().getStringExtra("bookName");
+        title.setText("Book Name : "+bName);
+
+        FirebaseDatabase.getInstance().getReference("Book Details").child(fName).child("bookmark")
+                .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            Boolean bool= (Boolean) snapshot.getValue();
+                            if(bool){
+                                withoutBookMark.setBackgroundResource(R.drawable.baseline_bookmark_added_24);
+
+                            }
+                            else {
+                                withoutBookMark.setBackgroundResource(R.drawable.baseline_bookmark_border_24);
+
+                            }
+
+
+                        }
+                        else {
+                            withoutBookMark.setBackgroundResource(R.drawable.baseline_bookmark_border_24);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+        withoutBookMark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bookBookMarkHandle();
+            }
+        });
+
+
+        //retrive data
+
+
+        //databaseHelper.addFile(DriveActivity.this,"Rakib","https://drive.google.com/uc?export=download&id=1ukLmYaz2WR8WChtZxgF_ZPIH1pAsp4az");
+        //Toast.makeText(this, ""+databaseHelper.getFilePath("Rakib"), Toast.LENGTH_SHORT).show();
+
+        // Download file
+        fileUrl = "https://drive.google.com/uc?export=download&id="+fUrl;
+        String fileName = fName+fUrl;
+
+
+
+        if (databaseHelper.fileExists(fileUrl)) {
+            FirebaseDatabase.getInstance().getReference("UserInfo").child(FirebaseAuth.getInstance().getUid()).child("userPdfSettings").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        mode= (String) snapshot.child("viewMode").getValue();
+                        theme= (String) snapshot.child("themeMode").getValue();
+                        loadPdf(databaseHelper.getFilePath(fileUrl),mode,theme);
+
+
+                    }
+                    else {
+                        mode="horizontal";
+                        theme="light";
+                        loadPdf(databaseHelper.getFilePath(fileUrl),mode,theme);
+
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+        else {
+            FileDownloader.downloadFile(this, fileUrl, fileName, new FileDownloader.DownloadListener() {
+                @Override
+                public void onDownloadComplete(File file) {
+                    FirebaseDatabase.getInstance().getReference("UserInfo").child(FirebaseAuth.getInstance().getUid()).child("userPdfSettings").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){
+                                mode= (String) snapshot.child("viewMode").getValue();
+                                theme= (String) snapshot.child("themeMode").getValue();
+                                databaseHelper.addFile(fileName, fileUrl, file.getAbsolutePath());
+                                loadPdf(file.getAbsolutePath(),mode,theme);
+
+                            }
+                            else {
+                                mode="horizontal";
+                                theme="light";
+                                databaseHelper.addFile(fileName, fileUrl, file.getAbsolutePath());
+                                loadPdf(file.getAbsolutePath(),mode,theme);
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
+                }
+
+                @Override
+                public void onDownloadFailed(Exception e) {
+                    Toast.makeText(PDFShowActivity.this, "Download failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingsHandle();
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PDFShowActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String imageUrl=iUrl;
+                try {
+                    if (imageUrl != null) {
+                        // Create the text part
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("image/*"); // MIME type for image sharing
+                        String subject = "✔✔ Book Name: " + bName+ "\n\n" +
+                                "✔✔ One of the Best Educational App .Our services for College and University Students."+"\n\n1.Provide More than 2 thousands Free books about : Programming,Math,Physics,Chemistry,Biology,Economics,Business,English (Literature,Grammar,IELTS),Pharmacy,EEE,Science,Arts,Commerce and many more...."+"\n\n2.Provide More than Three Thousands University Information for Higher Study."
+                                +"\n\n3.Provide Dictionary with 80 Different language Conversion"
+                                +"\n\n4.Provide Lecture and Course On Science,Arts,Commerce,Programming,Technology,Digital Marketing,Online Earning,Finance,Economics,Business and many more..."+"\n\n5.It is a Complete Resource for Students . "+"Download \"" + bName + "\" Free Book and enjoy the best learning and Study app.";
+                        String appLink = "\uD83D\uDC49 \uD83D\uDC49" + "https://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName();
+                        String message = subject + "\n\n" + appLink;
+                        intent.putExtra(Intent.EXTRA_TEXT, message);
+
+                        // Load image from URL using Glide
+                        Glide.with(getApplicationContext())
+                                .asBitmap()
+                                .load(imageUrl)
+                                .into(new CustomTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(Bitmap bitmap, Transition<? super Bitmap> transition) {
+                                        try {
+                                            // Save bitmap to cache directory
+                                            File cachePath = new File(getCacheDir(), "images");
+                                            cachePath.mkdirs(); // Create directory if not exists
+                                            File imageFile = new File(cachePath, "shared_image.png");
+                                            FileOutputStream stream = new FileOutputStream(imageFile);
+                                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                                            stream.close();
+
+                                            // Get content URI using FileProvider
+                                            Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), "com.your.package.fileprovider", imageFile);
+                                            intent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Grant temporary read permission
+
+                                            // Show the chooser dialog
+                                            startActivity(Intent.createChooser(intent, "Share With"));
+                                        } catch (IOException e) {
+                                            Toast.makeText(PDFShowActivity.this, "Failed to save image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onLoadCleared(Drawable placeholder) {
+                                        // Optional: Handle placeholder if needed
+                                    }
+
+                                    @Override
+                                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                                        Toast.makeText(PDFShowActivity.this, "Failed to load image", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                    } else {
+                        Toast.makeText(PDFShowActivity.this, "Internet Connection Loss", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(PDFShowActivity.this, "Unable to Share!!! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
+
+    }
+    private Bitmap getSampleBitmap() {
+        // For demonstration purposes, create a sample bitmap.
+        // Replace this method with your own logic to get a bitmap from your source.
+        Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        bitmap.eraseColor(android.graphics.Color.BLUE); // Just to give it some color
+        return bitmap;
+    }
+
+    private void bookBookMarkHandle() {
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            try {
+                FirebaseDatabase.getInstance().getReference("Book Details").child(fName).child("bookmark")
+                        .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.exists()){
+                                    Boolean bool= (Boolean) snapshot.getValue();
+
+                                    if(bool){
+                                        FirebaseDatabase.getInstance().getReference("Book Details").child(fName).child("bookmark")
+                                                .child(FirebaseAuth.getInstance().getUid()).setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        withoutBookMark.setBackgroundResource(R.drawable.baseline_bookmark_border_24);
+
+                                                        Toast.makeText(PDFShowActivity.this, "Successfully remove from the BookMark List", Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                });
+
+                                    }
+                                    else {
+                                        FirebaseDatabase.getInstance().getReference("Book Details").child(fName).child("bookmark")
+                                                .child(FirebaseAuth.getInstance().getUid()).setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        withoutBookMark.setBackgroundResource(R.drawable.baseline_bookmark_added_24);
+                                                        Toast.makeText(PDFShowActivity.this, "Successfully added to the BookMark List", Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                });
+
+                                    }
+
+                                }
+                                else {
+                                    FirebaseDatabase.getInstance().getReference("Book Details").child(fName).child("bookmark")
+                                            .child(FirebaseAuth.getInstance().getUid()).setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    withoutBookMark.setBackgroundResource(R.drawable.baseline_bookmark_added_24);
+                                                    Toast.makeText(PDFShowActivity.this, "Successfully added to the BookMark List", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+            }catch (Exception e){
+                Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        else {
+            Toast.makeText(this, "Please Login First", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void pdfSettingsChecker() {
+        FirebaseDatabase.getInstance().getReference("UserInfo").child(FirebaseAuth.getInstance().getUid()).child("userPdfSettings").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    mode= (String) snapshot.child("viewMode").getValue();
+                    theme= (String) snapshot.child("themeMode").getValue();
+                    if (isActivityRunning()) {
+                        dialogue();
+                    }
+
+
+                }
+                else {
+                    mode="horizontal";
+                    theme="light";
+                    if (isActivityRunning()) {
+                        dialogue();
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    private void dialogue(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(PDFShowActivity.this);
+        final View view = getLayoutInflater().inflate(R.layout.pdf_settings, null);
+        RadioGroup viewhv = view.findViewById(R.id.group_radio_view);
+        RadioGroup modess = view.findViewById(R.id.radio_group_mode);
+
+        RadioButton horizontal = view.findViewById(R.id.horizontal_id);
+        RadioButton vertical = view.findViewById(R.id.vertical_id);
+        RadioButton light = view.findViewById(R.id.light_id);
+        RadioButton night = view.findViewById(R.id.night_id);
+
+        if(theme.equals("light")){
+            light.setChecked(true);
+        }else {
+            night.setChecked(true);
+        }
+
+        if(mode.equals("horizontal")){
+            horizontal.setChecked(true);
+        }else {
+            vertical.setChecked(true);
+        }
+
+        TextView applySettings = view.findViewById(R.id.apply_settings_id);
+        TextView cancel = view.findViewById(R.id.cancel_settings_id);
+
+
+        builder.setView(view);
+        AlertDialog alertDialog = builder.create();
+        Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
+        alertDialog.getWindow().setBackgroundDrawable(drawable);
+        if (isActivityRunning()) {
+            alertDialog.show();
+        }
+        applySettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(FirebaseAuth.getInstance().getCurrentUser() != null){
+                    int selectedViewModeId = viewhv.getCheckedRadioButtonId();
+                    int selectedThemeModeId = modess.getCheckedRadioButtonId();
+
+                    String viewMode = "";
+                    String themeMode = "";
+
+                    if (selectedViewModeId == horizontal.getId()) {
+                        viewMode = "horizontal";
+                    }
+                    else if (selectedViewModeId == vertical.getId()) {
+                        viewMode = "vertical";
+                    }
+
+                    if (selectedThemeModeId == light.getId()) {
+                        themeMode = "light";
+                    }
+                    else if (selectedThemeModeId == night.getId()) {
+                        themeMode = "night";
+                    }
+
+
+                    if (!viewMode.isEmpty() && !themeMode.isEmpty()) {
+                        // Create a HashMap to store the settings
+                        HashMap<String, Object> settingsMap = new HashMap<>();
+                        settingsMap.put("viewMode", viewMode);
+                        settingsMap.put("themeMode", themeMode);
+
+
+                        // Reference to the Firebase Realtime Database
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserInfo").child(FirebaseAuth.getInstance().getUid());
+
+                        // Update the settings in Firebase
+                        databaseReference.child("userPdfSettings").setValue(settingsMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(PDFShowActivity.this, "Settings updated successfully", Toast.LENGTH_SHORT).show();
+                                    alertDialog.dismiss();
+
+                                    FirebaseDatabase.getInstance().getReference("UserInfo").child(FirebaseAuth.getInstance().getUid()).child("userPdfSettings").addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if(snapshot.exists()){
+                                                mode= (String) snapshot.child("viewMode").getValue();
+                                                theme= (String) snapshot.child("themeMode").getValue();
+                                                loadPdf(databaseHelper.getFilePath(fileUrl),mode,theme);
+
+                                            }
+                                            else {
+                                                mode="light";
+                                                theme="horizontal";
+                                                loadPdf(databaseHelper.getFilePath(fileUrl),mode,theme);
+
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            alertDialog.dismiss();
+
+                                        }
+                                    });
+
+
+                                }
+                                else {
+                                    Toast.makeText(PDFShowActivity.this, "Failed to update settings", Toast.LENGTH_SHORT).show();
+                                    alertDialog.dismiss();
+
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        Toast.makeText(PDFShowActivity.this, "Please select both view mode and theme mode", Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+
+                    }
+                }else {
+
+                }
+
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    private void settingsHandle() {
+        pdfSettingsChecker();
+
+    }
+
+    private void deletesFile(String fileName) {
+        String filePath = databaseHelper.getFilePath(fileName);
+        if (filePath != null) {
+            File file = new File(filePath);
+            if (file.exists() && file.delete()) {
+                databaseHelper.deleteFile(fileName);
+                Toast.makeText(this, "File deleted successfully", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Failed to delete file", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "File path not found in database", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void loadPdf(String filePath,String mode ,String theme) {
+        if (filePath != null) {
+            File file = new File(filePath);
+            if (file.exists()) {
+                if(theme.equals("light") && mode.equals("horizontal")){
+                    pdfView.fromFile(file)
+                            .swipeHorizontal(true) // Enable horizontal swiping
+                            .enableDoubletap(true)
+                            .defaultPage(0)
+                            .onLoad(nbPages -> {})
+                            .onPageChange((page, pageCount) -> {})
+                            .onError(t -> {})
+                            .onPageError((page, t) -> {})
+                            .enableAnnotationRendering(false)
+                            .password(null)
+                            .scrollHandle(null)
+                            .enableAntialiasing(true)
+                            .spacing(0)
+                            .scrollHandle(new DefaultScrollHandle(this))
+                            .fitEachPage(true) // fit each page to the view, else smaller pages are scaled relative to largest page.
+                            .pageSnap(true) // snap pages to screen boundaries
+                            .pageFling(true) // make a fling change only a single page like ViewPager
+                            .nightMode(false)
+                            .load();
+
+                }
+                if(theme.equals("light") && mode.equals("vertical")){
+                    pdfView.fromFile(file)
+                            .swipeHorizontal(false) // Enable horizontal swiping
+                            .enableDoubletap(true)
+                            .defaultPage(0)
+                            .onLoad(nbPages -> {})
+                            .onPageChange((page, pageCount) -> {})
+                            .onError(t -> {})
+                            .onPageError((page, t) -> {})
+                            .enableAnnotationRendering(false)
+                            .password(null)
+                            .scrollHandle(null)
+                            .enableAntialiasing(true)
+                            .spacing(0)
+                            .scrollHandle(new DefaultScrollHandle(this))
+                            .fitEachPage(true) // fit each page to the view, else smaller pages are scaled relative to largest page.
+                            .pageSnap(true) // snap pages to screen boundaries
+                            .pageFling(true) // make a fling change only a single page like ViewPager
+                            .nightMode(false)
+                            .load();
+
+                }
+                if(theme.equals("night") && mode.equals("vertical")){
+                    pdfView.fromFile(file)
+                            .swipeHorizontal(false) // Enable horizontal swiping
+                            .enableDoubletap(true)
+                            .defaultPage(0)
+                            .onLoad(nbPages -> {})
+                            .onPageChange((page, pageCount) -> {})
+                            .onError(t -> {})
+                            .onPageError((page, t) -> {})
+                            .enableAnnotationRendering(false)
+                            .password(null)
+                            .scrollHandle(null)
+                            .enableAntialiasing(true)
+                            .spacing(0)
+                            .scrollHandle(new DefaultScrollHandle(this))
+                            .fitEachPage(true) // fit each page to the view, else smaller pages are scaled relative to largest page.
+                            .pageSnap(true) // snap pages to screen boundaries
+                            .pageFling(true) // make a fling change only a single page like ViewPager
+                            .nightMode(true)
+                            .load();
+
+                }
+                if(theme.equals("night") && mode.equals("horizontal")){
+                    pdfView.fromFile(file)
+                            .swipeHorizontal(true) // Enable horizontal swiping
+                            .enableDoubletap(true)
+                            .defaultPage(0)
+                            .onLoad(nbPages -> {})
+                            .onPageChange((page, pageCount) -> {})
+                            .onError(t -> {})
+                            .onPageError((page, t) -> {})
+                            .enableAnnotationRendering(false)
+                            .password(null)
+                            .scrollHandle(null)
+                            .enableAntialiasing(true)
+                            .spacing(0)
+                            .scrollHandle(new DefaultScrollHandle(this))
+                            .fitEachPage(true) // fit each page to the view, else smaller pages are scaled relative to largest page.
+                            .pageSnap(true) // snap pages to screen boundaries
+                            .pageFling(true) // make a fling change only a single page like ViewPager
+                            .nightMode(true)
+                            .load();
+
+                }
+
+
+
+            }
+            else {
+                Toast.makeText(this, "File not found", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "File path not found in database", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public boolean isActivityRunning() {
+        return !isFinishing() && !isDestroyed();
+    }
+
+
+
+}

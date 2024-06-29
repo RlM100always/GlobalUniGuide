@@ -12,9 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.CategoryModel;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.books.BookCategoryAdapter;
+import com.techtravelcoder.alluniversityinformations.books.BookCategoryModel;
+import com.techtravelcoder.alluniversityinformations.books.BookPostModel;
 import com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity;
 
 import java.util.ArrayList;
@@ -90,10 +97,65 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return viewTypeToShow; // Return the current view type to show
     }
 
+    private void fetchCourseNumber(@NonNull CategoryAdapter.ViewHolderType1 holder, CategoryModel categoryModel) {
+        FirebaseDatabase.getInstance().getReference("Post")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<MainPostModel> courseNo = new ArrayList<>(); // Local variable to avoid shared resource issues
+                        if (snapshot.exists()) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
+                                if (mainPostModels != null && mainPostModels.getUniqueNum().equals(categoryModel.getId())) {
+                                    courseNo.add(mainPostModels);
+
+                                }
+
+
+                            }
+                            holder.courseNo1.setText(courseNo.size() + " Lesson");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Handle the error
+                    }
+                });
+    }
+    private void fetchCourseNumber2(@NonNull CategoryAdapter.ViewHolderType2 holder, CategoryModel categoryModel) {
+        FirebaseDatabase.getInstance().getReference("Post")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<MainPostModel> courseNo = new ArrayList<>(); // Local variable to avoid shared resource issues
+                        if (snapshot.exists()) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
+                                if (mainPostModels != null && mainPostModels.getUniqueNum().equals(categoryModel.getId())) {
+                                    courseNo.add(mainPostModels);
+
+                                }
+
+
+                            }
+                            holder.courseNo2.setText(courseNo.size() + " Lesson");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Handle the error
+                    }
+                });
+    }
+
+
     private void bindViewHolderType1(ViewHolderType1 holder, CategoryModel categoryModel) {
         holder.title1.setText(categoryModel.getName());
         holder.label1.setText(categoryModel.getLabel());
         Glide.with(context).load(categoryModel.getImageLink()).into(holder.img1);
+        fetchCourseNumber(holder,categoryModel);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +176,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.title2.setText(categoryModel.getName());
         holder.label2.setText(categoryModel.getLabel());
         Glide.with(context).load(categoryModel.getImageLink()).into(holder.img2);
+        fetchCourseNumber2(holder,categoryModel);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,25 +195,28 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private static class ViewHolderType1 extends RecyclerView.ViewHolder {
         ImageView img1;
-        TextView label1, title1;
+        TextView label1, title1,courseNo1;
 
         ViewHolderType1(@NonNull View itemView) {
             super(itemView);
             img1 = itemView.findViewById(R.id.category_design_image_id);
             label1 = itemView.findViewById(R.id.category_design_label_id);
             title1 = itemView.findViewById(R.id.category_design_title_id);
+            courseNo1=itemView.findViewById(R.id.category_design_course_no_id);
         }
     }
 
     private static class ViewHolderType2 extends RecyclerView.ViewHolder {
         ImageView img2;
-        TextView label2, title2;
+        TextView label2, title2,courseNo2;
 
         ViewHolderType2(@NonNull View itemView) {
             super(itemView);
             img2 = itemView.findViewById(R.id.category_design_image_id);
             label2 = itemView.findViewById(R.id.category_design_label_id);
             title2 = itemView.findViewById(R.id.category_design_title_id);
+            courseNo2=itemView.findViewById(R.id.category_design_course_no_id);
+
         }
     }
 }

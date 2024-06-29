@@ -3,10 +3,14 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/back"
+    android:background="@drawable/edit_text_background"
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/cardMakerColor"
+    android:elevation="2dp"
     android:layout_height="wrap_content">
     <LinearLayout
-
+        android:backgroundTint="@color/cardMakerColor"
+        android:background="@drawable/edit_text_background"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,6 +25,7 @@
                 android:layout_gravity="center"
                 android:foreground="@drawable/uni_background"
                 android:padding="4dp"
+                android:layout_margin="4dp"
                 android:layout_width="140dp"
                 android:layout_height="100dp">
                 <ImageView
@@ -51,8 +56,8 @@
                         android:layout_height="wrap_content"
                         android:text="P tomi"
                         android:textStyle="bold"
-                        android:textColor="@color/yellow"
-                        android:textSize="17dp"/>
+                        android:textColor="@color/whiteTextSideColor1"
+                        android:textSize="16dp"/>
                     <TextView
                         android:foreground="@drawable/uni_background"
                         android:id="@+id/favorite_post_delete_id"
@@ -73,7 +78,6 @@
 
                 <TextView
                     android:fontFamily="serif"
-                    android:textStyle="bold"
                     android:maxLines="5"
                     android:id="@+id/post_design_title"
                     android:layout_marginLeft="5dp"
@@ -81,8 +85,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Java Development Roadmap Journey "
-                    android:textColor="@color/white"
-                    android:textSize="15.5dp"/>
+                    android:textColor="@color/whiteTextColor1"
+                    android:textSize="14.5dp"/>
 
 
             </LinearLayout>
@@ -96,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:drawableTint="@color/green"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:fontFamily="serif"
                 android:textStyle="bold"
                 android:drawableTop="@drawable/baseline_pageview_24"
@@ -106,17 +110,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="10444444 Views"
-                android:textColor="@color/white"
+                android:textColor="@color/whiteTextSideColor1"
                 android:textSize="12dp"/>
 
             <TextView
-                android:drawableTint="@color/red"
+                android:drawableTint="@color/whiteTextSideColor1"
 
                 android:id="@+id/post_design_loves"
                 android:fontFamily="serif"
                 android:textStyle="bold"
                 android:textSize="12dp"
-                android:textColor="@color/white"
+                android:textColor="@color/whiteTextSideColor1"
                 android:drawableTop="@drawable/baseline_favorite_241"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -125,12 +129,12 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:drawableTint="@color/yellow"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:id="@+id/post_design_reviews_num"
                 android:fontFamily="serif"
                 android:textStyle="bold"
                 android:textSize="12dp"
-                android:textColor="@color/white"
+                android:textColor="@color/whiteTextSideColor1"
                 android:drawableTop="@drawable/baseline_reviews_24"
                 android:gravity="center"
                 android:layout_weight="1"
@@ -139,12 +143,12 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:drawableTint="#00BFA5"
+                android:drawableTint="@color/whiteTextSideColor1"
                 android:id="@+id/post_design_star"
                 android:fontFamily="serif"
                 android:textStyle="bold"
                 android:textSize="12dp"
-                android:textColor="@color/white"
+                android:textColor="@color/whiteTextSideColor1"
                 android:drawableTop="@drawable/baseline_stars_24"
                 android:gravity="center"
                 android:layout_weight="1"

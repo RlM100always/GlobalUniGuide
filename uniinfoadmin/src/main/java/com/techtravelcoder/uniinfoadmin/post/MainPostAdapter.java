@@ -79,6 +79,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.MainPo
                     Drawable drawable= ContextCompat.getDrawable(context,R.drawable.back);
                     alertDialog.getWindow().setBackgroundDrawable(drawable);
                     alertDialog.show();
+                    alertDialog.setCancelable(false);
+
                     posttv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -130,6 +132,10 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.MainPo
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void searchListsFunc(ArrayList<MainPostModel> fList) {
+        list=fList;
     }
 
     public class MainPostViewHolder extends RecyclerView.ViewHolder {

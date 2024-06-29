@@ -7,13 +7,32 @@
     android:gravity="center"
     android:background="@color/back"
     tools:context=".post.PostDetailsActivity">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewPostDetails"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/searchbar_background"
+        android:elevation="5dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Search ..."
+        tools:ignore="MissingConstraints" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/post_details_recycler_view_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/searchViewPostDetails" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/post_details_float_button"

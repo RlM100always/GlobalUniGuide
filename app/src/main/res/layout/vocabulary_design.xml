@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="10dp"
+    android:elevation="3dp"
     android:layout_marginLeft="2dp"
     android:layout_marginRight="2dp"
     android:layout_marginTop="10dp"
@@ -31,7 +32,7 @@
                 android:fontFamily="serif"
                 android:id="@+id/audio_off_id"
                 android:layout_marginLeft="5dp"
-                android:textColor="@color/white"
+                android:textColor="@color/whiteTextColor1"
                 android:text="Audio Off"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -49,7 +50,7 @@
             android:id="@+id/translate_id"
             android:fontFamily="serif"
             android:layout_marginLeft="15dp"
-            android:textColor="@color/white"
+            android:textColor="@color/whiteTextColor1"
             android:text="Translate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -64,7 +65,7 @@
             android:id="@+id/voca_notice_id"
             android:fontFamily="serif"
             android:layout_marginLeft="15dp"
-            android:textColor="@color/white"
+            android:textColor="@color/whiteTextColor1"
             android:text="Notice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -97,7 +98,7 @@
     <TextView
         android:textSize="14.5dp"
         android:fontFamily="serif"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteTextColor1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="1 defination \n\n 2 another \n\n 3 third"
@@ -117,7 +118,7 @@
     <TextView
         android:textSize="14.5dp"
         android:fontFamily="serif"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteTextColor1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="asad, asaad, asdia ,asdajod"
@@ -137,7 +138,7 @@
     <TextView
         android:textSize="14.5dp"
         android:fontFamily="serif"
-        android:textColor="@color/white"
+        android:textColor="@color/whiteTextColor1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="asad, asaad, asdia ,asdajod"
