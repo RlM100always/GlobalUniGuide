@@ -132,22 +132,6 @@ public class HomeFragment extends Fragment   {
             }
         });
 
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                collectQuery=query;
-//
-//                return true;
-//
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                collectQuery=query;
-//
-//                return false;
-//            }
-//        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -250,6 +234,7 @@ public class HomeFragment extends Fragment   {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     MainPostModel mainPostModel = dataSnapshot.getValue(MainPostModel.class);
                     if (mainPostModel != null) {
+
                         String searchText=mainPostModel.getLabel()+mainPostModel.getCategory()+mainPostModel.getTitle();
 
                         String objStringWithoutSpaces = searchText.replaceAll("\\s+", "").toLowerCase();

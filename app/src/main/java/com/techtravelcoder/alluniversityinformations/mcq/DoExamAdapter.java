@@ -42,55 +42,66 @@ public class DoExamAdapter extends RecyclerView.Adapter<DoExamAdapter.ExamViewHo
 
     @Override
     public void onBindViewHolder(@NonNull DoExamAdapter.ExamViewHolder holder, int position) {
-
-        DoEaxmModel doEaxmModel=mcqList.get(position);
-        holder.serialNo.setText(""+(position+1));
+        DoEaxmModel doEaxmModel = mcqList.get(position);
+        holder.serialNo.setText("" + (position + 1));
         holder.mcqTitle.setText(doEaxmModel.getTitle());
         holder.optionA.setText(doEaxmModel.getOptionA());
         holder.optionB.setText(doEaxmModel.getOptionB());
         holder.optionC.setText(doEaxmModel.getOptionC());
         holder.optionD.setText(doEaxmModel.getOptionD());
-        holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton selectedRadioButton = holder.itemView.findViewById(checkedId);
-                if (selectedRadioButton != null) {
-                    String ansStat;
-                    String selectedText = selectedRadioButton.getText().toString();
-                    Toast.makeText(context, ""+selectedText, Toast.LENGTH_SHORT).show();
-                    if(selectedText.equals(doEaxmModel.getRightAnswer())){
-                        ansStat="true";
-                    }
-                    else {
-                        ansStat="false";
-                    }
 
-                    Map<String,Object> map=new HashMap<>();
-                    map.put("title",doEaxmModel.getTitle());
-                    map.put("optionA",doEaxmModel.getOptionA());
-                    map.put("optionB",doEaxmModel.getOptionB());
-                    map.put("optionC",doEaxmModel.getOptionC());
-                    map.put("optionD",doEaxmModel.getOptionD());
-                    map.put("explanation",doEaxmModel.getExplanation());
-                    map.put("rightAnswer",doEaxmModel.getRightAnswer());
-                    map.put("mcqKey",doEaxmModel.getMcqKey());
-                    map.put("ansStatus",ansStat);
-                    map.put("studentAns",selectedText);
-                    //  Toast.makeText(QuestionAddActivity.this, ""+radioButton, Toast.LENGTH_SHORT).show();
+        // Set the selected option if previously answered
+        holder.radioGroup.setOnCheckedChangeListener(null); // Remove any previous listeners
+        holder.radioGroup.clearCheck(); // Clear previous selection
 
-                    FirebaseDatabase.getInstance().getReference("ExamHis").child(FirebaseAuth.getInstance().getUid())
-                            .child(quesSetKey)
-                            .child(doEaxmModel.getMcqKey()).setValue(map).
-                            addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                }
-                            });
-                }
+        if (doEaxmModel.isAnswered()) {
+            String studentAns = doEaxmModel.getStudentAns();
+            if (studentAns.equals(doEaxmModel.getOptionA())) {
+                holder.optionA.setChecked(true);
+            } else if (studentAns.equals(doEaxmModel.getOptionB())) {
+                holder.optionB.setChecked(true);
+            } else if (studentAns.equals(doEaxmModel.getOptionC())) {
+                holder.optionC.setChecked(true);
+            } else if (studentAns.equals(doEaxmModel.getOptionD())) {
+                holder.optionD.setChecked(true);
+            }
+        }
+
+        holder.radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton selectedRadioButton = holder.itemView.findViewById(checkedId);
+            if (selectedRadioButton != null) {
+                String selectedText = selectedRadioButton.getText().toString();
+
+                String keyValue =  FirebaseDatabase.getInstance().getReference("ExamHis").child(FirebaseAuth.getInstance().getUid())
+                        .child(quesSetKey)
+                        .child("CurrentExam").push().getKey();
+
+
+                doEaxmModel.setStudentAns(selectedText);
+                doEaxmModel.setAnswered(true);
+
+                String ansStat = selectedText.equals(doEaxmModel.getRightAnswer()) ? "true" : "false";
+
+                Map<String, Object> map = new HashMap<>();
+                map.put("title", doEaxmModel.getTitle());
+                map.put("optionA", doEaxmModel.getOptionA());
+                map.put("optionB", doEaxmModel.getOptionB());
+                map.put("optionC", doEaxmModel.getOptionC());
+                map.put("optionD", doEaxmModel.getOptionD());
+                map.put("explanation", doEaxmModel.getExplanation());
+                map.put("rightAnswer", doEaxmModel.getRightAnswer());
+                map.put("mcqKey", doEaxmModel.getMcqKey());
+                map.put("ansStatus", ansStat);
+                map.put("studentAns", selectedText);
+
+                FirebaseDatabase.getInstance().getReference("ExamHis").child(FirebaseAuth.getInstance().getUid())
+                        .child(quesSetKey)
+                        .child("CurrentExam")
+                        .child(doEaxmModel.getMcqKey()).setValue(map)
+                        .addOnSuccessListener(unused -> {
+                        });
             }
         });
-
-
     }
 
     @Override

@@ -43,6 +43,7 @@ public class CategoryPostActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView,mcqRecyclerView;
     private MainPostAdapter mainPostAdapter;
+    private  ArrayList<QuestionTitleModel>listMcq;
 
     private ArrayList<MainPostModel> list;
     private DatabaseReference databaseReference;
@@ -85,26 +86,6 @@ public class CategoryPostActivity extends AppCompatActivity {
         visible=findViewById(R.id.switchButton);
         linearLayout=findViewById(R.id.ll_vcrr_id);
 
-        visible.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    linearLayout.setVisibility(View.GONE);
-                    l1.setVisibility(View.GONE);
-                    l2.setVisibility(View.GONE);
-                    mcqRecyclerView.setVisibility(View.GONE);
-
-                    // Switch is turned on
-                } else {
-                    // Switch is turned off
-                    linearLayout.setVisibility(View.VISIBLE);
-                    l1.setVisibility(View.VISIBLE);
-                    l2.setVisibility(View.VISIBLE);
-                    mcqRecyclerView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
 
         postId=getIntent().getStringExtra("id");
 
@@ -117,6 +98,8 @@ public class CategoryPostActivity extends AppCompatActivity {
         categoryType=getIntent().getBooleanExtra("type",false);
         cat=findViewById(R.id.category_set_id);
         cat.setText(keyString);
+
+
 
         searchView=findViewById(R.id.category_post_searchView);
         EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
@@ -144,6 +127,43 @@ public class CategoryPostActivity extends AppCompatActivity {
         }
 
         fetchPostData();
+        visible.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    if(keyString.equals("Most Popular Content")){
+                        linearLayout.setVisibility(View.GONE);
+                        l1.setVisibility(View.GONE);
+                        l2.setVisibility(View.GONE);
+                    }else {
+                        linearLayout.setVisibility(View.GONE);
+                        l1.setVisibility(View.GONE);
+                        l2.setVisibility(View.GONE);
+                        mcqRecyclerView.setVisibility(View.GONE);
+                    }
+
+
+                    // Switch is turned on
+                } else {
+                    if(!keyString.equals("Most Popular Content")){
+                        mcqRecyclerView.setVisibility(View.VISIBLE);
+                        linearLayout.setVisibility(View.VISIBLE);
+                        l1.setVisibility(View.VISIBLE);
+                        l2.setVisibility(View.VISIBLE);
+                        if (listMcq.size()==0){
+                            l2.setVisibility(View.GONE);
+                        }
+                    }else {
+                        linearLayout.setVisibility(View.VISIBLE);
+                        l1.setVisibility(View.VISIBLE);
+                    }
+                    // Switch is turned off
+
+                }
+            }
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -162,7 +182,7 @@ public class CategoryPostActivity extends AppCompatActivity {
 
     private void fetchQuestionSetData() {
         mcqRecyclerView=findViewById(R.id.category_mcq_set_recyclerview_id);
-        ArrayList<QuestionTitleModel>listMcq=new ArrayList<>();
+        listMcq=new ArrayList<>();
         QuestionTitleAdapter questionTitleAdapter=new QuestionTitleAdapter(CategoryPostActivity.this,listMcq);
         mcqRecyclerView.setAdapter(questionTitleAdapter );
         mcqRecyclerView.setLayoutManager(new GridLayoutManager(CategoryPostActivity.this,1,RecyclerView.HORIZONTAL,false));
@@ -182,7 +202,13 @@ public class CategoryPostActivity extends AppCompatActivity {
                         }
 
                     }
+                    if(listMcq.size()==0){
+                        l2.setVisibility(View.GONE);
+                    }
 
+                }
+                else {
+                    l2.setVisibility(View.GONE);
                 }
                 questionTitleAdapter.notifyDataSetChanged();
 
@@ -219,89 +245,101 @@ public class CategoryPostActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                   // Toast.makeText(CategoryPostActivity.this, ""+keyString, Toast.LENGTH_SHORT).show();
-                    if(keyString.equals("Most Popular Content"))
-                    {
-                        MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
-                        if (mainPostModels != null) {
-                            list.add(mainPostModels);
-                            countTotalViews+=mainPostModels.getViews();
-                            sizeCheck++;
-                            if(mainPostModels.getAvgRating() !=null){
-                                rating=rating+mainPostModels.getAvgRating();
-                                rateCnt++;
+                if(snapshot.exists()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        // Toast.makeText(CategoryPostActivity.this, ""+keyString, Toast.LENGTH_SHORT).show();
+                        if(keyString.equals("Most Popular Content"))
+                        {
+                            MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
+                            if (mainPostModels != null) {
+                                list.add(mainPostModels);
+                                countTotalViews+=mainPostModels.getViews();
+                                sizeCheck++;
+                                if(mainPostModels.getAvgRating() !=null){
+                                    rating=rating+mainPostModels.getAvgRating();
+                                    rateCnt++;
 
-                            }
-                            if(mainPostModels.getRatingNum()!=null){
-                                reviewersNum=mainPostModels.getRatingNum()+reviewersNum;
-                            }
-                            if(sizeCheck>=200){
-                                break;
+                                }
+                                if(mainPostModels.getRatingNum()!=null){
+                                    reviewersNum=mainPostModels.getRatingNum()+reviewersNum;
+                                }
+                                if(sizeCheck>=200){
+                                    break;
+                                }
                             }
                         }
+                        else
+                        {
+                            MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
+                            if (mainPostModels != null && mainPostModels.getUniqueNum().equals(postId)) {
+                                list.add(mainPostModels);
+                                countTotalViews+=mainPostModels.getViews();
+                                if(mainPostModels.getAvgRating() !=null){
+                                    rating=rating+mainPostModels.getAvgRating();
+                                    rateCnt++;
+                                }
+                                if(mainPostModels.getRatingNum()!=null){
+                                    reviewersNum=mainPostModels.getRatingNum()+reviewersNum;
+                                }
+                            }
+                        }
+
+                    }
+                    if(keyString.equals("Most Popular Content"))
+                    {
+                        Collections.sort(list, new Comparator<MainPostModel>() {
+                            @Override
+                            public int compare(MainPostModel o1, MainPostModel o2) {
+                                return Long.compare(o2.getViews(), o1.getViews()); // Descending
+                            }
+                        });
+
+                        if(list.size()==0){
+                            l2.setVisibility(View.GONE);
+                        }
+                        Double avg=rating/rateCnt;
+                        String formatted = String.format("%.2f", avg);
+                        playListRattings.setText(formatted+"");
+                        playListViews.setText(String.valueOf(countTotalViews)+"");
+                        playListItem.setText(String.valueOf(list.size())+"");
+                        playListReviewNum.setText(reviewersNum+"");
+                        mainPostAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
+
                     }
                     else
                     {
-                        MainPostModel mainPostModels= dataSnapshot.getValue(MainPostModel.class);
-                        if (mainPostModels != null && mainPostModels.getUniqueNum().equals(postId)) {
-                            list.add(mainPostModels);
-                            countTotalViews+=mainPostModels.getViews();
-                            if(mainPostModels.getAvgRating() !=null){
-                                rating=rating+mainPostModels.getAvgRating();
-                                rateCnt++;
-                            }
-                            if(mainPostModels.getRatingNum()!=null){
-                                reviewersNum=mainPostModels.getRatingNum()+reviewersNum;
-                            }
+
+                        if(list.size()==0){
+                            l2.setVisibility(View.GONE);
                         }
-                    }
 
-                }
-                if(keyString.equals("Most Popular Content"))
-                {
-                    Collections.sort(list, new Comparator<MainPostModel>() {
-                        @Override
-                        public int compare(MainPostModel o1, MainPostModel o2) {
-                            return Long.compare(o2.getViews(), o1.getViews()); // Descending
+                        Double avg=rating/rateCnt;
+                        String formatted = String.format("%.2f", avg);
+                        playListRattings.setText(formatted+"");
+                        playListReviewNum.setText(reviewersNum+"");
+
+                        if(categoryType==true){
+                            mainPostAdapter.notifyDataSetChanged();
+                            playListViews.setText(String.valueOf(countTotalViews+""));
+                            playListItem.setText(String.valueOf(list.size())+" ");
+                            progressBar.setVisibility(View.GONE);
+                            mainPostAdapter.notifyDataSetChanged();
                         }
-                    });
+                        else {
+                            mainPostAdapter.notifyDataSetChanged();
+                            playListViews.setText(String.valueOf(countTotalViews)+"");
+                            playListItem.setText(String.valueOf(list.size())+"");
+                            Collections.shuffle(list);
+                            progressBar.setVisibility(View.GONE);
+                            mainPostAdapter.notifyDataSetChanged();
+                        }
 
-                    Double avg=rating/rateCnt;
-                    String formatted = String.format("%.2f", avg);
-                    playListRattings.setText(formatted+"");
-                    playListViews.setText(String.valueOf(countTotalViews)+"");
-                    playListItem.setText(String.valueOf(list.size())+"");
-                    playListReviewNum.setText(reviewersNum+"");
-                    mainPostAdapter.notifyDataSetChanged();
-                    progressBar.setVisibility(View.GONE);
-
-                }
-                else
-                {
-
-                    Double avg=rating/rateCnt;
-                    String formatted = String.format("%.2f", avg);
-                    playListRattings.setText(formatted+"");
-                    playListReviewNum.setText(reviewersNum+"");
-
-                    if(categoryType==true){
-                        mainPostAdapter.notifyDataSetChanged();
-                        playListViews.setText(String.valueOf(countTotalViews+""));
-                        playListItem.setText(String.valueOf(list.size())+" ");
-                        progressBar.setVisibility(View.GONE);
-                        mainPostAdapter.notifyDataSetChanged();
                     }
-                    else {
-                        mainPostAdapter.notifyDataSetChanged();
-                        playListViews.setText(String.valueOf(countTotalViews)+"");
-                        playListItem.setText(String.valueOf(list.size())+"");
-                        Collections.shuffle(list);
-                        progressBar.setVisibility(View.GONE);
-                        mainPostAdapter.notifyDataSetChanged();
-                    }
-
+                }else {
+                    l2.setVisibility(View.GONE);
                 }
+
 
             }
 

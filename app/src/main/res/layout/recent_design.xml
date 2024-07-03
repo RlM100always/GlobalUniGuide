@@ -75,10 +75,9 @@
                 android:layout_height="100dp">
                 <ImageView
 
-                    android:background="@drawable/loading"
-                    android:id="@+id/recent_design_image_id"
+                    android:src="@drawable/loading"
+                    android:background="@drawable/background"                    android:id="@+id/recent_design_image_id"
                     android:scaleType="fitXY"
-                    android:src="@drawable/image_buet"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 

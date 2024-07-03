@@ -40,6 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.books.BookCategoryActivity;
 import com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity;
 
@@ -122,11 +123,6 @@ public class PDFShowActivity extends AppCompatActivity {
         });
 
 
-        //retrive data
-
-
-        //databaseHelper.addFile(DriveActivity.this,"Rakib","https://drive.google.com/uc?export=download&id=1ukLmYaz2WR8WChtZxgF_ZPIH1pAsp4az");
-        //Toast.makeText(this, ""+databaseHelper.getFilePath("Rakib"), Toast.LENGTH_SHORT).show();
 
         // Download file
         fileUrl = "https://drive.google.com/uc?export=download&id="+fUrl;
@@ -195,7 +191,10 @@ public class PDFShowActivity extends AppCompatActivity {
 
                 @Override
                 public void onDownloadFailed(Exception e) {
-                    Toast.makeText(PDFShowActivity.this, "Download failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(getApplicationContext(), BookCategoryActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(getApplicationContext(), "Internet Problem", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -566,6 +565,7 @@ public class PDFShowActivity extends AppCompatActivity {
                             .pageSnap(true) // snap pages to screen boundaries
                             .pageFling(true) // make a fling change only a single page like ViewPager
                             .nightMode(false)
+                            .fitEachPage(true)
                             .load();
 
                 }
@@ -588,6 +588,7 @@ public class PDFShowActivity extends AppCompatActivity {
                             .pageSnap(true) // snap pages to screen boundaries
                             .pageFling(true) // make a fling change only a single page like ViewPager
                             .nightMode(false)
+                            .fitEachPage(true)
                             .load();
 
                 }

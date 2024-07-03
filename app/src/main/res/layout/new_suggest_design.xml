@@ -22,9 +22,9 @@
             android:layout_height="100dp">
             <ImageView
                 android:id="@+id/sugg_img_id"
-                android:background="@drawable/loading"
                 android:scaleType="fitXY"
                 android:src="@drawable/loading"
+                android:background="@drawable/background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <TextView

@@ -20,6 +20,15 @@
         android:theme="@style/Theme.AllUniversityInformation"
         tools:targetApi="31">
         <activity
+            android:name="com.techtravelcoder.alluniversityinformations.notes.AddFriendsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.mcq.DetailsExamHisActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.techtravelcoder.alluniversityinformations.mcq.ExamHisActivity"
+            android:exported="false" />
+        <activity
             android:name="com.techtravelcoder.alluniversityinformations.mcq.DoExamActivity"
             android:exported="false" />
         <activity
@@ -41,7 +50,7 @@
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.postDetails.PostWebViewActivity"
             android:exported="false"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity"
             android:exported="false"
@@ -87,14 +96,14 @@
         </activity>
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.books.BookCategoryActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.books.BookPostActivity"
             android:exported="false"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.pdf.PDFShowActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

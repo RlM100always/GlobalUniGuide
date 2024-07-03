@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:padding="6dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_margin="8.5dp"
+        android:elevation="2dp"
+        android:foreground="@drawable/uni_background"
+        android:backgroundTint="@color/cardMakerColor"
+        android:background="@drawable/edit_text_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:padding="5dp"
+            android:src="@drawable/examhis"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/exam_his_topic_id"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/whiteTextColor1"
+                android:fontFamily="serif"
+                android:text="Topic : HTML"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/exam_his_question_set_id"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/whiteTextColor1"
+                android:fontFamily="serif"
+                android:text="Set : Question Set 1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/exam_his_date_id"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:textColor="@color/whiteTextColor1"
+                android:fontFamily="serif"
+                android:text="12 January 2024"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/his_delete_id"
+                android:foreground="@drawable/uni_background"
+                android:drawableLeft="@drawable/baseline_delete_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/yellow" />
+            <ImageView
+                android:src="@drawable/arrow_right"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

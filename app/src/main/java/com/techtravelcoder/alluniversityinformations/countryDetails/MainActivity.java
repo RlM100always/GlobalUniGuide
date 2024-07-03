@@ -1,10 +1,8 @@
 package com.techtravelcoder.alluniversityinformations.countryDetails;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -30,7 +28,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -66,6 +63,10 @@ import com.techtravelcoder.alluniversityinformations.books.BookCategoryModel;
 import com.techtravelcoder.alluniversityinformations.books.BookPostActivity;
 import com.techtravelcoder.alluniversityinformations.books.BookPostAdapter;
 import com.techtravelcoder.alluniversityinformations.books.BookPostModel;
+import com.techtravelcoder.alluniversityinformations.mcq.ExamHisActivity;
+import com.techtravelcoder.alluniversityinformations.notes.AddFriendsActivity;
+import com.techtravelcoder.alluniversityinformations.pdf.DatabaseHelper;
+import com.techtravelcoder.alluniversityinformations.pdf.FileDelete;
 import com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 import com.techtravelcoder.alluniversityinformations.universityDetails.ReBookMarkActivity;
@@ -100,8 +101,10 @@ public class MainActivity extends AppCompatActivity  {
     private GridLayoutManager gridLayoutManager;
     private AlertDialog alertDialog;
     private GoogleSignInHelper mGoogleSignInHelper;
+    private TextView notice;
     private ProgressBar progressBar,progressBar1,progressBar2,progressBar3;
     private LinearLayout visit,recentUni,carrierGuide,popularContent,bookUni,dictionary,bookCollection,newBook,bookMarkBook;
+    private LinearLayout examHis,addfriends,addNotes;
 
 
 
@@ -119,7 +122,7 @@ public class MainActivity extends AppCompatActivity  {
     private static final int REQUEST_USE_FULL_SCREEN_INTENT = 1;
     private ImageSlider imageSlider;
     private CardView cardView;
-
+    private DatabaseHelper databaseHelper;
 
 
 
@@ -136,10 +139,15 @@ public class MainActivity extends AppCompatActivity  {
 //        StartAppSDK.init(this, "201407686");
 //        StartAppAd.disableAutoInterstitial();
 
+
+        notice=findViewById(R.id.notice_id_main);
         userProf=findViewById(R.id.ll_user_profile);
         userImg=findViewById(R.id.user_image_id);
         userNme=findViewById(R.id.user_name_id);
         cardView=findViewById(R.id.pimage_card_id);
+        addNotes=findViewById(R.id.add_notes_id);
+        databaseHelper = new DatabaseHelper(MainActivity.this);
+
 
 
         //profile handelling
@@ -163,9 +171,11 @@ public class MainActivity extends AppCompatActivity  {
 
                         }
                     });
+            userProf.setVisibility(View.VISIBLE);
+
         }
         else {
-            userProf.setVisibility(View.VISIBLE);
+            userProf.setVisibility(View.GONE);
         }
 
 
@@ -189,6 +199,8 @@ public class MainActivity extends AppCompatActivity  {
         recyclerView=findViewById(R.id.main_recycler_id);
         recyclerViewNew=findViewById(R.id.newdata_recyclerview_id);
         difBookCategoryRecyclerView=findViewById(R.id.different_book_category_recycler_id);
+        examHis=findViewById(R.id.my_exam_history_id);
+        addfriends=findViewById(R.id.add_friends_id);
 
         imageSlider=findViewById(R.id.image_slider);
         swipeRefreshLayout=findViewById(R.id.swipe_refresh_layout_id);
@@ -217,6 +229,7 @@ public class MainActivity extends AppCompatActivity  {
                                 if(snapshot.exists()){
                                     String ans=snapshot.getValue(String.class);
                                     if(ans.equals("on")){
+                                        notice.setVisibility(View.VISIBLE);
                                         FirebaseDatabase.getInstance().getReference("Ads Control").
                                                 child("marque").addValueEventListener(new ValueEventListener() {
                                                     @Override
@@ -306,6 +319,48 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
+        examHis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(FirebaseAuth.getInstance().getUid()!=null){
+                    Intent intent=new Intent(getApplicationContext(),ExamHisActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    doLogin(MainActivity.this);
+                }
+            }
+        });
+
+        addNotes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(FirebaseAuth.getInstance().getUid()!=null){
+                    Intent intent=new Intent(getApplicationContext(), AddFriendsActivity.class);
+                    intent.putExtra("check","2");
+                    startActivity(intent);
+                }
+                else {
+                    doLogin(MainActivity.this);
+                }
+            }
+        });
+
+        addfriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(FirebaseAuth.getInstance().getUid()!=null){
+                    Intent intent=new Intent(getApplicationContext(), AddFriendsActivity.class);
+                    intent.putExtra("check","1");
+                    startActivity(intent);
+                }
+                else {
+                    doLogin(MainActivity.this);
+                }
+            }
+        });
+
+
         bookMarkBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -348,10 +403,16 @@ public class MainActivity extends AppCompatActivity  {
         carrierGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this, PostHandleActivity.class);
-                intent.putExtra("ggg",44);
-                ADSSetUp.adsType1(MainActivity.this);
-                startActivity(intent);
+                if(FirebaseAuth.getInstance().getUid()!=null){
+                    Intent intent=new Intent(MainActivity.this, PostHandleActivity.class);
+                    intent.putExtra("ggg",44);
+                    ADSSetUp.adsType1(MainActivity.this);
+                    startActivity(intent);
+                }
+                else {
+                    doLogin(MainActivity.this);
+                }
+
 
             }
         });
@@ -464,17 +525,27 @@ public class MainActivity extends AppCompatActivity  {
         // Start all threads
         loadDataThread.start();
         refreshDataThread.start();
+        if(FirebaseAuth.getInstance().getUid()!=null){
+            fetchBookCategoryThread.start();
+            retrieveDifferent50BooksThread.start();
+
+        }else {
+            progressBar1.setVisibility(View.GONE);
+            progressBar2.setVisibility(View.GONE);
+        }
         fetchNewPostDataThread.start();
-        fetchBookCategoryThread.start();
-        retrieveDifferent50BooksThread.start();
+
 
         // Wait for all threads to finish
         try {
             loadDataThread.join();
             refreshDataThread.join();
             fetchNewPostDataThread.join();
-            fetchBookCategoryThread.join();
-            retrieveDifferent50BooksThread.join();
+            if(FirebaseAuth.getInstance().getUid()!=null){
+                fetchBookCategoryThread.join();
+                retrieveDifferent50BooksThread.join();
+            }
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -497,8 +568,11 @@ public class MainActivity extends AppCompatActivity  {
             public void onRefresh() {
                 refeshData();
                 fetchNewPostData();
-                fetchBookCategory();
-                retriveDiffernt50Books();
+                if(FirebaseAuth.getInstance().getUid()!=null){
+                    fetchBookCategory();
+                    retriveDiffernt50Books();
+                }
+
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -679,7 +753,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
     private void refeshData() {
-        recyclerView.setLayoutManager(gridLayoutManager);
+       // recyclerView.setLayoutManager(gridLayoutManager);
         list=new ArrayList<>();
         campainAdapter=new CountryAdapter(this,list);
         recyclerView.setAdapter(campainAdapter );
@@ -782,15 +856,21 @@ public class MainActivity extends AppCompatActivity  {
 
                 if(item.getItemId()==R.id.menu_guide_id){
 
-                    Intent openWebsiteIntent = new Intent(MainActivity.this, PostHandleActivity.class);
-                    ADSSetUp.adsType1(MainActivity.this);
-                    startActivity(openWebsiteIntent);
+                    if(FirebaseAuth.getInstance().getUid()!=null){
+                        Intent openWebsiteIntent = new Intent(MainActivity.this, PostHandleActivity.class);
+                        ADSSetUp.adsType1(MainActivity.this);
+                        startActivity(openWebsiteIntent);
+                    }
+                    else {
+                        doLogin(MainActivity.this);
+                    }
+
 
                 }
 
                 if(item.getItemId()==R.id.menu_privacy_id){
 
-                    String websiteUrl = "https://github.com/RlM100always/uni_info_privacy_policy/blob/main/README.md";
+                    String websiteUrl = "https://newsfeed420s.blogspot.com/p/privacy-policy.html";
                     Intent openWebsiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteUrl));
                     startActivity(openWebsiteIntent);
 
@@ -871,7 +951,49 @@ public class MainActivity extends AppCompatActivity  {
                     startActivity(intent);
 
                 }
+                //menu_exam_his_id
+                if(item.getItemId()==R.id.menu_exam_his_id){
+                    if(FirebaseAuth.getInstance().getUid()!=null){
+                        Intent intent=new Intent(MainActivity.this, ExamHisActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        doLogin(MainActivity.this);
+                    }
 
+                }
+                if(item.getItemId()==R.id.menu_free_id){
+
+                    FileDelete.deleteAllDownloadedFiles(MainActivity.this, new FileDelete.DeletionListener() {
+                        @Override
+                        public void onDeletionComplete() {
+                            // Delete all records from the database
+                            databaseHelper.deleteAllFiles();
+
+
+                            // Show a toast message
+                            Toast.makeText(MainActivity.this, "Successfully Reduce App Size", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onDeletionFailed(Exception e) {
+                            // Show a toast message
+                            Toast.makeText(MainActivity.this, "Failed to delete files: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                //menu_update_app_id
+                if(item.getItemId()==R.id.menu_update_app_id){
+                    Uri uri=Uri.parse("https://play.google.com/store/apps/details?id="+getApplicationContext().getPackageName());
+
+                    Intent intent= new Intent(Intent.ACTION_VIEW,uri);
+                    try {
+                        startActivity(intent);
+                    }catch (Exception e){
+                        Toast.makeText(MainActivity.this, "Unable to ratting !!!"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
 
 
                 return false;

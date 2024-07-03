@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/FullWhite"
+    android:padding="12dp"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:src="@drawable/result_image"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"/>
+    <TextView
+        android:fontFamily="serif"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Congratulations"
+        android:textColor="@color/deepGreen"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:fontFamily="serif"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"
+        android:text="You Complete This Exam Successfully."
+        android:textColor="@color/whiteTextColor1"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/exam_see_result_id"
+        android:foreground="@drawable/uni_background"
+        android:layout_marginBottom="40dp"
+        android:elevation="2dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:backgroundTint="@color/blue"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:background="@drawable/edit_text_background"
+        android:fontFamily="serif"
+        android:layout_gravity="center_horizontal"
+        android:text="See Result"
+        android:textColor="@color/back"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+
+</LinearLayout>

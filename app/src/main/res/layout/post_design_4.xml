@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
    android:layout_margin="10dp"
+    android:elevation="2.5dp"
+    android:backgroundTint="@color/cardMakerColor"
     android:background="@drawable/edit_text_background"
     android:layout_height="wrap_content">
     <LinearLayout
         android:padding="8dp"
-        android:backgroundTint="#FCEDEDF6"
-        android:background="@drawable/edit_text_background"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -25,8 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
                 <ImageView
-                    android:background="@drawable/loading"
-                    android:elevation="6dp"
+                    android:src="@drawable/loading"
+                    android:background="@drawable/background"                    android:elevation="6dp"
                     android:id="@+id/post_design_image_id4"
                     android:scaleType="fitXY"
                     android:layout_width="match_parent"

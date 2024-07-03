@@ -2,13 +2,16 @@ package com.techtravelcoder.alluniversityinformations.pdf;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.books.BookCategoryActivity;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -127,7 +130,9 @@ public class FileDownloader {
             progressDialog.dismiss();
             if (file != null) {
                 listener.onDownloadComplete(file);
+
             } else {
+
                 listener.onDownloadFailed(exception);
             }
         }

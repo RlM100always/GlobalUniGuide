@@ -34,7 +34,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             db.execSQL(CREATE_FILES_TABLE);
         } catch (Exception e) {
-            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -81,6 +80,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         }
         return exists;
+    }
+
+    public void deleteAllFiles() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_FILES);
+        db.close();
     }
 
     public void deleteFile(String name) {

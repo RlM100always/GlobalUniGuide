@@ -65,10 +65,10 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     public void searchLists(ArrayList<MainPostModel> filterlist) {
-        list.clear();
-        list.addAll(filterlist);
+        list=filterlist;
         notifyDataSetChanged();
     }
+
 
 
     @NonNull

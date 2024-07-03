@@ -34,8 +34,7 @@
             android:layout_height="55dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:backgroundTint="@color/deepYellow"
-            android:background="@drawable/submit_back"
+            android:background="@drawable/searchbar_background"
             android:padding="5dp">
 
             <androidx.appcompat.widget.AppCompatSpinner

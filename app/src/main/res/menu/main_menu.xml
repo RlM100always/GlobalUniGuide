@@ -4,6 +4,21 @@
 
     <group >
         <item
+            android:id="@+id/menu_update_app_id"
+            android:icon="@drawable/baseline_update_24"
+            android:title="Update App"
+
+            />
+
+        <item
+
+            android:id="@+id/menu_exam_his_id"
+            android:icon="@drawable/baseline_history_24"
+            android:title="My Exam History"
+
+            />
+
+        <item
 
             android:id="@+id/menu_vocabulayr_id"
             android:icon="@drawable/baseline_menu_book_24"
@@ -13,7 +28,7 @@
 
         <item android:id="@+id/menu_guide_id"
             android:icon="@drawable/baseline_newspaper_24"
-            android:title="Carrier Guide"
+            android:title="Learn Your Nish"
             />
         <item android:id="@+id/menu_popular_content_id"
             android:icon="@drawable/baseline_article_24"
@@ -26,9 +41,14 @@
             android:title="Bookmark University"
             />
         <item android:id="@+id/menu_recent_id"
-            android:icon="@drawable/repeat"
+            android:icon="@drawable/baseline_history_24"
             android:title="New University"
             />
+        <item android:id="@+id/menu_free_id"
+            android:icon="@drawable/baseline_sd_storage_24"
+            android:title="Reduce App Size"
+            />
+
 
 
 

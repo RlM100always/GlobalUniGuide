@@ -14,12 +14,12 @@
     <color name="card">#FC0C115B</color>
 
 
-    <color name="back">#FFFFFF</color><!-- F0F0F4F4-->
-    <color name="cardMakerColor">#F5FEFC</color><!--F3F4F5 FC0C115B  AD00050A-->
+    <color name="back">#F5FEFC</color><!-- F0F0F4F4-->
+    <color name="cardMakerColor">#FFFFFF</color><!--F3F4F5 FC0C115B  AD00050A-->
     <color name="WhitebuttonSide">#F8BDBDBD</color><!-- FC05093A-->
     <color name="whiteTextColor1">#FF000000</color>
     <color name="whiteTextSideColor1">#CF0369</color>
-    <color name="deepGreen">#57AE0E</color>
+    <color name="deepGreen">#34BB03</color>
     <color name="red">#F90303</color>
     <color name="deepYellow">#FFAB00</color>
     <color name="FullWhite">#FFFFFF</color>

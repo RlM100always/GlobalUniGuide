@@ -9,6 +9,7 @@
     android:layout_marginRight="2dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="5dp"
+    android:backgroundTint="@color/cardMakerColor"
     android:background="@drawable/rounded_corner"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -87,7 +88,7 @@
 
     <TextView
         android:fontFamily="serif"
-        android:textColor="#EE53FC"
+        android:textColor="@color/whiteTextSideColor1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -106,7 +107,7 @@
 
     <TextView
         android:fontFamily="serif"
-        android:textColor="#EE53FC"
+        android:textColor="@color/whiteTextSideColor1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -126,7 +127,7 @@
 
     <TextView
         android:fontFamily="serif"
-        android:textColor="#EE53FC"
+        android:textColor="@color/whiteTextSideColor1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

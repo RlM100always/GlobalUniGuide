@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@color/FullWhite"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/f_heading_id"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:text="Add New Friends"
+                android:textColor="@color/whiteTextColor1"
+                android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name **"
+                app:boxStrokeColor="@color/whiteTextColor1"
+                app:hintTextColor="@color/whiteTextColor1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/f_name_id"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/whiteTextColor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:hint="Mobile Number**"
+                app:boxStrokeColor="@color/whiteTextColor1"
+                app:hintTextColor="@color/whiteTextColor1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/f_phone_no_id"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/whiteTextColor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:hint="Address"
+                app:boxStrokeColor="@color/whiteTextColor1"
+                app:hintTextColor="@color/whiteTextColor1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/f_address_id"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/whiteTextColor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Institution"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:boxStrokeColor="@color/whiteTextColor1"
+                app:hintTextColor="@color/whiteTextColor1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/f_institute_id"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/whiteTextColor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Department"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:boxStrokeColor="@color/whiteTextColor1"
+                app:hintTextColor="@color/whiteTextColor1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/f_department_id"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/whiteTextColor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Facebook Id Link"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:boxStrokeColor="@color/whiteTextColor1"
+                app:hintTextColor="@color/whiteTextColor1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/f_facebook_id"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/whiteTextColor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Notes"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:boxStrokeColor="@color/whiteTextColor1"
+                app:hintTextColor="@color/whiteTextColor1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/f_Notes_id"
+                    android:textColorHint="@color/grey"
+                    android:textColor="@color/whiteTextColor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+
+                    android:fontFamily="serif"
+
+                    android:layout_marginRight="30dp"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2.5"
+                    android:gravity="center"
+                    android:id="@+id/f_save_id"
+                    android:textColor="@color/back"
+                    android:backgroundTint="@color/deepGreen"
+                    android:background="@drawable/edit_text_background"
+                    android:textSize="16dp"
+                    android:foreground="@drawable/uni_background"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:text="Save"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:fontFamily="serif"
+                    android:layout_marginLeft="30dp"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2.5"
+                    android:gravity="center"
+                    android:id="@+id/f_cancel_id"
+                    android:textColor="@color/back"
+                    android:backgroundTint="@color/red"
+                    android:background="@drawable/edit_text_background"
+                    android:textSize="16dp"
+                    android:foreground="@drawable/uni_background"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:text="Cancel"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+
+</LinearLayout>

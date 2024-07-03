@@ -16,8 +16,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class BookCategoryActivity extends AppCompatActivity {
 
@@ -48,14 +51,47 @@ public class BookCategoryActivity extends AppCompatActivity {
         EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         editText.setTextColor(ContextCompat.getColor(this, android.R.color.black));
         editText.setHintTextColor(ContextCompat.getColor(this, R.color.allert_back_upper));
+        retriveBookCategoryDetailsData();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
 
 
 
         //retrive category data
 
-        retriveBookCategoryDetailsData();
 
     }
+
+
+    public void searchList(String query) {
+        List<BookCategoryModel> filteredList = new ArrayList<>();
+        String queryWithoutSpaces = query.replaceAll("\\s+", "").toLowerCase(); // Remove spaces from query
+
+        for (BookCategoryModel obj : bookCategoryList) {
+            String objStringWithoutSpaces = obj.toString().replaceAll("\\s+", "").toLowerCase(); // Remove spaces from object
+
+            // Perform search based on bCategoryName without spaces and case-insensitive
+            if (obj.getbCategoryName().replaceAll("\\s+", "").toLowerCase().contains(queryWithoutSpaces)) {
+                filteredList.add(obj);
+            }
+        }
+
+        // Update your UI with the filtered list
+        bookCategoryAdapter.searchLists((ArrayList<BookCategoryModel>) filteredList);
+        bookCategoryAdapter.notifyDataSetChanged();
+    }
+
     private void retriveBookCategoryDetailsData() {
         bookCategoryList=new ArrayList<>();
         bookCategoryAdapter=new BookCategoryAdapter(BookCategoryActivity.this,bookCategoryList);
@@ -76,8 +112,8 @@ public class BookCategoryActivity extends AppCompatActivity {
                         }
 
                     }
-
                 }
+                Collections.shuffle(bookCategoryList);
                 bookCategoryAdapter.notifyDataSetChanged();
             }
 

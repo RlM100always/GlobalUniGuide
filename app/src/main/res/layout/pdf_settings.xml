@@ -40,6 +40,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:fontFamily="serif"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -55,6 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <RadioButton
+                            android:fontFamily="serif"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -63,6 +65,7 @@
                             android:textSize="13sp"/>
 
                         <RadioButton
+                            android:fontFamily="serif"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -78,6 +81,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:fontFamily="serif"
+
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
                         android:textSize="18dp"
@@ -93,6 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <RadioButton
+                            android:fontFamily="serif"
                             android:id="@+id/light_id"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
@@ -101,6 +107,7 @@
                             android:textSize="13sp"/>
 
                         <RadioButton
+                            android:fontFamily="serif"
                             android:id="@+id/night_id"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
@@ -123,6 +130,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:fontFamily="serif"
+
                     android:layout_marginRight="30dp"
                     android:shadowDx="1"
                     android:shadowDy="1"
@@ -142,6 +151,7 @@
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:fontFamily="serif"
                     android:layout_marginLeft="30dp"
                     android:shadowDx="1"
                     android:shadowDy="1"

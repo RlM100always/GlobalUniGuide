@@ -17,11 +17,12 @@
         <androidx.cardview.widget.CardView
             app:cardCornerRadius="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="95dp">
             <ImageView
-                android:background="@drawable/loading"
+                android:src="@drawable/loading"
+                android:background="@drawable/background"
                 android:id="@+id/category_design_image_id"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"/>
 

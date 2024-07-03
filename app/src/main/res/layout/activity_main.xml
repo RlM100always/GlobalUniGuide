@@ -13,22 +13,22 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <androidx.appcompat.widget.Toolbar
             style="@style/MyPopupTheme"
-            app:title="Your Educational Assistant"
-           android:layout_marginTop="5dp"
+            app:subtitle="GlobalUniGuide : Study Notes Provider"
             android:layout_gravity="left"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:id="@+id/tolbar"
             app:subtitleTextColor="@color/whiteTextColor1"
             app:titleTextColor="@color/whiteTextColor1"
             >
         </androidx.appcompat.widget.Toolbar>
         <LinearLayout
+            android:layout_marginTop="4dp"
             android:layout_marginLeft="14dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/ll_user_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -48,15 +48,38 @@
                 android:textSize="16dp"
                 android:textStyle="bold"
                 android:textColor="@color/whiteTextColor1"
-                android:text="Md Raki"
+                android:text="Md Rakib"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:elevation="2dp"
+                android:visibility="gone"
+                android:id="@+id/notice_id_main"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:paddingRight="7dp"
+                android:paddingLeft="7dp"
+                android:background="@drawable/background"
+                android:fontFamily="serif"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="15sp"
+                android:scrollHorizontally="true"
+                android:textColor="@color/whiteTextSideColor1"
+                android:text="Notice : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
             <TextView
+                android:fontFamily="serif"
                 android:visibility="gone"
                 android:layout_marginTop="6dp"
-                android:layout_marginLeft="14dp"
+                android:layout_marginLeft="2dp"
                 android:layout_marginRight="6dp"
                 android:id="@+id/marque_text_id"
                 android:textSize="15sp"
@@ -65,274 +88,53 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:textColor="@color/whiteTextColor1"
-                android:text="আসসালামু আলাইকুম University BD এপ টি মুলত বাংলাদেশের সনামধন্য সকল University এর সুবিধার কথা ভেবে তৈরি করা হয়েছে।
- এই এপের মাধ্যমে আপনারা সকল University এর যাবতীয় আপডেট ইনফরমেশন পাবেন এবং গুরুত্বপূর্ণ নিউজ চাকরির গাইড লাইন, জব সারকুলার, উদ্দোক্তা, রিমোট
- জব, ফ্রিল্যান্সিং বিষয়ক সকল গাইড লাইন পাবেন। আমরা Student দের সারা পেলে সামনে আর ভালো কিছু নিয়ে আসব ইনশাআল্লাহ। আপনাদের সবার সহজোগিতা কামনা করছি। "
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+        </LinearLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
-
-    </LinearLayout>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_marginTop="135dp"
-        android:id="@+id/swipe_refresh_layout_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_marginTop="135dp"
+            android:id="@+id/swipe_refresh_layout_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_marginTop="135dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <androidx.cardview.widget.CardView
-                    android:visibility="gone"
-                    android:id="@+id/pimage_card_id"
-                    app:cardBackgroundColor="@color/back_upper"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardElevation="10dp"
-                    android:layout_margin="11dp"
-                    app:cardCornerRadius="12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.denzcoskun.imageslider.ImageSlider
-                        android:id="@+id/image_slider"
-                        android:background="@drawable/image_buet"
-                        android:layout_width="match_parent"
-                        android:layout_height="210dp"
-                        app:iss_auto_cycle="true"
-                        app:iss_period="2000"
-                        app:iss_delay="2000"
-                        app:iss_text_align="CENTER"/>
-
-                </androidx.cardview.widget.CardView>
-
-
                 <LinearLayout
-                    android:layout_marginLeft="3dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:padding="3dp"
-                        android:layout_weight="0.1"
-                        android:layout_marginStart="2dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/arrow"
-                        app:civ_border_color="@color/cardMakerColor"
-                        app:civ_border_width=".8dp" />
-
-                    <TextView
-                        android:fontFamily="serif"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-                        android:layout_marginStart="5dp"
-                        android:text="Learning Materials "
-                        android:textColor="@color/heading"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="0.1"
-                        android:scaleType="fitXY" />
-
-                </LinearLayout>
-                <LinearLayout
-
                     android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:weightSum="4"
-                        android:orientation="horizontal"
+                    <androidx.cardview.widget.CardView
+                        android:visibility="gone"
+                        android:id="@+id/pimage_card_id"
+                        app:cardBackgroundColor="@color/back_upper"
+                        app:cardPreventCornerOverlap="true"
+                        app:cardElevation="10dp"
+                        android:layout_margin="11dp"
+                        app:cardCornerRadius="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:layout_margin="4dp"
-                            android:gravity="center"
-                            android:foreground="@drawable/uni_background"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
+                        <com.denzcoskun.imageslider.ImageSlider
+                            android:id="@+id/image_slider"
+                            android:background="@drawable/image_buet"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:foreground="@drawable/uni_background"
-                                android:elevation="2dp"
-                                android:id="@+id/carrier_guide_id"
-                                android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/carrier_guidelines"
-                                    android:layout_width="50dp"
-                                    android:layout_height="40dp"/>
+                            android:layout_height="210dp"
+                            app:iss_auto_cycle="true"
+                            app:iss_period="2000"
+                            app:iss_delay="2000"
+                            app:iss_text_align="CENTER"/>
 
-                            </LinearLayout>
-                            <TextView
-                                android:gravity="center"
-                                android:fontFamily="serif"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Learn Your \n Nish "
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
+                    </androidx.cardview.widget.CardView>
 
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/book_collection_id"
-                            android:gravity="center"
-                            android:elevation="10dp"
-                            android:layout_margin="4dp"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:elevation="2dp"
-                                android:foreground="@drawable/uni_background"
-
-                                android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/book"
-                                    android:layout_width="50dp"
-                                    android:layout_height="35dp"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:gravity="center"
-                                android:fontFamily="serif"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text=" Book  \nNotes"
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/dictionary_id"
-                            android:gravity="center"
-                            android:elevation="10dp"
-                            android:layout_margin="4dp"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:foreground="@drawable/uni_background"
-
-                                android:elevation="3dp"
-
-                                android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/dictionar"
-                                    android:layout_width="50dp"
-                                    android:layout_height="35dp"/>
-
-                            </LinearLayout>
-                            <TextView
-                                android:gravity="center"
-                                android:fontFamily="serif"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Dictionary"
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:gravity="center"
-                            android:elevation="10dp"
-                            android:layout_margin="4dp"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:elevation="3dp"
-                                android:foreground="@drawable/uni_background"
-
-                                android:id="@+id/popular_content_id"
-                                android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/trendy"
-                                    android:layout_width="50dp"
-                                    android:layout_height="40dp"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:gravity="center"
-                                android:fontFamily="serif"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Popular \nContent"
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
-
-
-                        </LinearLayout>
-
-
-
-
-                    </LinearLayout>
 
                     <LinearLayout
+                        android:layout_marginLeft="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -355,7 +157,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.8"
                             android:layout_marginStart="5dp"
-                            android:text="My BookMark And Recent"
+                            android:text="Learning Materials "
                             android:textColor="@color/heading"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -367,424 +169,825 @@
                             android:scaleType="fitXY" />
 
                     </LinearLayout>
-
                     <LinearLayout
-                        android:weightSum="4"
-                        android:orientation="horizontal"
+
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <LinearLayout
-                            android:gravity="center"
-                            android:layout_margin="4dp"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
+                            android:weightSum="4"
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <LinearLayout
-                                android:elevation="2dp"
+                                android:layout_margin="4dp"
+                                android:gravity="center"
                                 android:foreground="@drawable/uni_background"
-
-                                android:id="@+id/recent_uni_id"
-                                android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/new_uni"
-                                    android:layout_width="50dp"
-                                    android:layout_height="40dp"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:gravity="center"
-                                android:fontFamily="serif"
-                                android:textStyle="bold"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="New \n University"
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
-
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:gravity="center"
-                            android:elevation="10dp"
-                            android:layout_margin="4dp"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:elevation="2dp"
-                                android:foreground="@drawable/uni_background"
-
-                                android:id="@+id/bookmark_uni_id"
-                                android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/baseline_bookmark_added_24"
-                                    android:layout_width="50dp"
-                                    android:layout_height="35dp"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:gravity="center"
-                                android:fontFamily="serif"
-                                android:textStyle="bold"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="MyBookMark University"
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:foreground="@drawable/uni_background"
+                                    android:elevation="2dp"
+                                    android:id="@+id/carrier_guide_id"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/carrier_guidelines"
+                                        android:layout_width="50dp"
+                                        android:layout_height="40dp"/>
+
+                                </LinearLayout>
+                                <TextView
+                                    android:textStyle="bold"
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Learn Your \n Nish "
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
 
 
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:id="@+id/my_bookmark_book_id"
-                            android:gravity="center"
-                            android:elevation="10dp"
-                            android:layout_margin="4dp"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            </LinearLayout>
                             <LinearLayout
-                                android:elevation="2dp"
-                                android:foreground="@drawable/uni_background"
-
+                                android:id="@+id/book_collection_id"
                                 android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/mark"
-                                    android:layout_width="50dp"
-                                    android:layout_height="35dp"/>
+                                android:elevation="10dp"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:elevation="2dp"
+                                    android:foreground="@drawable/uni_background"
+
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/book"
+                                        android:layout_width="50dp"
+                                        android:layout_height="35dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:textStyle="bold"
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=" Book  \nNotes"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
 
                             </LinearLayout>
 
-                            <TextView
+                            <LinearLayout
+                                android:id="@+id/dictionary_id"
                                 android:gravity="center"
-                                android:fontFamily="serif"
-                                android:textStyle="bold"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
+                                android:elevation="10dp"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:foreground="@drawable/uni_background"
 
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="MyBookmark \nBook"
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
+                                    android:elevation="3dp"
+
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/dictionar"
+                                        android:layout_width="50dp"
+                                        android:layout_height="35dp"/>
+
+                                </LinearLayout>
+                                <TextView
+                                    android:textStyle="bold"
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Dictionary"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:elevation="10dp"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:elevation="3dp"
+                                    android:foreground="@drawable/uni_background"
+
+                                    android:id="@+id/popular_content_id"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/trendy"
+                                        android:layout_width="50dp"
+                                        android:layout_height="40dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:textStyle="bold"
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Popular \nContent"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
+
+                            </LinearLayout>
+
+
 
 
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/new_book_id"
-                            android:gravity="center"
-                            android:elevation="10dp"
-                            android:layout_margin="4dp"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:padding="3dp"
+                                android:layout_weight="0.1"
+                                android:layout_marginStart="2dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/arrow"
+                                app:civ_border_color="@color/cardMakerColor"
+                                app:civ_border_width=".8dp" />
+
+                            <TextView
+                                android:fontFamily="serif"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.8"
+                                android:layout_marginStart="5dp"
+                                android:text="My Notes and History"
+                                android:textColor="@color/heading"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="30dp"
+                                android:layout_weight="0.1"
+                                android:scaleType="fitXY" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:weightSum="3"
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
-                                android:elevation="2dp"
-
-                                android:foreground="@drawable/uni_background"
                                 android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/new_book"
-                                    android:layout_width="50dp"
-                                    android:layout_height="40dp"/>
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:elevation="2dp"
+                                    android:foreground="@drawable/uni_background"
+
+                                    android:id="@+id/my_exam_history_id"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/history"
+                                        android:layout_width="50dp"
+                                        android:layout_height="40dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:textStyle="bold"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="My Exam \n History"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:elevation="10dp"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:elevation="2dp"
+                                    android:foreground="@drawable/uni_background"
+
+                                    android:id="@+id/add_friends_id"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/add_friends"
+                                        android:layout_width="50dp"
+                                        android:layout_height="35dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:textStyle="bold"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add \n Friends"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:elevation="10dp"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:elevation="2dp"
+                                    android:foreground="@drawable/uni_background"
+
+                                    android:id="@+id/add_notes_id"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/notes"
+                                        android:layout_width="50dp"
+                                        android:layout_height="35dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:textStyle="bold"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add \n Notes"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
 
                             </LinearLayout>
 
-                            <TextView
-                                android:gravity="center"
-                                android:fontFamily="serif"
-                                android:textStyle="bold"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=" New Book \nNotes"
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
+
+
+
+
 
 
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:padding="3dp"
+                                android:layout_weight="0.1"
+                                android:layout_marginStart="2dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/arrow"
+                                app:civ_border_color="@color/cardMakerColor"
+                                app:civ_border_width=".8dp" />
+
+                            <TextView
+                                android:fontFamily="serif"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.8"
+                                android:layout_marginStart="5dp"
+                                android:text="My BookMark And Recent"
+                                android:textColor="@color/heading"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="30dp"
+                                android:layout_weight="0.1"
+                                android:scaleType="fitXY" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:weightSum="4"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:elevation="2dp"
+                                    android:foreground="@drawable/uni_background"
+
+                                    android:id="@+id/recent_uni_id"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/new_uni"
+                                        android:layout_width="50dp"
+                                        android:layout_height="40dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:textStyle="bold"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="New \n University"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:gravity="center"
+                                android:elevation="10dp"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:elevation="2dp"
+                                    android:foreground="@drawable/uni_background"
+
+                                    android:id="@+id/bookmark_uni_id"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/baseline_bookmark_added_24"
+                                        android:layout_width="50dp"
+                                        android:layout_height="35dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:textStyle="bold"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="MyBookMark University"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/my_bookmark_book_id"
+                                android:gravity="center"
+                                android:elevation="10dp"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:elevation="2dp"
+                                    android:foreground="@drawable/uni_background"
+
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/mark"
+                                        android:layout_width="50dp"
+                                        android:layout_height="35dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:textStyle="bold"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="MyBookmark \nBook"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/new_book_id"
+                                android:gravity="center"
+                                android:elevation="10dp"
+                                android:layout_margin="4dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:elevation="2dp"
+
+                                    android:foreground="@drawable/uni_background"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="80dp"
+                                    android:layout_height="60dp">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/new_book"
+                                        android:layout_width="50dp"
+                                        android:layout_height="40dp"/>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:gravity="center"
+                                    android:fontFamily="serif"
+                                    android:textStyle="bold"
+                                    android:shadowDx=".5"
+                                    android:shadowDy=".5"
+                                    android:shadowRadius="1.5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" New Book \nNotes"
+                                    android:textColor="@color/whiteTextColor1"
+                                    android:textSize="10dp"
+                                    />
+
+
+                            </LinearLayout>
+
+
+
+
+                        </LinearLayout>
+
+
 
 
 
 
                     </LinearLayout>
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:padding="3dp"
-                        android:layout_weight="0.1"
-                        android:layout_marginStart="2dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/arrow"
-                        app:civ_border_color="@color/cardMakerColor"
-                        app:civ_border_width=".8dp" />
-
-                    <TextView
-                        android:fontFamily="serif"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-                        android:layout_marginStart="5dp"
-                        android:text="Explore More Than 100 Countries University "
-                        android:textColor="@color/heading"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="0.1"
-                        android:background="@drawable/arrow_right"
-                        android:scaleType="fitXY" />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:padding="3dp"
+                            android:layout_weight="0.1"
+                            android:layout_marginStart="2dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/arrow"
+                            app:civ_border_color="@color/cardMakerColor"
+                            app:civ_border_width=".8dp" />
 
-                </LinearLayout>
-                <androidx.appcompat.widget.SearchView
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_gravity="center"
-                    android:elevation="5dp"
-                    style="@style/AppTheme.SearchView"
-                    android:id="@+id/searchView"
-                    android:layout_width="250dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/searchbar_background"
-                    app:queryHint="Search Country..."
-                    app:iconifiedByDefault="false"
-                    />
+                        <TextView
+                            android:fontFamily="serif"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:layout_marginStart="5dp"
+                            android:text="Explore More Than 100 Countries University "
+                            android:textColor="@color/heading"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/main_recycler_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp" />
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="0.1"
+                            android:background="@drawable/arrow_right"
+                            android:scaleType="fitXY" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:indeterminate="true"
-                    android:visibility="visible" />
+                    </LinearLayout>
+                    <androidx.appcompat.widget.SearchView
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_gravity="center"
+                        android:elevation="5dp"
+                        style="@style/AppTheme.SearchView"
+                        android:id="@+id/searchView"
+                        android:layout_width="250dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/searchbar_background"
+                        app:queryHint="Search Country..."
+                        app:iconifiedByDefault="false"
+                        />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:padding="3dp"
-                        android:layout_weight="0.1"
-                        android:layout_marginStart="2dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/arrow"
-                        app:civ_border_color="@color/cardMakerColor"
-                        app:civ_border_width=".8dp" />
-
-                    <TextView
-                        android:fontFamily="serif"
-                        android:layout_width="0dp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/main_recycler_id"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-                        android:layout_marginStart="5dp"
-                        android:text="You May Like this Books/Notes Category "
-                        android:textColor="@color/heading"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp" />
 
-                    <ImageView
-                        android:src="@drawable/arrow_right"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="0.1"
-                        android:scaleType="fitXY" />
-
-                </LinearLayout>
-                <ProgressBar
-                    android:id="@+id/progressBar_id1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:indeterminate="true"
-                    android:visibility="visible" />
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/different_book_category_recycler_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:padding="3dp"
-                        android:layout_weight="0.1"
-                        android:layout_marginStart="2dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/arrow"
-                        app:civ_border_color="@color/cardMakerColor"
-                        app:civ_border_width=".8dp" />
-
-                    <TextView
-                        android:fontFamily="serif"
-                        android:layout_width="0dp"
+                    <ProgressBar
+                        android:id="@+id/progressBar_id"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-                        android:layout_marginStart="5dp"
-                        android:text="Suggested Books/Notes For You "
-                        android:textColor="@color/heading"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:layout_centerInParent="true"
+                        android:indeterminate="true"
+                        android:visibility="visible" />
 
-                    <ImageView
-                        android:src="@drawable/arrow_right"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="0.1"
-                        android:scaleType="fitXY" />
-
-                </LinearLayout>
-                <ProgressBar
-                    android:id="@+id/progressBar_id2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:indeterminate="true"
-                    android:visibility="visible" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/different_book_recycler_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:padding="3dp"
-                        android:layout_weight="0.1"
-                        android:layout_marginStart="2dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/arrow"
-                        app:civ_border_color="@color/cardMakerColor"
-                        app:civ_border_width=".8dp" />
-
-                    <TextView
-                        android:fontFamily="serif"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-                        android:layout_marginStart="5dp"
-                        android:text="You May Like this Lesson/contents "
-                        android:textColor="@color/heading"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:padding="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="0.1"
-                        android:scaleType="fitXY" />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:padding="3dp"
+                            android:layout_weight="0.1"
+                            android:layout_marginStart="2dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/arrow"
+                            app:civ_border_color="@color/cardMakerColor"
+                            app:civ_border_width=".8dp" />
+
+                        <TextView
+                            android:fontFamily="serif"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:layout_marginStart="5dp"
+                            android:text="You May Like this Books/Notes Category "
+                            android:textColor="@color/heading"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:src="@drawable/arrow_right"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="0.1"
+                            android:scaleType="fitXY" />
+
+                    </LinearLayout>
+                    <ProgressBar
+                        android:id="@+id/progressBar_id1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:indeterminate="true"
+                        android:visibility="visible" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/different_book_category_recycler_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:padding="3dp"
+                            android:layout_weight="0.1"
+                            android:layout_marginStart="2dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/arrow"
+                            app:civ_border_color="@color/cardMakerColor"
+                            app:civ_border_width=".8dp" />
+
+                        <TextView
+                            android:fontFamily="serif"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:layout_marginStart="5dp"
+                            android:text="Suggested Books/Notes For You "
+                            android:textColor="@color/heading"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:src="@drawable/arrow_right"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="0.1"
+                            android:scaleType="fitXY" />
+
+                    </LinearLayout>
+                    <ProgressBar
+                        android:id="@+id/progressBar_id2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:indeterminate="true"
+                        android:visibility="visible" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/different_book_recycler_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:padding="3dp"
+                            android:layout_weight="0.1"
+                            android:layout_marginStart="2dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/arrow"
+                            app:civ_border_color="@color/cardMakerColor"
+                            app:civ_border_width=".8dp" />
+
+                        <TextView
+                            android:fontFamily="serif"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:layout_marginStart="5dp"
+                            android:text="You May Like this Lesson/contents "
+                            android:textColor="@color/heading"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="0.1"
+                            android:scaleType="fitXY" />
+
+                    </LinearLayout>
+                    <ProgressBar
+                        android:id="@+id/progressBar_id3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:indeterminate="true"
+                        android:visibility="visible" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/newdata_recyclerview_id"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+
+
+
 
                 </LinearLayout>
-                <ProgressBar
-                    android:id="@+id/progressBar_id3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:indeterminate="true"
-                    android:visibility="visible" />
 
+            </androidx.core.widget.NestedScrollView>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/newdata_recyclerview_id"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-
-
-
-            </LinearLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

@@ -1,11 +1,16 @@
 package com.techtravelcoder.alluniversityinformations.mcq;
 
 public class DoEaxmModel {
-    String explanation,optionA,optionB,optionC,optionD,title,rightAnswer,mcqKey;
+    String explanation, optionA, optionB, optionC, optionD, title, rightAnswer, mcqKey;
+    String studentAns; // Add this field to store the student's selected answer
+    boolean isAnswered; // Add this field to indicate if the question has been answered
 
-    public DoEaxmModel(){
-
+    public DoEaxmModel() {
+        this.studentAns = "";
+        this.isAnswered = false;
     }
+
+    // Getters and Setters for all fields
 
     public String getExplanation() {
         return explanation;
@@ -69,5 +74,21 @@ public class DoEaxmModel {
 
     public void setMcqKey(String mcqKey) {
         this.mcqKey = mcqKey;
+    }
+
+    public String getStudentAns() {
+        return studentAns;
+    }
+
+    public void setStudentAns(String studentAns) {
+        this.studentAns = studentAns;
+    }
+
+    public boolean isAnswered() {
+        return isAnswered;
+    }
+
+    public void setAnswered(boolean answered) {
+        isAnswered = answered;
     }
 }

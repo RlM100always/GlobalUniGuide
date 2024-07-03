@@ -36,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class BookPostActivity extends AppCompatActivity {
@@ -80,6 +81,19 @@ public class BookPostActivity extends AppCompatActivity {
         condition=findViewById(R.id.text_id);
 
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
+
 
 
         //progressbar color
@@ -112,6 +126,25 @@ public class BookPostActivity extends AppCompatActivity {
 
 
     }
+
+    public void searchList(String query) {
+        List<BookPostModel> filteredList = new ArrayList<>();
+        String queryWithoutSpaces = query.replaceAll("\\s+", "").toLowerCase(); // Remove spaces from query
+
+        for (BookPostModel obj : bookList) {
+            String objStringWithoutSpaces = obj.toString().replaceAll("\\s+", "").toLowerCase(); // Remove spaces from object
+
+            // Perform search based on bCategoryName without spaces and case-insensitive
+            if (obj.getBookName().replaceAll("\\s+", "").toLowerCase().contains(queryWithoutSpaces)) {
+                filteredList.add(obj);
+            }
+        }
+
+        // Update your UI with the filtered list
+        bookPostAdapter.searchLists((ArrayList<BookPostModel>) filteredList);
+        bookPostAdapter .notifyDataSetChanged();
+    }
+
 
 
     private void retriveBookMarkBook() {

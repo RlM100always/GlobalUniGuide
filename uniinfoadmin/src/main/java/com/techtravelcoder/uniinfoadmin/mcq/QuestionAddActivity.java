@@ -1,8 +1,11 @@
 package com.techtravelcoder.uniinfoadmin.mcq;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,10 +19,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.uniinfoadmin.R;
 import com.techtravelcoder.uniinfoadmin.post.MainPostActivity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,11 +35,15 @@ public class QuestionAddActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
     private String key;
     private String radioButton;
+    private RecyclerView recyclerView;
+    private ArrayList<DetailsExamHisModel>list;
+    private DetailsExamHisModel detailsExamHisModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_add);
+        recyclerView=findViewById(R.id.add_question_recycler_id);
 
         key=getIntent().getStringExtra("key");
 
@@ -44,6 +55,8 @@ public class QuestionAddActivity extends AppCompatActivity {
                 addMcq();
             }
         });
+
+        retriveResult();
     }
 
 
@@ -85,8 +98,6 @@ public class QuestionAddActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
         builder.setView(view);
@@ -131,5 +142,42 @@ public class QuestionAddActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void retriveResult() {
+
+        list=new ArrayList<>();
+        DetailsExamHisAdapter detailsExamHisAdapter=new DetailsExamHisAdapter(QuestionAddActivity.this,list,key);
+        recyclerView.setAdapter(detailsExamHisAdapter );
+        recyclerView.setLayoutManager(new GridLayoutManager(QuestionAddActivity.this,1, RecyclerView.VERTICAL,false));
+        FirebaseDatabase.getInstance().getReference("McqQuestion").child("QuestionSet")
+                .child(key).child("AllQuestion")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        list.clear();
+
+                        if(snapshot.exists())
+                        {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                                detailsExamHisModel = dataSnapshot.getValue(DetailsExamHisModel.class);
+
+                                if(detailsExamHisModel != null){
+                                    list.add(detailsExamHisModel);
+                                }
+
+                            }
+
+
+                        }
+                        detailsExamHisAdapter.notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
 
 }

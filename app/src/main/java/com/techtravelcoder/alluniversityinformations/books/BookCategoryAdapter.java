@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,11 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
 
         return new BookCategoryViewHolder(view);
     }
+
+    public void searchLists(ArrayList<BookCategoryModel> filterlist) {
+        bookCategoryModelList=filterlist;
+    }
+
 
     private void fetchBookDetails(@NonNull BookCategoryViewHolder holder, BookCategoryModel bookCategoryModel) {
         FirebaseDatabase.getInstance().getReference("Book Details")

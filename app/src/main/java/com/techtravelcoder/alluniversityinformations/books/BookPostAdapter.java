@@ -51,6 +51,11 @@ public class BookPostAdapter extends RecyclerView.Adapter<BookPostAdapter.NewVie
         this.checker=checker;
     }
 
+    public void searchLists(ArrayList<BookPostModel> filterlist) {
+        bookList=filterlist;
+    }
+
+
     @NonNull
     @Override
     public NewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
