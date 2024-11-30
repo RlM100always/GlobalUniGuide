@@ -141,13 +141,22 @@ public class MainPostActivity extends AppCompatActivity {
         edQuestonSet=view.findViewById(R.id.ed_question_set_name);
 
         TextView addQuestionSet=view.findViewById(R.id.add_question_set_id);
+        TextView cancel=view.findViewById(R.id.q_t_cancel);
+
 
         builder.setView(view);
         AlertDialog alertDialog= builder.create();
-        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
+        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.alert_back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
         alertDialog.setCancelable(false);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
 
         addQuestionSet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,14 +198,18 @@ public class MainPostActivity extends AppCompatActivity {
         postId=view.findViewById(R.id.post_post_id);
 
         TextView posttv=view.findViewById(R.id.add_main_post_id);
+        //p_cata_cancel
+        TextView cancel=view.findViewById(R.id.p_cata_cancel);
+
 
 
         builder.setView(view);
         AlertDialog alertDialog= builder.create();
-        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
-        alertDialog.getWindow().setBackgroundDrawable(drawable);
+
         alertDialog.show();
         alertDialog.setCancelable(false);
+        Drawable drawables = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
+        alertDialog.getWindow().setBackgroundDrawable(drawables);
 
         posttv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +222,12 @@ public class MainPostActivity extends AppCompatActivity {
 
                 }
 
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
             }
         });
 

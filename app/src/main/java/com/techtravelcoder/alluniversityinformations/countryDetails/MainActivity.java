@@ -31,7 +31,6 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -52,6 +51,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.startapp.sdk.ads.banner.Banner;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.StartAppSDK;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentAdapter.MainPostAdapter;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
@@ -60,13 +61,12 @@ import com.techtravelcoder.alluniversityinformations.ads.GoogleSignInHelper;
 import com.techtravelcoder.alluniversityinformations.books.BookCategoryActivity;
 import com.techtravelcoder.alluniversityinformations.books.BookCategoryAdapter;
 import com.techtravelcoder.alluniversityinformations.books.BookCategoryModel;
+import com.techtravelcoder.alluniversityinformations.books.BookModel;
 import com.techtravelcoder.alluniversityinformations.books.BookPostActivity;
 import com.techtravelcoder.alluniversityinformations.books.BookPostAdapter;
-import com.techtravelcoder.alluniversityinformations.books.BookPostModel;
 import com.techtravelcoder.alluniversityinformations.mcq.ExamHisActivity;
 import com.techtravelcoder.alluniversityinformations.notes.AddFriendsActivity;
 import com.techtravelcoder.alluniversityinformations.pdf.DatabaseHelper;
-import com.techtravelcoder.alluniversityinformations.pdf.FileDelete;
 import com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 import com.techtravelcoder.alluniversityinformations.universityDetails.ReBookMarkActivity;
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity  {
 
     private CountryAdapter campainAdapter;
     private ArrayList<CountryModel> list;
-    private ArrayList<BookPostModel> bookList;
+    private ArrayList<BookModel> bookList;
     private ArrayList<BookCategoryModel> bookCategoryList;
     SwipeRefreshLayout swipeRefreshLayout;
     DatabaseReference mbase;
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity  {
     private AlertDialog alertDialog;
     private GoogleSignInHelper mGoogleSignInHelper;
     private TextView notice;
-    private ProgressBar progressBar,progressBar1,progressBar2,progressBar3;
+    private ProgressBar progressBar;
     private LinearLayout visit,recentUni,carrierGuide,popularContent,bookUni,dictionary,bookCollection,newBook,bookMarkBook;
     private LinearLayout examHis,addfriends,addNotes;
 
@@ -136,8 +136,9 @@ public class MainActivity extends AppCompatActivity  {
 
 
         //for ads disable
-//        StartAppSDK.init(this, "201407686");
-//        StartAppAd.disableAutoInterstitial();
+        StartAppSDK.init(this, "201407686",false);
+        StartAppAd.disableAutoInterstitial();//201407686
+
 
 
         notice=findViewById(R.id.notice_id_main);
@@ -180,16 +181,16 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
-
-
-
-
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(0);
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.whiteTextSideColor1);
+            color = getColor(R.color.back);
+            getWindow().setStatusBarColor(color);
+
+            // Enable light status bar mode (dark icons and text)
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        getWindow().setStatusBarColor(color);
 
 
 
@@ -197,8 +198,6 @@ public class MainActivity extends AppCompatActivity  {
         gridLayoutManager=new GridLayoutManager(MainActivity.this,2,GridLayoutManager.HORIZONTAL,false);
         progressBar=findViewById(R.id.progressBar_id);
         recyclerView=findViewById(R.id.main_recycler_id);
-        recyclerViewNew=findViewById(R.id.newdata_recyclerview_id);
-        difBookCategoryRecyclerView=findViewById(R.id.different_book_category_recycler_id);
         examHis=findViewById(R.id.my_exam_history_id);
         addfriends=findViewById(R.id.add_friends_id);
 
@@ -215,9 +214,7 @@ public class MainActivity extends AppCompatActivity  {
         bookCollection=findViewById(R.id.book_collection_id);
         newBook=findViewById(R.id.new_book_id);
         bookMarkBook=findViewById(R.id.my_bookmark_book_id);
-        progressBar1=findViewById(R.id.progressBar_id1);
-        progressBar2=findViewById(R.id.progressBar_id2);
-        progressBar3=findViewById(R.id.progressBar_id3);
+
         markText=findViewById(R.id.marque_text_id);
         imageSlider = findViewById(R.id.image_slider);
 
@@ -261,9 +258,6 @@ public class MainActivity extends AppCompatActivity  {
                             }
                         });
 
-
-
-
         //slider call
         try {
             FirebaseDatabase.getInstance().getReference("Ads Control")
@@ -272,7 +266,6 @@ public class MainActivity extends AppCompatActivity  {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()){
                                 String ans11=snapshot.child("pStatus").getValue(String.class);
-                                Toast.makeText(MainActivity.this, ""+ans11, Toast.LENGTH_SHORT).show();
                                 if(ans11.equals("on")){
                                     cardView.setVisibility(View.VISIBLE);
                                     sliderSupport();
@@ -289,7 +282,8 @@ public class MainActivity extends AppCompatActivity  {
                         }
                     });
 
-        }catch (Exception e){
+        }
+        catch (Exception e){
         }
 
 
@@ -298,7 +292,7 @@ public class MainActivity extends AppCompatActivity  {
         // Initialize FirebaseAuth instance
 
         mbase = FirebaseDatabase.getInstance().getReference("Country");
-        mbase.keepSynced(true);
+        mbase.keepSynced(false);
 
 
 
@@ -306,14 +300,6 @@ public class MainActivity extends AppCompatActivity  {
         progressBar.setVisibility(View.VISIBLE);
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
 
-        progressBar1.setVisibility(View.VISIBLE);
-        progressBar1.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
-
-        progressBar2.setVisibility(View.VISIBLE);
-        progressBar2.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
-
-        progressBar3.setVisibility(View.VISIBLE);
-        progressBar3.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.whiteTextColor1), PorterDuff.Mode.SRC_IN);
 
 
 
@@ -324,6 +310,7 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 if(FirebaseAuth.getInstance().getUid()!=null){
                     Intent intent=new Intent(getApplicationContext(),ExamHisActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
                     startActivity(intent);
                 }
                 else {
@@ -339,6 +326,7 @@ public class MainActivity extends AppCompatActivity  {
                     Intent intent=new Intent(getApplicationContext(), AddFriendsActivity.class);
                     intent.putExtra("check","2");
                     startActivity(intent);
+                    ADSSetUp.adsType1(MainActivity.this);
                 }
                 else {
                     doLogin(MainActivity.this);
@@ -351,6 +339,8 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 if(FirebaseAuth.getInstance().getUid()!=null){
                     Intent intent=new Intent(getApplicationContext(), AddFriendsActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
+
                     intent.putExtra("check","1");
                     startActivity(intent);
                 }
@@ -367,6 +357,7 @@ public class MainActivity extends AppCompatActivity  {
                 if(FirebaseAuth.getInstance().getCurrentUser() != null){
                     Intent intent=new Intent(getApplicationContext(), BookPostActivity.class);
                     intent.putExtra("key","@");
+                    ADSSetUp.adsType1(MainActivity.this);
                     startActivity(intent);
                 }
                 else {
@@ -380,6 +371,7 @@ public class MainActivity extends AppCompatActivity  {
                 if(FirebaseAuth.getInstance().getCurrentUser() != null){
                     Intent intent=new Intent(getApplicationContext(), BookPostActivity.class);
                     intent.putExtra("key","@b");
+                    ADSSetUp.adsType1(MainActivity.this);
 
                     startActivity(intent);
                 }
@@ -396,6 +388,8 @@ public class MainActivity extends AppCompatActivity  {
                 Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
                 ADSSetUp.adsType1(MainActivity.this);
                 intent.putExtra("check",1);
+                ADSSetUp.adsType1(MainActivity.this);
+
                 startActivity(intent);
 
             }
@@ -446,6 +440,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(),VocabularyActivity.class);
+                ADSSetUp.adsType1(MainActivity.this);
+
                 startActivity(intent);
             }
         });
@@ -454,6 +450,8 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 if(FirebaseAuth.getInstance().getCurrentUser() != null){
                     Intent intent=new Intent(getApplicationContext(), BookCategoryActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
+
                     startActivity(intent);
                 }
                 else {
@@ -503,48 +501,23 @@ public class MainActivity extends AppCompatActivity  {
             refeshData();
         };
 
-        Runnable fetchNewPostDataTask = () -> {
-            fetchNewPostData();
-        };
 
-        Runnable fetchBookCategoryTask = () -> {
-            fetchBookCategory();
-        };
 
-        Runnable retrieveDifferent50BooksTask = () -> {
-            retriveDiffernt50Books();
-        };
+
 
         // Create threads with the tasks
         Thread loadDataThread = new Thread(loadDataTask);
         Thread refreshDataThread = new Thread(refreshDataTask);
-        Thread fetchNewPostDataThread = new Thread(fetchNewPostDataTask);
-        Thread fetchBookCategoryThread = new Thread(fetchBookCategoryTask);
-        Thread retrieveDifferent50BooksThread = new Thread(retrieveDifferent50BooksTask);
-
         // Start all threads
         loadDataThread.start();
         refreshDataThread.start();
-        if(FirebaseAuth.getInstance().getUid()!=null){
-            fetchBookCategoryThread.start();
-            retrieveDifferent50BooksThread.start();
 
-        }else {
-            progressBar1.setVisibility(View.GONE);
-            progressBar2.setVisibility(View.GONE);
-        }
-        fetchNewPostDataThread.start();
 
 
         // Wait for all threads to finish
         try {
             loadDataThread.join();
             refreshDataThread.join();
-            fetchNewPostDataThread.join();
-            if(FirebaseAuth.getInstance().getUid()!=null){
-                fetchBookCategoryThread.join();
-                retrieveDifferent50BooksThread.join();
-            }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -559,19 +532,15 @@ public class MainActivity extends AppCompatActivity  {
         actionBarDrawerToggle.syncState();
         Drawable navIcon = toolbar.getNavigationIcon();
         if (navIcon != null) {
-            navIcon.setColorFilter(getResources().getColor(android.R.color.holo_green_dark), PorterDuff.Mode.SRC_IN);
+            navIcon.setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
         }
 
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
                 refeshData();
-                fetchNewPostData();
-                if(FirebaseAuth.getInstance().getUid()!=null){
-                    fetchBookCategory();
-                    retriveDiffernt50Books();
-                }
 
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -626,98 +595,6 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
-
-
-
-
-
-
-
-    private void retriveDiffernt50Books() {
-        suggestedBooksRecyclerview=findViewById(R.id.different_book_recycler_id);
-        suggestedBooksRecyclerview.setLayoutManager(new GridLayoutManager(getApplicationContext(),1,GridLayoutManager.HORIZONTAL,false));
-        bookList = new ArrayList<>();
-        bookPostAdapter = new BookPostAdapter(this, bookList, 4);
-
-        suggestedBooksRecyclerview.setAdapter(bookPostAdapter);
-        FirebaseDatabase.getInstance().getReference("Book Details").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                bookList.clear();
-                List<BookPostModel> allBooks = new ArrayList<>();
-                if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        BookPostModel bookPostModel = dataSnapshot.getValue(BookPostModel.class);
-                        if (bookPostModel != null) {
-                            allBooks.add(bookPostModel);
-                        }
-                    }
-
-                    // Shuffle the list of all books
-                    Collections.shuffle(allBooks);
-                    progressBar2.setVisibility(View.GONE);
-
-
-                    // Take the first 50 items or fewer if the list size is less than 50
-                    int itemsToFetch = Math.min(40, allBooks.size());
-                    for (int i = 0; i < itemsToFetch; i++) {
-                        bookList.add(allBooks.get(i));
-                    }
-
-                    bookPostAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), "Failed to fetch categories: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    private void fetchBookCategory() {
-        bookCategoryList = new ArrayList<>();
-        bookCategoryAdapter = new BookCategoryAdapter(MainActivity.this, bookCategoryList);
-        difBookCategoryRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1,GridLayoutManager.HORIZONTAL,false));
-        difBookCategoryRecyclerView.setAdapter(bookCategoryAdapter);
-
-        FirebaseDatabase.getInstance().getReference("Book Category").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<BookCategoryModel> allBooks = new ArrayList<>();
-                if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        BookCategoryModel bookCategoryModel = dataSnapshot.getValue(BookCategoryModel.class);
-                        if (bookCategoryModel != null) {
-                            allBooks.add(bookCategoryModel);
-                        }
-                    }
-                }
-
-                // Shuffle the list
-                Collections.shuffle(allBooks);
-
-                // Clear the current list
-                bookCategoryList.clear();
-                progressBar1.setVisibility(View.GONE);
-
-
-                // Add up to 20 items to the bookCategoryList
-                for (int i = 0; i < Math.min(15, allBooks.size()); i++) {
-                    bookCategoryList.add(allBooks.get(i));
-                }
-
-                // Notify the adapter
-                bookCategoryAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle possible errors
-                Log.e("MainActivity", "Database error: " + error.getMessage());
-            }
-        });
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -749,8 +626,6 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
-
-
 
     private void refeshData() {
        // recyclerView.setLayoutManager(gridLayoutManager);
@@ -964,23 +839,6 @@ public class MainActivity extends AppCompatActivity  {
                 }
                 if(item.getItemId()==R.id.menu_free_id){
 
-                    FileDelete.deleteAllDownloadedFiles(MainActivity.this, new FileDelete.DeletionListener() {
-                        @Override
-                        public void onDeletionComplete() {
-                            // Delete all records from the database
-                            databaseHelper.deleteAllFiles();
-
-
-                            // Show a toast message
-                            Toast.makeText(MainActivity.this, "Successfully Reduce App Size", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onDeletionFailed(Exception e) {
-                            // Show a toast message
-                            Toast.makeText(MainActivity.this, "Failed to delete files: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
                 }
 
                 //menu_update_app_id
@@ -1003,6 +861,7 @@ public class MainActivity extends AppCompatActivity  {
     }
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (recyclerView != null && recyclerView.getAdapter() != null) {
             int firstVisibleItemPosition = ((GridLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
             if (firstVisibleItemPosition > 0) {
@@ -1041,48 +900,6 @@ public class MainActivity extends AppCompatActivity  {
 
         Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
         dialog.getWindow().setBackgroundDrawable(drawable);
-    }
-    private void fetchNewPostData() {
-        listNew = new ArrayList<>();
-        mainPostAdapter = new MainPostAdapter(getApplicationContext(), listNew,1);
-
-        databaseReferenceNew = FirebaseDatabase.getInstance().getReference("Post");
-        mainPostAdapter.setViewTypeToShow(2);
-        recyclerViewNew.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewNew.setAdapter(mainPostAdapter);
-
-
-        databaseReferenceNew.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listNew.clear();
-                List<MainPostModel> allPosts = new ArrayList<>();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    MainPostModel mainPostModel = dataSnapshot.getValue(MainPostModel.class);
-                    if (mainPostModel != null) {
-                        allPosts.add(mainPostModel);
-                    }
-                }
-
-                // Shuffle the list of all posts
-                Collections.shuffle(allPosts);
-                progressBar3.setVisibility(View.GONE);
-
-
-                // Take the first 120 items or fewer if the list size is less than 120
-                int itemsToFetch = Math.min(150, allPosts.size());
-                for (int i = 0; i < itemsToFetch; i++) {
-                    listNew.add(allPosts.get(i));
-                }
-
-                mainPostAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), "Failed to fetch categories: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override

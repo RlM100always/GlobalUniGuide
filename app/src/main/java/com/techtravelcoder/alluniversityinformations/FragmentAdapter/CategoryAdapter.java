@@ -19,9 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.CategoryModel;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
-import com.techtravelcoder.alluniversityinformations.books.BookCategoryAdapter;
-import com.techtravelcoder.alluniversityinformations.books.BookCategoryModel;
-import com.techtravelcoder.alluniversityinformations.books.BookPostModel;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.postDetails.CategoryPostActivity;
 
 import java.util.ArrayList;
@@ -62,7 +60,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 itemView = inflater.inflate(R.layout.category_design, parent, false);
                 return new ViewHolderType1(itemView);
             case VIEW_TYPE_2:
-                itemView = inflater.inflate(R.layout.category_design_1, parent, false);
+                itemView = inflater.inflate(R.layout.category_design, parent, false);
                 return new ViewHolderType2(itemView);
             default:
                 throw new IllegalArgumentException("Invalid view type");
@@ -152,15 +150,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     private void bindViewHolderType1(ViewHolderType1 holder, CategoryModel categoryModel) {
+
         holder.title1.setText(categoryModel.getName());
         holder.label1.setText(categoryModel.getLabel());
+        if(holder.img1 !=null){
+
+        }
         Glide.with(context).load(categoryModel.getImageLink()).into(holder.img1);
+
         fetchCourseNumber(holder,categoryModel);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, CategoryPostActivity.class);
+                ADSSetUp.adsType1(context);
                 intent.putExtra("id",categoryModel.getId());
                 intent.putExtra("title",categoryModel.getLabel());
                 if(categoryModel.getCategoryType()!=null){
@@ -176,6 +180,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.title2.setText(categoryModel.getName());
         holder.label2.setText(categoryModel.getLabel());
         Glide.with(context).load(categoryModel.getImageLink()).into(holder.img2);
+
         fetchCourseNumber2(holder,categoryModel);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

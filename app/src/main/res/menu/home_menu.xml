@@ -20,6 +20,7 @@
                 android:title="Rate This University"
                 />
             <item
+                android:iconTint="@color/whiteTextSideColor1"
                 android:id="@+id/menu_favorite_border_id"
                 android:icon="@drawable/baseline_bookmark_border_24"
                 android:title="Add to BookMark"

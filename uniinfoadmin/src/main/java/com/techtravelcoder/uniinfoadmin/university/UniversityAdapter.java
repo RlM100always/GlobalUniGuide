@@ -86,6 +86,7 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
                 privatesFalse=view.findViewById(R.id.private_false_id);
                 suggestTrue=view.findViewById(R.id.suggest_true_id);
                 suggestFalse=view.findViewById(R.id.suggest_false_id);
+                TextView cancel=view.findViewById(R.id.uni_cancel);
 
 
 
@@ -193,6 +194,15 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
                 AlertDialog alertDialog = builder.create();
 
                 alertDialog.show();
+                Drawable drawables = ContextCompat.getDrawable(context, R.drawable.alert_back);
+                alertDialog.getWindow().setBackgroundDrawable(drawables);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
 
                 update.setOnClickListener(new View.OnClickListener() {
                     @Override

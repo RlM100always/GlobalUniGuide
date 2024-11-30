@@ -66,9 +66,19 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
                 EditText name = view.findViewById(R.id.ed_book_category_id);
                 EditText link = view.findViewById(R.id.ed_book_category_image_link);
                 TextView update = view.findViewById(R.id.book_category_add_id);
+                TextView cancel=view.findViewById(R.id.category_cancel_settings_id);
+                //key_word_id
+                EditText categoryKey=view.findViewById(R.id.key_word_id);
+
+
 
                 name.setText(bookCategoryModel.getbCategoryName());
                 link.setText(bookCategoryModel.getbCategoryImageLink());
+                Toast.makeText(context, ""+bookCategoryModel.getbCategoryKeyword(), Toast.LENGTH_SHORT).show();
+                if(bookCategoryModel.getbCategoryKeyword()!=null){
+                    categoryKey.setText(bookCategoryModel.getbCategoryKeyword());
+                }
+
 
                 // Set the custom layout view to the AlertDialog builder
                 builder.setView(view);
@@ -76,6 +86,15 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
                 // Create and show the AlertDialog
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
+                Drawable drawables = ContextCompat.getDrawable(context, R.drawable.alert_back);
+                alertDialog.getWindow().setBackgroundDrawable(drawables);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
 
                 // Set OnClickListener for the update TextView
                 update.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +107,8 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
                             map.put("bCategoryName", name.getText().toString());
                             map.put("bCategoryImageLink", link.getText().toString());
                             map.put("bCategoryKey", bookCategoryModel.getbCategoryKey());
+                            map.put("bCategoryKeyword", categoryKey.getText().toString());
+
 
                             // Update the details in Firebase
                             FirebaseDatabase.getInstance().getReference("Book Category")
@@ -121,6 +142,8 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
                 Intent intent=new Intent(context,BookPostActivity.class);
                 intent.putExtra("key",bookCategoryModel.getbCategoryKey());
                 intent.putExtra("bCategory",bookCategoryModel.getbCategoryName());
+                intent.putExtra("bCategoryKeyword",bookCategoryModel.getbCategoryKeyword());
+
 
                 context.startActivity(intent);
             }
@@ -131,6 +154,10 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
     @Override
     public int getItemCount() {
         return bookCategoryModelList.size();
+    }
+
+    public void searchListsFunc(ArrayList<BookCategoryModel> fList) {
+        bookCategoryModelList=fList;
     }
 
     public class BookCategoryViewHolder extends RecyclerView.ViewHolder {

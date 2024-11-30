@@ -9,6 +9,7 @@
 
     android:layout_height="wrap_content">
     <LinearLayout
+        android:foreground="@drawable/uni_background"
         android:background="@drawable/edit_text_background"
         android:backgroundTint="@color/cardMakerColor"
         android:padding="5dp"
@@ -16,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:foreground="@drawable/uni_background"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
@@ -24,15 +24,16 @@
             <androidx.cardview.widget.CardView
                 app:cardCornerRadius="12dp"
                 android:layout_gravity="center"
-                android:foreground="@drawable/uni_background"
                 android:layout_width="140dp"
                 android:layout_height="100dp">
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:src="@drawable/loading"
-                    android:background="@drawable/background"
+                    android:background="@drawable/loading"
                     android:id="@+id/post_design_image_id"
                     android:scaleType="fitXY"
-                    android:layout_width="match_parent"
+                    app:shapeAppearanceOverlay="@style/CornerCut"
+
+                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
             </androidx.cardview.widget.CardView>

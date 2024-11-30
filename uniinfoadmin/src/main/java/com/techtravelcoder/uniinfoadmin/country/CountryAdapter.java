@@ -66,6 +66,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
                 final View view = inflater.inflate(R.layout.task_update_design, null);
                 EditText name = view.findViewById(R.id.enter_task_title1);
                 EditText link = view.findViewById(R.id.enter_task_link1);
+                TextView cancel=view.findViewById(R.id.country_cancel1);
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setView(view);
 
@@ -80,9 +82,17 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
                 TextView update = view.findViewById(R.id.add_post_id1);
 
                 AlertDialog alertDialog = builder.create();
-                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.back);
+                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.alert_back);
                 alertDialog.getWindow().setBackgroundDrawable(drawable);
                 alertDialog.show();
+                alertDialog.setCancelable(false);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
 
                 update.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -104,6 +114,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
                         alertDialog.dismiss();
                     }
                 });
+
             }
         });
 

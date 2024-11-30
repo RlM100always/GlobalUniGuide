@@ -159,26 +159,52 @@
                     android:textSize="15dp"/>
             </RadioGroup>
         </LinearLayout>
-        <TextView
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2.5"
+        <LinearLayout
             android:layout_marginBottom="30dp"
-            android:gravity="center"
-            android:layout_marginTop="7dp"
-            android:id="@+id/question_submit_id"
-            android:textColor="@color/white"
-            android:backgroundTint="#57C905"
-            android:background="@drawable/sub_back"
-            android:textSize="20dp"
-            android:foreground="@drawable/rip"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:text="Submit"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"/>
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:fontFamily="serif"
+                android:layout_marginRight="30dp"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2.5"
+                android:gravity="center"
+                android:id="@+id/question_submit_id"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/deepGreen"
+                android:background="@drawable/edit_text_background"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="Submit"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/question_cancel"
+                android:fontFamily="serif"
+                android:layout_marginLeft="30dp"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2.5"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/red"
+                android:background="@drawable/edit_text_background"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="Cancel"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 

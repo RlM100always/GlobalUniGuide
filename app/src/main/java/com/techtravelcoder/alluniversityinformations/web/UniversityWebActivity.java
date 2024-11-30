@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -90,11 +91,14 @@ public class UniversityWebActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_web);
 
-        int color = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            color = getColor(R.color.whiteTextSideColor1);
+        int color=0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            color = getColor(R.color.back);
+            getWindow().setStatusBarColor(color);
+
+            // Enable light status bar mode (dark icons and text)
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        getWindow().setStatusBarColor(color);
 
         noInternet=findViewById(R.id.no_internet_id);
 
@@ -158,27 +162,7 @@ public class UniversityWebActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Download Manager is not available", Toast.LENGTH_SHORT).show();
             }
         });
-        webView.setWebViewClient(new MyWebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                progressBar.setVisibility(View.VISIBLE);
-                view.loadUrl(url);
-                return true;
-            }
 
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed();
-            }
-
-            @Override
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                // Hide the WebView
-                webView.setVisibility(View.GONE);
-                // Show error message
-                noInternet.setVisibility(View.VISIBLE);
-            }
-        });
         webView.loadUrl(s_link);
 
 

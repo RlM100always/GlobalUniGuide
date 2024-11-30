@@ -27,8 +27,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/book_category_recycler_view_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/book_category_float_id"
         app:layout_constraintEnd_toEndOf="parent"

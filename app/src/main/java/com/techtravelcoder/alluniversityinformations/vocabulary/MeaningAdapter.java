@@ -196,6 +196,8 @@ public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.MeaningV
         holder.copyText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ADSSetUp.adsType1(context);
+
                 String text=holder.partOfSpeechTextview.getText().toString()+"Definitions"+holder.definitionsTextview.getText().toString()+"Synonyms"+holder.synonymsTextview.getText().toString()+"Antonyms"+holder.antonymsTextview.getText().toString();
 
                 copyToClipboard(text);
@@ -225,6 +227,9 @@ public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.MeaningV
         holder.translate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ADSSetUp.adsType1(context);
+
 
                 View dialogView = LayoutInflater.from(context).inflate(R.layout.translate_design, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -275,7 +280,6 @@ public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.MeaningV
                 convert.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ADSSetUp.adsType3(context);
 
 
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/FullWhite"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:foreground="@drawable/fore_back"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="Option"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:foreground="@drawable/fore_back"
+        android:id="@+id/online_id"
+        android:textColor="@color/FullWhite"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="Online"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <TextView
+        android:id="@+id/offline_id"
+        android:textColor="@color/FullWhite"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:background="@drawable/edit_text_background"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="Offline"
+        android:foreground="@drawable/fore_back"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+</LinearLayout>

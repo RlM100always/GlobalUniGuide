@@ -20,14 +20,15 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:weightSum="2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <androidx.appcompat.widget.SearchView
-                    android:layout_weight=".7"
+                    android:layout_weight="1"
                     android:id="@+id/home_searchView"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_margin="6dp"
                     android:layout_gravity="center"
@@ -37,12 +38,11 @@
                     app:iconifiedByDefault="false" />
 
                 <Button
-                    android:layout_weight="1.3"
                     android:fontFamily="serif"
                     android:textColor="@color/back"
                     android:backgroundTint="#CA04FC"
                     android:id="@+id/search_btn_home_fragment"
-                    android:layout_width="match_parent"
+                    android:layout_width="110dp"
                     android:layout_height="47dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="5dp"

@@ -72,6 +72,9 @@ public class QuestionAddActivity extends AppCompatActivity {
         EditText explain=view.findViewById(R.id.ed_explanation_id);
         RadioGroup radioGroup=view.findViewById(R.id.group_radio_mcq);
         TextView submit=view.findViewById(R.id.question_submit_id);
+        //question_cancel
+        TextView cancel=view.findViewById(R.id.question_cancel);
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -102,11 +105,18 @@ public class QuestionAddActivity extends AppCompatActivity {
 
         builder.setView(view);
         AlertDialog alertDialog= builder.create();
-        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
-        alertDialog.getWindow().setBackgroundDrawable(drawable);
+
         alertDialog.show();
         alertDialog.setCancelable(false);
+        Drawable drawables = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
+        alertDialog.getWindow().setBackgroundDrawable(drawables);
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

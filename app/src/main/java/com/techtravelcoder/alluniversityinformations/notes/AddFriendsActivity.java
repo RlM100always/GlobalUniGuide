@@ -3,14 +3,18 @@ package com.techtravelcoder.alluniversityinformations.notes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,20 +25,16 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
-import com.techtravelcoder.alluniversityinformations.books.BookCategoryActivity;
-import com.techtravelcoder.alluniversityinformations.books.BookCategoryAdapter;
-import com.techtravelcoder.alluniversityinformations.books.BookCategoryModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -43,6 +43,13 @@ public class AddFriendsActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
     private String check;
     private RecyclerView recyclerView;
+    private ArrayList<NotesModel> noteList;
+    private ArrayList<FriendsModel> flist;
+
+    private NotesAdapter notesAdapter;
+    private FriendsAdapter friendsAdapter;
+    private SearchView searchView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +58,61 @@ public class AddFriendsActivity extends AppCompatActivity {
 
         floatingActionButton=findViewById(R.id.friends_float_id);
         recyclerView=findViewById(R.id.add_friends_recyclerview_id);
+        swipeRefreshLayout=findViewById(R.id.swipe_refresh_layout_add_friends);
+        searchView=findViewById(R.id.friends_search);
+        EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        editText.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+        editText.setHintTextColor(ContextCompat.getColor(this, R.color.allert_back_upper));
+
         check=getIntent().getStringExtra("check");
-        Toast.makeText(this, ""+check, Toast.LENGTH_SHORT).show();
+        int color=0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            color = getColor(R.color.back);
+            getWindow().setStatusBarColor(color);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
 
         if(check.equals("2")){
             retriveNotesData();
         }
+        if(check.equals("1")){
+            retriveFriendsData();
+        }
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if(check.equals("2")){
+                    retriveNotesData();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+                if(check.equals("1")){
+                    retriveFriendsData();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+        });
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(check.equals("1")){
+                    searchListFriends(newText);
+                }
+                if(check.equals("2")){
+                    searchListNotes(newText);
+                }
+
+                return true;
+            }
+        });
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,9 +129,81 @@ public class AddFriendsActivity extends AppCompatActivity {
 
     }
 
+    private void searchListFriends(String newText) {
+        List<FriendsModel> filteredList1 = new ArrayList<>();
+        String queryWithoutSpaces = newText.replaceAll("\\s+", "").toLowerCase(); // Remove spaces from query
+
+        for (FriendsModel obj : flist) {
+            String objStringWithoutSpaces = obj.toString().replaceAll("\\s+", "").toLowerCase(); // Remove spaces from object
+
+            // Perform search based on bCategoryName without spaces and case-insensitive
+            if (objStringWithoutSpaces.contains(queryWithoutSpaces)) {
+                filteredList1.add(obj);
+            }
+        }
+
+        // Update your UI with the filtered list
+        friendsAdapter.searchLists((ArrayList<FriendsModel>) filteredList1);
+        friendsAdapter.notifyDataSetChanged();
+    }
+
+    private void retriveFriendsData() {
+
+        flist=new ArrayList<>();
+        friendsAdapter=new FriendsAdapter( AddFriendsActivity.this,flist);
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
+        recyclerView.setAdapter(friendsAdapter);
+        FirebaseDatabase.getInstance().getReference("Friends").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                flist.clear();
+                FriendsModel friendsModel;
+                if(snapshot.exists()){
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+                        friendsModel = dataSnapshot.getValue(FriendsModel.class);
+                        if(friendsModel != null){
+                            flist.add(0,friendsModel);
+
+                        }
+
+                    }
+                }
+
+                friendsAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    public void searchListNotes(String query) {
+        List<NotesModel> filteredList = new ArrayList<>();
+        String queryWithoutSpaces = query.replaceAll("\\s+", "").toLowerCase(); // Remove spaces from query
+
+        for (NotesModel obj : noteList) {
+            String objStringWithoutSpaces = obj.toString().replaceAll("\\s+", "").toLowerCase(); // Remove spaces from object
+
+            // Perform search based on bCategoryName without spaces and case-insensitive
+            if (objStringWithoutSpaces.contains(queryWithoutSpaces)) {
+                filteredList.add(obj);
+            }
+        }
+
+        // Update your UI with the filtered list
+        notesAdapter.searchLists((ArrayList<NotesModel>) filteredList);
+        notesAdapter.notifyDataSetChanged();
+    }
+
+
     private void retriveNotesData() {
-        ArrayList<NotesModel> noteList=new ArrayList<>();
-        NotesAdapter notesAdapter=new NotesAdapter(noteList, AddFriendsActivity.this);
+         noteList=new ArrayList<>();
+         notesAdapter=new NotesAdapter(noteList, AddFriendsActivity.this);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
         recyclerView.setAdapter(notesAdapter);
         FirebaseDatabase.getInstance().getReference("MyNotes").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
@@ -140,7 +268,6 @@ public class AddFriendsActivity extends AppCompatActivity {
                     map.put("date", date);
                     map.put("key",key);
 
-                    Toast.makeText(AddFriendsActivity.this, "Rakib", Toast.LENGTH_SHORT).show();
 
                     FirebaseDatabase.getInstance().getReference("MyNotes")
                             .child(FirebaseAuth.getInstance().getUid())

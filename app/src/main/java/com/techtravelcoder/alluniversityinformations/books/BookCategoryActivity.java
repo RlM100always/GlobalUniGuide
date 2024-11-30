@@ -2,6 +2,7 @@ package com.techtravelcoder.alluniversityinformations.books;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -42,9 +43,11 @@ public class BookCategoryActivity extends AppCompatActivity {
         //set statusbar color
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.whiteTextSideColor1);
+            color = getColor(R.color.back);
         }
         getWindow().setStatusBarColor(color);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
 
 
         //searchview background check
@@ -76,13 +79,13 @@ public class BookCategoryActivity extends AppCompatActivity {
 
     public void searchList(String query) {
         List<BookCategoryModel> filteredList = new ArrayList<>();
-        String queryWithoutSpaces = query.replaceAll("\\s+", "").toLowerCase(); // Remove spaces from query
+        String queryWithoutSpaces = query.replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase();
 
         for (BookCategoryModel obj : bookCategoryList) {
             String objStringWithoutSpaces = obj.toString().replaceAll("\\s+", "").toLowerCase(); // Remove spaces from object
 
             // Perform search based on bCategoryName without spaces and case-insensitive
-            if (obj.getbCategoryName().replaceAll("\\s+", "").toLowerCase().contains(queryWithoutSpaces)) {
+            if (obj.getbCategoryName().replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase().contains(queryWithoutSpaces)) {
                 filteredList.add(obj);
             }
         }

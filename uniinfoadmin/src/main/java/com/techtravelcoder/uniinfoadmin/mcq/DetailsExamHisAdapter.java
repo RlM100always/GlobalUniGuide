@@ -60,6 +60,7 @@ public class DetailsExamHisAdapter extends RecyclerView.Adapter<DetailsExamHisAd
         holder.optionC.setText(detailsExamHisModel.getOptionC());
         holder.optionD.setText(detailsExamHisModel.getOptionD());
         holder.explanation.setText("Explanation : "+detailsExamHisModel.getExplanation());
+
         holder.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +89,9 @@ public class DetailsExamHisAdapter extends RecyclerView.Adapter<DetailsExamHisAd
                 RadioButton r2=view.findViewById(R.id.rb_b_id);
                 RadioButton r3=view.findViewById(R.id.rb_c_id);
                 RadioButton r4=view.findViewById(R.id.rb_d_id);
+
+                //question_type_cancel
+                TextView cancel =view.findViewById(R.id.question_cancel);
 
                 if(detailsExamHisModel.getRightAnswer().equals(detailsExamHisModel.getOptionA())){
                     r1.setChecked(true);
@@ -134,10 +138,16 @@ public class DetailsExamHisAdapter extends RecyclerView.Adapter<DetailsExamHisAd
 
                 builder.setView(view);
                 AlertDialog alertDialog= builder.create();
-                Drawable drawable= ContextCompat.getDrawable(context,R.drawable.back);
+                Drawable drawable= ContextCompat.getDrawable(context,R.drawable.alert_back);
                 alertDialog.getWindow().setBackgroundDrawable(drawable);
                 alertDialog.show();
                 alertDialog.setCancelable(false);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
 
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -10,7 +10,7 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/result_image"
         android:layout_width="match_parent"
-        android:layout_height="220dp"/>
+        android:layout_height="200dp"/>
     <TextView
         android:fontFamily="serif"
         android:padding="5dp"

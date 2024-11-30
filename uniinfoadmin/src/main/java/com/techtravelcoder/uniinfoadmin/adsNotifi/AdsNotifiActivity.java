@@ -233,14 +233,24 @@ public class AdsNotifiActivity extends AppCompatActivity {
 
         TextView postAds=view.findViewById(R.id.ads_submit_id);
 
+        //ads_cancel
+        TextView cancel=view.findViewById(R.id.ads_cancel);
+
+
 
         builder.setView(view);
         AlertDialog alertDialog= builder.create();
-        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
+        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.alert_back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
         alertDialog.setCancelable(false);
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
         postAds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -320,22 +330,29 @@ public class AdsNotifiActivity extends AppCompatActivity {
                                     EditText edKeyNumber=view.findViewById(R.id.enter_key_number);
                                     edKeyNumber.setVisibility(View.GONE);
                                     TextView postAds=view.findViewById(R.id.ads_submit_id);
+                                    TextView cancel=view.findViewById(R.id.ads_cancel);
+
 
                                     edTitle.setText(remoteimages.get(i).getTitle());
                                     edImage.setText(remoteimages.get(i).getImageUrl());
                                     edKey.setText(remoteimages1.get(i));
 
-                                    Toast.makeText(AdsNotifiActivity.this, ""+remoteimages.get(i).getTitle()+"    "+remoteimages.get(i).getImageUrl()+"  "+remoteimages1.get(i), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(AdsNotifiActivity.this, ""+remoteimages.get(i).getTitle()+"    "+remoteimages.get(i).getImageUrl()+"  "+remoteimages1.get(i), Toast.LENGTH_SHORT).show();
 
 
 
                                     builder.setView(view);
                                     AlertDialog alertDialog= builder.create();
-                                    Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
+                                    Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.alert_back);
                                     alertDialog.getWindow().setBackgroundDrawable(drawable);
                                     alertDialog.show();
                                     alertDialog.setCancelable(false);
-
+                                    cancel.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            alertDialog.dismiss();
+                                        }
+                                    });
                                     postAds.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {

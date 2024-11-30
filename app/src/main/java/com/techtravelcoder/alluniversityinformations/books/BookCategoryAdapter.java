@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +57,10 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        List<BookPostModel> bookNumber = new ArrayList<>(); // Local variable to avoid shared resource issues
+                        List<BookModel> bookNumber = new ArrayList<>(); // Local variable to avoid shared resource issues
                         if (snapshot.exists()) {
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                BookPostModel bookPostModel = dataSnapshot.getValue(BookPostModel.class);
+                                BookModel bookPostModel = dataSnapshot.getValue(BookModel.class);
                                 if (bookPostModel != null && bookPostModel.getBookCategoryKey().equals(bookCategoryModel.getbCategoryKey())) {
                                     bookNumber.add(bookPostModel);
                                 }
@@ -87,6 +88,8 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context,BookPostActivity.class);
+                ADSSetUp.adsType1(context);
+
                 intent.putExtra("key",bookCategoryModel.getbCategoryKey());
                 intent.putExtra("category",bookCategoryModel.getbCategoryName());
 

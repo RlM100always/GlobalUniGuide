@@ -5,11 +5,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,16 +25,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
-import com.techtravelcoder.alluniversityinformations.universityDetails.ReBookMarkAdapter;
-import com.techtravelcoder.alluniversityinformations.universityDetails.UniversityModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class BookPostActivity extends AppCompatActivity {
 
@@ -45,7 +43,7 @@ public class BookPostActivity extends AppCompatActivity {
     private SearchView searchView;
     private String bCataKey,categoryName;
 
-    private ArrayList<BookPostModel> bookList;
+    private ArrayList<BookModel> bookList;
     private BookPostAdapter bookPostAdapter;
     private ProgressBar progressBar;
     private TextView textView,condition;
@@ -66,9 +64,11 @@ public class BookPostActivity extends AppCompatActivity {
 
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.whiteTextSideColor1);
+            color = getColor(R.color.back);
         }
         getWindow().setStatusBarColor(color);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
 
 
 
@@ -128,11 +128,11 @@ public class BookPostActivity extends AppCompatActivity {
     }
 
     public void searchList(String query) {
-        List<BookPostModel> filteredList = new ArrayList<>();
-        String queryWithoutSpaces = query.replaceAll("\\s+", "").toLowerCase(); // Remove spaces from query
+        List<BookModel> filteredList = new ArrayList<>();
+        String queryWithoutSpaces = query.replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase();
 
-        for (BookPostModel obj : bookList) {
-            String objStringWithoutSpaces = obj.toString().replaceAll("\\s+", "").toLowerCase(); // Remove spaces from object
+        for (BookModel obj : bookList) {
+            String objStringWithoutSpaces = obj.toString().replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase(); // Remove spaces from object
 
             // Perform search based on bCategoryName without spaces and case-insensitive
             if (obj.getBookName().replaceAll("\\s+", "").toLowerCase().contains(queryWithoutSpaces)) {
@@ -141,14 +141,14 @@ public class BookPostActivity extends AppCompatActivity {
         }
 
         // Update your UI with the filtered list
-        bookPostAdapter.searchLists((ArrayList<BookPostModel>) filteredList);
+        bookPostAdapter.searchLists((ArrayList<BookModel>) filteredList);
         bookPostAdapter .notifyDataSetChanged();
     }
 
 
 
     private void retriveBookMarkBook() {
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
         bookList=new ArrayList<>();
         bookPostAdapter=new BookPostAdapter(this,bookList,3);
 
@@ -159,11 +159,14 @@ public class BookPostActivity extends AppCompatActivity {
                 bookList.clear();
                 if(snapshot.exists()){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        BookPostModel bookPostModel;
+                        BookModel bookPostModel;
 
-                        bookPostModel = dataSnapshot.getValue(BookPostModel.class);
+                        bookPostModel = dataSnapshot.getValue(BookModel.class);
                         if (bookPostModel != null) {
-                            checkFavorite(bookPostModel);
+                                checkFavorite(bookPostModel);
+
+
+
                         }
                     }
 
@@ -183,49 +186,86 @@ public class BookPostActivity extends AppCompatActivity {
         });
     }
 
-    private void checkFavorite(BookPostModel bookPostModel) {
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            FirebaseDatabase.getInstance().getReference("Book Details").child(bookPostModel.getBookKey())
-                    .child("bookmark")
-                    .child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+    private void checkFavorite(BookModel bookPostModel) {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+            // Access the specific user's bookmark node
+            FirebaseDatabase.getInstance().getReference("Book Details")
+                    .child(bookPostModel.getBookKey())
+                    .child("bookmarkbook")
+                    .child(FirebaseAuth.getInstance().getUid())
+                    .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                // Retrieve the bookmark details
+                                Bookmark bookmark1 = snapshot.getValue(Bookmark.class);
 
-                            if(snapshot.exists()){
-                                if ((snapshot.getValue(Boolean.class) != null) && (snapshot.getValue(Boolean.class))) {
-                                    bookList.add(bookPostModel);
+                                // Check if the bookmark exists
+                                if (bookmark1 != null && bookmark1.getUserBookmark()==true) {
+                                    if(bookList.size()<180){
+                                        bookList.add(bookPostModel);
+                                    }
 
+                                }
+
+                                Collections.sort(bookList, new Comparator<BookModel>() {
+                                    @Override
+                                    public int compare(BookModel book1, BookModel book2) {
+                                        Long time1 = getLatestBookmarkTime(book1);
+                                        Long time2 = getLatestBookmarkTime(book2);
+                                        return time2.compareTo(time1); // Descending order
+                                    }
+                                });
+
+                                if(!bookList.isEmpty()){
+                                    progressBar.setVisibility(View.GONE);
+                                    bookPostAdapter.notifyDataSetChanged();
                                 }
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        if(bookList.size()==0){
-                                            textView.setVisibility(View.VISIBLE);
+                                        if(bookList.isEmpty()){
                                             imageView.setVisibility(View.VISIBLE);
+                                            textView.setVisibility(View.VISIBLE);
                                             progressBar.setVisibility(View.GONE);
-
                                         }else {
-                                            textView.setVisibility(View.GONE);
                                             imageView.setVisibility(View.GONE);
-                                            progressBar.setVisibility(View.GONE);
-
+                                            textView.setVisibility(View.GONE);
                                         }
+
                                     }
-                                },1500);
-
-                                bookPostAdapter.notifyDataSetChanged();
-
-
+                                }, 2000);
                             }
+
 
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
+                            // Handle error
+                            Log.e("Tag", error.getMessage());
+                            Toast.makeText(BookPostActivity.this, "Error fetching bookmark: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
+    }
 
+    private Long getLatestBookmarkTime(BookModel bookPostModel) {
+        Map<String, Bookmark> bookmarks = bookPostModel.getBookmarkbook();
+        Long latestTime = null;
+
+        // Iterate through the bookmarks to find the latest time
+        for (Map.Entry<String, Bookmark> entry : bookmarks.entrySet()) {
+            Bookmark bookmark = entry.getValue();
+            if (bookmark != null && bookmark.getTime() != null) {
+                Long time = bookmark.getTime(); // Assuming getTime() returns Long
+                if (latestTime == null || time > latestTime) {
+                    latestTime = time;
+                }
+            }
+        }
+        return latestTime;
     }
 
     private void retriveNewbook() {
@@ -236,17 +276,17 @@ public class BookPostActivity extends AppCompatActivity {
 
         bookList=new ArrayList<>();
         bookPostAdapter=new BookPostAdapter(BookPostActivity.this,bookList,2);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
         recyclerView.setAdapter(bookPostAdapter);
         FirebaseDatabase.getInstance().getReference("Book Details").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 bookList.clear();
-                BookPostModel bookPostModel;
+                BookModel bookPostModel;
                 if(snapshot.exists()){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                        bookPostModel = dataSnapshot.getValue(BookPostModel.class);
+                        bookPostModel = dataSnapshot.getValue(BookModel.class);
                         if (bookPostModel != null && isDateInRange(bookPostModel.getBookPostDate(),startDate)) {
                             bookList.add(0,bookPostModel);
                         }
@@ -287,17 +327,17 @@ public class BookPostActivity extends AppCompatActivity {
     private void retriveBookDetailsData() {
         bookList=new ArrayList<>();
         bookPostAdapter=new BookPostAdapter(BookPostActivity.this,bookList,1);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),1));
         recyclerView.setAdapter(bookPostAdapter);
         FirebaseDatabase.getInstance().getReference("Book Details").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 bookList.clear();
-                BookPostModel bookPostModel;
+                BookModel bookPostModel;
                 if(snapshot.exists()){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                        bookPostModel = dataSnapshot.getValue(BookPostModel.class);
+                        bookPostModel = dataSnapshot.getValue(BookModel.class);
                         if(bookPostModel != null){
                             if(bookPostModel.getBookCategoryKey().equals(bCataKey)){
                                 bookList.add(0,bookPostModel);

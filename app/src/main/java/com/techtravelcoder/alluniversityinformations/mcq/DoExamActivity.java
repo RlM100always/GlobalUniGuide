@@ -60,9 +60,12 @@ public class DoExamActivity extends AppCompatActivity {
 
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.whiteTextSideColor1);
+            color = getColor(R.color.back);
+            getWindow().setStatusBarColor(color);
+
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         }
-        getWindow().setStatusBarColor(color);
 
         Toast.makeText(this, "Exam Started", Toast.LENGTH_LONG).show();
 

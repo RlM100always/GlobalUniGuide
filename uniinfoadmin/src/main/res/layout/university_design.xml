@@ -44,44 +44,54 @@
         android:text="Click for More.."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <TextView
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2.5"
-        android:gravity="center"
-        android:layout_margin="4dp"
-        android:id="@+id/uni_update_id"
-        android:textColor="@color/white"
-        android:backgroundTint="#57C905"
-        android:background="@drawable/sub_back"
-        android:textSize="16dp"
-        android:foreground="@drawable/rip"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:text="Update"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2.5"
-        android:gravity="center"
-        android:layout_margin="4dp"
-        android:id="@+id/uni_delete_id"
-        android:textColor="@color/white"
-        android:backgroundTint="#D50000"
-        android:background="@drawable/sub_back"
-        android:textSize="16dp"
-        android:foreground="@drawable/rip"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:text="Delete"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/uni_update_id"
+            android:fontFamily="serif"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2.5"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/deepGreen"
+            android:background="@drawable/edit_text_background"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="Admin"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="6dp"
+            android:fontFamily="serif"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2.5"
+            android:gravity="center"
+            android:id="@+id/uni_delete_id"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/red"
+            android:background="@drawable/edit_text_background"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="Delete"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
 
 
 

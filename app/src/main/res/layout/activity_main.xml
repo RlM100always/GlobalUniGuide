@@ -11,12 +11,14 @@
     tools:openDrawer="start"
     tools:context="com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity">
     <LinearLayout
+        android:padding="4dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.Toolbar
             style="@style/MyPopupTheme"
-            app:subtitle="GlobalUniGuide : Study Notes Provider"
+            app:title="Study Materials"
+            app:titleTextAppearance="@style/MyToolbarTitleText"
             android:layout_gravity="left"
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -35,7 +37,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 app:civ_border_width="1.3dp"
                 app:civ_border_color="@color/deepGreen"
-                android:src="@drawable/image_buet"
+                android:src="@drawable/loading"
                 android:id="@+id/user_image_id"
                 android:layout_width="40dp"
                 android:layout_height="40dp"/>
@@ -48,7 +50,7 @@
                 android:textSize="16dp"
                 android:textStyle="bold"
                 android:textColor="@color/whiteTextColor1"
-                android:text="Md Rakib"
+                android:text="User Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -122,7 +124,7 @@
 
                         <com.denzcoskun.imageslider.ImageSlider
                             android:id="@+id/image_slider"
-                            android:background="@drawable/image_buet"
+                            android:background="@drawable/loading"
                             android:layout_width="match_parent"
                             android:layout_height="210dp"
                             app:iss_auto_cycle="true"
@@ -134,32 +136,33 @@
 
 
                     <LinearLayout
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginLeft="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="0dp"
                             android:layout_height="45dp"
                             android:padding="3dp"
                             android:layout_weight="0.1"
                             android:layout_marginStart="2dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/arrow"
-                            app:civ_border_color="@color/cardMakerColor"
-                            app:civ_border_width=".8dp" />
+                            android:src="@drawable/learning_materials"
+                             />
 
                         <TextView
-                            android:fontFamily="serif"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+
+                            android:textAppearance="@style/MyToolbarTitleText"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.8"
                             android:layout_marginStart="5dp"
                             android:text="Learning Materials "
-                            android:textColor="@color/heading"
-                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <ImageView
@@ -214,7 +217,7 @@
                                     android:shadowRadius="1.5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Learn Your \n Nish "
+                                    android:text="Study"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -256,7 +259,7 @@
                                     android:shadowRadius="1.5"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text=" Book  \nNotes"
+                                    android:text=" Book"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -342,7 +345,7 @@
                                     android:shadowRadius="1.5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Popular \nContent"
+                                    android:text="Popular"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -355,31 +358,33 @@
 
                         </LinearLayout>
                         <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="3dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <de.hdodenhof.circleimageview.CircleImageView
+                            <ImageView
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
                                 android:padding="3dp"
                                 android:layout_weight="0.1"
                                 android:layout_marginStart="2dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/arrow"
-                                app:civ_border_color="@color/cardMakerColor"
-                                app:civ_border_width=".8dp" />
+                                android:src="@drawable/notes_his"
+                                />
 
                             <TextView
-                                android:fontFamily="serif"
+                                android:textSize="17dp"
+                                android:textAppearance="@style/MyToolbarTitleText"
+                                android:textColor="@color/black"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.8"
                                 android:layout_marginStart="5dp"
                                 android:text="My Notes and History"
-                                android:textColor="@color/heading"
-                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
                             <ImageView
@@ -429,7 +434,7 @@
 
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="My Exam \n History"
+                                    android:text="Exam History"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -471,7 +476,7 @@
                                     android:shadowRadius="1.5"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Add \n Friends"
+                                    android:text="Add Friend"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -513,7 +518,7 @@
                                     android:shadowRadius="1.5"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Add \n Notes"
+                                    android:text="Add Note"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -530,31 +535,33 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="3dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <de.hdodenhof.circleimageview.CircleImageView
+                            <ImageView
                                 android:layout_width="0dp"
                                 android:layout_height="45dp"
                                 android:padding="3dp"
                                 android:layout_weight="0.1"
                                 android:layout_marginStart="2dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/arrow"
-                                app:civ_border_color="@color/cardMakerColor"
-                                app:civ_border_width=".8dp" />
+                                android:src="@drawable/recent_bookmark"
+                                />
 
                             <TextView
-                                android:fontFamily="serif"
+                                android:textSize="17dp"
+                                android:textAppearance="@style/MyToolbarTitleText"
+
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.8"
                                 android:layout_marginStart="5dp"
                                 android:text="My BookMark And Recent"
-                                android:textColor="@color/heading"
-                                android:textSize="16sp"
+                                android:textColor="@color/black"
                                 android:textStyle="bold" />
 
                             <ImageView
@@ -605,7 +612,7 @@
 
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="New \n University"
+                                    android:text="New Uni"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -647,7 +654,7 @@
                                     android:shadowRadius="1.5"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="MyBookMark University"
+                                    android:text="Save Uni"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -692,7 +699,7 @@
 
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="MyBookmark \nBook"
+                                    android:text="Save Book"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -734,7 +741,7 @@
                                     android:shadowRadius="1.5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text=" New Book \nNotes"
+                                    android:text=" New Book"
                                     android:textColor="@color/whiteTextColor1"
                                     android:textSize="10dp"
                                     />
@@ -754,33 +761,32 @@
 
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="3dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <ImageView
                             android:layout_width="0dp"
                             android:layout_height="45dp"
                             android:padding="3dp"
                             android:layout_weight="0.1"
                             android:layout_marginStart="2dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/arrow"
-                            app:civ_border_color="@color/cardMakerColor"
-                            app:civ_border_width=".8dp" />
+                            android:src="@drawable/country"
+                            />
 
                         <TextView
-                            android:fontFamily="serif"
+                            android:textSize="17dp"
+                            android:textAppearance="@style/MyToolbarTitleText"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.8"
                             android:layout_marginStart="5dp"
                             android:text="Explore More Than 100 Countries University "
                             android:textColor="@color/heading"
-                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <ImageView
@@ -820,162 +826,9 @@
                         android:indeterminate="true"
                         android:visibility="visible" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="0dp"
-                            android:layout_height="45dp"
-                            android:padding="3dp"
-                            android:layout_weight="0.1"
-                            android:layout_marginStart="2dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/arrow"
-                            app:civ_border_color="@color/cardMakerColor"
-                            app:civ_border_width=".8dp" />
-
-                        <TextView
-                            android:fontFamily="serif"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.8"
-                            android:layout_marginStart="5dp"
-                            android:text="You May Like this Books/Notes Category "
-                            android:textColor="@color/heading"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:src="@drawable/arrow_right"
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="0.1"
-                            android:scaleType="fitXY" />
-
-                    </LinearLayout>
-                    <ProgressBar
-                        android:id="@+id/progressBar_id1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:indeterminate="true"
-                        android:visibility="visible" />
 
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/different_book_category_recycler_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="10dp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="0dp"
-                            android:layout_height="45dp"
-                            android:padding="3dp"
-                            android:layout_weight="0.1"
-                            android:layout_marginStart="2dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/arrow"
-                            app:civ_border_color="@color/cardMakerColor"
-                            app:civ_border_width=".8dp" />
-
-                        <TextView
-                            android:fontFamily="serif"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.8"
-                            android:layout_marginStart="5dp"
-                            android:text="Suggested Books/Notes For You "
-                            android:textColor="@color/heading"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:src="@drawable/arrow_right"
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="0.1"
-                            android:scaleType="fitXY" />
-
-                    </LinearLayout>
-                    <ProgressBar
-                        android:id="@+id/progressBar_id2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:indeterminate="true"
-                        android:visibility="visible" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/different_book_recycler_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingTop="10dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="0dp"
-                            android:layout_height="45dp"
-                            android:padding="3dp"
-                            android:layout_weight="0.1"
-                            android:layout_marginStart="2dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/arrow"
-                            app:civ_border_color="@color/cardMakerColor"
-                            app:civ_border_width=".8dp" />
-
-                        <TextView
-                            android:fontFamily="serif"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.8"
-                            android:layout_marginStart="5dp"
-                            android:text="You May Like this Lesson/contents "
-                            android:textColor="@color/heading"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="0.1"
-                            android:scaleType="fitXY" />
-
-                    </LinearLayout>
-                    <ProgressBar
-                        android:id="@+id/progressBar_id3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:indeterminate="true"
-                        android:visibility="visible" />
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/newdata_recyclerview_id"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
 
 
 
@@ -1001,7 +854,7 @@
         app:itemIconPadding="8dp"
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"
-        android:visibility="gone">
+        android:visibility="visible">
     </com.google.android.material.navigation.NavigationView>
 
 

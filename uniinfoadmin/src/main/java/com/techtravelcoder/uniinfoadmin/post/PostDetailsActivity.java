@@ -137,6 +137,8 @@ public class PostDetailsActivity extends AppCompatActivity {
         radioGroup=view.findViewById(R.id.group_radio_category);
         lesson=view.findViewById(R.id.lesson_id);
         random=view.findViewById(R.id.random_id);
+        //p_cancel
+        TextView cancel=view.findViewById(R.id.p_cancel);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -155,7 +157,7 @@ public class PostDetailsActivity extends AppCompatActivity {
 
         builder.setView(view);
         AlertDialog alertDialog= builder.create();
-        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
+        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.alert_back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
         alertDialog.setCancelable(false);
@@ -171,6 +173,12 @@ public class PostDetailsActivity extends AppCompatActivity {
 
                 }
 
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
             }
         });
 

@@ -109,10 +109,10 @@ public class CategoryFragment extends Fragment {
 
     private void searchList(String query) {
         List<CategoryModel> filteredList = new ArrayList<>();
-        String queryWithoutSpaces = query.replaceAll("\\s+", "").toLowerCase(); // Remove spaces from query
+        String queryWithoutSpaces = query.replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase(); // Remove spaces from query
 
         for (CategoryModel obj : categoryList) {
-            String objStringWithoutSpaces = obj.toString().replaceAll("\\s+", "").toLowerCase(); // Remove spaces from object
+            String objStringWithoutSpaces = obj.toString().replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase(); // Remove spaces from object
 
             if (objStringWithoutSpaces.contains(queryWithoutSpaces)) {
                 filteredList.add(obj);
@@ -138,7 +138,7 @@ public class CategoryFragment extends Fragment {
         if(randomViewType==1){
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         } else if (randomViewType==2) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),1));
 
         }
         recyclerView.setAdapter(categoryAdapter);

@@ -44,16 +44,15 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="35dp"
                     android:padding="3dp"
                     android:layout_weight="0.1"
                     android:layout_marginStart="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/arrow"
-                    app:civ_border_color="@color/cardMakerColor"
-                    app:civ_border_width=".8dp" />
+                    android:src="@drawable/status"
+                    />
 
                 <TextView
                     android:fontFamily="serif"
@@ -233,15 +232,15 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:padding="3dp"
                     android:layout_weight="0.1"
                     android:layout_marginStart="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/arrow"
-                     />
+                    android:src="@drawable/mcq"
+                    />
 
                 <TextView
                     android:fontFamily="serif"
@@ -290,16 +289,15 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="45dp"
+                    android:layout_height="35dp"
                     android:padding="3dp"
                     android:layout_weight="0.1"
                     android:layout_marginStart="2dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/arrow"
-                    app:civ_border_color="@color/cardMakerColor"
-                    app:civ_border_width=".8dp" />
+                    android:src="@drawable/category"
+                    />
 
                 <TextView
                     android:id="@+id/category_set_id"

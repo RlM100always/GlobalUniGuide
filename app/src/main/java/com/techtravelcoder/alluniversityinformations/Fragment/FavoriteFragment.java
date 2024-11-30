@@ -114,10 +114,10 @@ public class FavoriteFragment extends Fragment {
 
     public void  searchList(String query) {
         List<MainPostModel> filteredList = new ArrayList<>();
-        String queryWithoutSpaces = query.replaceAll("\\s+", "").toLowerCase(); // Remove spaces from query
+        String queryWithoutSpaces = query.replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase(); // Remove spaces from query
 
         for (MainPostModel obj : list) {
-            String objStringWithoutSpaces = obj.toString().replaceAll("\\s+", "").toLowerCase(); // Remove spaces from object
+            String objStringWithoutSpaces = obj.toString().replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase(); // Remove spaces from object
 
             if (objStringWithoutSpaces.contains(queryWithoutSpaces)) {
                 filteredList.add(obj);

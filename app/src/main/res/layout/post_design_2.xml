@@ -9,6 +9,7 @@
     android:background="@drawable/edit_text_background"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:foreground="@drawable/uni_background"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:paddingTop="5dp"
@@ -24,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.cardview.widget.CardView
-                android:foreground="@drawable/uni_background"
                 app:cardCornerRadius="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">

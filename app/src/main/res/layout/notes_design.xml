@@ -35,6 +35,7 @@
                 app:hintTextColor="@color/whiteTextColor1">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:fontFamily="serif"
                     android:id="@+id/notes_title_id"
                     android:textColorHint="@color/grey"
                     android:textColor="@color/whiteTextColor1"
@@ -47,6 +48,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="write notes**"
@@ -58,6 +60,7 @@
                 app:hintTextColor="@color/whiteTextColor1">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:fontFamily="serif"
                     android:maxLines="5000"
                     android:id="@+id/notes_write_id"
                     android:textColorHint="@color/grey"

@@ -14,7 +14,7 @@
             android:layout_marginRight="30dp"
             android:src="@drawable/translator"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="170dp"/>
         <TextView
             android:fontFamily="serif"
             android:layout_gravity="center_horizontal"

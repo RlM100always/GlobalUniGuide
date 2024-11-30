@@ -51,26 +51,52 @@
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="55dp"/>
-    <TextView
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2.5"
+
+    <LinearLayout
         android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/add_post_id"
-        android:textColor="@color/white"
-        android:backgroundTint="#57C905"
-        android:background="@drawable/sub_back"
-        android:textSize="20dp"
-        android:foreground="@drawable/rip"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:text="Add Country"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:fontFamily="serif"
+            android:layout_marginRight="30dp"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2.5"
+            android:gravity="center"
+            android:id="@+id/add_post_id"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/back"
+            android:background="@drawable/edit_text_background"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="add"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/country_cancel"
+            android:fontFamily="serif"
+            android:layout_marginLeft="30dp"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2.5"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/red"
+            android:background="@drawable/edit_text_background"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="Cancel"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 
 </LinearLayout>

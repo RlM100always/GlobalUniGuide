@@ -72,14 +72,16 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.MainPo
                     imageLink.setText(mainPostModel.getImage());
 
                     TextView posttv=view.findViewById(R.id.add_main_post_id);
+                    TextView cancel=view.findViewById(R.id.p_cata_cancel);
+
 
 
                     builder.setView(view);
                     AlertDialog alertDialog= builder.create();
-                    Drawable drawable= ContextCompat.getDrawable(context,R.drawable.back);
-                    alertDialog.getWindow().setBackgroundDrawable(drawable);
                     alertDialog.show();
                     alertDialog.setCancelable(false);
+                    Drawable drawables = ContextCompat.getDrawable(context, R.drawable.alert_back);
+                    alertDialog.getWindow().setBackgroundDrawable(drawables);
 
                     posttv.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -122,6 +124,12 @@ public class MainPostAdapter extends RecyclerView.Adapter<MainPostAdapter.MainPo
 
                             }
 
+                        }
+                    });
+                    cancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
                         }
                     });
 

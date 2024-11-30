@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabItem;
@@ -29,9 +30,11 @@ public class PostHandleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_handle);
         int color = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.whiteTextSideColor1);
+            color = getColor(R.color.back);
         }
         getWindow().setStatusBarColor(color);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
 
         tabLayout = findViewById(R.id.tablayout1);
         recent=findViewById(R.id.tab3);

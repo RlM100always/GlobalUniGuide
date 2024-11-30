@@ -177,7 +177,6 @@ public class HomeFragment extends Fragment   {
         searchRecyclerView.setVisibility(View.VISIBLE);
 
         Query nextPageQuery = databaseReference.orderByKey().startAfter(lastItemId).limitToFirst(PAGE_SIZE);
-
         nextPageQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -225,7 +224,7 @@ public class HomeFragment extends Fragment   {
         searchRecyclerView.setAdapter(mainPostAdapter);
 
         // Filter the data from Firebase
-        String queryWithoutSpaces = query.replaceAll("\\s+", "").toLowerCase();
+        String queryWithoutSpaces = query.replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase();
         FirebaseDatabase.getInstance().getReference("Post").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -237,7 +236,7 @@ public class HomeFragment extends Fragment   {
 
                         String searchText=mainPostModel.getLabel()+mainPostModel.getCategory()+mainPostModel.getTitle();
 
-                        String objStringWithoutSpaces = searchText.replaceAll("\\s+", "").toLowerCase();
+                        String objStringWithoutSpaces = searchText.replaceAll("[/><:{}`+=*.||?()$#%!\\-,@&_\\n\\s]", "").toLowerCase();
                         if (objStringWithoutSpaces.contains(queryWithoutSpaces)) {
                             searchResults.add(mainPostModel);
                         }

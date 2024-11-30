@@ -1,10 +1,18 @@
 package com.techtravelcoder.uniinfoadmin.book;
 
 public class BookCategoryModel {
-    String bCategoryName,bCategoryImageLink,bCategoryKey;
+    String bCategoryName,bCategoryImageLink,bCategoryKey,bCategoryKeyword;
 
     public BookCategoryModel(){
 
+    }
+
+    public String getbCategoryKeyword() {
+        return bCategoryKeyword;
+    }
+
+    public void setbCategoryKeyword(String bCategoryKeyword) {
+        this.bCategoryKeyword = bCategoryKeyword;
     }
 
     public String getbCategoryName() {

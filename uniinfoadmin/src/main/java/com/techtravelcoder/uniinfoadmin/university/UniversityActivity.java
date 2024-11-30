@@ -143,6 +143,7 @@ public class UniversityActivity extends AppCompatActivity {
         uniName=view.findViewById(R.id.university_name_id);
         uniImage=view.findViewById(R.id.university_image_id);
         uniLLink=view.findViewById(R.id.university_website_id);
+        TextView cancel=view.findViewById(R.id.uni_cancel);
 
         RadioGroup top,publics,privates,suggest;
         RadioButton topTrue,topFalse,publicsTrue,publicsFalse,privatesTrue,privatesFalse,suggestTrue,suggestFalse;
@@ -198,10 +199,17 @@ public class UniversityActivity extends AppCompatActivity {
 
         builder.setView(view);
         AlertDialog alertDialog= builder.create();
-        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
-        alertDialog.getWindow().setBackgroundDrawable(drawable);
+        Drawable drawables = ContextCompat.getDrawable(getApplicationContext(), R.drawable.alert_back);
+        alertDialog.getWindow().setBackgroundDrawable(drawables);
         alertDialog.show();
         alertDialog.setCancelable(false);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
 
         post.setOnClickListener(new View.OnClickListener() {
             @Override

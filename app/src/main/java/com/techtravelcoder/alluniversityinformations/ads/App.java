@@ -2,25 +2,21 @@ package com.techtravelcoder.alluniversityinformations.ads;
 
 import android.app.Application;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
+import com.facebook.ads.AudienceNetworkAds;
 import com.google.firebase.database.FirebaseDatabase;
 import com.onesignal.OneSignal;
 import com.onesignal.debug.LogLevel;
 import com.onesignal.notifications.INotificationClickEvent;
 import com.onesignal.notifications.INotificationClickListener;
 import com.startapp.sdk.adsbase.StartAppAd;
+import com.techtravelcoder.alluniversityinformations.books.BookPostActivity;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 import com.techtravelcoder.alluniversityinformations.universityDetails.ReBookMarkActivity;
 import com.techtravelcoder.alluniversityinformations.vocabulary.VocabularyActivity;
-
-import co.notix.appopen.AppOpenLoader;
-import co.notix.interstitial.InterstitialLoader;
 
 public class App extends Application {
 
@@ -35,9 +31,9 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        AudienceNetworkAds.initialize(this);
         StartAppAd.disableSplash();
 
-        /* ... */
         //load data offline using firebase
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
@@ -51,8 +47,6 @@ public class App extends Application {
             @Override
             public void onClick(@NonNull INotificationClickEvent iNotificationClickEvent) {
                 iNotificationClickEvent.getNotification().getTemplateName();
-                Toast.makeText(getApplicationContext(), ""+iNotificationClickEvent.getNotification().getTemplateName(), Toast.LENGTH_SHORT).show();
-                //Log.d("Value",iNotificationClickEvent.getNotification().getTemplateName());
                 if(iNotificationClickEvent.getNotification().getTemplateName().equals("University")){
                     Intent intent=new Intent(getApplicationContext(), ReBookMarkActivity.class);
                     intent.putExtra("check",1);
@@ -72,6 +66,12 @@ public class App extends Application {
                     Intent intent=new Intent(getApplicationContext(), PostHandleActivity.class);
                     startActivity(intent);
                 }
+                if(iNotificationClickEvent.getNotification().getTemplateName().equals("Books")){
+                    Intent intent=new Intent(getApplicationContext(), BookPostActivity.class);
+                    intent.putExtra("key","@b");
+                    startActivity(intent);
+                }
+
 
 
 

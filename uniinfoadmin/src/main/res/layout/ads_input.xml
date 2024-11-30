@@ -46,7 +46,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
         android:background="@drawable/back"
-        android:maxLines="100000"
+        android:maxLines="1000000"
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="55dp"/>
@@ -60,7 +60,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
         android:background="@drawable/back"
-        android:maxLines="100000"
+        android:maxLines="10000000"
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="55dp"/>
@@ -80,20 +80,51 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"/>
 
+    <LinearLayout
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:fontFamily="serif"
+            android:layout_marginRight="30dp"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2.5"
+            android:gravity="center"
+            android:id="@+id/ads_submit_id"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/deepGreen"
+            android:background="@drawable/edit_text_background"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="Submit"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/ads_cancel"
+            android:fontFamily="serif"
+            android:layout_marginLeft="30dp"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2.5"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/red"
+            android:background="@drawable/edit_text_background"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="Cancel"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/ads_submit_id"
-        android:backgroundTint="#0314FF"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        android:background="@drawable/back"
-        android:layout_marginTop="10dp"
-        android:textSize="18dp"
-        android:textColor="@color/white"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -93,10 +94,13 @@ public class UniversityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_university);
 
         int color=0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            color = getColor(R.color.whiteTextSideColor1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            color = getColor(R.color.back);
+            getWindow().setStatusBarColor(color);
+
+            // Enable light status bar mode (dark icons and text)
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        getWindow().setStatusBarColor(color);
 
 
 
@@ -124,8 +128,6 @@ public class UniversityActivity extends AppCompatActivity {
         mbasePub=FirebaseDatabase.getInstance().getReference("University");
         mbasePrv=FirebaseDatabase.getInstance().getReference("University");
         mbaseSugg=FirebaseDatabase.getInstance().getReference("University");
-
-        mbase.keepSynced(true);
 
 
         allUniversity();
@@ -454,7 +456,7 @@ public class UniversityActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     // Handle onCancelled event
-                    progressBar.setVisibility(View.GONE); // Dismiss ProgressDialog after updating UI
+                    progressBar.setVisibility(View.GONE);
                 }
             });
 

@@ -48,7 +48,7 @@
         android:layout_marginLeft="10dp"
         android:minHeight="40dp"
         android:gravity="center_vertical"
-        android:background="@drawable/searchbar_background"
+        android:background="@drawable/ques"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -76,7 +76,7 @@
         android:layout_marginLeft="10dp"
         android:minHeight="40dp"
         android:gravity="center_vertical"
-        android:background="@drawable/searchbar_background"
+        android:background="@drawable/ques"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -104,7 +104,7 @@
         android:layout_marginLeft="10dp"
         android:minHeight="40dp"
         android:gravity="center_vertical"
-        android:background="@drawable/searchbar_background"
+        android:background="@drawable/ques"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -132,7 +132,7 @@
         android:layout_marginLeft="10dp"
         android:minHeight="40dp"
         android:gravity="center_vertical"
-        android:background="@drawable/searchbar_background"
+        android:background="@drawable/ques"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -155,7 +155,7 @@
         android:id="@+id/exam_result_explanation_id"
         android:layout_marginLeft="11dp"
         android:fontFamily="serif"
-        android:textColor="@color/deepGreen"
+        android:textColor="#268204"
         android:textSize="14dp"
         android:text="What is HTML ? ddddddddd ddddddd ddddddddddddddddddddddddddddd d"
         android:textStyle="bold"

@@ -38,9 +38,11 @@ public class ExamHisActivity extends AppCompatActivity {
 
         int color=0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = getColor(R.color.whiteTextSideColor1);
+            color = getColor(R.color.back);
         }
         getWindow().setStatusBarColor(color);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
 
         recyclerView=findViewById(R.id.exam_his_recycler_view_id);
         imageView=findViewById(R.id.exam_his_favorite_image);

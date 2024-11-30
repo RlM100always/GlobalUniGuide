@@ -12,20 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.startapp.sdk.adsbase.Ad;
-import com.startapp.sdk.adsbase.StartAppAd;
-import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
-import com.startapp.sdk.adsbase.adlisteners.VideoListener;
 import com.techtravelcoder.alluniversityinformation.R;
-import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
-import com.techtravelcoder.alluniversityinformations.ads.App;
 import com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity;
 
 import java.util.ArrayList;
-import java.util.Random;
-
-import co.notix.interstitial.NotixInterstitial;
-import kotlin.Unit;
 
 public class UniversityAdapter1 extends RecyclerView.Adapter<UniversityAdapter1.UniViewHolder> {
     Context context;
@@ -65,7 +55,6 @@ public class UniversityAdapter1 extends RecyclerView.Adapter<UniversityAdapter1.
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, UniversityWebActivity.class);
-                ADSSetUp.adsType2(context);
 
                 intent.putExtra("link",universityModel.getUniWebLink());
                 intent.putExtra("name",universityModel.getUniName());

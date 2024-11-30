@@ -186,7 +186,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onClick(View v) {
 
                 Intent intent=new Intent(context, PostWebViewActivity.class);
-                ADSSetUp.adsType2(context);
+                ADSSetUp.adsType1(context);
+
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());
@@ -261,7 +262,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
-                ADSSetUp.adsType2(context);
+                ADSSetUp.adsType1(context);
+
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());
@@ -300,15 +302,17 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.date3.setVisibility(View.VISIBLE);
             if (mainPostModel.getDate().equals(date)) {
                 holder.date3.setText("Publish : "+"Today");
-                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.yellow));
+                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.deepGreen));
             }else if(mainPostModel.getDate().equals(previousDate)){
                 holder.date3.setText("Publish : "+"Yesterday");
-                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.heading));
+                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.deepYellow));
             } else if (mainPostModel.getDate().equals(oneWeekAgoDate)) {
                 holder.date3.setText("Publish : "+"1 Weak Ago");
-                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.my_primary));
+                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.red));
             } else {
                 holder.date3.setText("Publish : "+mainPostModel.getDate());
+                holder.date3.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.whiteTextColor1));
+
             }
             //holder.date3.setText(mainPostModel.getDate());
         }
@@ -338,7 +342,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
-                ADSSetUp.adsType2(context);
+                ADSSetUp.adsType1(context);
+
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("num",mainPostModel.getViews());
                 intent.putExtra("key",mainPostModel.getKey());
@@ -362,7 +367,6 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.loves4.setText(mainPostModel.getPostLoves()+" loves");
         }else {
             holder.loves4.setText(0+" loves");
-
         }
 
         if(mainPostModel.getRatingNum()!=null && mainPostModel.getAvgRating()!=null){
@@ -378,7 +382,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
-                ADSSetUp.adsType2(context);
+                ADSSetUp.adsType1(context);
+
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("num",mainPostModel.getViews());
                 intent.putExtra("key",mainPostModel.getKey());
@@ -392,6 +397,8 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ADSSetUp.adsType1(context);
+
                 AlertDialog.Builder alertObj = new AlertDialog.Builder(context);
                 alertObj.setTitle(Html.fromHtml("<font color='#000000'>Confirm Removal...ℹ️</font>"));
                 alertObj.setMessage(Html.fromHtml("<font color='#000000'>ℹ️ Do you want to remove this post from favorite list ❓❓</font>"));

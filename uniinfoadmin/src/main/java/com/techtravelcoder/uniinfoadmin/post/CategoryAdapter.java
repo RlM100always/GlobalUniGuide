@@ -79,6 +79,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 RadioGroup radioGroup;
                 RadioButton lesson,random;
 
+                TextView cancel=view.findViewById(R.id.p_cancel);
+
                 title=view.findViewById(R.id.category_title_id);
                 label=view.findViewById(R.id.categoty_label_id);
                 link=view.findViewById(R.id.category_image_link_id);
@@ -116,9 +118,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
                 builder.setView(view);
                 AlertDialog alertDialog= builder.create();
-                Drawable drawable= ContextCompat.getDrawable(context,R.drawable.back);
-                alertDialog.getWindow().setBackgroundDrawable(drawable);
+                alertDialog.setCancelable(false);
+
                 alertDialog.show();
+                Drawable drawables = ContextCompat.getDrawable(context, R.drawable.alert_back);
+                alertDialog.getWindow().setBackgroundDrawable(drawables);
                 posttv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -151,6 +155,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
                         }
 
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
                     }
                 });
             }

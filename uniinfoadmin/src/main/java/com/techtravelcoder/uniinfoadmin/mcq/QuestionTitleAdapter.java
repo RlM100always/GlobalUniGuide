@@ -71,6 +71,8 @@ public class QuestionTitleAdapter extends RecyclerView.Adapter<QuestionTitleAdap
                 // Find EditText and TextView from the custom layout
                 final EditText edQuestionSet = view.findViewById(R.id.ed_question_set_name);
                 TextView addQuestionSet = view.findViewById(R.id.add_question_set_id);
+                TextView cancel=view.findViewById(R.id.q_t_cancel);
+
 
                 edQuestionSet.setText(questionTitleModel.getTitle());
 
@@ -78,12 +80,19 @@ public class QuestionTitleAdapter extends RecyclerView.Adapter<QuestionTitleAdap
                 builder.setView(view);
                 // Create and show the dialog
                 AlertDialog alertDialog = builder.create();
-                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.back);
+                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.alert_back);
                 if (alertDialog.getWindow() != null) {
                     alertDialog.getWindow().setBackgroundDrawable(drawable);
                 }
                 alertDialog.show();
                 alertDialog.setCancelable(false);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
 
                 // Set click listener for the addQuestionSet TextView
                 addQuestionSet.setOnClickListener(new View.OnClickListener() {

@@ -52,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton=findViewById(R.id.withdraw_set_float_button);
         searchView=findViewById(R.id.searchView);
 
+
         mbase = FirebaseDatabase.getInstance().getReference("Country");
+        mbase.keepSynced(false);
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -119,13 +122,24 @@ public class MainActivity extends AppCompatActivity {
         title=view.findViewById(R.id.enter_task_title);
         link=view.findViewById(R.id.enter_task_link);
         TextView posttv=view.findViewById(R.id.add_post_id);
+        TextView cancel=view.findViewById(R.id.country_cancel);
+
 
 
         builder.setView(view);
         AlertDialog alertDialog= builder.create();
-        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
+        Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.alert_back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
+        alertDialog.setCancelable(false);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
         posttv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

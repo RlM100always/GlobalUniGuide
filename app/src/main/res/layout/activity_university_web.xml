@@ -10,7 +10,7 @@
     tools:context="com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:background="@color/whiteTextSideColor1"
+        android:background="@color/back"
         app:menu="@menu/home_menu"
         android:foreground="@drawable/uni_background"
         app:navigationIcon="@drawable/baseline_arrow_back_24"
@@ -22,7 +22,7 @@
         app:titleTextAppearance="@style/MyToolbarTitleText"
         app:title="University Guide"
         app:subtitleTextColor="@color/whiteTextColor1"
-        app:titleTextColor="@color/back"
+        app:titleTextColor="@color/black"
         />
     <ImageView
         android:visibility="gone"

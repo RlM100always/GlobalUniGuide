@@ -7,7 +7,7 @@
     android:padding="6dp"
     android:layout_width="match_parent"
     android:background="@drawable/edit_text_background"
-    android:backgroundTint="#FCE6E7F1"
+    android:backgroundTint="@color/FullWhite"
     android:layout_height="wrap_content">
    <LinearLayout
        android:layout_marginTop="8dp"

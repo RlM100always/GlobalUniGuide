@@ -115,7 +115,6 @@ public class PostWebAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
-                ADSSetUp.adsType2(context);
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());
@@ -156,7 +155,8 @@ public class PostWebAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PostWebViewActivity.class);
-                ADSSetUp.adsType2(context);
+                ADSSetUp.adsType1(context);
+
                 intent.putExtra("postId",mainPostModel.getPostId());
                 intent.putExtra("label",mainPostModel.getLabel());
                 intent.putExtra("num",mainPostModel.getViews());
