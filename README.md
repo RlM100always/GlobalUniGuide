@@ -4,7 +4,7 @@ GlobalUniGuide is a comprehensive **Educational Application** designed for unive
 Students can access detailed information about universities, practice words with a dictionary, take courses, and view exam results. 📚💡  
 Additionally, they can explore books across multiple categories and subcategories, download, read, bookmark, and take notes in light and night modes. 🌙📖
 
-## 🚀 Features
+## 🚀 Feature
 
 ### 📱 User Features
 - 🌍 **University Information**: Access details about universities from all over the world.
