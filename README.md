@@ -55,22 +55,20 @@ Additionally, they can explore books across multiple categories and subcategorie
 
 ## 📊 Admin Screenshots  
 <p align="center">
-  <img width="30%" height="50%" src="" />
-  <img width="30%" height="50%" src="" />
-  <img width="30%" height="50%" src="" />
-  <img width="30%" height="50%" src="" />
-  <img width="30%" height="50%" src="" />
-  <img width="30%" height="50%" src="" />
-  <img width="30%" height="50%" src="" />
-  <img width="30%" height="50%" src="" />
-  <img width="30%" height="50%" src="" />
-  <img width="30%" height="50%" src="" />
+  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-16-49_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-27-22_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-34-93_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-49-16_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-11-59_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-22-42_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-39-75_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-51-07_95982415f53ee316011d916d2ea1a13f.jpg" />
 </p>
 
 ## 📲 Download the App  
-- 📥 **[Download User App](https://drive.google.com/file/d/1l129EV-qURme2lS3GFmh675KM0KxHlaa/view?usp=sharing)**  
-- 📥 **[Download Admin App](https://drive.google.com/file/d/18THkrZzSHdEPL7jlcPuepYV2tthnh8gH/view?usp=sharing)**
-
+ * Amazon App Link : <a href = "https://www.amazon.com/gp/product/B0CW18Z8CP">Amazon App Link</a>
+ * Play Store App Link : <a href="https://play.google.com/store/apps/details?id=com.techtravelcoder.alluniversityinformation"> PlayStore App Link </a>
+ 
 ## 🌐 GitHub Repository  
 🔗 **[GitHub Profile Link](https://github.com/RlM100always)**  
 
