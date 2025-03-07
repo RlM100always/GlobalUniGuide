@@ -43,7 +43,7 @@
                 />
             <item
                 android:id="@+id/menu_post_different_language_id"
-                android:icon="@drawable/baseline_favorite_border_24"
+                android:icon="@drawable/baseline_settings_24"
                 android:title="Convert Language"
                 />
 

@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 import com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity;
 
@@ -112,6 +113,8 @@ public class ReBookMarkAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, UniversityWebActivity.class);
+                ADSSetUp.adsType1(context);
+
                 intent.putExtra("link",universityModel.getUniWebLink());
                 intent.putExtra("name",universityModel.getUniName());
                 intent.putExtra("country",universityModel.getContryName());

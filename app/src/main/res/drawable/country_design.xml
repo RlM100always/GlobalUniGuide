@@ -18,7 +18,7 @@
             android:id="@+id/country_image_id"
             android:background="@drawable/edit_text_background"
             android:scaleType="fitXY"
-            android:src="@drawable/image_buet"
+            android:src="@drawable/loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,8 @@ public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapte
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context,BookPostActivity.class);
+                ADSSetUp.adsType1(context);
+
                 intent.putExtra("key",bookCategoryModel.getbCategoryKey());
                 intent.putExtra("category",bookCategoryModel.getbCategoryName());
 

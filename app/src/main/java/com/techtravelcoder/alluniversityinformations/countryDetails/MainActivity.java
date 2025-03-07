@@ -52,6 +52,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.startapp.sdk.ads.banner.Banner;
+import com.startapp.sdk.adsbase.StartAppAd;
+import com.startapp.sdk.adsbase.StartAppSDK;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.FragmentAdapter.MainPostAdapter;
 import com.techtravelcoder.alluniversityinformations.FragmentModel.MainPostModel;
@@ -136,8 +138,9 @@ public class MainActivity extends AppCompatActivity  {
 
 
         //for ads disable
-//        StartAppSDK.init(this, "201407686");
-//        StartAppAd.disableAutoInterstitial();
+        StartAppSDK.init(this, "201407686",false);
+        StartAppAd.disableAutoInterstitial();//201407686
+
 
 
         notice=findViewById(R.id.notice_id_main);
@@ -177,10 +180,6 @@ public class MainActivity extends AppCompatActivity  {
         else {
             userProf.setVisibility(View.GONE);
         }
-
-
-
-
 
 
 
@@ -272,7 +271,6 @@ public class MainActivity extends AppCompatActivity  {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()){
                                 String ans11=snapshot.child("pStatus").getValue(String.class);
-                                Toast.makeText(MainActivity.this, ""+ans11, Toast.LENGTH_SHORT).show();
                                 if(ans11.equals("on")){
                                     cardView.setVisibility(View.VISIBLE);
                                     sliderSupport();
@@ -324,6 +322,7 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 if(FirebaseAuth.getInstance().getUid()!=null){
                     Intent intent=new Intent(getApplicationContext(),ExamHisActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
                     startActivity(intent);
                 }
                 else {
@@ -339,6 +338,7 @@ public class MainActivity extends AppCompatActivity  {
                     Intent intent=new Intent(getApplicationContext(), AddFriendsActivity.class);
                     intent.putExtra("check","2");
                     startActivity(intent);
+                    ADSSetUp.adsType1(MainActivity.this);
                 }
                 else {
                     doLogin(MainActivity.this);
@@ -351,6 +351,8 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 if(FirebaseAuth.getInstance().getUid()!=null){
                     Intent intent=new Intent(getApplicationContext(), AddFriendsActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
+
                     intent.putExtra("check","1");
                     startActivity(intent);
                 }
@@ -367,6 +369,7 @@ public class MainActivity extends AppCompatActivity  {
                 if(FirebaseAuth.getInstance().getCurrentUser() != null){
                     Intent intent=new Intent(getApplicationContext(), BookPostActivity.class);
                     intent.putExtra("key","@");
+                    ADSSetUp.adsType1(MainActivity.this);
                     startActivity(intent);
                 }
                 else {
@@ -380,6 +383,7 @@ public class MainActivity extends AppCompatActivity  {
                 if(FirebaseAuth.getInstance().getCurrentUser() != null){
                     Intent intent=new Intent(getApplicationContext(), BookPostActivity.class);
                     intent.putExtra("key","@b");
+                    ADSSetUp.adsType1(MainActivity.this);
 
                     startActivity(intent);
                 }
@@ -396,6 +400,8 @@ public class MainActivity extends AppCompatActivity  {
                 Intent intent=new Intent(MainActivity.this, ReBookMarkActivity.class);
                 ADSSetUp.adsType1(MainActivity.this);
                 intent.putExtra("check",1);
+                ADSSetUp.adsType1(MainActivity.this);
+
                 startActivity(intent);
 
             }
@@ -446,6 +452,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(),VocabularyActivity.class);
+                ADSSetUp.adsType1(MainActivity.this);
+
                 startActivity(intent);
             }
         });
@@ -454,6 +462,8 @@ public class MainActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 if(FirebaseAuth.getInstance().getCurrentUser() != null){
                     Intent intent=new Intent(getApplicationContext(), BookCategoryActivity.class);
+                    ADSSetUp.adsType1(MainActivity.this);
+
                     startActivity(intent);
                 }
                 else {
@@ -559,19 +569,20 @@ public class MainActivity extends AppCompatActivity  {
         actionBarDrawerToggle.syncState();
         Drawable navIcon = toolbar.getNavigationIcon();
         if (navIcon != null) {
-            navIcon.setColorFilter(getResources().getColor(android.R.color.holo_green_dark), PorterDuff.Mode.SRC_IN);
+            navIcon.setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
         }
 
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refeshData();
-                fetchNewPostData();
+
                 if(FirebaseAuth.getInstance().getUid()!=null){
                     fetchBookCategory();
                     retriveDiffernt50Books();
                 }
+                refeshData();
+                fetchNewPostData();
 
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -624,14 +635,6 @@ public class MainActivity extends AppCompatActivity  {
                     }
                 });
     }
-
-
-
-
-
-
-
-
 
 
     private void retriveDiffernt50Books() {
@@ -749,8 +752,6 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
-
-
 
     private void refeshData() {
        // recyclerView.setLayoutManager(gridLayoutManager);
@@ -969,6 +970,8 @@ public class MainActivity extends AppCompatActivity  {
                         public void onDeletionComplete() {
                             // Delete all records from the database
                             databaseHelper.deleteAllFiles();
+                            ADSSetUp.adsType1(MainActivity.this);
+
 
 
                             // Show a toast message

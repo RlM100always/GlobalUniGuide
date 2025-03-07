@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,7 @@ public class ExamHisAdapter extends RecyclerView.Adapter<ExamHisAdapter.ExamHisV
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, DetailsExamHisActivity.class);
+                ADSSetUp.adsType1(context);
                 intent.putExtra("title",examHisModel.getTitle());
                 intent.putExtra("key",examHisModel.getKey());
                 intent.putExtra("set",examHisModel.getCategory());

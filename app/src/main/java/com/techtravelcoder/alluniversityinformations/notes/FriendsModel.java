@@ -2,9 +2,20 @@ package com.techtravelcoder.alluniversityinformations.notes;
 
 public class FriendsModel {
     String address,date,department,facebook,institution,name,notes,phone,key ;
+    private boolean isExpanded;
+
 
     public FriendsModel(){
+        this.isExpanded=false;
+    }
 
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
     }
 
     public String getKey() {
@@ -77,5 +88,18 @@ public class FriendsModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "FriendsModel{" +
+                "address='" + address + '\'' +
+                ", date='" + date + '\'' +
+                ", department='" + department + '\'' +
+                ", institution='" + institution + '\'' +
+                ", name='" + name + '\'' +
+                ", notes='" + notes + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

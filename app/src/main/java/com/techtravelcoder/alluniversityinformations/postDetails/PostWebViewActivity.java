@@ -612,7 +612,6 @@ public class PostWebViewActivity extends AppCompatActivity {
             //check status
             checkStatus();
 
-
         }
         if(item.getItemId()==R.id.menu_post_speaker_id){
 
@@ -660,39 +659,9 @@ public class PostWebViewActivity extends AppCompatActivity {
             View view = LayoutInflater.from(PostWebViewActivity.this).inflate(R.layout.convert_language, null);
             builder.setView(view);
 
-            WebView difLan = view.findViewById(R.id.convert_webview_id);
-            String ALLOWED_URL = "https://carrierguidelinesbd.blogspot.com/";
-
-            WebSettings webSettings = difLan.getSettings();
-            webSettings.setJavaScriptEnabled(true); // Enable JavaScript
-            webSettings.setDomStorageEnabled(true); // Enable DOM Storage
-            webSettings.setLoadWithOverviewMode(true);
-            webSettings.setUseWideViewPort(true);
-
-            difLan.setWebViewClient(new WebViewClient() {
-                @Override
-                public boolean shouldOverrideUrlLoading(@NonNull WebView view, @NonNull WebResourceRequest request) {
-                    // Restrict the WebView to only load the allowed URL
-                    if (request.getUrl().toString().equals(ALLOWED_URL)) {
-                        return false; // Allow loading the allowed URL
-                    }
-                    return true; // Block loading any other URLs
-                }
-
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    // For older Android versions
-                    if (url.equals(ALLOWED_URL)) {
-                        return false; // Allow loading the allowed URL
-                    }
-                    return true; // Block loading any other URLs
-                }
-            });
-
-            difLan.loadUrl(ALLOWED_URL);
 
             AlertDialog alertDialog1 = builder.create();
-            Drawable drawable = ContextCompat.getDrawable(PostWebViewActivity.this, R.drawable.alert_back);
+            Drawable drawable = ContextCompat.getDrawable(PostWebViewActivity.this, R.drawable.background);
             if (alertDialog1.getWindow() != null) {
                 alertDialog1.getWindow().setBackgroundDrawable(drawable);
             }

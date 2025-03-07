@@ -11,6 +11,7 @@
     tools:openDrawer="start"
     tools:context="com.techtravelcoder.alluniversityinformations.countryDetails.MainActivity">
     <LinearLayout
+        android:layout_margin="5dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -35,7 +36,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 app:civ_border_width="1.3dp"
                 app:civ_border_color="@color/deepGreen"
-                android:src="@drawable/image_buet"
+                android:src="@drawable/loading"
                 android:id="@+id/user_image_id"
                 android:layout_width="40dp"
                 android:layout_height="40dp"/>
@@ -122,7 +123,7 @@
 
                         <com.denzcoskun.imageslider.ImageSlider
                             android:id="@+id/image_slider"
-                            android:background="@drawable/image_buet"
+                            android:background="@drawable/loading"
                             android:layout_width="match_parent"
                             android:layout_height="210dp"
                             app:iss_auto_cycle="true"
@@ -134,55 +135,18 @@
 
 
                     <LinearLayout
-                        android:layout_marginLeft="3dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_width="0dp"
-                            android:layout_height="45dp"
-                            android:padding="3dp"
-                            android:layout_weight="0.1"
-                            android:layout_marginStart="2dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/arrow"
-                            app:civ_border_color="@color/cardMakerColor"
-                            app:civ_border_width=".8dp" />
-
-                        <TextView
-                            android:fontFamily="serif"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.8"
-                            android:layout_marginStart="5dp"
-                            android:text="Learning Materials "
-                            android:textColor="@color/heading"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="0.1"
-                            android:scaleType="fitXY" />
-
-                    </LinearLayout>
-                    <LinearLayout
 
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                         <LinearLayout
-                            android:weightSum="4"
+                            android:weightSum="3"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <LinearLayout
-                                android:layout_margin="4dp"
                                 android:gravity="center"
                                 android:foreground="@drawable/uni_background"
                                 android:orientation="vertical"
@@ -190,76 +154,80 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <LinearLayout
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
+                                    android:orientation="vertical"
                                     android:foreground="@drawable/uni_background"
                                     android:elevation="2dp"
                                     android:id="@+id/carrier_guide_id"
                                     android:gravity="center"
                                     android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <ImageView
                                         android:scaleType="centerCrop"
                                         android:padding="5dp"
                                         android:src="@drawable/carrier_guidelines"
-                                        android:layout_width="50dp"
-                                        android:layout_height="40dp"/>
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Learn"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
 
                                 </LinearLayout>
-                                <TextView
-                                    android:textStyle="bold"
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Learn Your \n Nish "
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
+
 
 
                             </LinearLayout>
                             <LinearLayout
                                 android:id="@+id/book_collection_id"
                                 android:gravity="center"
-                                android:elevation="10dp"
-                                android:layout_margin="4dp"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <LinearLayout
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
                                     android:elevation="2dp"
                                     android:foreground="@drawable/uni_background"
-
+                                    android:orientation="vertical"
                                     android:gravity="center"
                                     android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <ImageView
                                         android:scaleType="centerCrop"
                                         android:padding="5dp"
                                         android:src="@drawable/book"
-                                        android:layout_width="50dp"
-                                        android:layout_height="35dp"/>
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text=" Book"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
 
                                 </LinearLayout>
 
-                                <TextView
-                                    android:textStyle="bold"
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text=" Book  \nNotes"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
 
 
                             </LinearLayout>
@@ -267,126 +235,47 @@
                             <LinearLayout
                                 android:id="@+id/dictionary_id"
                                 android:gravity="center"
-                                android:elevation="10dp"
-                                android:layout_margin="4dp"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <LinearLayout
                                     android:foreground="@drawable/uni_background"
-
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
                                     android:elevation="3dp"
-
+                                    android:orientation="vertical"
                                     android:gravity="center"
                                     android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <ImageView
                                         android:scaleType="centerCrop"
                                         android:padding="5dp"
                                         android:src="@drawable/dictionar"
-                                        android:layout_width="50dp"
-                                        android:layout_height="35dp"/>
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Dictionary"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
 
                                 </LinearLayout>
-                                <TextView
-                                    android:textStyle="bold"
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Dictionary"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:gravity="center"
-                                android:elevation="10dp"
-                                android:layout_margin="4dp"
-                                android:orientation="vertical"
-                                android:layout_weight="1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <LinearLayout
-                                    android:elevation="3dp"
-                                    android:foreground="@drawable/uni_background"
-
-                                    android:id="@+id/popular_content_id"
-                                    android:gravity="center"
-                                    android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
-                                    <ImageView
-                                        android:scaleType="centerCrop"
-                                        android:padding="5dp"
-                                        android:src="@drawable/trendy"
-                                        android:layout_width="50dp"
-                                        android:layout_height="40dp"/>
-
-                                </LinearLayout>
-
-                                <TextView
-                                    android:textStyle="bold"
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Popular \nContent"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
 
 
                             </LinearLayout>
 
 
 
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="0dp"
-                                android:layout_height="45dp"
-                                android:padding="3dp"
-                                android:layout_weight="0.1"
-                                android:layout_marginStart="2dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/arrow"
-                                app:civ_border_color="@color/cardMakerColor"
-                                app:civ_border_width=".8dp" />
-
-                            <TextView
-                                android:fontFamily="serif"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.8"
-                                android:layout_marginStart="5dp"
-                                android:text="My Notes and History"
-                                android:textColor="@color/heading"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="30dp"
-                                android:layout_weight="0.1"
-                                android:scaleType="fitXY" />
 
                         </LinearLayout>
                         <LinearLayout
@@ -394,129 +283,131 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <LinearLayout
                                 android:gravity="center"
-                                android:layout_margin="4dp"
+                                android:foreground="@drawable/uni_background"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <LinearLayout
-                                    android:elevation="2dp"
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
+                                    android:orientation="vertical"
                                     android:foreground="@drawable/uni_background"
-
+                                    android:elevation="2dp"
                                     android:id="@+id/my_exam_history_id"
                                     android:gravity="center"
                                     android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <ImageView
                                         android:scaleType="centerCrop"
                                         android:padding="5dp"
                                         android:src="@drawable/history"
-                                        android:layout_width="50dp"
-                                        android:layout_height="40dp"/>
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Exam"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
 
                                 </LinearLayout>
 
-                                <TextView
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:textStyle="bold"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="My Exam \n History"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
 
 
                             </LinearLayout>
                             <LinearLayout
+                                android:id="@+id/add_friends_id"
                                 android:gravity="center"
-                                android:elevation="10dp"
-                                android:layout_margin="4dp"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <LinearLayout
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
                                     android:elevation="2dp"
                                     android:foreground="@drawable/uni_background"
-
-                                    android:id="@+id/add_friends_id"
+                                    android:orientation="vertical"
                                     android:gravity="center"
                                     android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <ImageView
                                         android:scaleType="centerCrop"
                                         android:padding="5dp"
                                         android:src="@drawable/add_friends"
-                                        android:layout_width="50dp"
-                                        android:layout_height="35dp"/>
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Add Friends"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
 
                                 </LinearLayout>
 
-                                <TextView
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:textStyle="bold"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Add \n Friends"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
 
 
                             </LinearLayout>
+
                             <LinearLayout
+                                android:id="@+id/add_notes_id"
                                 android:gravity="center"
-                                android:elevation="10dp"
-                                android:layout_margin="4dp"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <LinearLayout
-                                    android:elevation="2dp"
                                     android:foreground="@drawable/uni_background"
-
-                                    android:id="@+id/add_notes_id"
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
+                                    android:elevation="3dp"
+                                    android:orientation="vertical"
                                     android:gravity="center"
                                     android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <ImageView
                                         android:scaleType="centerCrop"
                                         android:padding="5dp"
                                         android:src="@drawable/notes"
-                                        android:layout_width="50dp"
-                                        android:layout_height="35dp"/>
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Add Notes"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
 
                                 </LinearLayout>
-
-                                <TextView
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:textStyle="bold"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Add \n Notes"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
 
 
                             </LinearLayout>
@@ -524,220 +415,138 @@
 
 
 
-
-
-
                         </LinearLayout>
-
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="0dp"
-                                android:layout_height="45dp"
-                                android:padding="3dp"
-                                android:layout_weight="0.1"
-                                android:layout_marginStart="2dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/arrow"
-                                app:civ_border_color="@color/cardMakerColor"
-                                app:civ_border_width=".8dp" />
-
-                            <TextView
-                                android:fontFamily="serif"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.8"
-                                android:layout_marginStart="5dp"
-                                android:text="My BookMark And Recent"
-                                android:textColor="@color/heading"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
-
-                            <ImageView
-                                android:layout_width="0dp"
-                                android:layout_height="30dp"
-                                android:layout_weight="0.1"
-                                android:scaleType="fitXY" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:weightSum="4"
+                            android:weightSum="3"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <LinearLayout
                                 android:gravity="center"
-                                android:layout_margin="4dp"
+                                android:foreground="@drawable/uni_background"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <LinearLayout
-                                    android:elevation="2dp"
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
+                                    android:orientation="vertical"
                                     android:foreground="@drawable/uni_background"
-
+                                    android:elevation="2dp"
                                     android:id="@+id/recent_uni_id"
                                     android:gravity="center"
                                     android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <ImageView
                                         android:scaleType="centerCrop"
                                         android:padding="5dp"
                                         android:src="@drawable/new_uni"
-                                        android:layout_width="50dp"
-                                        android:layout_height="40dp"/>
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="New Univesrity"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
 
                                 </LinearLayout>
 
-                                <TextView
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:textStyle="bold"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="New \n University"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
 
 
                             </LinearLayout>
                             <LinearLayout
+                                android:id="@+id/bookmark_uni_id"
                                 android:gravity="center"
-                                android:elevation="10dp"
-                                android:layout_margin="4dp"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <LinearLayout
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
                                     android:elevation="2dp"
                                     android:foreground="@drawable/uni_background"
-
-                                    android:id="@+id/bookmark_uni_id"
+                                    android:orientation="vertical"
                                     android:gravity="center"
                                     android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <ImageView
                                         android:scaleType="centerCrop"
                                         android:padding="5dp"
                                         android:src="@drawable/baseline_bookmark_added_24"
-                                        android:layout_width="50dp"
-                                        android:layout_height="35dp"/>
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:maxLines="1"
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Bookmark Uni"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
 
                                 </LinearLayout>
 
-                                <TextView
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:textStyle="bold"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="MyBookMark University"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
 
 
                             </LinearLayout>
-
 
                             <LinearLayout
                                 android:id="@+id/my_bookmark_book_id"
                                 android:gravity="center"
-                                android:elevation="10dp"
-                                android:layout_margin="4dp"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                                 <LinearLayout
-                                    android:elevation="2dp"
                                     android:foreground="@drawable/uni_background"
-
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
+                                    android:elevation="3dp"
+                                    android:orientation="vertical"
                                     android:gravity="center"
                                     android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <ImageView
                                         android:scaleType="centerCrop"
                                         android:padding="5dp"
                                         android:src="@drawable/mark"
-                                        android:layout_width="50dp"
-                                        android:layout_height="35dp"/>
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Bookmark Book"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
 
                                 </LinearLayout>
-
-                                <TextView
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:textStyle="bold"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="MyBookmark \nBook"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
-
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:id="@+id/new_book_id"
-                                android:gravity="center"
-                                android:elevation="10dp"
-                                android:layout_margin="4dp"
-                                android:orientation="vertical"
-                                android:layout_weight="1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <LinearLayout
-                                    android:elevation="2dp"
-
-                                    android:foreground="@drawable/uni_background"
-                                    android:gravity="center"
-                                    android:background="@drawable/background"
-                                    android:layout_width="80dp"
-                                    android:layout_height="60dp">
-                                    <ImageView
-                                        android:scaleType="centerCrop"
-                                        android:padding="5dp"
-                                        android:src="@drawable/new_book"
-                                        android:layout_width="50dp"
-                                        android:layout_height="40dp"/>
-
-                                </LinearLayout>
-
-                                <TextView
-                                    android:gravity="center"
-                                    android:fontFamily="serif"
-                                    android:textStyle="bold"
-                                    android:shadowDx=".5"
-                                    android:shadowDy=".5"
-                                    android:shadowRadius="1.5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=" New Book \nNotes"
-                                    android:textColor="@color/whiteTextColor1"
-                                    android:textSize="10dp"
-                                    />
 
 
                             </LinearLayout>
@@ -746,6 +555,97 @@
 
 
                         </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:gravity="center"
+                            android:elevation="10dp"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:elevation="3dp"
+                                android:foreground="@drawable/uni_background"
+
+                                android:id="@+id/popular_content_id"
+                                android:gravity="center"
+                                android:background="@drawable/background"
+                                android:layout_width="80dp"
+                                android:layout_height="60dp">
+                                <ImageView
+                                    android:scaleType="centerCrop"
+                                    android:padding="5dp"
+                                    android:src="@drawable/trendy"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:fontFamily="serif"
+                                android:shadowDx=".5"
+                                android:shadowDy=".5"
+                                android:shadowRadius="1.5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Popular"
+                                android:textColor="@color/whiteTextColor1"
+                                android:textSize="10dp"
+                                />
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/new_book_id"
+                            android:gravity="center"
+                            android:elevation="10dp"
+                            android:layout_margin="4dp"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:elevation="2dp"
+
+                                android:foreground="@drawable/uni_background"
+                                android:gravity="center"
+                                android:background="@drawable/background"
+                                android:layout_width="80dp"
+                                android:layout_height="60dp">
+                                <ImageView
+                                    android:scaleType="centerCrop"
+                                    android:padding="5dp"
+                                    android:src="@drawable/new_book"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:gravity="center"
+                                android:fontFamily="serif"
+                                android:textStyle="bold"
+                                android:shadowDx=".5"
+                                android:shadowDy=".5"
+                                android:shadowRadius="1.5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" New Book Notes"
+                                android:textColor="@color/whiteTextColor1"
+                                android:textSize="10dp"
+                                />
+
+
+                        </LinearLayout>
+
+
+
+
+
 
 
 
@@ -809,6 +709,7 @@
                         android:id="@+id/main_recycler_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
                         android:orientation="horizontal"
                         android:paddingTop="10dp" />
 

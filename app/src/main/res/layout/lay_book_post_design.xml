@@ -25,8 +25,8 @@
             >
 
             <ImageView
-                android:src="@drawable/loading"
-                android:background="@drawable/background"
+                android:src="@drawable/background"
+                android:background="@drawable/loading"
                 android:id="@+id/lay_book_post_iamge_id"
                 android:layout_width="match_parent"
                 android:layout_height="155dp"

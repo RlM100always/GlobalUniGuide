@@ -19,10 +19,11 @@
             android:layout_width="match_parent"
             android:layout_height="95dp">
             <ImageView
-                android:src="@drawable/loading"
-                android:background="@drawable/background"
+
+                android:src="@drawable/background"
                 android:id="@+id/category_design_image_id"
                 android:scaleType="fitXY"
+                android:background="@drawable/new_back"
                 android:layout_width="match_parent"
                 android:layout_height="95dp"/>
 

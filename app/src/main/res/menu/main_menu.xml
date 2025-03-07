@@ -55,7 +55,7 @@
         <item
             android:icon="@drawable/baseline_star_rate_24"
             android:id="@+id/menu_rate_id"
-            android:title="Rate Us"
+            android:title="Rate Us To Motivate"
             />
 
         <item

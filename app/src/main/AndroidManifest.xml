@@ -2,11 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:name="com.techtravelcoder.alluniversityinformations.ads.App"
@@ -18,7 +23,8 @@
         android:roundIcon="@drawable/university"
         android:supportsRtl="true"
         android:theme="@style/Theme.AllUniversityInformation"
-        tools:targetApi="31">
+        tools:targetApi="34">
+
         <activity
             android:name="com.techtravelcoder.alluniversityinformations.notes.AddFriendsActivity"
             android:exported="false" />
@@ -57,7 +63,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="OPEN_ACTIVITY_FROM_NOTIFICATION" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -90,7 +95,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -107,13 +111,14 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.your.package.fileprovider"
+            android:authorities="com.techtravelcoder.alluniversityinformations.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
     </application>
 
 </manifest>

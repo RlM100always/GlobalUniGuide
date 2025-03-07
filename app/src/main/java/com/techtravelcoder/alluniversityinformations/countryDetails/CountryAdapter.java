@@ -12,20 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
-import com.startapp.sdk.adsbase.Ad;
-import com.startapp.sdk.adsbase.StartAppAd;
-import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
-import com.startapp.sdk.adsbase.adlisteners.VideoListener;
 import com.techtravelcoder.alluniversityinformation.R;
-import com.techtravelcoder.alluniversityinformations.ads.App;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.universityDetails.UniversityActivity;
 
 import java.util.ArrayList;
-import java.util.Random;
-
-import co.notix.interstitial.NotixInterstitial;
-import kotlin.Unit;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHolder> {
 
@@ -57,6 +48,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHo
 
                     Intent intent=new Intent(context, UniversityActivity.class);
                     intent.putExtra("name",countryModel.getName());
+                    ADSSetUp.adsType1(context);
                     context.startActivity(intent);
 
             }

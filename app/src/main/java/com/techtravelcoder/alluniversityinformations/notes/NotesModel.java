@@ -56,4 +56,13 @@ public class NotesModel {
     public void setExpanded(boolean expanded) {
         isExpanded = expanded;
     }
+
+    @Override
+    public String toString() {
+        return "NotesModel{" +
+                "title='" + title + '\'' +
+                ", notes='" + notes + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }

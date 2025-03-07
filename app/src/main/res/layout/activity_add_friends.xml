@@ -22,16 +22,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:queryHint="Search here" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/add_friends_recyclerview_id"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout_add_friends"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/friends_search" />
+        app:layout_constraintTop_toBottomOf="@id/friends_search">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/add_friends_recyclerview_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="4dp" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/friends_float_id"

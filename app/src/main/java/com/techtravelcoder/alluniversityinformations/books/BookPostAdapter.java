@@ -23,14 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.onesignal.common.AndroidSupportV4Compat;
 import com.techtravelcoder.alluniversityinformation.R;
+import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
 import com.techtravelcoder.alluniversityinformations.pdf.PDFShowActivity;
-import com.techtravelcoder.alluniversityinformations.postDetails.PostHandleActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -101,15 +97,17 @@ public class BookPostAdapter extends RecyclerView.Adapter<BookPostAdapter.NewVie
             holder.bDate.setVisibility(View.VISIBLE);
             if (bookPostModel.getBookPostDate().equals(date)) {
                 holder.bDate.setText("Publish : "+"Today");
-                holder.bDate.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.yellow));
+                holder.bDate.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.deepGreen));
             }else if(bookPostModel.getBookPostDate().equals(previousDate)){
                 holder.bDate.setText("Publish : "+"Yesterday");
-                holder.bDate.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.heading));
+                holder.bDate.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.deepYellow));
             } else if (bookPostModel.getBookPostDate().equals(oneWeekAgoDate)) {
                 holder.bDate.setText("Publish : "+"1 Weak Ago");
-                holder.bDate.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.my_primary));
+                holder.bDate.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.red));
             } else {
                 holder.bDate.setText("Publish : "+bookPostModel.getBookPostDate());
+                holder.bDate.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.whiteTextColor1));
+
             }
         }
         if(checker==3){
@@ -183,6 +181,7 @@ public class BookPostAdapter extends RecyclerView.Adapter<BookPostAdapter.NewVie
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, PDFShowActivity.class);
+                ADSSetUp.adsType1(context);
                 intent.putExtra("fUrl",bookPostModel.getBookDriveurl());
                 intent.putExtra("fName",bookPostModel.getBookKey());
                 intent.putExtra("bookName",bookPostModel.getBookName());

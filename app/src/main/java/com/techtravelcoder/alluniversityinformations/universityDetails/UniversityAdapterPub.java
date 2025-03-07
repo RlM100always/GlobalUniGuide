@@ -6,27 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.startapp.sdk.adsbase.Ad;
-import com.startapp.sdk.adsbase.StartAppAd;
-import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
-import com.startapp.sdk.adsbase.adlisteners.VideoListener;
 import com.techtravelcoder.alluniversityinformation.R;
 import com.techtravelcoder.alluniversityinformations.ads.ADSSetUp;
-import com.techtravelcoder.alluniversityinformations.ads.App;
 import com.techtravelcoder.alluniversityinformations.web.UniversityWebActivity;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-import co.notix.interstitial.NotixInterstitial;
 import de.hdodenhof.circleimageview.CircleImageView;
-import kotlin.Unit;
 
 public class UniversityAdapterPub extends RecyclerView.Adapter<UniversityAdapterPub.UniViewHolder> {
     Context context;
@@ -69,7 +60,7 @@ public class UniversityAdapterPub extends RecyclerView.Adapter<UniversityAdapter
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, UniversityWebActivity.class);
-                ADSSetUp.adsType2(context);
+                ADSSetUp.adsType1(context);
 
                 intent.putExtra("link",universityModel.getUniWebLink());
                 intent.putExtra("name",universityModel.getUniName());

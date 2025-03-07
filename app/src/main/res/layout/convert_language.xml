@@ -3,9 +3,30 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <WebView
-        android:id="@+id/convert_webview_id"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/i1"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"/>
+            <ImageView
+                android:src="@drawable/i2"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"/>
+            <ImageView
+                android:src="@drawable/i3"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"/>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

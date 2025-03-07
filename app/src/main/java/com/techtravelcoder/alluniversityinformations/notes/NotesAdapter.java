@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.techtravelcoder.alluniversityinformation.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteviewHolder> {
     private ArrayList<NotesModel> list;
@@ -71,14 +80,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteviewHold
         holder.copy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text=notesModel.getTitle()+"\n"+notesModel.getNotes();
+                String text="MADE BY GLOBALUNIGUIDE \n\n"+"Title : "+notesModel.getTitle()+"\n"+"Note : "+notesModel.getNotes();
                 copyToClipboard(text);
             }
         });
         holder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text=notesModel.getTitle()+"\n"+notesModel.getNotes();
+                String text="MADE BY GLOBALUNIGUIDE \n\n"+"Title : "+notesModel.getTitle()+"\n"+"Note : "+notesModel.getNotes();
 
                 shareNoteContent(text);
             }
@@ -93,11 +102,36 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteviewHold
                 alertObj.setPositiveButton(Html.fromHtml("<font color='#000000'>✅Yes</font>"), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // Get the current adapter position
+                        int adapterPosition = holder.getAdapterPosition();
+                        if (adapterPosition == RecyclerView.NO_POSITION) {
+                            return;
+                        }
+
+                        NotesModel currentModel = list.get(adapterPosition);
+
                         FirebaseDatabase.getInstance().getReference("MyNotes")
                                 .child(FirebaseAuth.getInstance().getUid())
-                                .child(notesModel.getKey())
-                                .removeValue();
-
+                                .child(currentModel.getKey())
+                                .removeValue()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        // Ensure the position is still valid before removing
+                                        int newPosition = holder.getAdapterPosition();
+                                        if (newPosition != RecyclerView.NO_POSITION && newPosition < list.size()) {
+                                            list.remove(newPosition);
+                                            notifyItemRemoved(newPosition);
+                                            notifyItemRangeChanged(newPosition, list.size());
+                                            Toast.makeText(context, "Note deleted", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(context, "Failed to delete note: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     }
                 });
 
@@ -107,13 +141,102 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteviewHold
                         dialog.cancel();
                     }
                 });
+
                 AlertDialog dialog = alertObj.create();
                 dialog.show();
                 Drawable drawable = ContextCompat.getDrawable(context, R.drawable.alert_back);
                 dialog.getWindow().setBackgroundDrawable(drawable);
-
             }
         });
+
+        holder.update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                final View view = LayoutInflater.from(context).inflate(R.layout.notes_design, null);
+                builder.setView(view);
+
+                final TextInputEditText title = view.findViewById(R.id.notes_title_id);
+                final TextInputEditText writeNotes = view.findViewById(R.id.notes_write_id);
+                TextView saveButton = view.findViewById(R.id.notes_save_id);
+                TextView cancelButton = view.findViewById(R.id.notes_cancel_id);
+                TextView heading = view.findViewById(R.id.notes_heading_id);
+
+                heading.setText("Update Notes");
+                title.setText(notesModel.getTitle());
+                writeNotes.setText(notesModel.getNotes());
+
+
+                final AlertDialog alertDialog = builder.create();
+                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.note_back);
+                if (alertDialog.getWindow() != null) {
+                    alertDialog.getWindow().setBackgroundDrawable(drawable);
+                }
+                alertDialog.show();
+                alertDialog.setCancelable(false);
+
+                saveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!TextUtils.isEmpty(writeNotes.getText().toString())) {
+                            Calendar calendar = Calendar.getInstance();
+                            Date times = calendar.getTime();
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy, EEEE", Locale.getDefault());
+                            String date = sdf.format(times);
+
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("title", title.getText().toString());
+                            map.put("notes", writeNotes.getText().toString());
+                            map.put("date", date);
+                            map.put("key",notesModel.getKey());
+
+
+                            FirebaseDatabase.getInstance().getReference("MyNotes")
+                                    .child(FirebaseAuth.getInstance().getUid())
+                                    .child(notesModel.getKey())
+                                    .setValue(map)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            notesModel.setTitle(title.getText().toString());
+                                            notesModel.setNotes(writeNotes.getText().toString());
+                                            notesModel.setDate(date);
+
+                                            // Find the position of the updated note in the list
+                                            int position = list.indexOf(notesModel);
+                                            if (position != -1) {
+                                                // Notify the adapter about the change
+                                                notifyItemChanged(position);
+                                            }
+
+                                            Toast.makeText(context, "Successfully Note updated", Toast.LENGTH_SHORT).show();
+                                            alertDialog.dismiss();
+
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(context, "Failed to update note: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        } else {
+                            Toast.makeText(context, "Notes is Empty", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+            }
+        });
+
+
+
     }
 
     private void shareNoteContent(String text) {
@@ -133,6 +256,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteviewHold
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public void searchLists(ArrayList<NotesModel> filteredList) {
+        list=filteredList;
     }
 
     public class NoteviewHolder extends RecyclerView.ViewHolder {

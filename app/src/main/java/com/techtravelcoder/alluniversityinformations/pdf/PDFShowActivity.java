@@ -1,6 +1,7 @@
 package com.techtravelcoder.alluniversityinformations.pdf;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -54,6 +55,11 @@ public class PDFShowActivity extends AppCompatActivity {
     private PDFView pdfView;
     private DatabaseHelper databaseHelper;
     private TextView title;
+    private  String fileName;
+    private static final String PREFS_NAME = "PDFPrefs";
+    private static final String KEY_PAGE_NUMBER = "pageNumber";
+    private int currentPage = 0;
+
     private ImageView settings,withoutBookMark,home,share;
     private String theme,mode,fileUrl,fName,bName,iUrl;
 
@@ -126,7 +132,7 @@ public class PDFShowActivity extends AppCompatActivity {
 
         // Download file
         fileUrl = "https://drive.google.com/uc?export=download&id="+fUrl;
-        String fileName = fName+fUrl;
+        fileName = fName+fUrl;
 
 
 
@@ -247,7 +253,7 @@ public class PDFShowActivity extends AppCompatActivity {
                                             stream.close();
 
                                             // Get content URI using FileProvider
-                                            Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), "com.your.package.fileprovider", imageFile);
+                                            Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), "com.techtravelcoder.alluniversityinformations.fileprovider", imageFile);
                                             intent.putExtra(Intent.EXTRA_STREAM, contentUri);
                                             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Grant temporary read permission
 
@@ -282,13 +288,6 @@ public class PDFShowActivity extends AppCompatActivity {
 
 
 
-    }
-    private Bitmap getSampleBitmap() {
-        // For demonstration purposes, create a sample bitmap.
-        // Replace this method with your own logic to get a bitmap from your source.
-        Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
-        bitmap.eraseColor(android.graphics.Color.BLUE); // Just to give it some color
-        return bitmap;
     }
 
     private void bookBookMarkHandle() {
@@ -526,21 +525,25 @@ public class PDFShowActivity extends AppCompatActivity {
 
     }
 
-    private void deletesFile(String fileName) {
-        String filePath = databaseHelper.getFilePath(fileName);
-        if (filePath != null) {
-            File file = new File(filePath);
-            if (file.exists() && file.delete()) {
-                databaseHelper.deleteFile(fileName);
-                Toast.makeText(this, "File deleted successfully", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Failed to delete file", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(this, "File path not found in database", Toast.LENGTH_SHORT).show();
-        }
+    private void savePageNumber(String filename, int pageNumber) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(filename, pageNumber);
+        editor.apply();
     }
 
+    private int getSavedPageNumber(String filename) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        int savedPage = prefs.getInt(filename, 0);
+        return savedPage;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Save the current page number when the activity is paused
+        savePageNumber(fileName, currentPage);
+    }
 
     private void loadPdf(String filePath,String mode ,String theme) {
         if (filePath != null) {
@@ -548,9 +551,9 @@ public class PDFShowActivity extends AppCompatActivity {
             if (file.exists()) {
                 if(theme.equals("light") && mode.equals("horizontal")){
                     pdfView.fromFile(file)
+                            .defaultPage(getSavedPageNumber(fileName))
                             .swipeHorizontal(true) // Enable horizontal swiping
                             .enableDoubletap(true)
-                            .defaultPage(0)
                             .onLoad(nbPages -> {})
                             .onPageChange((page, pageCount) -> {})
                             .onError(t -> {})
@@ -558,6 +561,14 @@ public class PDFShowActivity extends AppCompatActivity {
                             .enableAnnotationRendering(false)
                             .password(null)
                             .scrollHandle(null)
+                            .onPageChange(new OnPageChangeListener() {
+                                @Override
+                                public void onPageChanged(int page, int pageCount) {
+                                    currentPage = page;
+                                    savePageNumber(fileName,page);
+                                }
+                            })
+
                             .enableAntialiasing(true)
                             .spacing(0)
                             .scrollHandle(new DefaultScrollHandle(this))
@@ -571,9 +582,9 @@ public class PDFShowActivity extends AppCompatActivity {
                 }
                 if(theme.equals("light") && mode.equals("vertical")){
                     pdfView.fromFile(file)
+                            .defaultPage(getSavedPageNumber(fileName))
                             .swipeHorizontal(false) // Enable horizontal swiping
                             .enableDoubletap(true)
-                            .defaultPage(0)
                             .onLoad(nbPages -> {})
                             .onPageChange((page, pageCount) -> {})
                             .onError(t -> {})
@@ -583,6 +594,13 @@ public class PDFShowActivity extends AppCompatActivity {
                             .scrollHandle(null)
                             .enableAntialiasing(true)
                             .spacing(0)
+                            .onPageChange(new OnPageChangeListener() {
+                                @Override
+                                public void onPageChanged(int page, int pageCount) {
+                                    currentPage = page;
+                                    savePageNumber(fileName,page);
+                                }
+                            })
                             .scrollHandle(new DefaultScrollHandle(this))
                             .fitEachPage(true) // fit each page to the view, else smaller pages are scaled relative to largest page.
                             .pageSnap(true) // snap pages to screen boundaries
@@ -594,15 +612,23 @@ public class PDFShowActivity extends AppCompatActivity {
                 }
                 if(theme.equals("night") && mode.equals("vertical")){
                     pdfView.fromFile(file)
+                            .defaultPage(getSavedPageNumber(fileName))
+
                             .swipeHorizontal(false) // Enable horizontal swiping
                             .enableDoubletap(true)
-                            .defaultPage(0)
                             .onLoad(nbPages -> {})
                             .onPageChange((page, pageCount) -> {})
                             .onError(t -> {})
                             .onPageError((page, t) -> {})
                             .enableAnnotationRendering(false)
                             .password(null)
+                            .onPageChange(new OnPageChangeListener() {
+                                @Override
+                                public void onPageChanged(int page, int pageCount) {
+                                    currentPage = page;
+                                    savePageNumber(fileName,page);
+                                }
+                            })
                             .scrollHandle(null)
                             .enableAntialiasing(true)
                             .spacing(0)
@@ -616,15 +642,23 @@ public class PDFShowActivity extends AppCompatActivity {
                 }
                 if(theme.equals("night") && mode.equals("horizontal")){
                     pdfView.fromFile(file)
+                            .defaultPage(getSavedPageNumber(fileName))
+
                             .swipeHorizontal(true) // Enable horizontal swiping
                             .enableDoubletap(true)
-                            .defaultPage(0)
                             .onLoad(nbPages -> {})
                             .onPageChange((page, pageCount) -> {})
                             .onError(t -> {})
                             .onPageError((page, t) -> {})
                             .enableAnnotationRendering(false)
                             .password(null)
+                            .onPageChange(new OnPageChangeListener() {
+                                @Override
+                                public void onPageChanged(int page, int pageCount) {
+                                    currentPage = page;
+                                    savePageNumber(fileName,page);
+                                }
+                            })
                             .scrollHandle(null)
                             .enableAntialiasing(true)
                             .spacing(0)

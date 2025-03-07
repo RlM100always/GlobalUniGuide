@@ -12,7 +12,7 @@
     android:layout_height="wrap_content">
     <de.hdodenhof.circleimageview.CircleImageView
         app:civ_border_color="#FCADADB3"
-        app:civ_border_width="1.1dp"
+        app:civ_border_width="0.7dp"
         android:id="@+id/lay_category_iamge_id"
         android:src="@drawable/profile"
         android:layout_width="90dp"
