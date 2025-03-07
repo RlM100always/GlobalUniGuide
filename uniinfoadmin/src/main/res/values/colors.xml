@@ -2,8 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="back">#FC050721</color><!-- FC050721-->
-    <color name="back_upper">#AB202677</color> <!-- AB202677-->
+    <color name="back">#FFFFFFFF</color><!-- FC050721-->
+    <color name="back_upper">#D3D3D3</color> <!-- AB202677-->
     <color name="allert_back_upper">#CC0A0D39</color>
 
 
@@ -15,5 +15,10 @@
     <color name="red">#F90303</color>
     <color name="deepYellow">#FFAB00</color>
     <color name="FullWhite">#FFFFFF</color>
+
+
+    <color name="adminBackground">#F0F4F8</color>
+    <color name="adminPrimary">#3494E6</color>
+    <color name="adminAccent">#EC6EAD</color>
 
 </resources>

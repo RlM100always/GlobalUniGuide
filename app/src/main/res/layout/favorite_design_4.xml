@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@drawable/edit_text_background"
     android:layout_margin="10dp"
@@ -50,7 +51,6 @@
                         android:maxLines="2"
                         android:layout_marginLeft="5dp"
                         android:id="@+id/post_design_category"
-                        android:layout_marginRight="5dp"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="serif"
                         android:layout_width="0dp"
@@ -59,27 +59,27 @@
                         android:textStyle="bold"
                         android:textColor="@color/whiteTextSideColor1"
                         android:textSize="16dp"/>
-                    <TextView
-                        android:foreground="@drawable/uni_background"
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/favorite_post_delete_id"
-                        android:layout_marginRight="20dp"
-                        android:drawableLeft="@drawable/baseline_delete_24"
-                        android:layout_marginLeft="5dp"
-                        android:layout_gravity="center"
-                        android:fontFamily="serif"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="@color/yellow"
-                        android:textSize="18dp"/>
+                        android:layout_gravity="top|end"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/baseline_delete_24"
+                        android:visibility="visible"
+                        app:fabSize="mini"
+                        app:tint="@android:color/white"
+                        app:backgroundTint="@color/delete_button_color"
+                        tools:ignore="ContentDescription" />
 
 
                 </LinearLayout>
 
 
                 <TextView
+
                     android:fontFamily="serif"
-                    android:maxLines="5"
+                    android:maxLines="2"
                     android:id="@+id/post_design_title"
                     android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"

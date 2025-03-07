@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bangladesh "
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold" />
     <TextView
@@ -39,7 +39,7 @@
         android:layout_marginLeft="6dp"
         android:maxLines="1"
         android:id="@+id/tnDateId"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="15dp"
         android:text="Click for More.."
         android:layout_width="wrap_content"

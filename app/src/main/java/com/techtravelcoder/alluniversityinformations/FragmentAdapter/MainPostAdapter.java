@@ -1,5 +1,6 @@
 package com.techtravelcoder.alluniversityinformations.FragmentAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -205,11 +207,15 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void bindViewHolderType2(MainPostAdapter.ViewHolderType2 holder, MainPostModel mainPostModel) {
 
         if(checker==1){
+            holder.view2.setText(mainPostModel.getViews()+" views");
+
             holder.title2.setText(mainPostModel.getTitle());
             holder.label2.setVisibility(View.VISIBLE);
             holder.label2.setText(mainPostModel.getCategory());
-            holder.view2.setText(mainPostModel.getViews()+" views");
-            Glide.with(context).load(mainPostModel.getImage()).into(holder.img2);
+            if(mainPostModel.getImage()!=null){
+                Glide.with(context).load(mainPostModel.getImage()).into(holder.img2);
+
+            }
             if(mainPostModel.getPostLoves()!=null){
                 holder.loves2.setText(mainPostModel.getPostLoves()+" loves");
             }else {
@@ -227,15 +233,18 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 holder.reviews2.setText(0+" reviews");
                 holder.star2.setText(0+" stars");
             }
-        }else {
+        }
+        else {
             holder.title2.setText(mainPostModel.getTitle());
             holder.label2.setVisibility(View.GONE);
             holder.lesson2.setVisibility(View.VISIBLE);
             holder.lesson2.setText("Lesson : "+(holder.getPosition()+1));
             holder.label2.setText(mainPostModel.getCategory());
             holder.view2.setText(mainPostModel.getViews()+" views");
-            Glide.with(context).load(mainPostModel.getImage()).into(holder.img2);
-            if(mainPostModel.getPostLoves()!=null){
+            if(mainPostModel.getImage()!=null){
+                Glide.with(context).load(mainPostModel.getImage()).into(holder.img2);
+
+            }            if(mainPostModel.getPostLoves()!=null){
                 holder.loves2.setText(mainPostModel.getPostLoves()+" loves");
             }else {
                 holder.loves2.setText(0+" loves");
@@ -318,8 +327,10 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
         holder.view3.setText(mainPostModel.getViews()+" views");
         holder.category3.setText(mainPostModel.getCategory());
-        Glide.with(context).load(mainPostModel.getImage()).into(holder.img3);
+        if(mainPostModel.getImage()!=null){
+            Glide.with(context).load(mainPostModel.getImage()).into(holder.img3);
 
+        }
         if(mainPostModel.getPostLoves()!=null){
             holder.loves3.setText(mainPostModel.getPostLoves()+" loves");
         }else {
@@ -361,8 +372,10 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.title4.setText(mainPostModel.getTitle());
         holder.label4.setText(mainPostModel.getCategory());
         holder.view4.setText(mainPostModel.getViews()+" views");
-        Glide.with(context).load(mainPostModel.getImage()).into(holder.img4);
+        if(mainPostModel.getImage()!=null){
+            Glide.with(context).load(mainPostModel.getImage()).into(holder.img4);
 
+        }
         if(mainPostModel.getPostLoves()!=null){
             holder.loves4.setText(mainPostModel.getPostLoves()+" loves");
         }else {
@@ -517,8 +530,10 @@ public class MainPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private static class ViewHolderType4 extends RecyclerView.ViewHolder {
         ImageView img4;
-        TextView label4, title4,view4,delete,loves4,reviews4,star4;
+        TextView label4, title4,view4,loves4,reviews4,star4;
+        FloatingActionButton delete;
 
+        @SuppressLint("WrongViewCast")
         ViewHolderType4(@NonNull View itemView) {
             super(itemView);
             label4 = itemView.findViewById(R.id.post_design_category);

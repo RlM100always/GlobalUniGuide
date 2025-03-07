@@ -1,84 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:elevation="2dp"
-    android:padding="7dp"
-    android:foreground="@drawable/uni_background"
-    android:backgroundTint="@color/cardMakerColor"
-    android:background="@drawable/edit_text_background"
-    android:layout_margin="10dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <de.hdodenhof.circleimageview.CircleImageView
-        app:civ_border_color="#FCADADB3"
-        app:civ_border_width="0.7dp"
-        android:id="@+id/lay_category_iamge_id"
-        android:src="@drawable/profile"
-        android:layout_width="90dp"
-        android:layout_height="90dp"/>
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:foreground="@drawable/uni_background"
 
+    android:background="@drawable/background"
+
+    >
 
     <LinearLayout
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Profile Image with Modern Touch -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/lay_category_iamge_id"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/profile"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/accent_color"/>
+
+        <!-- Content Section -->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_marginLeft="6dp"
-                android:src="@drawable/pdf"
-                android:layout_width="25dp"
-                android:layout_height="25dp"/>
-            <TextView
-                android:layout_marginLeft="3dp"
-                android:layout_marginBottom="2dp"
-                android:drawablePadding="1dp"
-                android:fontFamily="serif"
-                android:maxLines="6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            android:gravity="start">
+
+            <!-- Title with Icon -->
+            <com.google.android.material.chip.Chip
                 android:id="@+id/lay_category_name_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bangladesh"
-                android:textColor="@color/whiteTextColor1"
-                android:textSize="13.5dp"
-                android:textStyle="bold" />
+                app:chipIcon="@drawable/pdf"
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:textStyle="bold"/>
+
+            <!-- Book Count with Modern Badge -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/lay_category_total_book_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="50 Books"
+                app:chipBackgroundColor="@color/secondary_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+            <!-- Status with Modern Indicator -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:drawablePadding="8dp"
+                android:text="Status: Available"
+                android:textColor="@color/success_color"></TextView>
 
         </LinearLayout>
-        <TextView
-            android:paddingBottom="1dp"
-            android:paddingTop="1dp"
-            android:paddingRight="4dp"
-            android:paddingLeft="4dp"
-            android:backgroundTint="@color/deepGreen"
-            android:background="@drawable/edit_text_background"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="2dp"
-            android:fontFamily="serif"
-            android:maxLines="1"
-            android:id="@+id/lay_category_total_book_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="50 Books"
-            android:textColor="@color/back"
-            android:textSize="11dp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_marginLeft="8dp"
-            android:fontFamily="serif"
-            android:maxLines="6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status : Available"
-            android:textColor="@color/deepGreen"
-            android:textSize="12dp"
-            />
-
     </LinearLayout>
-
-
-
-
 </LinearLayout>

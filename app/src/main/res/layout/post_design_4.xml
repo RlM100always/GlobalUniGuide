@@ -9,7 +9,8 @@
     android:background="@drawable/edit_text_background"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:padding="8dp"
+        android:foreground="@drawable/uni_background"
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,14 +20,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.cardview.widget.CardView
-                android:elevation="6dp"
                 android:foreground="@drawable/uni_background"
-                app:cardCornerRadius="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
                 <ImageView
+                    android:background="@drawable/rounded_top_corners"
+                    android:clipToOutline="true"
                     android:src="@drawable/loading"
-                    android:background="@drawable/background"                    android:elevation="6dp"
                     android:id="@+id/post_design_image_id4"
                     android:scaleType="fitXY"
                     android:layout_width="match_parent"
@@ -34,6 +34,9 @@
 
             </androidx.cardview.widget.CardView>
             <LinearLayout
+                android:paddingRight="8dp"
+                android:paddingTop="8dp"
+                android:paddingLeft="8dp"
                 android:layout_gravity="center"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -58,6 +61,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:padding="5dp"
             android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"
             android:orientation="horizontal"

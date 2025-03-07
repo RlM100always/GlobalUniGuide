@@ -118,7 +118,6 @@ public class BookCategoryActivity extends AppCompatActivity {
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
-        alertDialog.setCancelable(false);
         addCategoyry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

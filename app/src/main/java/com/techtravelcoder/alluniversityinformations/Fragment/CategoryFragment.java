@@ -138,7 +138,7 @@ public class CategoryFragment extends Fragment {
         if(randomViewType==1){
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         } else if (randomViewType==2) {
-            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
 
         }
         recyclerView.setAdapter(categoryAdapter);

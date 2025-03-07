@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.Toolbar
+            app:title="Study Helper"
             style="@style/MyPopupTheme"
-            app:subtitle="GlobalUniGuide : Study Notes Provider"
             android:layout_gravity="left"
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -556,93 +556,104 @@
 
                         </LinearLayout>
 
-
-
                         <LinearLayout
-                            android:gravity="center"
-                            android:elevation="10dp"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
+                            android:weightSum="3"
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:elevation="3dp"
-                                android:foreground="@drawable/uni_background"
 
-                                android:id="@+id/popular_content_id"
+                            <LinearLayout
                                 android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/trendy"
-                                    android:layout_width="50dp"
-                                    android:layout_height="40dp"/>
+                                android:foreground="@drawable/uni_background"
+                                android:orientation="vertical"
+                                android:layout_weight="2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
+                                    android:orientation="vertical"
+                                    android:foreground="@drawable/uni_background"
+                                    android:elevation="2dp"
+                                    android:id="@+id/popular_content_id"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/trendy"
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Popular"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/new_book_id"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:layout_weight="2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <LinearLayout
+                                    android:layout_margin="7dp"
+                                    android:padding="10dp"
+                                    android:elevation="2dp"
+                                    android:foreground="@drawable/uni_background"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:background="@drawable/background"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <ImageView
+                                        android:scaleType="centerCrop"
+                                        android:padding="5dp"
+                                        android:src="@drawable/new_book"
+                                        android:layout_width="45dp"
+                                        android:layout_height="50dp"/>
+                                    <TextView
+                                        android:maxLines="1"
+                                        android:textStyle="bold"
+                                        android:gravity="center"
+                                        android:fontFamily="serif"
+                                        android:shadowDx=".5"
+                                        android:shadowDy=".5"
+                                        android:shadowRadius="1.5"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="New Book"
+                                        android:textColor="@color/whiteTextColor1"
+                                        android:textSize="10dp"
+                                        />
+
+                                </LinearLayout>
+
+
 
                             </LinearLayout>
 
-                            <TextView
-                                android:textStyle="bold"
-                                android:gravity="center"
-                                android:fontFamily="serif"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Popular"
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
+
+
 
 
                         </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/new_book_id"
-                            android:gravity="center"
-                            android:elevation="10dp"
-                            android:layout_margin="4dp"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <LinearLayout
-                                android:elevation="2dp"
-
-                                android:foreground="@drawable/uni_background"
-                                android:gravity="center"
-                                android:background="@drawable/background"
-                                android:layout_width="80dp"
-                                android:layout_height="60dp">
-                                <ImageView
-                                    android:scaleType="centerCrop"
-                                    android:padding="5dp"
-                                    android:src="@drawable/new_book"
-                                    android:layout_width="50dp"
-                                    android:layout_height="40dp"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:gravity="center"
-                                android:fontFamily="serif"
-                                android:textStyle="bold"
-                                android:shadowDx=".5"
-                                android:shadowDy=".5"
-                                android:shadowRadius="1.5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=" New Book Notes"
-                                android:textColor="@color/whiteTextColor1"
-                                android:textSize="10dp"
-                                />
-
-
-                        </LinearLayout>
-
-
 
 
 
@@ -880,8 +891,6 @@
 
 
 
-
-
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>
@@ -897,8 +906,8 @@
         android:background="@color/back"
         app:itemIconSize="28dp"
         android:fitsSystemWindows="true"
-        app:itemTextColor="@color/whiteTextColor1"
-        app:itemIconTint="@color/whiteTextColor1"
+        app:itemTextColor="@color/book_title_color"
+        app:itemIconTint="@color/book_title_color"
         app:itemIconPadding="8dp"
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"

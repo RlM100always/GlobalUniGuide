@@ -120,7 +120,6 @@ public class BookPostActivity extends AppCompatActivity {
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
-        alertDialog.setCancelable(false);
         addBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

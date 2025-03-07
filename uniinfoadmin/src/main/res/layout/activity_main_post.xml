@@ -70,7 +70,7 @@
             app:fabSize="normal"
             />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:backgroundTint="#C6FF00"
+            android:backgroundTint="#00B8D4"
             android:layout_margin="10dp"
             android:id="@+id/mcq_float_button"
             android:layout_width="wrap_content"

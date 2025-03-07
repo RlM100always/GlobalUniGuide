@@ -16,13 +16,29 @@
 
     <color name="back">#F5FEFC</color><!-- F0F0F4F4-->
     <color name="cardMakerColor">#FFFFFF</color><!--F3F4F5 FC0C115B  AD00050A-->
-    <color name="WhitebuttonSide">#F8BDBDBD</color><!-- FC05093A-->
+    <color name="WhitebuttonSide">#F8E4E2E2</color><!-- FC05093A-->
     <color name="whiteTextColor1">#FF000000</color>
     <color name="whiteTextSideColor1">#CF0369</color>
     <color name="deepGreen">#34BB03</color>
     <color name="red">#F90303</color>
     <color name="deepYellow">#FFAB00</color>
     <color name="FullWhite">#FFFFFF</color>
+
+    <!-- In colors.xml -->
+    <color name="surface_color">#FFFFFF</color>
+    <color name="accent_color">#3700B3</color>
+    <color name="secondary_color">#03DAC6</color>
+    <color name="success_color">#4CAF50</color>
+
+
+
+
+    <color name="book_title_color">#333333</color>
+    <color name="book_date_color">#888888</color>
+    <color name="book_format_color">#666666</color>
+    <color name="chip_background_color">#EEEEEE</color>
+    <color name="chip_text_color">#444444</color>
+    <color name="delete_button_color">#FF5252</color>
 
 
 

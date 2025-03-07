@@ -1,73 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="8dp"
-    android:elevation="2dp"
-    android:padding="6dp"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_margin="8dp"
+    android:elevation="4dp"
     android:background="@drawable/edit_text_background"
-    android:backgroundTint="#FCE6E7F1"
-    android:layout_height="wrap_content">
-   <LinearLayout
-       android:layout_marginTop="8dp"
-       android:gravity="center"
-       android:orientation="horizontal"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content">
-       <de.hdodenhof.circleimageview.CircleImageView
-           app:civ_border_color="#FCADADB3"
-           app:civ_border_width="1.1dp"
-           android:id="@+id/cv_image_id"
-           android:layout_marginLeft="8dp"
-           android:src="@drawable/profile"
-           android:layout_width="40dp"
-           android:layout_height="40dp"/>
-       <TextView
-           android:fontFamily="serif"
-           android:id="@+id/reviewers_name_id"
-           android:textStyle="bold"
-           android:layout_marginLeft="5dp"
-           android:textColor="@color/black"
-           android:textSize="14dp"
-           android:text="Md Rakib Hossain"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"/>
-   </LinearLayout>
+    android:backgroundTint="@color/FullWhite">
+
     <LinearLayout
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:gravity="center_vertical"
+        android:paddingVertical="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cv_image_id"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/profile"
+            app:civ_border_color="#FCADADB3"
+            app:civ_border_width="1.5dp" />
+
+        <TextView
+            android:id="@+id/reviewers_name_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Md Rakib Hossain"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingVertical="4dp">
+
         <androidx.appcompat.widget.AppCompatRatingBar
-            android:layout_marginLeft="5dp"
             android:id="@+id/reviewers_ratingbar_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
+            android:stepSize="0.5"
+            android:rating="4.5"
+            android:layout_marginEnd="8dp"
             android:theme="@style/RatingBar1" />
+
+        <TextView
+            android:id="@+id/reviewers_date_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12/11/2001"
+            android:textColor="@color/whiteTextSideColor1"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif" />
     </LinearLayout>
-    <TextView
-        android:fontFamily="serif"
-        android:textStyle="bold"
-        android:id="@+id/reviewers_date_id"
-        android:layout_marginLeft="8dp"
-        android:textColor="@color/whiteTextSideColor1"
-        android:textSize="14dp"
-        android:text="12/11/2001"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
     <TextView
-        android:autoLink="all"
-        android:fontFamily="serif"
         android:id="@+id/reviewers_text_id"
-        android:layout_marginLeft="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Very good app"
         android:textColor="@color/black"
-        android:textSize="14dp"
-        android:text="very good app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:autoLink="all" />
 
 </LinearLayout>

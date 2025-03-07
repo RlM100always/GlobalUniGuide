@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.techtravelcoder.uniinfoadmin.R;
@@ -14,7 +15,7 @@ import com.techtravelcoder.uniinfoadmin.post.PostDetailsActivity;
 
 public class FirstActivity extends AppCompatActivity {
 
-    TextView country,post,book,adsNotifiTv;
+    LinearLayout country,post,book,adsNotifiTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
