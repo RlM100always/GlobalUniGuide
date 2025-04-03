@@ -27,6 +27,10 @@ Additionally, they can explore books across multiple categories and subcategorie
 - **UI Design**: XML 🖌️
 - **Backend**: Firebase 🔥
 
+## 📲 Download the App
+[![Amazon App](https://img.shields.io/badge/Amazon-Download-orange?style=for-the-badge&logo=amazon)](https://www.amazon.com/gp/product/B0CW18Z8CP)
+[![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?style=for-the-badge&logo=google-play)](https://play.google.com/store/apps/details?id=com.techtravelcoder.alluniversityinformation)
+
 ## 📸 User Screenshots  
 <p align="center"> 
   <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-22-82_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
@@ -65,9 +69,8 @@ Additionally, they can explore books across multiple categories and subcategorie
   <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-51-07_95982415f53ee316011d916d2ea1a13f.jpg" />
 </p>
 
-## 📲 Download the App  
- * Amazon App Link : <a href = "https://www.amazon.com/gp/product/B0CW18Z8CP">Amazon App Link</a>
- * Play Store App Link : <a href="https://play.google.com/store/apps/details?id=com.techtravelcoder.alluniversityinformation"> PlayStore App Link </a>
+
+ 
  
 ## 🌐 GitHub Repository  
 🔗 **[GitHub Profile Link](https://github.com/RlM100always)**  
@@ -76,8 +79,9 @@ Additionally, they can explore books across multiple categories and subcategorie
 
 ## 👨‍💻 Developed By  
 <a href="https://www.linkedin.com/in/rlm100always/" target="_blank">
-  <img src="https://avatars.githubusercontent.com/u/109984220?v=4" width="80" align="left">
+    <img src="https://avatars.githubusercontent.com/u/109984220?v=4" width="80" style="border-radius: 50%;" align="left">
 </a>
+
 
 **Md Rakib Hossain**  
 
