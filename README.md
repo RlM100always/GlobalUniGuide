@@ -32,41 +32,41 @@ Additionally, they can explore books across multiple categories and subcategorie
 [![Google Play](https://img.shields.io/badge/Google%20Play-Download-green?style=for-the-badge&logo=google-play)](https://play.google.com/store/apps/details?id=com.techtravelcoder.alluniversityinformation)
 
 ## 📸 User Screenshots  
+<!-- User Screenshots -->
 <p align="center"> 
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-22-82_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-34-24_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-43-65_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-48-05_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-54-37_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-18-02-25_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-18-06-16_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-18-20-94_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-18-47-04_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-19-07-75_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-19-50-44_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-19-56-45_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-20-59-04_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-21-18-48_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-21-26-59_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-21-31-56_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-21-42-05_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-22-00-28_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-22-20-95_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-22-27-06_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
-  
-
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-22-82_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-34-24_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-43-65_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-48-05_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-17-54-37_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-18-02-25_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-18-06-16_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-18-20-94_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-18-47-04_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-19-07-75_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-19-50-44_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-19-56-45_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-20-59-04_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-21-18-48_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-21-26-59_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-21-31-56_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-21-42-05_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-22-00-28_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-22-20-95_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/User/Screenshot_2025-01-26-11-22-27-06_92a872e6c8130c21f03b274d6cc23fbd.jpg" />
 </p>
 
-## 📊 Admin Screenshots  
+<!-- Admin Screenshots -->
+<h2 align="center">📊 Admin Screenshots</h2>
 <p align="center">
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-16-49_95982415f53ee316011d916d2ea1a13f.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-27-22_95982415f53ee316011d916d2ea1a13f.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-34-93_95982415f53ee316011d916d2ea1a13f.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-49-16_95982415f53ee316011d916d2ea1a13f.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-11-59_95982415f53ee316011d916d2ea1a13f.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-22-42_95982415f53ee316011d916d2ea1a13f.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-39-75_95982415f53ee316011d916d2ea1a13f.jpg" />
-  <img width="30%" height="50%" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-51-07_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-16-49_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-27-22_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-34-93_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-25-49-16_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-11-59_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-22-42_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-39-75_95982415f53ee316011d916d2ea1a13f.jpg" />
+  <img width="200" src="https://github.com/RlM100always/Hisab/blob/main/globaluniguide/Admin/Screenshot_2025-01-26-11-26-51-07_95982415f53ee316011d916d2ea1a13f.jpg" />
 </p>
 
 
