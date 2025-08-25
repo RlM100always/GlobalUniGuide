@@ -1,57 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <TextView
-        android:backgroundTint="#D500F9"
-        android:id="@+id/questino_set_title_name_id"
-        android:background="@drawable/back"
-        android:layout_margin="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textSize="14dp"
-        android:text="Question Set q"
-        android:layout_width="120dp"
-        android:layout_height="120dp"/>
-    <TextView
-        android:textColor="@color/white"
-        android:id="@+id/question_set_update_id"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
-        android:backgroundTint="#479902"
-        android:background="@drawable/edit_text_background"
-        android:layout_margin="5dp"
-        android:textStyle="bold"
-        android:textSize="14dp"
-        android:text="Update"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="10dp"
+    android:backgroundTint="#6200EE">
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:textColor="@color/white"
-        android:id="@+id/question_set_delete_id"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="3dp"
-        android:paddingBottom="3dp"
-        android:backgroundTint="#FF0318"
-        android:background="@drawable/edit_text_background"
-        android:layout_margin="5dp"
-        android:textStyle="bold"
-        android:textSize="14dp"
-        android:text="Delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        android:background="@android:color/transparent">
 
+        <TextView
+            android:id="@+id/questino_set_title_name_id"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:background="@drawable/back"
+            android:backgroundTint="#7C4DFF"
+            android:gravity="center"
+            android:text="Question Set q"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="6dp"
+            android:clipToOutline="true"
+            android:outlineProvider="background" />
 
+        <Button
+            android:id="@+id/question_set_update_id"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:text="Update"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_background"
+            android:backgroundTint="#43A047"
 
+            />
 
+        <Button
+            android:id="@+id/question_set_delete_id"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:text="Delete"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:backgroundTint="#E53935"
+            android:background="@drawable/edit_text_background"
+            />
 
-</LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

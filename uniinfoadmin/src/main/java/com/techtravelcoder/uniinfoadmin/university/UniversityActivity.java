@@ -89,7 +89,7 @@ public class UniversityActivity extends AppCompatActivity {
 
 
         recyclerView=findViewById(R.id.recycler_view_university_id);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         list=new ArrayList<>();
         campainAdapter=new UniversityAdapter(this,list,contryName);
         recyclerView.setAdapter(campainAdapter );
@@ -201,7 +201,6 @@ public class UniversityActivity extends AppCompatActivity {
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
-        alertDialog.setCancelable(false);
 
         post.setOnClickListener(new View.OnClickListener() {
             @Override

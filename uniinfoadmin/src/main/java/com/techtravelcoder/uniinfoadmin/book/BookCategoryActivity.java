@@ -73,7 +73,7 @@ public class BookCategoryActivity extends AppCompatActivity {
     private void retriveBookCategoryDetailsData() {
         bookCategoryList=new ArrayList<>();
         bookCategoryAdapter=new BookCategoryAdapter(BookCategoryActivity.this,bookCategoryList);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerView.setAdapter(bookCategoryAdapter);
         FirebaseDatabase.getInstance().getReference("Book Category").addValueEventListener(new ValueEventListener() {
             @Override

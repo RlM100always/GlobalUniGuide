@@ -239,7 +239,6 @@ public class AdsNotifiActivity extends AppCompatActivity {
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
-        alertDialog.setCancelable(false);
 
         postAds.setOnClickListener(new View.OnClickListener() {
             @Override

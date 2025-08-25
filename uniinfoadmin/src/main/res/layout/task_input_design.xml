@@ -1,76 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F5F1F1"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_marginTop="30dp"
-        android:textSize="18dp"
-        android:textColor="@color/black"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Enter country"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/enter_task_title"
-        android:textColorHint="#676565"
-        android:textColor="@color/black"
-        android:paddingLeft="11dp"
-        android:hint="Enter country name .. "
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/edit_text_background"
-        android:maxLines="1000"
-        android:inputType="textMultiLine"
-        android:maxHeight="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"/>
-    <TextView
-        android:layout_marginTop="5dp"
-    android:textSize="18dp"
-    android:textColor="@color/black"
-    android:layout_marginRight="8dp"
-    android:layout_marginLeft="8dp"
-    android:text="Enter Link"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/enter_task_link"
-        android:textColorHint="#676565"
-        android:textColor="@color/black"
-        android:paddingLeft="11dp"
-        android:hint="Enter Image Link..."
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/edit_text_background"
-        android:maxLines="100000"
-        android:inputType="textMultiLine"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"/>
-    <TextView
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2.5"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/add_post_id"
-        android:textColor="@color/white"
-        android:backgroundTint="#57C905"
-        android:background="@drawable/sub_back"
-        android:textSize="20dp"
-        android:foreground="@drawable/rip"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:text="Add Country"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"/>
+    android:padding="16dp"
+    tools:context=".YourActivityName">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-</LinearLayout>
+        <!-- Heading -->
+        <TextView
+            android:id="@+id/form_title"
+            android:text="Add New Country"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:layout_marginBottom="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Country Name Field -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
+
+            <EditText
+                android:id="@+id/enter_task_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter country name"
+                android:padding="16dp"
+                android:textColor="#000000"
+                android:textColorHint="#888888"
+                android:background="@android:color/transparent"
+                android:inputType="textCapWords" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Link Field -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="8dp">
+
+            <EditText
+                android:id="@+id/enter_task_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter image link"
+                android:padding="16dp"
+                android:textColor="#000000"
+                android:textColorHint="#888888"
+                android:background="@android:color/transparent"
+                android:inputType="textUri" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Submit Button -->
+        <TextView
+            android:id="@+id/add_post_id"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="14dp"
+            android:gravity="center"
+            android:text="Add Country"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:backgroundTint="#4CAF50"
+            android:background="@drawable/edit_text_background"
+            android:elevation="6dp"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+</ScrollView>

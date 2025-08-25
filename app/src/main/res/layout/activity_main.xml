@@ -221,7 +221,7 @@
                                         android:shadowRadius="1.5"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text=" Book"
+                                        android:text=" Notes"
                                         android:textColor="@color/whiteTextColor1"
                                         android:textSize="10dp"
                                         />
@@ -541,7 +541,7 @@
                                         android:shadowRadius="1.5"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Bookmark Book"
+                                        android:text="Bookmark Notes"
                                         android:textColor="@color/whiteTextColor1"
                                         android:textSize="10dp"
                                         />
@@ -638,7 +638,7 @@
                                         android:shadowRadius="1.5"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="New Book"
+                                        android:text="New Notes"
                                         android:textColor="@color/whiteTextColor1"
                                         android:textSize="10dp"
                                         />

@@ -1,190 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="12dp"
-    android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F5F1F1"
+    android:padding="16dp">
 
     <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Title -->
         <TextView
-            android:layout_marginTop="30dp"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Add MCQ Question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <EditText
-            android:id="@+id/ed_question_set_title"
-            android:textColorHint="#676565"
-            android:textColor="@color/black"
-            android:paddingLeft="11dp"
-            android:hint="Enter question name"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/edit_text_background"
-            android:maxLines="1000"
-            android:inputType="textMultiLine"
-            android:maxHeight="120dp"
+            android:textColor="#222222"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Question Field -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"/>
-        <EditText
-            android:id="@+id/ed_option_a"
-            android:textColorHint="#676565"
-            android:textColor="@color/black"
-            android:paddingLeft="11dp"
-            android:hint="Option a"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/edit_text_background"
-            android:maxLines="1000"
-            android:inputType="textMultiLine"
-            android:maxHeight="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp">
+
+            <EditText
+                android:id="@+id/ed_question_set_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter question name"
+                android:padding="14dp"
+                android:textColor="#000000"
+                android:textColorHint="#888888"
+                android:background="@android:color/transparent"
+                android:inputType="textMultiLine"
+                android:maxLines="4" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Options A-D -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"/>
-        <EditText
-            android:id="@+id/ed_option_b"
-            android:textColorHint="#676565"
-            android:textColor="@color/black"
-            android:paddingLeft="11dp"
-            android:hint="Option b"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/edit_text_background"
-            android:maxLines="1000"
-            android:inputType="textMultiLine"
-            android:maxHeight="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp">
+
+            <EditText
+                android:id="@+id/ed_option_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Option a"
+                android:padding="14dp"
+                android:textColor="#000000"
+                android:textColorHint="#888888"
+                android:background="@android:color/transparent"
+                android:inputType="text" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"/>
-        <EditText
-            android:id="@+id/ed_option_c"
-            android:textColorHint="#676565"
-            android:textColor="@color/black"
-            android:paddingLeft="11dp"
-            android:hint="Option c"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/edit_text_background"
-            android:maxLines="1000"
-            android:inputType="textMultiLine"
-            android:maxHeight="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp">
+
+            <EditText
+                android:id="@+id/ed_option_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Option b"
+                android:padding="14dp"
+                android:textColor="#000000"
+                android:textColorHint="#888888"
+                android:background="@android:color/transparent"
+                android:inputType="text" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"/>
-        <EditText
-            android:id="@+id/ed_option_d"
-            android:textColorHint="#676565"
-            android:textColor="@color/black"
-            android:paddingLeft="11dp"
-            android:hint="Option d"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/edit_text_background"
-            android:maxLines="1000"
-            android:inputType="textMultiLine"
-            android:maxHeight="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp">
+
+            <EditText
+                android:id="@+id/ed_option_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Option c"
+                android:padding="14dp"
+                android:textColor="#000000"
+                android:textColorHint="#888888"
+                android:background="@android:color/transparent"
+                android:inputType="text" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"/>
-        <EditText
-            android:id="@+id/ed_explanation_id"
-            android:textColorHint="#676565"
-            android:textColor="@color/black"
-            android:paddingLeft="11dp"
-            android:hint="Explanation"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/edit_text_background"
-            android:maxLines="1000"
-            android:inputType="textMultiLine"
-            android:maxHeight="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp">
+
+            <EditText
+                android:id="@+id/ed_option_d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Option d"
+                android:padding="14dp"
+                android:textColor="#000000"
+                android:textColorHint="#888888"
+                android:background="@android:color/transparent"
+                android:inputType="text" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Explanation Field -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="55dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp">
+
+            <EditText
+                android:id="@+id/ed_explanation_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Explanation"
+                android:padding="14dp"
+                android:textColor="#000000"
+                android:textColorHint="#888888"
+                android:background="@android:color/transparent"
+                android:inputType="textMultiLine"
+                android:maxLines="4" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- RadioGroup Title -->
         <TextView
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:text="Choose right answer"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <LinearLayout
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Choose right answer"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="8dp" />
+
+        <!-- RadioGroup -->
+        <RadioGroup
+            android:id="@+id/group_radio_mcq"
             android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <RadioGroup
-
-                android:id="@+id/group_radio_mcq"
+            <RadioButton
+                android:id="@+id/rb_a_id"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <RadioButton
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_a_id"
-                    android:text="Option a"
-                    android:textSize="15sp"/>
-                <RadioButton
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_b_id"
-                    android:text="Option b"
-                    android:textSize="15sp"/>
-                <RadioButton
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_c_id"
-                    android:text="Option c"
-                    android:textSize="15dp"/>
-                <RadioButton
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rb_d_id"
-                    android:text="Option d"
-                    android:textSize="15dp"/>
-            </RadioGroup>
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:text="Option a"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rb_b_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option b"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rb_c_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option c"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rb_d_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option d"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+        <!-- Submit Button -->
         <TextView
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2.5"
-            android:layout_marginBottom="30dp"
-            android:gravity="center"
-            android:layout_marginTop="7dp"
             android:id="@+id/question_submit_id"
-            android:textColor="@color/white"
-            android:backgroundTint="#57C905"
-            android:background="@drawable/sub_back"
-            android:textSize="20dp"
-            android:foreground="@drawable/rip"
-            android:textStyle="bold"
-            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="30dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center"
             android:text="Submit"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"/>
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4CAF50"
+            android:background="@drawable/edit_text_background"
+            android:elevation="4dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_gravity="center" />
+
     </LinearLayout>
-
-
-
-
-
-
 
 </ScrollView>

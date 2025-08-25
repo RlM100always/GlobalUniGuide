@@ -105,7 +105,6 @@ public class QuestionAddActivity extends AppCompatActivity {
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
-        alertDialog.setCancelable(false);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

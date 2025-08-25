@@ -73,7 +73,7 @@ public class BookPostActivity extends AppCompatActivity {
     private void retriveBookDetailsData() {
         bookList=new ArrayList<>();
         bookPostAdapter=new BookPostAdapter(BookPostActivity.this,bookList,bCataNAme);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerView.setAdapter(bookPostAdapter);
         FirebaseDatabase.getInstance().getReference("Book Details").addValueEventListener(new ValueEventListener() {
             @Override

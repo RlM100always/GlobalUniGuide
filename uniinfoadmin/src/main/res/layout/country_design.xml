@@ -1,70 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/edit_text_background"
-    android:backgroundTint="@color/back"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="10dp"
     android:orientation="vertical"
-    android:layout_margin="3dp"
-    android:elevation="20dp"
-    android:layout_height="wrap_content">
+    android:background="@drawable/edit_text_background"
+    android:elevation="10dp">
 
+    <!-- CardView for Image -->
     <androidx.cardview.widget.CardView
-        android:foreground="@drawable/uni_background"
-        app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="160dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true">
+
         <ImageView
             android:id="@+id/country_image_id"
-            android:background="@drawable/edit_text_background"
-            android:scaleType="fitXY"
-            android:src="@drawable/image_buet"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image_buet" />
     </androidx.cardview.widget.CardView>
 
+    <!-- University Name -->
     <TextView
-
-        android:layout_marginLeft="6dp"
-        android:maxLines="2"
         android:id="@+id/country_name_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:text="Bangladesh University of Engineering and Technology"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:maxLines="2" />
+
+    <!-- University Info -->
+    <TextView
+        android:id="@+id/tnDateId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Top engineering university in Bangladesh."
+        android:textColor="@color/allert_back_upper"
+        android:textSize="15sp"
+        android:maxLines="2" />
+
+    <!-- Update Button -->
+    <TextView
+        android:id="@+id/country_update_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bangladesh "
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        android:textStyle="bold" />
-    <TextView
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="6dp"
-        android:maxLines="1"
-        android:id="@+id/tnDateId"
-        android:textColor="@color/white"
-        android:textSize="15dp"
-        android:text="University info.."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_background"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="10dp"
+        android:text="Update"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:shadowColor="#000"
         android:shadowDx="1"
         android:shadowDy="1"
-        android:shadowRadius="2.5"
-        android:gravity="center"
-        android:layout_margin="4dp"
-        android:id="@+id/country_update_id"
-        android:textColor="@color/white"
-        android:backgroundTint="#57C905"
-        android:background="@drawable/sub_back"
-        android:textSize="16dp"
-        android:foreground="@drawable/rip"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:text="Update"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"/>
-
-
-
+        android:shadowRadius="2" />
 </LinearLayout>

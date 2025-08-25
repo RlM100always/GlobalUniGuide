@@ -147,7 +147,6 @@ public class MainPostActivity extends AppCompatActivity {
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
-        alertDialog.setCancelable(false);
 
         addQuestionSet.setOnClickListener(new View.OnClickListener() {
             @Override

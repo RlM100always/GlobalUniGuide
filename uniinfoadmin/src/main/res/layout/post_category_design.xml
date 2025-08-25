@@ -133,26 +133,20 @@
                 android:textSize="20sp"/>
         </RadioGroup>
         <TextView
-
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="2.5"
-            android:layout_marginBottom="30dp"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
             android:id="@+id/add_news_category_id"
-            android:textColor="@color/white"
-            android:backgroundTint="#57C905"
-            android:background="@drawable/sub_back"
-            android:textSize="20dp"
-            android:foreground="@drawable/rip"
-            android:textStyle="bold"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded_background"
+            android:gravity="center"
             android:text="Add Category"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:elevation="3dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginTop="4dp" />
+
     </LinearLayout>
 
 

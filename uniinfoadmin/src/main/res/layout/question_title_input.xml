@@ -1,54 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="12dp"
+    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_marginTop="30dp"
-        android:textSize="18dp"
-        android:textColor="@color/black"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="Enter Question set Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/ed_question_set_name"
-        android:textColorHint="#676565"
-        android:textColor="@color/black"
-        android:paddingLeft="11dp"
-        android:hint="Enter question set name"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/edit_text_background"
-        android:maxLines="1000"
-        android:inputType="textMultiLine"
-        android:maxHeight="100dp"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="55dp"/>
-    <TextView
-        android:shadowDx="1"
-        android:shadowDy="1"
-        android:shadowRadius="2.5"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/add_question_set_id"
-        android:textColor="@color/white"
-        android:backgroundTint="#57C905"
-        android:background="@drawable/sub_back"
-        android:textSize="20dp"
-        android:foreground="@drawable/rip"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:text="Add Question Set"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:elevation="8dp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Question Set Name"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <!-- EditText -->
+            <EditText
+                android:id="@+id/ed_question_set_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter question set name"
+                android:background="@drawable/edit_text_background"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColorHint="#676565"
+                android:textColor="@color/black"
+                android:inputType="text" />
+
+            <!-- Submit Button -->
+            <TextView
+                android:id="@+id/add_question_set_id"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="Add Question Set"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/edit_text_background"
+                android:foreground="@drawable/rip"
+                android:backgroundTint="#57C905"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2.5" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

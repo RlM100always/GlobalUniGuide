@@ -158,7 +158,6 @@ public class PostDetailsActivity extends AppCompatActivity {
         Drawable drawable= ContextCompat.getDrawable(getApplicationContext(),R.drawable.back);
         alertDialog.getWindow().setBackgroundDrawable(drawable);
         alertDialog.show();
-        alertDialog.setCancelable(false);
 
         posttv.setOnClickListener(new View.OnClickListener() {
             @Override
