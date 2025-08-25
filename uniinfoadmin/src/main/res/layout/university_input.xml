@@ -1,282 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:background="@drawable/edit_text_background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="6dp">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
         <LinearLayout
-            android:layout_margin="15dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:elevation="6dp"
+            android:layout_marginTop="10dp">
+
+            <!-- University Name -->
             <TextView
-                android:layout_marginTop="5dp"
-                android:textSize="18dp"
-                android:textColor="@color/black"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:text="Enter University Name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Enter University Name"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp" />
+
             <EditText
                 android:id="@+id/university_name_id"
-                android:textColorHint="#676565"
-                android:textColor="@color/black"
-                android:paddingLeft="11dp"
-                android:hint="Enter university name ..."
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/edit_text_background"
-                android:maxLines="1000"
-                android:inputType="textMultiLine"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"/>
-            <TextView
-                android:layout_marginTop="5dp"
-                android:textSize="18dp"
+                android:layout_height="48dp"
+                android:hint="Enter university name ..."
+                android:background="@drawable/edit_text_background"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColorHint="#888"
                 android:textColor="@color/black"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:text="Enter Image"
+                android:layout_marginTop="6dp" />
+
+            <!-- Image -->
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Enter Image"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="12dp" />
+
             <EditText
                 android:id="@+id/university_image_id"
-                android:textColorHint="#676565"
-                android:textColor="@color/black"
-                android:paddingLeft="11dp"
-                android:hint="Enter university image ..."
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/edit_text_background"
-                android:maxLines="100000"
-                android:inputType="textImeMultiLine"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"/>
-            <TextView
-                android:layout_marginTop="5dp"
-                android:textSize="18dp"
+                android:layout_height="48dp"
+                android:hint="Enter university image ..."
+                android:background="@drawable/edit_text_background"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColorHint="#888"
                 android:textColor="@color/black"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:text="Enter website"
+                android:layout_marginTop="6dp" />
+
+            <!-- Website -->
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="Enter Website"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="12dp" />
+
             <EditText
                 android:id="@+id/university_website_id"
-                android:textColorHint="#676565"
-                android:textColor="@color/black"
-                android:paddingLeft="11dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:hint="Enter university website link ..."
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
                 android:background="@drawable/edit_text_background"
-                android:maxLines="100000"
-                android:inputType="textMultiLine"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"/>
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColorHint="#888"
+                android:textColor="@color/black"
+                android:layout_marginTop="6dp" />
+
+            <!-- Top & Public Radios -->
             <LinearLayout
-                android:weightSum="2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="14dp"
+                android:weightSum="2">
+
+                <!-- Top -->
                 <LinearLayout
-                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="8dp"
-                        android:text="top"
+                        android:text="Top"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
+                        android:layout_marginBottom="4dp" />
+
                     <RadioGroup
                         android:id="@+id/group_radio_top"
-                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <RadioButton
-                            android:textColor="@color/black"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/top_true_id"
-                            android:text="true"
-                            android:textSize="20sp"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <RadioButton
-                            android:textColor="@color/black"
+                            android:id="@+id/top_true_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="True"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
+
+                        <RadioButton
                             android:id="@+id/top_false_id"
-                            android:text="false"
-                            android:textSize="20sp"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="False"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
                     </RadioGroup>
                 </LinearLayout>
+
+                <!-- Public -->
                 <LinearLayout
-                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
+
                     <TextView
-                        android:textStyle="bold"
-                        android:layout_marginTop="5dp"
-                        android:textSize="18dp"
-                        android:textColor="@color/black"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:text="public"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Public"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="4dp" />
+
                     <RadioGroup
                         android:id="@+id/radio_group_public"
-                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                         <RadioButton
                             android:id="@+id/public_true_id"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="true"
-                            android:textSize="20sp"/>
+                            android:text="True"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
 
                         <RadioButton
                             android:id="@+id/public_false_id"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="false"
-                            android:textSize="20sp"/>
+                            android:text="False"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
                     </RadioGroup>
                 </LinearLayout>
-
-
-
-
-
             </LinearLayout>
+
+            <!-- Private & Suggest Radios -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="14dp"
+                android:weightSum="2">
+
+                <!-- Private -->
                 <LinearLayout
-                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
+
                     <TextView
-                        android:textStyle="bold"
-                        android:layout_marginTop="5dp"
-                        android:textSize="18dp"
-                        android:textColor="@color/black"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:text="private"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Private"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="4dp" />
+
                     <RadioGroup
                         android:id="@+id/radio_group_private"
-                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                         <RadioButton
                             android:id="@+id/private_true_id"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="true"
-                            android:textSize="20sp"/>
+                            android:text="True"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
 
                         <RadioButton
                             android:id="@+id/private_false_id"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="false"
-                            android:textSize="20sp"/>
+                            android:text="False"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
                     </RadioGroup>
                 </LinearLayout>
+
+                <!-- Suggest -->
                 <LinearLayout
-                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
+
                     <TextView
-                        android:textStyle="bold"
-                        android:layout_marginTop="5dp"
-                        android:textSize="18dp"
-                        android:textColor="@color/black"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:text="suggest"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Suggest"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="4dp" />
+
                     <RadioGroup
                         android:id="@+id/radio_group_suggest"
-                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                         <RadioButton
                             android:id="@+id/suggest_true_id"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="true"
-                            android:textSize="20sp"/>
+                            android:text="True"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
 
                         <RadioButton
                             android:id="@+id/suggest_false_id"
-                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="false"
-                            android:textSize="20sp"/>
+                            android:text="False"
+                            android:textSize="14sp"
+                            android:textColor="@color/black" />
                     </RadioGroup>
                 </LinearLayout>
-
             </LinearLayout>
 
-
+            <!-- Submit Button -->
             <TextView
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="2.5"
-                android:layout_marginBottom="30dp"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
                 android:id="@+id/add_university_post_id"
-                android:textColor="@color/white"
-                android:backgroundTint="#57C905"
-                android:background="@drawable/sub_back"
-                android:textSize="20dp"
-                android:foreground="@drawable/rip"
-                android:textStyle="bold"
-                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:text="Add University"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"/>
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:backgroundTint="#4CAF50"
+                android:gravity="center"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp" />
         </LinearLayout>
     </ScrollView>
-
-
-
-
-
 </LinearLayout>
