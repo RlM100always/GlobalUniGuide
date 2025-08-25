@@ -167,18 +167,26 @@ public class UniversityWebActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed();
+            public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
+                // ব্যবহারকারীকে সতর্ক বার্তা দেখানো
+                new AlertDialog.Builder(view.getContext())
+                        .setTitle("SSL Error")
+                        .setMessage("ওয়েবসাইটের নিরাপত্তা সমস্যা আছে। আপনি কি চালিয়ে যেতে চান?")
+                        .setPositiveButton("হ্যাঁ", (dialog, which) -> handler.proceed())  // user consent
+                        .setNegativeButton("না", (dialog, which) -> handler.cancel())    // cancel
+                        .setCancelable(false)
+                        .show();
             }
 
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                // Hide the WebView
+                // WebView লুকানো
                 webView.setVisibility(View.GONE);
-                // Show error message
+                // Error message দেখানো
                 noInternet.setVisibility(View.VISIBLE);
             }
         });
+
         webView.loadUrl(s_link);
 
 
